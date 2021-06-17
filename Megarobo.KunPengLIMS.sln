@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Megarobo.KunPengLIMS.Infrastructure", "Megarobo.KunPengLIMS.Infrastructure\Megarobo.KunPengLIMS.Infrastructure.csproj", "{48BF44E0-0F28-48AF-93BF-2770D3389F15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{24B4B7DB-1735-4631-AB4A-00DFEC94D32A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{0325DD0B-3F05-426D-949C-BF4B30A2A672}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{FBD0331D-C524-4D96-9B5F-F76268ED453C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{36E4470F-E429-47B6-AD1C-84A88B404315}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Megarobo.KunPengLIMS.Domain", "Megarobo.KunPengLIMS.Domain\Megarobo.KunPengLIMS.Domain.csproj", "{DCD25A38-643E-488F-8E1B-99F43640121E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Megarobo.KunPengLIMS.Application", "Megarobo.KunPengLIMS.Application\Megarobo.KunPengLIMS.Application.csproj", "{A045702B-751F-41AE-9555-376C4BC86071}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Megarobo.KunPengLIMS.WebAPI", "Megarobo.KunPengLIMS.WebAPI\Megarobo.KunPengLIMS.WebAPI.csproj", "{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48BF44E0-0F28-48AF-93BF-2770D3389F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48BF44E0-0F28-48AF-93BF-2770D3389F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48BF44E0-0F28-48AF-93BF-2770D3389F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48BF44E0-0F28-48AF-93BF-2770D3389F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD25A38-643E-488F-8E1B-99F43640121E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD25A38-643E-488F-8E1B-99F43640121E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD25A38-643E-488F-8E1B-99F43640121E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD25A38-643E-488F-8E1B-99F43640121E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A045702B-751F-41AE-9555-376C4BC86071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A045702B-751F-41AE-9555-376C4BC86071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A045702B-751F-41AE-9555-376C4BC86071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A045702B-751F-41AE-9555-376C4BC86071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48BF44E0-0F28-48AF-93BF-2770D3389F15} = {36E4470F-E429-47B6-AD1C-84A88B404315}
+		{DCD25A38-643E-488F-8E1B-99F43640121E} = {FBD0331D-C524-4D96-9B5F-F76268ED453C}
+		{A045702B-751F-41AE-9555-376C4BC86071} = {0325DD0B-3F05-426D-949C-BF4B30A2A672}
+		{CA9CE7D0-39EC-4D73-8C29-A0FF5B7FD54C} = {24B4B7DB-1735-4631-AB4A-00DFEC94D32A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FF2F146-B135-40B1-92A8-A195274003A9}
+	EndGlobalSection
+EndGlobal

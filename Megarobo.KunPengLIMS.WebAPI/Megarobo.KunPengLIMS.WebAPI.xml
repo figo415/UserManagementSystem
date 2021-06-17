@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Megarobo.KunPengLIMS.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.AuthenticationController">
+            <summary>
+            登录
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.AuthenticationController.AuthenticateUser(Megarobo.KunPengLIMS.WebAPI.Models.AuthRequestDto)">
+            <summary>
+            验证用户名和密码
+            </summary>
+            <param name="requestDto">AuthRequestDto</param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController">
+            <summary>
+            部门管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.GetAllDepartments(Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos.DepartmentResourceParameter)">
+            <summary>
+            获取所有部门，可根据部门名称或者状态查询
+            </summary>
+            <returns>DepartmentDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.GetDepartment(System.Guid)">
+            <summary>
+            根据主键获取部门
+            </summary>
+            <param name="departmentId">Guid</param>
+            <returns>DepartmentDto</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.GetUsersByDepartment(System.Guid)">
+            <summary>
+            获取某个部门下的用户
+            </summary>
+            <param name="departmentId">Guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.CreateDepartment(Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos.DepartmentCreationDto)">
+            <summary>
+            新增部门
+            </summary>
+            <param name="departmentDto">DepartmentCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.UpdateDepartment(System.Guid,Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos.DepartmentUpdateDto)">
+            <summary>
+            修改部门
+            </summary>
+            <param name="departmentId">Guid</param>
+            <param name="departmentDto">DepartmentUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DepartmentController.DeleteDepartments(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除部门
+            </summary>
+            <param name="ids">Guid列表</param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController">
+            <summary>
+            字典项管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.GetAllDictItems(Megarobo.KunPengLIMS.Application.DictItemApp.Dtos.DictItemResourceParameter)">
+            <summary>
+            获取所有字典项，可根据字典名称或者字典类型查询
+            </summary>
+            <returns>DictItemDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.GetDictItem(System.Guid)">
+            <summary>
+            根据主键获取字典项
+            </summary>
+            <param name="dictItemId">Guid</param>
+            <returns>DictItemDto</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.CreateDictItem(Megarobo.KunPengLIMS.Application.DictItemApp.Dtos.DictItemCreationDto)">
+            <summary>
+            新增字典项
+            </summary>
+            <param name="dictItemDto">DictItemCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.UpdateDictItem(System.Guid,Megarobo.KunPengLIMS.Application.DictItemApp.Dtos.DictItemUpdateDto)">
+            <summary>
+            修改字典项
+            </summary>
+            <param name="dictItemId">Guid</param>
+            <param name="dictItemDto">DictItemUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.MaintainValuesForDictItem(System.Guid,Megarobo.KunPengLIMS.Application.DictItemApp.Dtos.DictItemUpdateValueDto)">
+            <summary>
+            维护字典项的值，包括添加、修改、删除
+            </summary>
+            <param name="dictItemId">Guid</param>
+            <param name="dto">DictItemUpdateValueDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.DictitemController.DeleteDictItems(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除字典项
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.HomeController.Index">
+            <summary>
+            用于健康检查
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.LimsControllerBase.GetModelStateError">
+            <summary>
+            获取服务端验证的第一条错误信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.LogitemController">
+            <summary>
+            日志项管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.LogitemController.GetAllLogItems(Megarobo.KunPengLIMS.Application.LogItemApp.Dtos.LogItemResourceParameter)">
+            <summary>
+            获取所有日志项，可根据用户名称或者状态来查询
+            </summary>
+            <returns>LogItemDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.LogitemController.GetLogItem(System.Int32)">
+            <summary>
+            根据主键获取日志项
+            </summary>
+            <param name="logItemId">int</param>
+            <returns>LogItemDto</returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController">
+            <summary>
+            菜单管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.GetAllMenus(Megarobo.KunPengLIMS.Application.MenuApp.Dtos.MenuResourceParameter)">
+            <summary>
+            获取所有菜单，可根据菜单名称、状态和类型查询
+            </summary>
+            <returns>MenuDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.GetMenu(System.Guid)">
+            <summary>
+            根据主键获取菜单
+            </summary>
+            <param name="menuId"></param>
+            <returns>MenuDto</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.CreateMenu(Megarobo.KunPengLIMS.Application.MenuApp.Dtos.MenuCreationDto)">
+            <summary>
+            新增菜单
+            </summary>
+            <param name="menuDto">MenuCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.UpdateMenu(System.Guid,Megarobo.KunPengLIMS.Application.MenuApp.Dtos.MenuUpdateDto)">
+            <summary>
+            修改菜单
+            </summary>
+            <param name="menuId">Guid</param>
+            <param name="menuDto">MenuUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.EnableMenu(System.Guid,Megarobo.KunPengLIMS.Application.MenuApp.Dtos.MenuUpdateStatusDto)">
+            <summary>
+            修改菜单状态
+            </summary>
+            <param name="menuId">Guid</param>
+            <param name="dto">MenuUpdateStatusDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.MenuController.DeleteMenus(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除菜单
+            </summary>
+            <param name="ids">Guid列表</param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController">
+            <summary>
+            角色管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.GetAllRoles(Megarobo.KunPengLIMS.Application.RoleApp.Dtos.RoleResourceParameter)">
+            <summary>
+            获取所有角色，根据角色名称和状态查询
+            </summary>
+            <returns>RoleDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.Get(System.Guid)">
+            <summary>
+            根据主键获取角色
+            </summary>
+            <param name="roleId">Guid</param>
+            <returns>RoleDto</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.GetMenusByRole(System.Guid)">
+            <summary>
+            获取某个角色对应的菜单
+            </summary>
+            <param name="roleId">Guid</param>
+            <returns>MenuDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.CreateRole(Megarobo.KunPengLIMS.Application.RoleApp.Dtos.RoleCreationDto)">
+            <summary>
+            新增角色
+            </summary>
+            <param name="roleDto">RoleCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.UpdateRole(System.Guid,Megarobo.KunPengLIMS.Application.RoleApp.Dtos.RoleUpdateDto)">
+            <summary>
+            修改角色
+            </summary>
+            <param name="roleId">Guid</param>
+            <param name="roleDto">RoleUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.EnableRole(System.Guid,Megarobo.KunPengLIMS.Application.RoleApp.Dtos.RoleUpdateStatusDto)">
+            <summary>
+            修改角色状态
+            </summary>
+            <param name="roleId">Guid</param>
+            <param name="dto">RoleUpdateStatusDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.RoleController.DeleteRoles(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除角色
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController">
+            <summary>
+            技能管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController.GetAllSkills(Megarobo.KunPengLIMS.Application.SkillApp.Dtos.SkillResourceParameter)">
+            <summary>
+            获取所有技能，可根据技能名称查询
+            </summary>
+            <returns>SkillDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController.GetSkillsByParent(System.Guid)">
+            <summary>
+            获取某个技能的下级技能
+            </summary>
+            <param name="skillId">Guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController.CreateSkill(Megarobo.KunPengLIMS.Application.SkillApp.Dtos.SkillCreationDto)">
+            <summary>
+            新增技能
+            </summary>
+            <param name="skillDto">SkillCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController.UpdateSkill(System.Guid,Megarobo.KunPengLIMS.Application.SkillApp.Dtos.SkillUpdateDto)">
+            <summary>
+            修改技能
+            </summary>
+            <param name="skillId">Guid</param>
+            <param name="skillDto">SkillUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.SkillController.DeleteSkills(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除技能
+            </summary>
+            <param name="ids">Guid列表</param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetAllUsers(Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserResourceParameter)">
+            <summary>
+            获取所有用户，可根据用户名称、手机号码、部门名称、技能名称、状态或者创建时间查询
+            </summary>
+            <returns>UserDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetUser(System.Guid)">
+            <summary>
+            根据主键获取用户
+            </summary>
+            <param name="userId">Guid</param>
+            <returns>UserDto</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetSkillsForUser(System.Guid)">
+            <summary>
+            获取用户的技能列表
+            </summary>
+            <param name="userId">Guid</param>
+            <returns>SkillDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetDepartmentRolesForUser(System.Guid)">
+             <summary>
+            获取用户的部门角色列表
+             </summary>
+             <param name="userId">Guid</param>
+             <returns>UserDepartmentRoleDto列表</returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.CreateUser(Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserCreationDto)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="userDto">UserCreationDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.UpdateUser(System.Guid,Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserUpdateDto)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="userId">Guid</param>
+            <param name="userDto">UserUpdateDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.UpdateUserStatus(System.Guid,Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserUpdateStatusDto)">
+            <summary>
+            修改用户状态
+            </summary>
+            <param name="userId">Guid</param>
+            <param name="dto">UserUpdateStatusDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.ResetPassword(System.Guid,Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserUpdatePasswordDto)">
+            <summary>
+            重置密码
+            </summary>
+            <param name="userId">Guid</param>
+            <param name="dto">UserUpdatePasswordDto</param>
+            <returns></returns>
+        </member>
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.DeleteUsers(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            批量删除用户
+            </summary>
+            <param name="ids">Guid列表</param>
+            <returns></returns>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1">
+            <summary>
+            WebAPI返回数据的统一格式
+            </summary>
+        </member>
+        <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.Code">
+            <summary>
+            状态码：0表示成功，其他正数表示失败
+            </summary>
+        </member>
+        <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.Message">
+            <summary>
+            附加消息
+            </summary>
+        </member>
+        <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.Data">
+            <summary>
+            对于查询API，保存实际的数据
+            </summary>
+        </member>
+        <member name="T:Megarobo.KunPengLIMS.WebAPI.Models.ApiStringResult">
+            <summary>
+            用于返回新增、修改和删除API的结果
+            </summary>
+        </member>
+    </members>
+</doc>
