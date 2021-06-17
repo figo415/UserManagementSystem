@@ -19,14 +19,14 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 
         public string MobileNumber { get; set; }
 
-        public List<Period> WorkTimes { get; set; }
+        public List<Period> WorkTimes { get; set; }//需转换
 
         public bool IsActive { get; set; }
 
         public DateTime CreateTime { get; set; }
 
-        public List<UserDepartmentRoleDto> DepartmentRoles { get; set; }
+        public List<UserDepartmentRoleDto> DepartmentRoles { get; set; }//需转换
 
-        public List<SkillDto> Skills { get; set; }
+        public List<SkillDto> Skills { get; set; }//需转换
     }
 }

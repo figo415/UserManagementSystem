@@ -11,11 +11,11 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 
         public string MobileNumber { get; set; }
 
-        public List<Period> WorkTimes { get; set; }
+        public List<Guid> WorkTimeIds { get; set; }
 
         public bool IsActive { get; set; }
 
-        public List<string> SkillNames { get; set; }
+        public List<Guid> SkillIds { get; set; }
 
         public List<KeyValuePair<string, string>> DepartmentRoles { get; set; }
     }

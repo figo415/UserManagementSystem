@@ -289,9 +289,9 @@
             用户管理
             </summary>
         </member>
-        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetAllUsers(Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserResourceParameter)">
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.GetUsers(Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserResourceParameter)">
             <summary>
-            获取所有用户，可根据用户名称、手机号码、部门名称、技能名称、状态或者创建时间查询
+            获取所有用户，可根据用户名称、手机号码、状态或者创建时间查询
             </summary>
             <returns>UserDto列表</returns>
         </member>
@@ -331,7 +331,7 @@
             <param name="userDto">UserUpdateDto</param>
             <returns></returns>
         </member>
-        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.UpdateUserStatus(System.Guid,Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserUpdateStatusDto)">
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.EnableUser(System.Guid,Megarobo.KunPengLIMS.Application.UserApp.Dtos.UserUpdateStatusDto)">
             <summary>
             修改用户状态
             </summary>
@@ -347,11 +347,11 @@
             <param name="dto">UserUpdatePasswordDto</param>
             <returns></returns>
         </member>
-        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.DeleteUsers(System.Collections.Generic.List{System.Guid})">
+        <member name="M:Megarobo.KunPengLIMS.WebAPI.Controllers.UserController.DeleteUsers(Megarobo.KunPengLIMS.Application.DeleteMultiDto)">
             <summary>
             批量删除用户
             </summary>
-            <param name="ids">Guid列表</param>
+            <param name="dto">DeleteMultiDto</param>
             <returns></returns>
         </member>
         <member name="T:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1">
@@ -367,6 +367,11 @@
         <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.Message">
             <summary>
             附加消息
+            </summary>
+        </member>
+        <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.RowCount">
+            <summary>
+            此次查询的数据总条数
             </summary>
         </member>
         <member name="P:Megarobo.KunPengLIMS.WebAPI.Models.ApiResult`1.Data">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Models
 {
@@ -21,25 +22,55 @@ namespace Megarobo.KunPengLIMS.WebAPI.Models
         public string Message { get; set; }
 
         /// <summary>
+        /// 此次查询的数据总条数
+        /// </summary>
+        public int RowCount { get; set; }
+
+        /// <summary>
         /// 对于查询API，保存实际的数据
         /// </summary>
         public T Data { get; set; }
 
-        //public virtual object Data { get; set; }
+        public static ApiResult<T> HasData(T value)
+        {
+            var result = new ApiResult<T>();
+            result.Code = 0;
+            result.Message = "Success";
+            result.Data = value;
+            return result;
+        }
     }
-
-    //public class ApiResult<T>:ApiResult
-    //{
-    //    private T _data;
-
-    //    public override object Data { get => _data; set => _data = (T)value; }
-    //}
 
     /// <summary>
     /// 用于返回新增、修改和删除API的结果
     /// </summary>
     public class ApiStringResult:ApiResult<string>
     {
+        public static ApiStringResult Succeed()
+        {
+            return new ApiStringResult()
+            {
+                Code = 0,
+                Message = "Success"
+            };
+        }
 
+        public static ApiStringResult Fail()
+        {
+            return new ApiStringResult()
+            {
+                Code = 1,
+                Message = "Failed"
+            };
+        }
+
+        public static ApiStringResult Error(string msg)
+        {
+            return new ApiStringResult()
+            {
+                Code = 2,
+                Message = msg
+            };
+        }
     }
 }

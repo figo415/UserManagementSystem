@@ -6,7 +6,7 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 {
     public class UserResourceParameter
     {
-        public const int MaxPageSize = 50;
+        private const int MaxPageSize = 50;
 
         private int _pageSize = 10;
 
@@ -22,12 +22,10 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 
         public string MobileNumber { get; set; }
 
-        public string DepartmentName { get; set; }
-
-        public string SkillName { get; set; }
-
         public bool IsActive { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
     }
 }

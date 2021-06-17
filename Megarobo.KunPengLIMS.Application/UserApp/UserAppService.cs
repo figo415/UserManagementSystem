@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Domain.Entities;
 using Megarobo.KunPengLIMS.Domain.IRepositories;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
+using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 
@@ -24,29 +25,6 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             _repoWrapper = wrapper;
         }
 
-        public List<UserDto> GetAllUsers()
-        {
-            var users = _repository.GetAllList();
-            return _mapper.Map<List<UserDto>>(users);
-        }
-
-        public async Task<UserDto> GetUser(Guid userId)
-        {
-            var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
-            var dto = _mapper.Map<UserDto>(user);
-            return dto;
-        }
-
-        ///// <summary>
-        ///// 根据Id获取实体
-        ///// </summary>
-        ///// <param name="id">Id</param>
-        ///// <returns></returns>
-        //public UserDto Get(Guid id)
-        //{
-        //    return _mapper.Map<UserDto>(_repository.GetWithRoles(id));
-        //}
-
         public User CheckUser(string userName, string password)
         {
             return _repository.CheckUser(userName, password);
@@ -58,11 +36,34 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentRoles.Select(ud=>ud.DepartmentID).Contains(departmentId), it => it.CreatedAt));
         }
 
+        public Task<UserDtoList> GetUsers(UserResourceParameter parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<UserDto> GetUser(Guid userId)
+        {
+            var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
+            var dto = _mapper.Map<UserDto>(user);
+            return dto;
+        }
+
+        public Task<SkillDtoList> GetSkillsForUser(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDepartmentRoleDtoList> GetDepartmentRolesForUser(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> InsertUser(UserCreationDto dto)
         {
             var user = _mapper.Map<User>(dto);
             user.Id = Guid.NewGuid();
             user.CreatedAt = DateTime.Now;
+            user.IsDeleted = false;
             _repoWrapper.UserRepo.Create(user);
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
@@ -81,37 +82,46 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             return result;
         }
 
-        /// <summary>
-        /// 新增或修改
-        /// </summary>
-        /// <param name="dto">实体</param>
-        /// <returns></returns>
-        public UserDto InsertOrUpdate(UserDto dto)
+        public async Task<bool> EnableUser(Guid userId, UserUpdateStatusDto dto)
         {
-            //if (Get(dto.Id) != null)
-                _repository.Delete(dto.Id);
-            var user = _repository.InsertOrUpdate(_mapper.Map<User>(dto));
-            return _mapper.Map<UserDto>(user);
+            var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return false;
+            }
+            user.IsActive = dto.IsActive;
+            _repoWrapper.UserRepo.Update(user);
+            var result = await _repoWrapper.UserRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 根据Id集合批量删除
-        /// </summary>
-        /// <param name="ids">Id集合</param>
-        public void DeleteBatch(List<Guid> ids)
+        public async Task<bool> ResetPassword(Guid userId, UserUpdatePasswordDto dto)
         {
-            _repository.Delete(it => ids.Contains(it.Id));
+            var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return false;
+            }
+            user.Password = dto.Password;
+            _repoWrapper.UserRepo.Update(user);
+            var result = await _repoWrapper.UserRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id">Id</param>
-        public void Delete(Guid id)
+        public async Task<bool> DeleteUsers(DeleteMultiDto dto)
         {
-            _repository.Delete(id);
-        }
-
-        
+            foreach(var userId in dto.Guids)
+            {
+                var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    continue;
+                }
+                user.IsDeleted = true;
+                _repoWrapper.UserRepo.Update(user);
+            }
+            var result = await _repoWrapper.UserRepo.SaveAsync();
+            return result;
+        }   
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Megarobo.KunPengLIMS.Application.UserApp;
 using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
+using Megarobo.KunPengLIMS.Application;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
@@ -26,16 +27,15 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 获取所有用户，可根据用户名称、手机号码、部门名称、技能名称、状态或者创建时间查询
+        /// 获取所有用户，可根据用户名称、手机号码、状态或者创建时间查询
         /// </summary>
         /// <returns>UserDto列表</returns>
         [HttpGet]
-        public ActionResult<ApiResult<IEnumerable<UserDto>>> GetAllUsers([FromQuery]UserResourceParameter parameter)
+        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsers([FromQuery]UserResourceParameter parameter)
         {
-            var result = new ApiResult<IEnumerable<UserDto>>();
-            var users = _service.GetAllUsers().Skip(parameter.PageSize * (parameter.PageNumber - 1)).Take(parameter.PageSize);
-            result.Data = users;
-            return null; ;
+            var users = await _service.GetUsers(parameter);
+            var pagedUsers = users.Skip(parameter.PageSize * (parameter.PageNumber - 1)).Take(parameter.PageSize).ToList();
+            return ApiResult<UserDtoList>.HasData(null);
         }
 
         /// <summary>
@@ -47,11 +47,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<UserDto>>> GetUser(Guid userId)
         {
             var userdto = await _service.GetUser(userId);
-            var result = new ApiResult<UserDto>();
-            result.Code = 0;
-            result.Message = string.Empty;
-            result.Data = userdto;
-            return null;
+            return ApiResult<UserDto>.HasData(userdto);
         }
 
         /// <summary>
@@ -60,7 +56,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>SkillDto列表</returns>
         [HttpGet("{userId}/skills")]
-        public ActionResult<ApiResult<IEnumerable<SkillDto>>> GetSkillsForUser(Guid userId)
+        public ActionResult<ApiResult<SkillDtoList>> GetSkillsForUser(Guid userId)
         {
             var result = new ApiResult<IEnumerable<SkillDto>>();
             result.Data = new List<SkillDto>();
@@ -73,7 +69,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>UserDepartmentRoleDto列表</returns>
         [HttpGet("{userId}/departmentroles")]
-        public ActionResult<ApiResult<IEnumerable<UserDepartmentRoleDto>>> GetDepartmentRolesForUser(Guid userId)
+        public ActionResult<ApiResult<UserDepartmentRoleDtoList>> GetDepartmentRolesForUser(Guid userId)
         {
             var result = new ApiResult<IEnumerable<UserDepartmentRoleDto>>();
             result.Data = new List<UserDepartmentRoleDto>();
@@ -86,26 +82,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userDto">UserCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<ApiStringResult> CreateUser(UserCreationDto userDto)
+        public async Task<ActionResult<ApiStringResult>> CreateUser(UserCreationDto userDto)
         {
             try
             {
-                //if (userDto.Id == Guid.Empty)
-                //{
-                //    userDto.Id = Guid.NewGuid();
-                //}
-                //var userRoles = new List<UserRoleDto>();
-                //foreach (var role in roles.Split(','))
-                //{
-                //    userRoles.Add(new UserRoleDto() { UserId = dto.Id, RoleId = Guid.Parse(role) });
-                //}
-                //userDto.UserRoles = userRoles;
-                //var user = _service.InsertOrUpdate(userDto);
-                return new ApiStringResult { Code=0, Message = "Success" };
+                var result = await _service.InsertUser(userDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
             catch (Exception ex)
             {
-                return new ApiStringResult {  Code= 1, Message = ex.Message };
+                return ApiStringResult.Error(ex.Message);
             }
         }
 
@@ -116,26 +106,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userDto">UserUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{userId}")]
-        public ActionResult<ApiStringResult> UpdateUser(Guid userId,UserUpdateDto userDto)
+        public async Task<ActionResult<ApiStringResult>> UpdateUser(Guid userId,UserUpdateDto userDto)
         {
             try
             {
-                //if (userDto.Id == Guid.Empty)
-                //{
-                //    userDto.Id = Guid.NewGuid();
-                //}
-                //var userRoles = new List<UserRoleDto>();
-                //foreach (var role in roles.Split(','))
-                //{
-                //    userRoles.Add(new UserRoleDto() { UserId = dto.Id, RoleId = Guid.Parse(role) });
-                //}
-                //userDto.UserRoles = userRoles;
-                //var user = _service.InsertOrUpdate(userDto);
-                return new ApiStringResult { Code=0, Message = "Success" };
+                var result = await _service.UpdateUser(userId, userDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
             catch (Exception ex)
             {
-                return new ApiStringResult { Code = 1, Message = ex.Message };
+                return ApiStringResult.Error(ex.Message);
             }
         }
 
@@ -146,9 +130,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">UserUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{userId}/enable")]
-        public ActionResult<ApiStringResult> UpdateUserStatus(Guid userId,UserUpdateStatusDto dto)
+        public async Task<ActionResult<ApiStringResult>> EnableUser(Guid userId,UserUpdateStatusDto dto)
         {
-            return new ApiStringResult { Code = 0, Message = "Success" };
+            try
+            {
+                var result = await _service.EnableUser(userId, dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -158,62 +154,43 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">UserUpdatePasswordDto</param>
         /// <returns></returns>
         [HttpPut("{userId}/password")]
-        public ActionResult<ApiStringResult> ResetPassword(Guid userId,UserUpdatePasswordDto dto)
+        public async Task<ActionResult<ApiStringResult>> ResetPassword(Guid userId,UserUpdatePasswordDto dto)
         {
-            return new ApiStringResult { Code = 0, Message = "Success" };
+            try
+            {
+                var result = await _service.ResetPassword(userId, dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
-
-        ///// <summary>
-        ///// 根据Guid删除用户
-        ///// </summary>
-        ///// <param name="userId">Guid</param>
-        ///// <returns></returns>
-        //[HttpDelete("{userId}")]
-        //public WebApiResultModel DeleteUser(Guid userId)
-        //{
-        //    try
-        //    {
-        //        _service.Delete(userId);
-        //        return new WebApiResultModel
-        //        {
-        //            Code=0,
-        //            Message = "Success"
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new WebApiResultModel
-        //        {
-        //            Code = 1,
-        //            Message = ex.Message
-        //        };
-        //    }
-        //}
 
         /// <summary>
         /// 批量删除用户
         /// </summary>
-        /// <param name="ids">Guid列表</param>
+        /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public ActionResult<ApiStringResult> DeleteUsers(List<Guid> ids)
+        public async Task<ActionResult<ApiStringResult>> DeleteUsers(DeleteMultiDto dto)
         {
             try
             {
-                _service.DeleteBatch(ids);
-                return new ApiStringResult
+                var result = await _service.DeleteUsers(dto);
+                if (result)
                 {
-                    Code = 0,
-                    Message = "Success"
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
             catch (Exception ex)
             {
-                return new ApiStringResult
-                {
-                    Code=1,
-                    Message = ex.Message
-                };
+                return ApiStringResult.Error(ex.Message);
             }
         }
     }
