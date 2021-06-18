@@ -57,11 +57,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>SkillDto列表</returns>
         [HttpGet("{userId}/skills")]
-        public ActionResult<ApiResult<SkillDtoList>> GetSkillsForUser(Guid userId)
+        public async Task<ActionResult<ApiResult<SkillDtoList>>> GetSkillsForUser(Guid userId)
         {
-            var result = new ApiResult<IEnumerable<SkillDto>>();
-            result.Data = new List<SkillDto>();
-            return null;
+            var dtos = await _service.GetSkillsForUser(userId);
+            var list = new SkillDtoList(dtos);
+            return ApiResult<SkillDtoList>.HasData(list);
         }
 
         /// <summary>
@@ -70,11 +70,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>UserDepartmentRoleDto列表</returns>
         [HttpGet("{userId}/departmentroles")]
-        public ActionResult<ApiResult<UserDepartmentRoleDtoList>> GetDepartmentRolesForUser(Guid userId)
+        public async Task<ActionResult<ApiResult<UserDepartmentRoleDtoList>>> GetDepartmentRolesForUser(Guid userId)
         {
-            var result = new ApiResult<IEnumerable<UserDepartmentRoleDto>>();
-            result.Data = new List<UserDepartmentRoleDto>();
-            return null;
+            var dtos = await _service.GetDepartmentRolesForUser(userId);
+            var list = new UserDepartmentRoleDtoList(dtos);
+            return ApiResult<UserDepartmentRoleDtoList>.HasData(list);
         }
 
         /// <summary>

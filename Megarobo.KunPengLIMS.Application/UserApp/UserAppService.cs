@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Domain.Entities;
 using Megarobo.KunPengLIMS.Domain.IRepositories;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
 using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
+using Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos;
+using Megarobo.KunPengLIMS.Application.RoleApp.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 
@@ -16,29 +19,42 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
     /// </summary>
     public class UserAppService : IUserAppService
     {
-        private readonly Megarobo.KunPengLIMS.Domain.IRepositories.IUserRepository _repository;
-        private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repoWrapper;
+        private readonly IMapper _mapper;
 
-        public UserAppService(IRepositoryWrapper wrapper)
+        public UserAppService(IRepositoryWrapper wrapper,IMapper mapper)
         {
             _repoWrapper = wrapper;
-        }
-
-        public User CheckUser(string userName, string password)
-        {
-            return _repository.CheckUser(userName, password);
+            _mapper = mapper;
         }
 
         public List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount)
         {
             //return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentId == departmentId, it => it.CreateTime));
-            return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentRoles.Select(ud=>ud.DepartmentID).Contains(departmentId), it => it.CreatedAt));
+            //return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentRoles.Select(ud=>ud.DepartmentID).Contains(departmentId), it => it.CreatedAt));
+            throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter)
+        public async Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter)
         {
-            throw new NotImplementedException();
+            Expression<Func<User, bool>> predicate = PredicateBuilder.True<User>();
+            if(!string.IsNullOrEmpty(parameter.UserName))
+            {
+                predicate = predicate.And(u => u.UserName == parameter.UserName);
+            }
+            if(!string.IsNullOrEmpty(parameter.MobileNumber))
+            {
+                predicate = predicate.And(u => u.MobileNumber == parameter.MobileNumber);
+            }
+            predicate = predicate.And(u => u.IsActive == parameter.IsActive);
+            if(parameter.StartDate!=DateTime.MinValue && parameter.EndDate!=DateTime.MinValue)
+            {
+                predicate = predicate.And(u => u.CreatedAt >= parameter.StartDate && u.CreatedAt <= parameter.EndDate);
+            }
+            predicate = predicate.And(u => !u.IsDeleted);
+            var users = await _repoWrapper.UserRepo.GetByConditionAsync(predicate);
+            var dtos = _mapper.Map < IEnumerable<UserDto>>(users);
+            return dtos;
         }
 
         public async Task<UserDto> GetUser(Guid userId)
@@ -48,14 +64,25 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             return dto;
         }
 
-        public Task<SkillDtoList> GetSkillsForUser(Guid userId)
+        public async Task<IEnumerable<SkillDto>> GetSkillsForUser(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = await _repoWrapper.UserRepo.GetUserWithSkill(userId);
+            var skills = user.Skills.Select(us => us.Skill);
+            var dtos = _mapper.Map<IEnumerable<SkillDto>>(skills);
+            return dtos;
         }
 
-        public Task<UserDepartmentRoleDtoList> GetDepartmentRolesForUser(Guid userId)
+        public async Task<IEnumerable<UserDepartmentRoleDto>> GetDepartmentRolesForUser(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = await _repoWrapper.UserRepo.GetUserWithDepartmentRole(userId);
+            var dtos = new List<UserDepartmentRoleDto>();
+            foreach(var departmentrole in user.DepartmentRoles)
+            {
+                var departmentDto = _mapper.Map<DepartmentDto>(departmentrole.Department);
+                var roleDto = _mapper.Map<RoleDto>(departmentrole.Role);
+                dtos.Add(new UserDepartmentRoleDto() { Department = departmentDto, Role = roleDto });
+            }
+            return dtos;
         }
 
         public async Task<bool> InsertUser(UserCreationDto dto)
@@ -65,6 +92,13 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             user.CreatedAt = DateTime.Now;
             user.IsDeleted = false;
             _repoWrapper.UserRepo.Create(user);
+            if (dto.SkillIds.Any())
+            {
+                foreach (var skillid in dto.SkillIds)
+                {
+                    user.Skills.Add(new UserSkill() { UserID = user.Id, SkillID = skillid });
+                }
+            }
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
         }

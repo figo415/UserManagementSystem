@@ -13,12 +13,12 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 
         public string MobileNumber { get; set; }
 
-        public List<Guid> WorkTimeIds { get; set; }
+        public string WorkTime { get; set; }
 
         public bool IsActive { get; set; }
 
         public List<Guid> SkillIds { get; set; }
 
-        public List<KeyValuePair<string,string>> DepartmentRoles { get; set; }
+        public List<DepartmentIdRoleId> DepartmentRoles { get; set; }
     }
 }

@@ -24,7 +24,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public string MobileNumber { get; set; }
 
         //工作时间，嵌入值对象：时间区间
-        public Period WorkTime { get; set; }
+        //public Period WorkTime { get; set; }
+        public string WorkTime { get; set; }
 
         public bool IsActive { get; set; }
 

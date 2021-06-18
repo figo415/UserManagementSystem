@@ -26,7 +26,7 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 
         public DateTime CreateTime { get; set; }
 
-        public List<UserDepartmentRoleDto> DepartmentRoles { get; set; }//需转换
+        //public List<UserDepartmentRoleDto> DepartmentRoles { get; set; }//需转换
 
         //public List<SkillDto> Skills { get; set; }//需转换
         public string Skill { get; set; }

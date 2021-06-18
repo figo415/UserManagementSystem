@@ -10,7 +10,6 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
 {
     public interface IUserAppService
     {
-        User CheckUser(string userName, string password);
 
         List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount);
 
@@ -19,9 +18,9 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
 
         Task<UserDto> GetUser(Guid userId);
 
-        Task<SkillDtoList> GetSkillsForUser(Guid userId);
+        Task<IEnumerable<SkillDto>> GetSkillsForUser(Guid userId);
 
-        Task<UserDepartmentRoleDtoList> GetDepartmentRolesForUser(Guid userId);
+        Task<IEnumerable<UserDepartmentRoleDto>> GetDepartmentRolesForUser(Guid userId);
 
         Task<bool> InsertUser(UserCreationDto dto);
 
