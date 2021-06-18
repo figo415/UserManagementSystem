@@ -15,7 +15,7 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
         List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount);
 
 
-        Task<UserDtoList> GetUsers(UserResourceParameter parameter);
+        Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter);
 
         Task<UserDto> GetUser(Guid userId);
 

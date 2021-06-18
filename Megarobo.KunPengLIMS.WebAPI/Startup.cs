@@ -15,6 +15,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Megarobo.KunPengLIMS.Infrastructure;
 using System.Runtime.InteropServices;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
+using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -36,6 +39,10 @@ namespace Megarobo.KunPengLIMS.WebAPI
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             //services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Postgre")));
+
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+
+            services.AddAutoMapper(typeof(DeleteMultiDto));
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>

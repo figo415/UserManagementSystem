@@ -36,7 +36,7 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentRoles.Select(ud=>ud.DepartmentID).Contains(departmentId), it => it.CreatedAt));
         }
 
-        public Task<UserDtoList> GetUsers(UserResourceParameter parameter)
+        public Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter)
         {
             throw new NotImplementedException();
         }

@@ -35,7 +35,8 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var users = await _service.GetUsers(parameter);
             var pagedUsers = users.Skip(parameter.PageSize * (parameter.PageNumber - 1)).Take(parameter.PageSize).ToList();
-            return ApiResult<UserDtoList>.HasData(null);
+            var list = new UserDtoList(pagedUsers);
+            return ApiResult<UserDtoList>.HasData(list);
         }
 
         /// <summary>
