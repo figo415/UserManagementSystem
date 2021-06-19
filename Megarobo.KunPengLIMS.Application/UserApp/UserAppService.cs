@@ -11,6 +11,8 @@ using Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos;
 using Megarobo.KunPengLIMS.Application.RoleApp.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
 
 namespace Megarobo.KunPengLIMS.Application.UserApp
 {
@@ -35,26 +37,11 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter)
+        public async Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters)
         {
-            Expression<Func<User, bool>> predicate = PredicateBuilder.True<User>();
-            if(!string.IsNullOrEmpty(parameter.UserName))
-            {
-                predicate = predicate.And(u => u.UserName == parameter.UserName);
-            }
-            if(!string.IsNullOrEmpty(parameter.MobileNumber))
-            {
-                predicate = predicate.And(u => u.MobileNumber == parameter.MobileNumber);
-            }
-            predicate = predicate.And(u => u.IsActive == parameter.IsActive);
-            if(parameter.StartDate!=DateTime.MinValue && parameter.EndDate!=DateTime.MinValue)
-            {
-                predicate = predicate.And(u => u.CreatedAt >= parameter.StartDate && u.CreatedAt <= parameter.EndDate);
-            }
-            predicate = predicate.And(u => !u.IsDeleted);
-            var users = await _repoWrapper.UserRepo.GetByConditionAsync(predicate);
-            var dtos = _mapper.Map < IEnumerable<UserDto>>(users);
-            return dtos;
+            var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parameters);
+            var pagedDtos = _mapper.Map<IEnumerable<UserDto>>(pagedUsers);
+            return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
         }
 
         public async Task<UserDto> GetUser(Guid userId)
@@ -96,7 +83,8 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             {
                 foreach (var skillid in dto.SkillIds)
                 {
-                    user.Skills.Add(new UserSkill() { UserID = user.Id, SkillID = skillid });
+                    var userskill = new UserSkill() { UserID = user.Id, SkillID = skillid };
+                    _repoWrapper.UserSkillRepo.Create(userskill);
                 }
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();

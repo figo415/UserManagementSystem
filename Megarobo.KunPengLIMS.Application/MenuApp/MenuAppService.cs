@@ -12,13 +12,12 @@ namespace Megarobo.KunPengLIMS.Application.MenuApp
     public class MenuAppService : IMenuAppService
     {
         private readonly IMenuRepository _menuRepository;
-        private readonly IUserRepository _userRepository;
+        //private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly IMapper _mapper;
-        public MenuAppService(IMenuRepository menuRepository, IUserRepository userRepository, IRoleRepository roleRepository)
+        public MenuAppService(IMenuRepository menuRepository, IRoleRepository roleRepository)
         {
             _menuRepository = menuRepository;
-            _userRepository = userRepository;
             _roleRepository = roleRepository;
         }
 
@@ -66,7 +65,7 @@ namespace Megarobo.KunPengLIMS.Application.MenuApp
             var allMenus = _menuRepository.GetAllList(it=>it.Type == 0).OrderBy(it => it.OrdinalNumber);
             if (userId == Guid.Empty) //超级管理员
                 return _mapper.Map<List<MenuDto>>(allMenus);
-            var user = _userRepository.GetWithRoles(userId);
+            var user = new User(); //_userRepository.GetWithRoles(userId);
             if (user == null)
                 return result;
             //var userRoles = user.Roles;

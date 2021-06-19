@@ -19,6 +19,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserSkill> UserSkills { get; set; }
+
         public DbSet<Role> Roles { get; set; }
 
         public DbSet<Menu> Menus { get; set; }

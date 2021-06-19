@@ -32,11 +32,12 @@ namespace Megarobo.KunPengLIMS.WebAPI.Models
         /// </summary>
         public T Data { get; set; }
 
-        public static ApiResult<T> HasData(T value)
+        public static ApiResult<T> HasData(T value,int total)
         {
             var result = new ApiResult<T>();
             result.Code = 0;
             result.Message = "Success";
+            result.RowCount = total;
             result.Data = value;
             return result;
         }

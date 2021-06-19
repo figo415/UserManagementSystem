@@ -17,6 +17,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         }
 
         private readonly IUserRepository _userRepo;
+        private readonly IUserSkillRepository _userSkillRepo;
         private readonly ISkillRepository _skillRepo;
         private readonly IRoleRepository _roleRepo;
         private readonly IMenuRepository _menuRepo;
@@ -25,6 +26,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         private readonly IDepartmentRepository _departmentRepo;
 
         public IUserRepository UserRepo => _userRepo ?? new UserRepository(_dbContext);
+
+        public IUserSkillRepository UserSkillRepo => _userSkillRepo ?? new UserSkillRepository(_dbContext);
 
         public ISkillRepository SkillRepo => _skillRepo ?? new SkillRepository(_dbContext);
 

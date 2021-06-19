@@ -58,4 +58,45 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return await DbContext.Set<T>().FindAsync(id) != null;
         }
     }
+
+    public class RepositoryBaseNoId<T>:IRepositoryBase<T> where T:class
+    {
+        public DbContext DbContext { get; set; }
+
+        public RepositoryBaseNoId(DbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
+        public Task<IEnumerable<T>> GetAllAsync()
+        {
+            return Task.FromResult(DbContext.Set<T>().AsEnumerable());
+        }
+
+        public Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> expression)
+        {
+            return Task.FromResult(DbContext.Set<T>().Where(expression).AsEnumerable());
+        }
+
+        public void Create(T entity)
+        {
+            DbContext.Set<T>().Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            DbContext.Set<T>().Update(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            DbContext.Set<T>().Remove(entity);
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            var num = await DbContext.SaveChangesAsync();
+            return num > 0;
+        }
+    }
 }

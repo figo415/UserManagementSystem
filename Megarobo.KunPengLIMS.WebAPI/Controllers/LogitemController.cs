@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 日志项管理
     /// </summary>
-    [Route("api/logitems")]
+    [Route("limsapi/logitems")]
     [ApiController]
     public class LogitemController : LimsControllerBase
     {

@@ -13,7 +13,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 部门管理
     /// </summary>
-    [Route("api/departments")]
+    [Route("limsapi/departments")]
     [ApiController]
     public class DepartmentController : LimsControllerBase
     {

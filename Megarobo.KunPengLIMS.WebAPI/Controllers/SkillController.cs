@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 技能管理
     /// </summary>
-    [Route("api/skills")]
+    [Route("limsapi/skills")]
     [ApiController]
     public class SkillController : LimsControllerBase
     {

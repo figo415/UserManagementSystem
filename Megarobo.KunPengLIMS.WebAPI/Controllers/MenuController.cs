@@ -13,7 +13,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 菜单管理
     /// </summary>
-    [Route("api/menus")]
+    [Route("limsapi/menus")]
     [ApiController]
     public class MenuController : LimsControllerBase
     {

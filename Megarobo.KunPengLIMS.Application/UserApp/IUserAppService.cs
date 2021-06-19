@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
+using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
 
 namespace Megarobo.KunPengLIMS.Application.UserApp
 {
@@ -13,8 +15,7 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
 
         List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount);
 
-
-        Task<IEnumerable<UserDto>> GetUsers(UserResourceParameter parameter);
+        Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters);
 
         Task<UserDto> GetUser(Guid userId);
 

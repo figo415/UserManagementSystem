@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Infrastructure.Utility;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 {
@@ -13,6 +17,34 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public UserRepository(DbContext dbContext):base(dbContext)
         {
 
+        }
+
+        public System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParameters parameters)
+        {
+            IQueryable<User> queryable = DbContext.Set<User>();
+            var predicate = BuildPredicate(parameters);
+            queryable = queryable.Where(predicate);
+            return PagedList<User>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+        }
+
+        private Expression<Func<User,bool>> BuildPredicate(UserQueryParameters parameters)
+        {
+            Expression<Func<User, bool>> predicate = PredicateBuilder.True<User>();
+            if (!string.IsNullOrEmpty(parameters.UserName))
+            {
+                predicate = predicate.And(u => u.UserName == parameters.UserName);
+            }
+            if (!string.IsNullOrEmpty(parameters.MobileNumber))
+            {
+                predicate = predicate.And(u => u.MobileNumber == parameters.MobileNumber);
+            }
+            predicate = predicate.And(u => u.IsActive == parameters.IsActive);
+            if (parameters.StartDate != DateTime.MinValue && parameters.EndDate != DateTime.MinValue)
+            {
+                predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate && u.CreatedAt <= parameters.EndDate);
+            }
+            predicate = predicate.And(u => !u.IsDeleted);
+            return predicate;
         }
 
         public System.Threading.Tasks.Task<User> GetUserWithSkill(Guid userId)

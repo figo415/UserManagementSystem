@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 字典项管理
     /// </summary>
-    [Route("api/dictitems")]
+    [Route("limsapi/dictitems")]
     [ApiController]
     public class DictitemController : LimsControllerBase
     {

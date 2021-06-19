@@ -13,7 +13,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 角色管理
     /// </summary>
-    [Route("api/roles")]
+    [Route("limsapi/roles")]
     [ApiController]
     public class RoleController : LimsControllerBase
     {
@@ -35,17 +35,17 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
 
-        private PageModel GetAllPageList(int startPage, int pageSize)
-        {
-            int rowCount = 0;
-            var result = _service.GetAllPageList(startPage, pageSize, out rowCount);
-            return new PageModel
-            {
-                RowCount = rowCount,
-                PageCount = (int) Math.Ceiling(Convert.ToDecimal(rowCount) / pageSize),
-                Rows = result,
-            };
-        }
+        //private PageModel GetAllPageList(int startPage, int pageSize)
+        //{
+        //    int rowCount = 0;
+        //    var result = _service.GetAllPageList(startPage, pageSize, out rowCount);
+        //    return new PageModel
+        //    {
+        //        RowCount = rowCount,
+        //        PageCount = (int) Math.Ceiling(Convert.ToDecimal(rowCount) / pageSize),
+        //        Rows = result,
+        //    };
+        //}
 
         /// <summary>
         /// 根据主键获取角色

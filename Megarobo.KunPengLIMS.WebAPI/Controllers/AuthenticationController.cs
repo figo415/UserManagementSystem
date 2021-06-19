@@ -12,7 +12,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 登录
     /// </summary>
-    [Route("api/authentication")]
+    [Route("limsapi/authentication")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -41,17 +41,17 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             Console.WriteLine(DateTime.Now + ": AuthenticateUser: " + requestDto.UserName);
             var result = new ApiStringResult();
             //var responseDto = new AuthResponseDto();
-            var user = _userAppService.CheckUser(requestDto.UserName, requestDto.Password);
-            if (user != null)
-            {
-                result.Code = 0;
-                result.Message = "登录成功";
-            }
-            else
-            {
-                result.Code = 1;
-                result.Message = "登录失败";
-            }
+            //var user =  _userAppService.CheckUser(requestDto.UserName, requestDto.Password);
+            //if (user != null)
+            //{
+            //    result.Code = 0;
+            //    result.Message = "登录成功";
+            //}
+            //else
+            //{
+            //    result.Code = 1;
+            //    result.Message = "登录失败";
+            //}
             //var resource = "/api/organizations/codeinternal/" + requestDto.ORGANIZATION_CODE;
             //var organizationDto = WebApiHelper.GetWebApi<OrganizationDto>("http://192.168.0.109:8010", resource);
             //if(organizationDto!=null)

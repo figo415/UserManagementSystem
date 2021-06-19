@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Megarobo.KunPengLIMS.WebAPI.Models
+namespace Megarobo.KunPengLIMS.Domain
 {
     public class PagedList<T> : List<T>
     {
@@ -26,6 +26,14 @@ namespace Megarobo.KunPengLIMS.WebAPI.Models
             PageSize = pageSize;
             TotalPages = (int)Math.Ceiling((double)totalCount / PageSize);
             AddRange(items);
+        }
+
+        public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source,int pageNumber,int pageSize)
+        {
+            var total = source.Count();
+            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var list = new PagedList<T>(items, total, pageNumber, pageSize);
+            return await Task.FromResult(list);
         }
     }
 }

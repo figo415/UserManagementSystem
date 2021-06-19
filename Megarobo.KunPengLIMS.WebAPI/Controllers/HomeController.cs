@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
-    [Route("api/home")]
+    [Route("limsapi/home")]
     [ApiController]
     public class HomeController : ControllerBase
     {

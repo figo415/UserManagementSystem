@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class UserResourceParameter
+    public class UserQueryParameters
     {
         private const int MaxPageSize = 50;
 

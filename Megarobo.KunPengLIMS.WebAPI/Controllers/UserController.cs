@@ -3,40 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Megarobo.KunPengLIMS.Application.UserApp;
 using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
 using Megarobo.KunPengLIMS.Application;
 using Megarobo.KunPengLIMS.WebAPI.Models;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
     /// 用户管理
     /// </summary>
-    [Route("api/users")]
+    [Produces("application/json")]
+    [Route("limsapi/users")]
     [ApiController]
     public class UserController : LimsControllerBase
     {
         private readonly IUserAppService _service;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserAppService service)
+        public UserController(IUserAppService service,ILogger<UserController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         /// <summary>
         /// 获取所有用户，可根据用户名称、手机号码、状态或者创建时间查询
         /// </summary>
+        /// <param name="parameters">UserQueryParameters</param>
         /// <returns>UserDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsers([FromQuery]UserResourceParameter parameter)
+        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsers([FromQuery]UserQueryParameters parameters)
         {
-            var users = await _service.GetUsers(parameter);
-            var pagedUsers = users.Skip(parameter.PageSize * (parameter.PageNumber - 1)).Take(parameter.PageSize).ToList();
-            var list = new UserDtoList(pagedUsers);
-            return ApiResult<UserDtoList>.HasData(list);
+            _logger.LogInformation("Query string for User: UserName={0}", parameters.UserName);
+            var pageddtos = await _service.GetUsersByPage(parameters);
+            var list = new UserDtoList(pageddtos);
+            return ApiResult<UserDtoList>.HasData(list,pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -48,7 +54,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<UserDto>>> GetUser(Guid userId)
         {
             var userdto = await _service.GetUser(userId);
-            return ApiResult<UserDto>.HasData(userdto);
+            return ApiResult<UserDto>.HasData(userdto,0);
         }
 
         /// <summary>
@@ -61,7 +67,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var dtos = await _service.GetSkillsForUser(userId);
             var list = new SkillDtoList(dtos);
-            return ApiResult<SkillDtoList>.HasData(list);
+            return ApiResult<SkillDtoList>.HasData(list,0);
         }
 
         /// <summary>
@@ -74,15 +80,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var dtos = await _service.GetDepartmentRolesForUser(userId);
             var list = new UserDepartmentRoleDtoList(dtos);
-            return ApiResult<UserDepartmentRoleDtoList>.HasData(list);
+            return ApiResult<UserDepartmentRoleDtoList>.HasData(list,0);
         }
 
         /// <summary>
         /// 新增用户
         /// </summary>
+        /// <remarks></remarks>
         /// <param name="userDto">UserCreationDto</param>
         /// <returns></returns>
+        // <response code="201">Returns the newly created item</response>
+        // <response code="400">If the item is null</response> 
         [HttpPost]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiStringResult>> CreateUser(UserCreationDto userDto)
         {
             try
