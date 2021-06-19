@@ -3,35 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Megarobo.KunPengLIMS.Application.DepartmentApp;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
     /// 部门管理
     /// </summary>
+    [Produces("application/json")]
     [Route("limsapi/departments")]
     [ApiController]
     public class DepartmentController : LimsControllerBase
     {
         private readonly IDepartmentAppService _service;
+        private readonly ILogger<DepartmentController> _logger;
 
-        public DepartmentController(IDepartmentAppService service)
+        public DepartmentController(IDepartmentAppService service, ILogger<DepartmentController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         /// <summary>
         /// 获取所有部门，可根据部门名称或者状态查询
         /// </summary>
+        /// <param name="parameters">DepartmentQueryParameters</param>
         /// <returns>DepartmentDto列表</returns>
         [HttpGet]
-        public ActionResult<ApiResult<IEnumerable<DepartmentDto>>> GetAllDepartments([FromQuery]DepartmentResourceParameter parameter)
+        public async Task<ActionResult<ApiResult<DepartmentDtoList>>> GetDepartments([FromQuery]DepartmentQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Department: Name={0}", parameters.Name);
+            var pageddtos = await _service.GetDepartmentsByPage(parameters);
+            var list = new DepartmentDtoList(pageddtos);
+            return ApiResult<DepartmentDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -40,10 +50,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentId">Guid</param>
         /// <returns>DepartmentDto</returns>
         [HttpGet("{departmentId}")]
-        public ActionResult<ApiResult<DepartmentDto>> GetDepartment(Guid departmentId)
+        public async Task<ActionResult<ApiResult<DepartmentDto>>> GetDepartment(Guid departmentId)
         {
-            var dto = _service.Get(departmentId);
-            return null;
+            var departmentdto = await _service.GetDepartment(departmentId);
+            return ApiResult<DepartmentDto>.HasData(departmentdto, 0);
         }
 
         ///// <summary>
@@ -66,21 +76,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// 获取某个部门下的用户
         /// </summary>
         /// <param name="departmentId">Guid</param>
-        /// <returns></returns>
+        /// <returns>UserDto列表</returns>
         [HttpGet("{departmentId}/users")]
-        public ActionResult<ApiResult<IEnumerable<UserDto>>> GetUsersByDepartment(Guid departmentId)
+        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsersByDepartment(Guid departmentId,[FromQuery]PagedParameters parameters)
         {
-            throw new NotImplementedException();
-            //int rowCount = 0;
-            //var result = new object();// _service.GetUserByDepartment(departmentId, startPage, pageSize, out rowCount);
-            ////var roles = _roleService.GetAllList();
-            //return new PageModel
-            //{
-            //    RowCount = rowCount,
-            //    PageCount = (int) Math.Ceiling(Convert.ToDecimal(rowCount) / pageSize),
-            //    Rows = result,
-            //    //roles = roles
-            //};
+            var pageddtos = await _service.GetUsersByDepartment(departmentId, parameters);
+            var list = new UserDtoList(pageddtos);
+            return ApiResult<UserDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         ///// <summary>
@@ -109,21 +111,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentDto">DepartmentCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<ApiStringResult> CreateDepartment(DepartmentCreationDto departmentDto)
+        public async Task<ActionResult<ApiStringResult>> CreateDepartment(DepartmentCreationDto departmentDto)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return new ApiStringResult
+                var result = await _service.InsertDepartment(departmentDto);
+                if (result)
                 {
-                    Code = 1,
-                    Message = GetModelStateError()
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
-            //if (_service.InsertOrUpdate(departmentDto))
+            catch (Exception ex)
             {
-                return new ApiStringResult { Code=0,Message = "Success" };
+                return ApiStringResult.Error(ex.Message);
             }
-            return new ApiStringResult { Code=1,Message = "Faild" };
         }
 
         /// <summary>
@@ -133,48 +135,46 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentDto">DepartmentUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{departmentId}")]
-        public ActionResult<ApiStringResult> UpdateDepartment(Guid departmentId,DepartmentUpdateDto departmentDto)
+        public async Task<ActionResult<ApiStringResult>> UpdateDepartment(Guid departmentId,DepartmentUpdateDto departmentDto)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return new ApiStringResult
+                var result = await _service.UpdateDepartment(departmentId, departmentDto);
+                if (result)
                 {
-                    Code=1,
-                    Message = GetModelStateError()
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
-            //if (_service.InsertOrUpdate(departmentDto))
+            catch (Exception ex)
             {
-                return new ApiStringResult { Code=0 };
+                return ApiStringResult.Error(ex.Message);
             }
-            return new ApiStringResult { Code=1 };
         }
 
-        ///// <summary>
-        ///// 根据主键删除部门
-        ///// </summary>
-        ///// <param name="departmentId">Guid</param>
-        ///// <returns></returns>
-        //[HttpDelete("{departmentId}")]
-        //public WebApiResultModel DeleteDepartment(Guid departmentId)
-        //{
-        //    try
-        //    {
-        //        _service.Delete(departmentId);
-        //        return new WebApiResultModel
-        //        {
-        //            Code=0
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new WebApiResultModel
-        //        {
-        //            Code=1,
-        //            Message = ex.Message
-        //        };
-        //    }
-        //}
+        /// <summary>
+        /// 修改部门状态
+        /// </summary>
+        /// <param name="departmentId">Guid</param>
+        /// <param name="dto">DepartmentUpdateStatusDto</param>
+        /// <returns></returns>
+        [HttpPut("{departmentId}/enable")]
+        public async Task<ActionResult<ApiStringResult>> EnableDepartment(Guid departmentId, DepartmentUpdateStatusDto dto)
+        {
+            try
+            {
+                var result = await _service.EnableDepartment(departmentId, dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
+        }
 
         /// <summary>
         /// 批量删除部门
@@ -182,23 +182,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="ids">Guid列表</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public ActionResult<ApiStringResult> DeleteDepartments(List<Guid> ids)
+        public async Task<ActionResult<ApiStringResult>> DeleteDepartments(DeleteMultiDto dto)
         {
             try
             {
-                _service.DeleteBatch(ids);
-                return new ApiStringResult
+                var result = await _service.DeleteDepartments(dto);
+                if (result)
                 {
-                    Code=0
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
             catch (Exception ex)
             {
-                return new ApiStringResult
-                {
-                    Code=1,
-                    Message = ex.Message
-                };
+                return ApiStringResult.Error(ex.Message);
             }
         }
     }

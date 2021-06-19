@@ -12,9 +12,6 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
 {
     public interface IUserAppService
     {
-
-        List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount);
-
         Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters);
 
         Task<UserDto> GetUser(Guid userId);

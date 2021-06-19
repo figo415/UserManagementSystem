@@ -3,79 +3,102 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos;
+using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
 using Megarobo.KunPengLIMS.Domain.IRepositories;
 using Megarobo.KunPengLIMS.Domain.Entities;
 using AutoMapper;
+using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 
 namespace Megarobo.KunPengLIMS.Application.DepartmentApp
 {
+    /// <summary>
+    /// 部门管理服务
+    /// </summary>
     public class DepartmentAppService : IDepartmentAppService
     {
-        private readonly IDepartmentRepository _repository;
+        private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
-        public DepartmentAppService(IDepartmentRepository repository)
+
+        public DepartmentAppService(IRepositoryWrapper wrapper, IMapper mapper)
         {
-            _repository = repository;
-        }
-        /// <summary>
-        /// 获取列表
-        /// </summary>
-        /// <returns></returns>
-        public List<DepartmentDto> GetAllList()
-        {
-            return _mapper.Map<List<DepartmentDto>>(_repository.GetAllList(it => it.Id != Guid.Empty).OrderBy(it => it.OrdinalNumber));
+            _repoWrapper = wrapper;
+            _mapper = mapper;
         }
 
-        /// <summary>
-        /// 根据父级Id获取子级列表
-        /// </summary>
-        /// <param name="parentId">父级Id</param>
-        /// <param name="startPage">起始页</param>
-        /// <param name="pageSize">页面大小</param>
-        /// <param name="rowCount">数据总数</param>
-        /// <returns></returns>
-        public List<DepartmentDto> GetChildrenByParent(Guid parentId, int startPage, int pageSize, out int rowCount)
+        public async Task<PagedList<DepartmentDto>> GetDepartmentsByPage(DepartmentQueryParameters parameters)
         {
-            return _mapper.Map<List<DepartmentDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.ParentId == parentId, it => it.OrdinalNumber));
+            var pagedDepartments = await _repoWrapper.DepartmentRepo.GetDepartmentsByPage(parameters);
+            var pagedDtos = _mapper.Map<IEnumerable<DepartmentDto>>(pagedDepartments);
+            return new PagedList<DepartmentDto>(pagedDtos.ToList(), pagedDepartments.TotalCount, pagedDepartments.CurrentPage, pagedDepartments.PageSize);
         }
 
-        /// <summary>
-        /// 新增或修改
-        /// </summary>
-        /// <param name="dto">实体</param>
-        /// <returns></returns>
-        public bool InsertOrUpdate(DepartmentDto dto)
+        public async Task<DepartmentDto> GetDepartment(Guid departmentId)
         {
-            var menu = _repository.InsertOrUpdate(_mapper.Map<Department>(dto));
-            return menu == null ? false : true;
+            var department = await _repoWrapper.UserRepo.GetByIdAsync(departmentId);
+            var dto = _mapper.Map<DepartmentDto>(department);
+            return dto;
         }
 
-        /// <summary>
-        /// 根据Id集合批量删除
-        /// </summary>
-        /// <param name="ids">Id集合</param>
-        public void DeleteBatch(List<Guid> ids)
+        public async Task<PagedList<UserDto>> GetUsersByDepartment(Guid departmentId, PagedParameters parameters)
         {
-            _repository.Delete(it => ids.Contains(it.Id));
+            var pagedUsers = await _repoWrapper.DepartmentRepo.GetUsersByDepartment(departmentId, parameters);
+            var pagedDtos = _mapper.Map<IEnumerable<UserDto>>(pagedUsers);
+            return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id">Id</param>
-        public void Delete(Guid id)
+        public async Task<bool> InsertDepartment(DepartmentCreationDto dto)
         {
-            _repository.Delete(id);
+            var department = _mapper.Map<Department>(dto);
+            department.Id = Guid.NewGuid();
+            department.CreatedAt = DateTime.Now;
+            department.IsDeleted = false;
+            _repoWrapper.DepartmentRepo.Create(department);
+            var result = await _repoWrapper.DepartmentRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 根据Id获取实体
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
-        public DepartmentDto Get(Guid id)
+        public async Task<bool> UpdateDepartment(Guid departmentId, DepartmentUpdateDto dto)
         {
-            return _mapper.Map<DepartmentDto>(_repository.Get(id));
+            var department = await _repoWrapper.DepartmentRepo.GetByIdAsync(departmentId);
+            if (department == null)
+            {
+                return false;
+            }
+            _mapper.Map(dto, department, typeof(DepartmentUpdateDto), typeof(Department));
+            _repoWrapper.DepartmentRepo.Update(department);
+            var result = await _repoWrapper.DepartmentRepo.SaveAsync();
+            return result;
+        }
+
+        public async Task<bool> EnableDepartment(Guid departmentId, DepartmentUpdateStatusDto dto)
+        {
+            var department = await _repoWrapper.DepartmentRepo.GetByIdAsync(departmentId);
+            if (department == null)
+            {
+                return false;
+            }
+            department.IsActive = dto.IsActive;
+            _repoWrapper.DepartmentRepo.Update(department);
+            var result = await _repoWrapper.DepartmentRepo.SaveAsync();
+            return result;
+        }
+
+        public async Task<bool> DeleteDepartments(DeleteMultiDto dto)
+        {
+            foreach (var departmentId in dto.Guids)
+            {
+                var department = await _repoWrapper.DepartmentRepo.GetByIdAsync(departmentId);
+                if (department == null)
+                {
+                    continue;
+                }
+                department.IsDeleted = true;
+                _repoWrapper.DepartmentRepo.Update(department);
+            }
+            var result = await _repoWrapper.DepartmentRepo.SaveAsync();
+            return result;
         }
     }
 }

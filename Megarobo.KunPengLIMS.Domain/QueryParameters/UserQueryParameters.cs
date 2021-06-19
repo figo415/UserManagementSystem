@@ -4,20 +4,8 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class UserQueryParameters
+    public class UserQueryParameters:PagedParameters
     {
-        private const int MaxPageSize = 50;
-
-        private int _pageSize = 10;
-
-        public int PageNumber { get; set; } = 1;
-
-        public int PageSize
-        {
-            get { return _pageSize; }
-            set { _pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
-        }
-
         public string UserName { get; set; }
 
         public string MobileNumber { get; set; }

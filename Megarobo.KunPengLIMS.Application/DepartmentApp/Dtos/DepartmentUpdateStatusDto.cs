@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos
 {
-    public class DepartmentResourceParameter
+    public class DepartmentUpdateStatusDto
     {
-        public string Name { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

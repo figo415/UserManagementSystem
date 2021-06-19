@@ -30,13 +30,6 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
             _mapper = mapper;
         }
 
-        public List<UserDto> GetUserByDepartment(Guid departmentId, int startPage, int pageSize, out int rowCount)
-        {
-            //return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentId == departmentId, it => it.CreateTime));
-            //return _mapper.Map<List<UserDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, it => it.DepartmentRoles.Select(ud=>ud.DepartmentID).Contains(departmentId), it => it.CreatedAt));
-            throw new NotImplementedException();
-        }
-
         public async Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters)
         {
             var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parameters);

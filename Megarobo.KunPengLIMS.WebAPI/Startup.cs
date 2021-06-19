@@ -20,6 +20,8 @@ using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
 using Megarobo.KunPengLIMS.Application;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
+using Megarobo.KunPengLIMS.Application.UserApp;
+using Megarobo.KunPengLIMS.Application.DepartmentApp;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -42,6 +44,9 @@ namespace Megarobo.KunPengLIMS.WebAPI
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             //services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Postgre")));
+
+            services.AddScoped<IUserAppService, UserAppService>();
+            services.AddScoped<IDepartmentAppService, DepartmentAppService>();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
