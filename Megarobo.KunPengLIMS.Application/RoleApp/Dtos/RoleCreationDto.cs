@@ -13,6 +13,7 @@ namespace Megarobo.KunPengLIMS.Application.RoleApp.Dtos
 
         public bool IsActive { get; set; }
 
-        public List<MenuDto> Menus { get; set; }
+        //public List<MenuDto> Menus { get; set; }
+        public string Menus { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.Repositories
 {
-    public class RoleRepository : LimsRepositoryBase<Role>, IRoleRepository
+    public class RoleRepository : LimsRepositoryBase<Role>
     {
         public RoleRepository(LimsDbContext dbcontext) : base(dbcontext)
         {

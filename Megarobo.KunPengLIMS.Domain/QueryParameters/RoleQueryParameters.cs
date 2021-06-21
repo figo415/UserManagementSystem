@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.RoleApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class RoleResourceParameter
+    public class RoleQueryParameters:PagedParameters
     {
         public string Name { get; set; }
 

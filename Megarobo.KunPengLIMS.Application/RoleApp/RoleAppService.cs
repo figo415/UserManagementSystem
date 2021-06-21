@@ -7,98 +7,89 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 
 namespace Megarobo.KunPengLIMS.Application.RoleApp
 {
     public class RoleAppService : IRoleAppService
     {
-        private readonly IRoleRepository _repository;
+        private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
-        public RoleAppService(IRoleRepository repository)
+
+        public RoleAppService(IRepositoryWrapper wrapper, IMapper mapper)
         {
-            _repository = repository;
+            _repoWrapper = wrapper;
+            _mapper = mapper;
         }
 
-        /// <summary>
-        /// 获取列表
-        /// </summary>
-        /// <returns></returns>
-        public List<RoleDto> GetAllList()
+        public async Task<PagedList<RoleDto>> GetRolesByPage(RoleQueryParameters parameters)
         {
-            //return _mapper.Map<List<RoleDto>>(_repository.GetAllList().OrderBy(it => it.Code));
-            return _mapper.Map<List<RoleDto>>(_repository.GetAllList());
+            var pagedRoles = await _repoWrapper.RoleRepo.GetRolesByPage(parameters);
+            var pagedDtos = _mapper.Map<IEnumerable<RoleDto>>(pagedRoles);
+            return new PagedList<RoleDto>(pagedDtos.ToList(), pagedRoles.TotalCount, pagedRoles.CurrentPage, pagedRoles.PageSize);
         }
 
-        /// <summary>
-        /// 获取分页列表
-        /// </summary>
-        /// <param name="startPage">起始页</param>
-        /// <param name="pageSize">页面大小</param>
-        /// <param name="rowCount">数据总数</param>
-        /// <returns></returns>
-        public List<RoleDto> GetAllPageList(int startPage, int pageSize, out int rowCount)
+        public async Task<IEnumerable<MenuDto>> GetMenusForRole(Guid roleId)
         {
-            //return _mapper.Map<List<RoleDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, null, it => it.Code));
-            return _mapper.Map<List<RoleDto>>(_repository.LoadPageList(startPage, pageSize, out rowCount, null, null));
+            var role = await _repoWrapper.RoleRepo.GetRoleWithMenu(roleId);
+            var menus = role.Menus.Select(rm => rm.Menu);
+            var dtos = _mapper.Map<IEnumerable<MenuDto>>(menus);
+            return dtos;
         }
 
-        /// <summary>
-        /// 新增或修改
-        /// </summary>
-        /// <param name="dto">实体</param>
-        /// <returns></returns>
-        public bool InsertOrUpdate(RoleDto dto)
+        public async Task<bool> InsertRole(RoleCreationDto dto)
         {
-            var menu = _repository.InsertOrUpdate(_mapper.Map<Role>(dto));
-            return menu == null ? false : true;
+            var role = _mapper.Map<Role>(dto);
+            role.Id = Guid.NewGuid();
+            role.CreatedAt = DateTime.Now;
+            role.IsDeleted = false;
+            _repoWrapper.RoleRepo.Create(role);
+            var result = await _repoWrapper.RoleRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 根据Id集合批量删除
-        /// </summary>
-        /// <param name="ids">Id集合</param>
-        public void DeleteBatch(List<Guid> ids)
+        public async Task<bool> UpdateRole(Guid roleId, RoleUpdateDto dto)
         {
-            _repository.Delete(it => ids.Contains(it.Id));
+            var role = await _repoWrapper.RoleRepo.GetByIdAsync(roleId);
+            if (role == null)
+            {
+                return false;
+            }
+            _mapper.Map(dto, role, typeof(RoleUpdateDto), typeof(Role));
+            _repoWrapper.RoleRepo.Update(role);
+            var result = await _repoWrapper.RoleRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id">Id</param>
-        public void Delete(Guid id)
+        public async Task<bool> EnableRole(Guid roleId, RoleUpdateStatusDto dto)
         {
-            _repository.Delete(id);
+            var role = await _repoWrapper.RoleRepo.GetByIdAsync(roleId);
+            if (role == null)
+            {
+                return false;
+            }
+            role.IsActive = dto.IsActive;
+            _repoWrapper.RoleRepo.Update(role);
+            var result = await _repoWrapper.RoleRepo.SaveAsync();
+            return result;
         }
 
-        /// <summary>
-        /// 根据Id获取实体
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
-        public RoleDto Get(Guid id)
+        public async Task<bool> DeleteRoles(DeleteMultiDto dto)
         {
-            return _mapper.Map<RoleDto>(_repository.Get(id));
-        }
-
-        /// <summary>
-        /// 根据角色获取权限
-        /// </summary>
-        /// <returns></returns>
-        public List<Guid> GetAllMenuListByRole(Guid roleId)
-        {
-            return _repository.GetAllMenuListByRole(roleId);
-        }
-
-        /// <summary>
-        /// 更新角色权限关联关系
-        /// </summary>
-        /// <param name="roleId">角色id</param>
-        /// <param name="roleMenus">角色权限集合</param>
-        /// <returns></returns>
-        public bool UpdateRoleMenu(Guid roleId, List<RoleMenuDto> roleMenus)
-        {
-            return _repository.UpdateRoleMenu(roleId, _mapper.Map<List<RoleMenu>>(roleMenus));
+            foreach (var roleId in dto.Guids)
+            {
+                var role = await _repoWrapper.RoleRepo.GetByIdAsync(roleId);
+                if (role == null)
+                {
+                    continue;
+                }
+                role.IsDeleted = true;
+                _repoWrapper.RoleRepo.Update(role);
+            }
+            var result = await _repoWrapper.RoleRepo.SaveAsync();
+            return result;
         }
     }
 }
