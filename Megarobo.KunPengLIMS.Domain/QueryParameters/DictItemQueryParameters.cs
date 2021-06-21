@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.DictItemApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class DictItemResourceParameter
+    public class DictItemQueryParameters:PagedParameters
     {
         public string KeyName { get; set; }
 

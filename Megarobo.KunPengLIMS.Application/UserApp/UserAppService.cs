@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Domain.Entities;
-using Megarobo.KunPengLIMS.Domain.IRepositories;
 using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
 using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
 using Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos;

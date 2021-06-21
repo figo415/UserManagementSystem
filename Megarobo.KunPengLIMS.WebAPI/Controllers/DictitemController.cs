@@ -1,28 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Megarobo.KunPengLIMS.Application.DictItemApp;
 using Megarobo.KunPengLIMS.Application.DictItemApp.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
     /// 字典项管理
     /// </summary>
+    [Produces("application/json")]
     [Route("limsapi/dictitems")]
     [ApiController]
     public class DictitemController : LimsControllerBase
     {
+        private readonly IDictItemAppService _service;
+        private readonly ILogger<DictitemController> _logger;
+
+        public DictitemController(IDictItemAppService service, ILogger<DictitemController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        }
+
         /// <summary>
         /// 获取所有字典项，可根据字典名称或者字典类型查询
         /// </summary>
+        /// <param name="parameters">DictItemQueryParameters</param>
         /// <returns>DictItemDto列表</returns>
         [HttpGet]
-        public ActionResult<ApiResult<IEnumerable<DictItemDto>>> GetAllDictItems([FromQuery] DictItemResourceParameter parameter)
+        public async Task<ActionResult<ApiResult<DictItemDtoList>>> GetDictItems([FromQuery] DictItemQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for DictItem: KeyName={0}", parameters.KeyName);
+            var pageddtos = await _service.GetDictItemsByPage(parameters);
+            var list = new DictItemDtoList(pageddtos);
+            return ApiResult<DictItemDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -42,9 +60,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dictItemDto">DictItemCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<ApiStringResult> CreateDictItem(DictItemCreationDto dictItemDto)
+        public  async Task<ActionResult<ApiStringResult>> CreateDictItem(DictItemCreationDto dictItemDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.InsertDictItem(dictItemDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -54,9 +84,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dictItemDto">DictItemUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{dictItemId}")]
-        public ActionResult<ApiStringResult> UpdateDictItem(Guid dictItemId,DictItemUpdateDto dictItemDto)
+        public async Task<ActionResult<ApiStringResult>> UpdateDictItem(Guid dictItemId,DictItemUpdateDto dictItemDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateDictItem(dictItemId, dictItemDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -66,7 +108,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DictItemUpdateValueDto</param>
         /// <returns></returns>
         [HttpPut("{dictItemId}/values")]
-        public ActionResult<ApiStringResult> MaintainValuesForDictItem(Guid dictItemId,DictItemUpdateValueDto dto)
+        public async Task<ActionResult<ApiStringResult>> MaintainValuesForDictItem(Guid dictItemId,DictItemUpdateValueDto dto)
         {
             throw new NotImplementedException();
         }
@@ -74,12 +116,24 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <summary>
         /// 批量删除字典项
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public ActionResult<ApiStringResult> DeleteDictItems(List<Guid> ids)
+        public async Task<ActionResult<ApiStringResult>> DeleteDictItems(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.DeleteDictItems(dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
     }
 }
