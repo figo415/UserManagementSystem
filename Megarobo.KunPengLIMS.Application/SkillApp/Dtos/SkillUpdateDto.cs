@@ -8,8 +8,10 @@ namespace Megarobo.KunPengLIMS.Application.SkillApp.Dtos
     {
         public Guid ParentID { get; set; }
 
-        public int OrdinalNumber { get; set; }
+        public string SkillName { get; set; }
 
-        public bool IsActive { get; set; }
+        //public int OrdinalNumber { get; set; }
+
+        //public bool IsActive { get; set; }
     }
 }

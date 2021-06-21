@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.SkillApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class SkillResourceParameter
+    public class SkillQueryParameters:PagedParameters
     {
         public string SkillName { get; set; }
     }
