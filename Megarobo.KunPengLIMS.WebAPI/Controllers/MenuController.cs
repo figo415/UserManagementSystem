@@ -2,84 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Megarobo.KunPengLIMS.Application.MenuApp.Dtos;
 using Megarobo.KunPengLIMS.Application.MenuApp;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Microsoft.AspNetCore.Http;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
     /// 菜单管理
     /// </summary>
+    [Produces("application/json")]
     [Route("limsapi/menus")]
     [ApiController]
     public class MenuController : LimsControllerBase
     {
-        private readonly IMenuAppService _menuAppService;
+        private readonly IMenuAppService _service;
+        private readonly ILogger<UserController> _logger;
 
-        public MenuController(IMenuAppService menuAppService, Application.UserApp.IUserAppService userAppService)
+        public MenuController(IMenuAppService service, ILogger<UserController> logger)
         {
-            _menuAppService = menuAppService;
+            _service = service;
+            _logger = logger;
         }
 
         /// <summary>
         /// 获取所有菜单，可根据菜单名称、状态和类型查询
         /// </summary>
+        /// <param name="parameters">MenuQueryParameters</param>
         /// <returns>MenuDto列表</returns>
         [HttpGet]
-        public ActionResult<ApiResult<IEnumerable<MenuDto>>> GetAllMenus([FromQuery] MenuResourceParameter parameter)
+        public async Task<ActionResult<ApiResult<MenuDtoList>>> GetMenus([FromQuery] MenuQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Menu: Name={0}", parameters.Name);
+            var pageddtos = await _service.GetMenusByPage(parameters);
+            var list = new MenuDtoList(pageddtos);
+            return ApiResult<MenuDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
         /// 根据主键获取菜单
         /// </summary>
-        /// <param name="menuId"></param>
+        /// <param name="menuId">Guid</param>
         /// <returns>MenuDto</returns>
         [HttpGet("{menuId}")]
-        public ActionResult<ApiResult<MenuDto>> GetMenu(Guid menuId)
+        public async Task<ActionResult<ApiResult<MenuDto>>> GetMenu(Guid menuId)
         {
-            var dto = _menuAppService.Get(menuId);
-            return null;
+            throw new NotImplementedException();
         }
-
-        ///// <summary>
-        ///// 获取菜单树形结构
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet("tree")]
-        //public List<TreeModel> GetMenuTreeData()// 获取功能树JSON数据
-        //{
-        //    var menus = _menuAppService.GetAllList();
-        //    List<TreeModel> treeModels = new List<TreeModel>();
-        //    foreach (var menu in menus)
-        //    {
-        //        treeModels.Add(new TreeModel() { Id = menu.Id.ToString(), Text = menu.Name, Parent = menu.ParentId == Guid.Empty ? "#" : menu.ParentId.ToString() });
-        //    }
-        //    return treeModels;
-        //}
-
-        ///// <summary>
-        ///// 获取某个菜单的下级菜单
-        ///// </summary>
-        ///// <param name="menuId">Guid</param>
-        ///// <returns></returns>
-        //[HttpGet("{menuId}/children")]
-        //public PageModel GetMneusByParent(Guid menuId)// 获取子级功能列表
-        //{
-        //    throw new NotImplementedException();
-        //    //int rowCount = 0;
-        //    //var result = _menuAppService.GetMenusByParent(menuId, startPage, pageSize, out rowCount);
-        //    //return new PageModel
-        //    //{
-        //    //    RowCount = rowCount,
-        //    //    PageCount = (int) Math.Ceiling(Convert.ToDecimal(rowCount) / pageSize),
-        //    //    Rows = result,
-        //    //};
-        //}
 
         /// <summary>
         /// 新增菜单
@@ -87,21 +61,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="menuDto">MenuCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<ApiStringResult> CreateMenu(MenuCreationDto menuDto)
+        public async Task<ActionResult<ApiStringResult>> CreateMenu(MenuCreationDto menuDto)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return new ApiStringResult
+                var result = await _service.InsertMenu(menuDto);
+                if (result)
                 {
-                    Code=1,
-                    Message = GetModelStateError()
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
-            //if (_menuAppService.InsertOrUpdate(menuDto))
+            catch (Exception ex)
             {
-                return new ApiStringResult { Code=0 };
+                return ApiStringResult.Error(ex.Message);
             }
-            return new ApiStringResult { Code=1 };
         }
 
         /// <summary>
@@ -111,21 +85,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="menuDto">MenuUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{menuId}")]
-        public ActionResult<ApiStringResult> UpdateMenu(Guid menuId,MenuUpdateDto menuDto)
+        public async Task<ActionResult<ApiStringResult>> UpdateMenu(Guid menuId,MenuUpdateDto menuDto)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return new ApiStringResult
+                var result = await _service.UpdateMenu(menuId, menuDto);
+                if (result)
                 {
-                    Code=1,
-                    Message = GetModelStateError()
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
-            //if (_menuAppService.InsertOrUpdate(menuDto))
+            catch (Exception ex)
             {
-                return new ApiStringResult { Code=0 };
+                return ApiStringResult.Error(ex.Message);
             }
-            return new ApiStringResult { Code=1 };
         }
 
         /// <summary>
@@ -135,60 +109,43 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">MenuUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{menuId}/enable")]
-        public ActionResult<ApiStringResult> EnableMenu(Guid menuId,MenuUpdateStatusDto dto)
+        public async Task<ActionResult<ApiStringResult>> EnableMenu(Guid menuId,MenuUpdateStatusDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.EnableMenu(menuId, dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
-
-        ///// <summary>
-        ///// 根据主键删除菜单
-        ///// </summary>
-        ///// <param name="menuId">Guid</param>
-        ///// <returns></returns>
-        //[HttpDelete("{menuId}")]
-        //public WebApiResultModel DeleteMenu(Guid menuId)
-        //{
-        //    try
-        //    {
-        //        _menuAppService.Delete(menuId);
-        //        return new WebApiResultModel
-        //        {
-        //            Code=0
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new WebApiResultModel
-        //        {
-        //            Code=1,
-        //            Message = ex.Message
-        //        };
-        //    }
-        //}
 
         /// <summary>
         /// 批量删除菜单
         /// </summary>
-        /// <param name="ids">Guid列表</param>
+        /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public ActionResult<ApiStringResult> DeleteMenus(List<Guid> ids)
+        public async Task<ActionResult<ApiStringResult>> DeleteMenus(DeleteMultiDto dto)
         {
             try
             {
-                _menuAppService.DeleteBatch(ids);
-                return new ApiStringResult
+                var result = await _service.DeleteMenus(dto);
+                if (result)
                 {
-                    Code=0
-                };
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
             }
             catch (Exception ex)
             {
-                return new ApiStringResult
-                {
-                    Code=1,
-                    Message = ex.Message
-                };
+                return ApiStringResult.Error(ex.Message);
             }
         }
     }

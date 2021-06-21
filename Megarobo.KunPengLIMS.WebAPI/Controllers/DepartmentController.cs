@@ -56,22 +56,6 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<DepartmentDto>.HasData(departmentdto, 0);
         }
 
-        ///// <summary>
-        ///// 获取部门树形结构
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet("Tree")]
-        //public List<TreeModel> GetTreeData()
-        //{
-        //    var dtos = _service.GetAllList();
-        //    List<TreeModel> treeModels = new List<TreeModel>();
-        //    foreach (var dto in dtos)
-        //    {
-        //        treeModels.Add(new TreeModel() { Id = dto.Id.ToString(), Text = dto.Name, Parent = dto.ParentId == Guid.Empty ? "#" : dto.ParentId.ToString() });
-        //    }
-        //    return treeModels;
-        //}
-
         /// <summary>
         /// 获取某个部门下的用户
         /// </summary>
@@ -84,26 +68,6 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             var list = new UserDtoList(pageddtos);
             return ApiResult<UserDtoList>.HasData(list, pageddtos.TotalCount);
         }
-
-        ///// <summary>
-        ///// 获取某个部门的下级部门
-        ///// </summary>
-        ///// <param name="departmentId">Guid</param>
-        ///// <param name="startPage"></param>
-        ///// <param name="pageSize"></param>
-        ///// <returns></returns>
-        //[HttpGet("{departmentId}/children")]
-        //public PageModel GetDepartmentsByParent(Guid departmentId, int startPage, int pageSize)// 获取子级列表
-        //{
-        //    int rowCount = 0;
-        //    var result = _service.GetChildrenByParent(departmentId, startPage, pageSize, out rowCount);
-        //    return new PageModel
-        //    {
-        //        RowCount = rowCount,
-        //        PageCount = (int)Math.Ceiling(Convert.ToDecimal(rowCount) / pageSize),
-        //        Rows = result
-        //    };
-        //}
 
         /// <summary>
         /// 新增部门

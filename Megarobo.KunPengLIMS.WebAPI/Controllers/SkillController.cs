@@ -43,17 +43,6 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<SkillDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
-        ///// <summary>
-        ///// 获取某个技能的下级技能
-        ///// </summary>
-        ///// <param name="skillId">Guid</param>
-        ///// <returns></returns>
-        //[HttpGet("{skillId}/children")]
-        //public ActionResult<ApiResult<IEnumerable<SkillDto>>> GetSkillsByParent(Guid skillId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         /// <summary>
         /// 新增技能
         /// </summary>

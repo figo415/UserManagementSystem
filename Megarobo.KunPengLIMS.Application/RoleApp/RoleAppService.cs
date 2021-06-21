@@ -2,7 +2,6 @@
 using Megarobo.KunPengLIMS.Application.MenuApp.Dtos;
 using Megarobo.KunPengLIMS.Application.RoleApp.Dtos;
 using Megarobo.KunPengLIMS.Domain.Entities;
-using Megarobo.KunPengLIMS.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.MenuApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class MenuResourceParameter
+    public class MenuQueryParameters:PagedParameters
     {
         public string Name { get; set; }
 

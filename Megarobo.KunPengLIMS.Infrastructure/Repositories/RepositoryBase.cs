@@ -1,5 +1,4 @@
 ﻿using Megarobo.KunPengLIMS.Domain.Entities;
-using Megarobo.KunPengLIMS.Domain.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.Repositories
 {
-     public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
+     public abstract class RepositoryBase<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
         protected readonly LimsDbContext _dbContext;
 
