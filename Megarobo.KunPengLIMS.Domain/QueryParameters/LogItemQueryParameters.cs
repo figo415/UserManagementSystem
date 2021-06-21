@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Application.LogItemApp.Dtos
+namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class LogItemResourceParameter
+    public class LogItemQueryParameters:PagedParameters
     {
         public string Operator { get; set; }
 
