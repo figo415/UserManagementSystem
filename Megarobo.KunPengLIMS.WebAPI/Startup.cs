@@ -22,6 +22,11 @@ using Megarobo.KunPengLIMS.Application;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
 using Megarobo.KunPengLIMS.Application.UserApp;
 using Megarobo.KunPengLIMS.Application.DepartmentApp;
+using Megarobo.KunPengLIMS.Application.SkillApp;
+using Megarobo.KunPengLIMS.Application.RoleApp;
+using Megarobo.KunPengLIMS.Application.MenuApp;
+using Megarobo.KunPengLIMS.Application.LogItemApp;
+using Megarobo.KunPengLIMS.Application.DictItemApp;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -48,42 +53,47 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IDepartmentAppService, DepartmentAppService>();
+            services.AddScoped<ISkillAppService, SkillAppService>();
+            services.AddScoped<IRoleAppService, RoleAppService>();
+            services.AddScoped<IMenuAppService, MenuAppService>();
+            services.AddScoped<IDictItemAppService, DictItemAppService>();
+            services.AddScoped<ILogItemAppService, LogItemAppService>();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
             #region Swagger
-            //// Register the Swagger generator, defining one or more Swagger documents
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo
-            //    {
-            //        Version = "v1",
-            //        Title = "Megarobo.KunPengLIMS",
-            //        Description = "WebAPI list of KunPengLIMS",
-            //        //TermsOfService = new Uri("https://example.com/terms"),
-            //        //Contact = new OpenApiContact
-            //        //{
-            //        //    Name = "Shayne Boyer",
-            //        //    Email = string.Empty,
-            //        //    Url = new Uri("https://twitter.com/spboyer"),
-            //        //},
-            //        //License = new OpenApiLicense
-            //        //{
-            //        //    Name = "Use under LICX",
-            //        //    Url = new Uri("https://example.com/license"),
-            //        //}
-            //    });
-            //    //Set the comments path for the swagger json and ui.
-            //    //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            //    //var xmlPath = Path.Combine(basePath, "Megarobo.KunPengLIMS.WebAPI.xml");
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Megarobo.KunPengLIMS",
+                    Description = "WebAPI list of KunPengLIMS",
+                    //TermsOfService = new Uri("https://example.com/terms"),
+                    //Contact = new OpenApiContact
+                    //{
+                    //    Name = "Shayne Boyer",
+                    //    Email = string.Empty,
+                    //    Url = new Uri("https://twitter.com/spboyer"),
+                    //},
+                    //License = new OpenApiLicense
+                    //{
+                    //    Name = "Use under LICX",
+                    //    Url = new Uri("https://example.com/license"),
+                    //}
+                });
+                //Set the comments path for the swagger json and ui.
+                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                //var xmlPath = Path.Combine(basePath, "Megarobo.KunPengLIMS.WebAPI.xml");
 
-            //    // Set the comments path for the Swagger JSON and UI.
-            //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            //    c.IncludeXmlComments(xmlPath);
-            //});
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
             #endregion
         }
 
@@ -96,14 +106,14 @@ namespace Megarobo.KunPengLIMS.WebAPI
             }
 
             #region Swagger
-            //// Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
-            //// Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "KunPengLIMS API V1");
-            //    //c.RoutePrefix = string.Empty;
-            //});
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "KunPengLIMS API V1");
+                //c.RoutePrefix = string.Empty;
+            });
             #endregion
 
             app.UseRouting();

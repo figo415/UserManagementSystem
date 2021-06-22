@@ -10,6 +10,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     {
         System.Threading.Tasks.Task<PagedList<Department>> GetDepartmentsByPage(DepartmentQueryParameters parameters);
 
+        System.Threading.Tasks.Task<IEnumerable<Department>> GetDepartments(DepartmentQueryParameters parameters);
+
         System.Threading.Tasks.Task<PagedList<User>> GetUsersByDepartment(Guid departmentId, PagedParameters parameters);
     }
 }

@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Application.SkillApp.Dtos
     {
         public SkillProfile()
         {
-            CreateMap<Skill, SkillDto>();
+            CreateMap<Skill, SkillDto>().ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
             CreateMap<SkillCreationDto, Skill>();
             CreateMap<SkillUpdateDto, Skill>();
         }

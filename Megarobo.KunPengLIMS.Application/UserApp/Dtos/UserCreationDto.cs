@@ -9,20 +9,24 @@ namespace Megarobo.KunPengLIMS.Application.UserApp.Dtos
 {
     public class UserCreationDto
     {
-        [Required]
+        [Required(ErrorMessage ="用户名称不能为空")]
         public string UserName { get; set; }
 
         public string EMail { get; set; }
 
+        [Required(ErrorMessage ="手机号码不能为空")]
         public string MobileNumber { get; set; }
 
-        public string WorkTime { get; set; }
+        [Required(ErrorMessage ="请选择工作时间")]
+        public List<string> WorkTime { get; set; }
 
         [DefaultValue(true)]
         public bool IsActive { get; set; }
 
+        [Required(ErrorMessage ="请选择工作技能")]
         public List<Guid> SkillIds { get; set; }
 
-        public List<DepartmentIdRoleId> DepartmentRoles { get; set; }
+        [Required(ErrorMessage ="请选择部门和角色")]
+        public List<DepartmentIdRoleId> DepartmentRoleIds { get; set; }
     }
 }

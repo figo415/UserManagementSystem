@@ -10,6 +10,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     {
         System.Threading.Tasks.Task<PagedList<Role>> GetRolesByPage(RoleQueryParameters parameters);
 
+        System.Threading.Tasks.Task<PagedList<Role>> GetRolesWithMenuByPage(RoleQueryParameters parameters);
+
         System.Threading.Tasks.Task<Role> GetRoleWithMenu(Guid roleId);
     }
 }

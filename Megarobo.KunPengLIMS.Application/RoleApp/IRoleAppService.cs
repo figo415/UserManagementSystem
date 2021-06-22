@@ -13,6 +13,8 @@ namespace Megarobo.KunPengLIMS.Application.RoleApp
     {
         Task<PagedList<RoleDto>> GetRolesByPage(RoleQueryParameters parameters);
 
+        Task<PagedList<RoleDto>> GetRolesWithMenuByPage(RoleQueryParameters parameters);
+
         Task<IEnumerable<MenuDto>> GetMenusForRole(Guid roleId);
 
         Task<bool> InsertRole(RoleCreationDto dto);

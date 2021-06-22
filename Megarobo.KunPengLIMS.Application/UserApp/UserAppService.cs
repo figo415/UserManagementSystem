@@ -79,6 +79,14 @@ namespace Megarobo.KunPengLIMS.Application.UserApp
                     _repoWrapper.UserSkillRepo.Create(userskill);
                 }
             }
+            if(dto.DepartmentRoleIds.Any())
+            {
+                foreach(var deptrole in dto.DepartmentRoleIds)
+                {
+                    var userdepartmentrole = new UserDepartmentRole() { UserID = user.Id, DepartmentID = deptrole.DepartmentId, RoleID = deptrole.RoleId };
+                    _repoWrapper.UserDepartmentRoleRepo.Create(userdepartmentrole);
+                }
+            }
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
         }

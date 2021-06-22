@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 
         public string MobileNumber { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public DateTime StartDate { get; set; }
 

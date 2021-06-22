@@ -12,6 +12,8 @@ namespace Megarobo.KunPengLIMS.Application.SkillApp
     {
         Task<PagedList<SkillDto>> GetSkillsByPage(SkillQueryParameters parameters);
 
+        Task<IEnumerable<SkillDto>> GetSkillTree(SkillQueryParameters parameters);
+
         Task<bool> InsertSkill(SkillCreationDto dto);
 
         Task<bool> UpdateSkill(Guid skillId, SkillUpdateDto dto);

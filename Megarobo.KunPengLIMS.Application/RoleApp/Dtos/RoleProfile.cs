@@ -10,8 +10,8 @@ namespace Megarobo.KunPengLIMS.Application.RoleApp.Dtos
     {
         public RoleProfile()
         {
-            CreateMap<Role, RoleDto>();
-            CreateMap<RoleCreationDto, Role>();
+            CreateMap<Role, RoleDto>().ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
+            CreateMap<RoleCreationDto, Role>().ForMember(d => d.Menus, opt => opt.Ignore());
             CreateMap<RoleUpdateDto, Role>();
             CreateMap<RoleUpdateStatusDto, Role>();
         }

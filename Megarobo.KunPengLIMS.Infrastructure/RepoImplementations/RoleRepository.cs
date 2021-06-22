@@ -27,6 +27,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return PagedList<Role>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
+        public System.Threading.Tasks.Task<PagedList<Role>> GetRolesWithMenuByPage(RoleQueryParameters parameters)
+        {
+            IQueryable<Role> queryable = DbContext.Set<Role>().Include(r => r.Menus).ThenInclude(rm => rm.Menu);
+            var predicate = BuildPredicate(parameters);
+            queryable = queryable.Where(predicate);
+            return PagedList<Role>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+        }
+
         private Expression<Func<Role, bool>> BuildPredicate(RoleQueryParameters parameters)
         {
             Expression<Func<Role, bool>> predicate = PredicateBuilder.True<Role>();
@@ -34,7 +42,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(r => r.Name == parameters.Name);
             }
-            predicate = predicate.And(r => r.IsActive == parameters.IsActive);
+            if (parameters.IsActive != null)
+            {
+                predicate = predicate.And(r => r.IsActive == parameters.IsActive);
+            }
             predicate = predicate.And(r => !r.IsDeleted);
             return predicate;
         }

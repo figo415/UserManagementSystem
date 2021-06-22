@@ -30,6 +30,24 @@ namespace Megarobo.KunPengLIMS.Application.SkillApp
             return new PagedList<SkillDto>(pagedDtos.ToList(), pagedSkills.TotalCount, pagedSkills.CurrentPage, pagedSkills.PageSize);
         }
 
+        public async Task<IEnumerable<SkillDto>> GetSkillTree(SkillQueryParameters parameters)
+        {
+            var skills = await _repoWrapper.SkillRepo.GetSkills(parameters);
+            var skillDtos = _mapper.Map<IEnumerable<SkillDto>>(skills);
+            var tree = GetTree(Guid.Empty, skillDtos);
+            return tree;
+        }
+
+        private List<SkillDto> GetTree(Guid parentId, IEnumerable<SkillDto> dtos)
+        {
+            var tree = dtos.Where(s => s.ParentId == parentId).ToList();
+            foreach (var item in tree)
+            {
+                item.Children = GetTree(item.Id, dtos);
+            }
+            return tree;
+        }
+
         public async Task<bool> InsertSkill(SkillCreationDto dto)
         {
             var skill = _mapper.Map<Skill>(dto);

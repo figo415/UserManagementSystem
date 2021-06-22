@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Application.DictItemApp.Dtos
     {
         public DictItemProfile()
         {
-            CreateMap<DictItem, DictItemDto>();
+            CreateMap<DictItem, DictItemDto>().ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
             CreateMap<DictItemCreationDto, DictItem>();
             CreateMap<DictItemUpdateDto, DictItem>();
         }

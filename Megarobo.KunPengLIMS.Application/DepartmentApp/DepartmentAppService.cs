@@ -32,6 +32,24 @@ namespace Megarobo.KunPengLIMS.Application.DepartmentApp
             var pagedDtos = _mapper.Map<IEnumerable<DepartmentDto>>(pagedDepartments);
             return new PagedList<DepartmentDto>(pagedDtos.ToList(), pagedDepartments.TotalCount, pagedDepartments.CurrentPage, pagedDepartments.PageSize);
         }
+        
+        public async Task<IEnumerable<DepartmentDto>> GetDepartmentTree(DepartmentQueryParameters parameters)
+        {
+            var departments = await _repoWrapper.DepartmentRepo.GetDepartments(parameters);
+            var departmentDtos = _mapper.Map<IEnumerable<DepartmentDto>>(departments);
+            var tree = GetTree(Guid.Empty, departmentDtos);
+            return tree;
+        }
+
+        private List<DepartmentDto> GetTree(Guid parentId,IEnumerable<DepartmentDto> dtos)
+        {
+            var tree = dtos.Where(d => d.ParentId == parentId).ToList();
+            foreach(var item in tree)
+            {
+                item.Children = GetTree(item.Id, dtos);
+            }
+            return tree;
+        }
 
         public async Task<DepartmentDto> GetDepartment(Guid departmentId)
         {

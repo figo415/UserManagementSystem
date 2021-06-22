@@ -17,7 +17,8 @@ namespace Megarobo.KunPengLIMS.Application.RoleApp.Dtos
 
         public DateTime CreateTime { get; set; }
 
-        //public List<MenuDto> Menus { get; set; }
-        public string Menus { get; set; }
+        public string Menu { get; set; }
+
+        public List<MenuDto> Menus { get; set; }
     }
 }

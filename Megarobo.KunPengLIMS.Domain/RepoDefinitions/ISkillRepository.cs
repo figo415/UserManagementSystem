@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface ISkillRepository:IRepositoryBase<Skill>,IRepositoryBase2<Skill,Guid>
     {
         System.Threading.Tasks.Task<PagedList<Skill>> GetSkillsByPage(SkillQueryParameters parameters);
+
+        System.Threading.Tasks.Task<IEnumerable<Skill>> GetSkills(SkillQueryParameters parameters);
     }
 }

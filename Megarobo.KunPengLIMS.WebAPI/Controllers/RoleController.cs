@@ -39,7 +39,8 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<RoleDtoList>>> GetRoles([FromQuery]RoleQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Role: Name={0}", parameters.Name);
-            var pageddtos = await _service.GetRolesByPage(parameters);
+            //var pageddtos = await _service.GetRolesByPage(parameters);
+            var pageddtos = await _service.GetRolesWithMenuByPage(parameters);
             var list = new RoleDtoList(pageddtos);
             return ApiResult<RoleDtoList>.HasData(list, pageddtos.TotalCount);
         }

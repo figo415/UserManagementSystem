@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Application.MenuApp.Dtos
     {
         public MenuProfile()
         {
-            CreateMap<Menu, MenuDto>();
+            CreateMap<Menu, MenuDto>().ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
             CreateMap<MenuCreationDto, Menu>();
             CreateMap<MenuUpdateDto, Menu>();
             CreateMap<MenuUpdateStatusDto, Menu>();

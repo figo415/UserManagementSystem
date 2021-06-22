@@ -13,6 +13,8 @@ namespace Megarobo.KunPengLIMS.Application.DepartmentApp
     {
         Task<PagedList<DepartmentDto>> GetDepartmentsByPage(DepartmentQueryParameters parameters);
 
+        Task<IEnumerable<DepartmentDto>> GetDepartmentTree(DepartmentQueryParameters parameters);
+
         Task<DepartmentDto> GetDepartment(Guid departmentId);
 
         Task<PagedList<UserDto>> GetUsersByDepartment(Guid departmentId, PagedParameters parameters);

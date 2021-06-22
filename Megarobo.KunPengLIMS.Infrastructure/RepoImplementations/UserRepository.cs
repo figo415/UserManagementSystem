@@ -21,7 +21,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParameters parameters)
         {
-            IQueryable<User> queryable = DbContext.Set<User>();
+            //IQueryable<User> queryable = DbContext.Set<User>();
+            IQueryable<User> queryable = DbContext.Set<User>().Include(u => u.Skills).ThenInclude(us => us.Skill).Include(u => u.DepartmentRoles);
             var predicate = BuildPredicate(parameters);
             queryable = queryable.Where(predicate);
             return PagedList<User>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
@@ -38,7 +39,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(u => u.MobileNumber == parameters.MobileNumber);
             }
-            predicate = predicate.And(u => u.IsActive == parameters.IsActive);
+            if (parameters.IsActive != null)
+            {
+                predicate = predicate.And(u => u.IsActive == parameters.IsActive);
+            }
             if (parameters.StartDate != DateTime.MinValue && parameters.EndDate != DateTime.MinValue)
             {
                 predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate && u.CreatedAt <= parameters.EndDate);

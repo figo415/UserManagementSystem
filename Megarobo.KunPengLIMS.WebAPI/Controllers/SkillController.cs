@@ -38,9 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<SkillDtoList>>> GetSkills([FromQuery]SkillQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Skill: SkillName={0}", parameters.SkillName);
-            var pageddtos = await _service.GetSkillsByPage(parameters);
+            //var pageddtos = await _service.GetSkillsByPage(parameters);
+            var pageddtos = await _service.GetSkillTree(parameters);
             var list = new SkillDtoList(pageddtos);
-            return ApiResult<SkillDtoList>.HasData(list, pageddtos.TotalCount);
+            return ApiResult<SkillDtoList>.HasData(list, pageddtos.Count());
         }
 
         /// <summary>

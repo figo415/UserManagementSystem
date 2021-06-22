@@ -21,10 +21,17 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<Department>> GetDepartmentsByPage(DepartmentQueryParameters parameters)
         {
-            IQueryable<Department> queryable = DbContext.Set<Department>();
+            throw new NotImplementedException();
+            //IQueryable<Department> queryable = DbContext.Set<Department>();
+            //var predicate = BuildPredicate(parameters);
+            //queryable = queryable.Where(predicate);
+            //return PagedList<Department>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+        }
+
+        public System.Threading.Tasks.Task<IEnumerable<Department>> GetDepartments(DepartmentQueryParameters parameters)
+        {
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
-            return PagedList<Department>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+            return GetByConditionAsync(predicate);
         }
 
         private Expression<Func<Department, bool>> BuildPredicate(DepartmentQueryParameters parameters)
@@ -34,7 +41,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(d => d.Name == parameters.Name);
             }
-            predicate = predicate.And(d => d.IsActive == parameters.IsActive);
+            if(parameters.IsActive!=null)
+            {
+                predicate = predicate.And(d => d.IsActive == parameters.IsActive);
+            }
             predicate = predicate.And(d => !d.IsDeleted);
             return predicate;
         }

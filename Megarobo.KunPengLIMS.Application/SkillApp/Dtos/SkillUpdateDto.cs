@@ -6,7 +6,7 @@ namespace Megarobo.KunPengLIMS.Application.SkillApp.Dtos
 {
     public class SkillUpdateDto
     {
-        public Guid ParentID { get; set; }
+        public Guid ParentId { get; set; }
 
         public string SkillName { get; set; }
 

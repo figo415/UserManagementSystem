@@ -11,6 +11,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IUserSkillRepository UserSkillRepo { get; }
 
+        IUserDepartmentRoleRepository UserDepartmentRoleRepo { get; }
+
         ISkillRepository SkillRepo { get; }
 
         IRoleRepository RoleRepo { get; }

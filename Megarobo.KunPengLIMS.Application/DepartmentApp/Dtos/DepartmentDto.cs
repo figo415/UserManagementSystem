@@ -22,5 +22,7 @@ namespace Megarobo.KunPengLIMS.Application.DepartmentApp.Dtos
         public Guid ParentId { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public List<DepartmentDto> Children { get; set; }
     }
 }
