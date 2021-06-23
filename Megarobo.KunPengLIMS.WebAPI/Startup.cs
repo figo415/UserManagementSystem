@@ -18,15 +18,9 @@ using Megarobo.KunPengLIMS.Infrastructure;
 using System.Runtime.InteropServices;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
-using Megarobo.KunPengLIMS.Application;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
-using Megarobo.KunPengLIMS.Application.UserApp;
-using Megarobo.KunPengLIMS.Application.DepartmentApp;
-using Megarobo.KunPengLIMS.Application.SkillApp;
-using Megarobo.KunPengLIMS.Application.RoleApp;
-using Megarobo.KunPengLIMS.Application.MenuApp;
-using Megarobo.KunPengLIMS.Application.LogItemApp;
-using Megarobo.KunPengLIMS.Application.DictItemApp;
+using Megarobo.KunPengLIMS.Application.Services;
+using Megarobo.KunPengLIMS.Application.Dtos;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {

@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
-using Megarobo.KunPengLIMS.Application.UserApp;
-using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
-using Megarobo.KunPengLIMS.Application.UserApp.Dtos;
-using Megarobo.KunPengLIMS.Application;
+using Megarobo.KunPengLIMS.Application.Services;
+using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 

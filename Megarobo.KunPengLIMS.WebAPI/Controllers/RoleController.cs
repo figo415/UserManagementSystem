@@ -4,12 +4,10 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Megarobo.KunPengLIMS.Application.RoleApp.Dtos;
-using Megarobo.KunPengLIMS.Application.RoleApp;
-using Megarobo.KunPengLIMS.Application.MenuApp.Dtos;
+using Megarobo.KunPengLIMS.Application.Dtos;
+using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
-using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {

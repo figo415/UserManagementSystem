@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Megarobo.KunPengLIMS.Application.LogItemApp.Dtos;
+using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
-using Megarobo.KunPengLIMS.Application.LogItemApp;
+using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers

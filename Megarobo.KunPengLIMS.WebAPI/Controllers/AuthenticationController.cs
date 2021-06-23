@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.WebAPI.Models;
-using Megarobo.KunPengLIMS.Application.UserApp;
+using Megarobo.KunPengLIMS.Application.Services;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {

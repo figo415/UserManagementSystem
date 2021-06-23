@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Megarobo.KunPengLIMS.Application.SkillApp;
-using Megarobo.KunPengLIMS.Application.SkillApp.Dtos;
+using Megarobo.KunPengLIMS.Application.Services;
+using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
-using Megarobo.KunPengLIMS.Application;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
