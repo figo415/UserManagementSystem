@@ -43,9 +43,24 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(u => u.IsActive == parameters.IsActive);
             }
-            if (parameters.StartDate != DateTime.MinValue && parameters.EndDate != DateTime.MinValue)
+            if(parameters.StartDate!=null && parameters.EndDate==null)
             {
-                predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate && u.CreatedAt <= parameters.EndDate);
+                predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate);
+            }
+            else if(parameters.StartDate==null && parameters.EndDate!=null)
+            {
+                predicate = predicate.And(u => u.CreatedAt <= parameters.EndDate);
+            }
+            else if (parameters.StartDate != null && parameters.EndDate != null)
+            {
+                if(parameters.StartDate>parameters.EndDate)
+                {
+                    predicate = predicate.And(u => u.CreatedAt >= parameters.EndDate && u.CreatedAt <= parameters.StartDate);
+                }
+                else
+                {
+                    predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate && u.CreatedAt <= parameters.EndDate);
+                }
             }
             predicate = predicate.And(u => !u.IsDeleted);
             return predicate;

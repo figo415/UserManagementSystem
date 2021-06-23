@@ -15,8 +15,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string MobileNumber { get; set; }
 
-        //public List<Period> WorkTimes { get; set; }
-        public string WorkTime { get; set; }
+        public List<string> WorkTime { get; set; }
 
         public bool IsActive { get; set; }
 

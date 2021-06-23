@@ -17,6 +17,10 @@ RUN dotnet publish "Megarobo.KunPengLIMS.WebAPI.csproj" -c Release -o /app/publi
 
 FROM base AS final
 WORKDIR /app
-ENV CONNECTION_STRING="Host=localhost;Port=5432;User ID=postgres;Password=megarobo;Database=limsdb;Pooling=true;"
+ENV DB_HOSTNAME="localhost"
+ENV DB_PORT="5432"
+ENV DB_USERNAME="postgres"
+ENV DB_PASSWORD="megarobo"
+ENV DB_NAME="limsdb"
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Megarobo.KunPengLIMS.WebAPI.dll"]

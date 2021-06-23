@@ -39,11 +39,24 @@ namespace Megarobo.KunPengLIMS.WebAPI
             //services.AddControllers();
             services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>());
 
-            //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));//Read from appsettings.json
-            //var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var connectionString = "Host=host.docker.internal;Port=5432;User ID=postgres;Password=megarobo;Database=limsdb;Pooling=true;";
+            #region Database
+            //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
+            var dbhostname = Environment.GetEnvironmentVariable("DB_HOSTNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var dbport = Environment.GetEnvironmentVariable("DB_PORT", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var dbusername = Environment.GetEnvironmentVariable("DB_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var dbpassword = Environment.GetEnvironmentVariable("DB_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var dbname = Environment.GetEnvironmentVariable("DB_NAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var connectionString = "Host={0};Port={1};User ID={2};Password={3};Database={4};Pooling=true;";
+            if (!string.IsNullOrEmpty(dbhostname) && !string.IsNullOrEmpty(dbport) && !string.IsNullOrEmpty(dbusername) && !string.IsNullOrEmpty(dbpassword) && !string.IsNullOrEmpty(dbname))
+            {
+                connectionString = string.Format(connectionString, dbhostname, dbport, dbusername, dbpassword, dbname);
+            }
+            else
+            {
+                connectionString = Configuration.GetConnectionString("Postgre");
+            }
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
-            //services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Postgre")));
+            #endregion
 
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IDepartmentAppService, DepartmentAppService>();

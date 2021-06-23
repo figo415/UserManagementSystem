@@ -34,7 +34,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(l => l.Operator == parameters.Operator);
             }
-            predicate = predicate.And(l => l.IsSuccess == parameters.IsSuccess);
+            if (parameters.IsSuccess != null)
+            {
+                predicate = predicate.And(l => l.IsSuccess == parameters.IsSuccess);
+            }
             return predicate;
         }
     }

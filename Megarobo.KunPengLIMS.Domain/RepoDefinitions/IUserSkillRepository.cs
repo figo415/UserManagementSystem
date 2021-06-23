@@ -7,5 +7,6 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 {
     public interface IUserSkillRepository:IRepositoryBase<UserSkill>
     {
+        System.Threading.Tasks.Task<IEnumerable<UserSkill>> GetSkillsByUser(Guid userId);
     }
 }

@@ -97,6 +97,32 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             _mapper.Map(dto, user, typeof(UserUpdateDto), typeof(User));
             _repoWrapper.UserRepo.Update(user);
+            var userskills = await _repoWrapper.UserSkillRepo.GetSkillsByUser(userId);
+            foreach(var userskill in userskills)
+            {
+                _repoWrapper.UserSkillRepo.Delete(userskill);
+            }
+            if(dto.SkillIds.Any())
+            {
+                foreach (var skillid in dto.SkillIds)
+                {
+                    var userskill = new UserSkill() { UserID = user.Id, SkillID = skillid };
+                    _repoWrapper.UserSkillRepo.Create(userskill);
+                }
+            }
+            var userdepartmentroles = await _repoWrapper.UserDepartmentRoleRepo.GetUserDepartmentRolesByUser(userId);
+            foreach(var userdepartmentrole in userdepartmentroles)
+            {
+                _repoWrapper.UserDepartmentRoleRepo.Delete(userdepartmentrole);
+            }
+            if (dto.DepartmentRoleIds.Any())
+            {
+                foreach (var deptrole in dto.DepartmentRoleIds)
+                {
+                    var userdepartmentrole = new UserDepartmentRole() { UserID = user.Id, DepartmentID = deptrole.DepartmentId, RoleID = deptrole.RoleId };
+                    _repoWrapper.UserDepartmentRoleRepo.Create(userdepartmentrole);
+                }
+            }
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
         }

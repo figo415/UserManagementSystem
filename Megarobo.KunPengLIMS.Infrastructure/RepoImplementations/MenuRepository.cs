@@ -34,11 +34,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(m => m.Name == parameters.Name);
             }
-            if (parameters.Type>=0)
+            if (parameters.Type!=null)
             {
                 predicate = predicate.And(m => m.Type == parameters.Type);
             }
-            predicate = predicate.And(u => u.IsActive == parameters.IsActive);
+            if(parameters.IsActive!=null)
+            {
+                predicate = predicate.And(u => u.IsActive == parameters.IsActive);
+            }
             predicate = predicate.And(u => !u.IsDeleted);
             return predicate;
         }

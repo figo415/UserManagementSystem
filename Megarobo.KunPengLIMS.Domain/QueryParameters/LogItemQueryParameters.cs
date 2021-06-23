@@ -8,6 +8,6 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
     {
         public string Operator { get; set; }
 
-        public bool IsSuccess { get; set; }
+        public bool? IsSuccess { get; set; }
     }
 }

@@ -18,9 +18,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
 
             CreateMap<User, UserDto>()
                 .ForMember(d => d.Skill, opt => opt.MapFrom<SkillResolver>())
-                .ForMember(d=>d.SkillIds,opt=>opt.MapFrom<SkillIdResolver>())
+                .ForMember(d => d.SkillIds, opt => opt.MapFrom<SkillIdResolver>())
                 .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
-                .ForMember(d => d.DepartmentRoleIds, opt => opt.MapFrom(s => s.DepartmentRoles));
+                .ForMember(d => d.DepartmentRoleIds, opt => opt.MapFrom(s => s.DepartmentRoles))
+                .ForMember(d => d.WorkTime, opt => opt.MapFrom<WorkTimeResolver>());
 
             CreateMap<UserCreationDto, User>()
                 .ForMember(d => d.WorkTime, opt => opt.MapFrom<WorkTime1Resolver>());
@@ -55,6 +56,18 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 return source.Skills.Select(s => s.SkillID).ToList();
             }
             return new List<Guid>();
+        }
+    }
+
+    public class WorkTimeResolver : IValueResolver<User, UserDto, List<string>>
+    {
+        public List<string> Resolve(User source, UserDto destination, List<string> destMember, ResolutionContext context)
+        {
+            if(string.IsNullOrEmpty(source.WorkTime))
+            {
+                return new List<string>();
+            }
+            return source.WorkTime.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
         }
     }
 
