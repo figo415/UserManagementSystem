@@ -12,6 +12,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         Task<PagedList<MenuDto>> GetMenusByPage(MenuQueryParameters parameters);
 
+        Task<IEnumerable<MenuDto>> GetMenuTree(MenuQueryParameters parameters);
+
         Task<bool> InsertMenu(MenuCreationDto dto);
 
         Task<bool> UpdateMenu(Guid menuId, MenuUpdateDto dto);
@@ -19,7 +21,5 @@ namespace Megarobo.KunPengLIMS.Application.Services
         Task<bool> EnableMenu(Guid menuId, MenuUpdateStatusDto dto);
 
         Task<bool> DeleteMenus(DeleteMultiDto dto);
-
-        List<MenuDto> GetMenusByUser(Guid userId);
     }
 }

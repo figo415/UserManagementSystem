@@ -18,7 +18,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
 
             CreateMap<User, UserDto>()
                 .ForMember(d => d.Skill, opt => opt.MapFrom<SkillResolver>())
-                .ForMember(d => d.SkillIds, opt => opt.MapFrom<SkillIdResolver>())
+                .ForMember(d => d.SkillIds, opt => opt.MapFrom<SkillIdsResolver>())
                 .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
                 .ForMember(d => d.DepartmentRoleIds, opt => opt.MapFrom(s => s.DepartmentRoles))
                 .ForMember(d => d.WorkTime, opt => opt.MapFrom<WorkTimeResolver>());
@@ -47,7 +47,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         }
     }
 
-    public class SkillIdResolver : IValueResolver<User, UserDto, List<Guid>>
+    public class SkillIdsResolver : IValueResolver<User, UserDto, List<Guid>>
     {
         public List<Guid> Resolve(User source, UserDto destination, List<Guid> destMember, ResolutionContext context)
         {

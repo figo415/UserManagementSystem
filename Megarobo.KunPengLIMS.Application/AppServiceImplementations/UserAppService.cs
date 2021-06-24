@@ -98,7 +98,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             _mapper.Map(dto, user, typeof(UserUpdateDto), typeof(User));
             user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
-            var userskills = await _repoWrapper.UserSkillRepo.GetSkillsByUser(userId);
+            var userskills = await _repoWrapper.UserSkillRepo.GetUserSkillsByUser(userId);
             foreach(var userskill in userskills)
             {
                 _repoWrapper.UserSkillRepo.Delete(userskill);

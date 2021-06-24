@@ -11,9 +11,13 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public MenuProfile()
         {
-            CreateMap<Menu, MenuDto>().ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
+            CreateMap<Menu, MenuDto>()
+                .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
+
             CreateMap<MenuCreationDto, Menu>();
+
             CreateMap<MenuUpdateDto, Menu>();
+
             CreateMap<MenuUpdateStatusDto, Menu>();
         }
     }

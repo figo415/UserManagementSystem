@@ -29,6 +29,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<MenuDto>(pagedDtos.ToList(), pagedMenus.TotalCount, pagedMenus.CurrentPage, pagedMenus.PageSize);
         }
 
+        public async Task<IEnumerable<MenuDto>> GetMenuTree(MenuQueryParameters parameters)
+        {
+            var menus = await _repoWrapper.MenuRepo.GetMenus(parameters);
+            var menuDtos = _mapper.Map<IEnumerable<MenuDto>>(menus);
+            var tree = GetTree(Guid.Empty, menuDtos);
+            return tree;
+        }
+
+        private List<MenuDto> GetTree(Guid parentId, IEnumerable<MenuDto> dtos)
+        {
+            var tree = dtos.Where(d => d.ParentId == parentId).ToList();
+            foreach (var item in tree)
+            {
+                item.Children = GetTree(item.Id, dtos);
+            }
+            return tree;
+        }
+
         public async Task<bool> InsertMenu(MenuCreationDto dto)
         {
             var menu = _mapper.Map<Menu>(dto);
@@ -86,7 +104,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         }
 
 
-        public List<MenuDto> GetMenusByUser(Guid userId)// 根据用户获取功能菜单
+        private List<MenuDto> GetMenusByUser(Guid userId)// 根据用户获取功能菜单
         {
             throw new NotImplementedException();
             //List<MenuDto> result = new List<MenuDto>();

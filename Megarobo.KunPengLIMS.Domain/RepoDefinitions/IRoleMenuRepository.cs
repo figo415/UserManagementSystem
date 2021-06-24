@@ -5,8 +5,8 @@ using Megarobo.KunPengLIMS.Domain.Entities;
 
 namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 {
-    public interface IUserSkillRepository:IRepositoryBase<UserSkill>
+    public interface IRoleMenuRepository:IRepositoryBase<RoleMenu>
     {
-        System.Threading.Tasks.Task<IEnumerable<UserSkill>> GetUserSkillsByUser(Guid userId);
+        System.Threading.Tasks.Task<IEnumerable<RoleMenu>> GetRoleMenusByRole(Guid roleId);
     }
 }

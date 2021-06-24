@@ -17,6 +17,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IRoleRepository RoleRepo { get; }
 
+        IRoleMenuRepository RoleMenuRepo { get; }
+
         IMenuRepository MenuRepo { get; }
 
         ILogItemRepository LogItemRepo { get; }

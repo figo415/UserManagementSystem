@@ -21,10 +21,17 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<Menu>> GetMenusByPage(MenuQueryParameters parameters)
         {
-            IQueryable<Menu> queryable = DbContext.Set<Menu>();
+            throw new NotImplementedException();
+            //IQueryable<Menu> queryable = DbContext.Set<Menu>();
+            //var predicate = BuildPredicate(parameters);
+            //queryable = queryable.Where(predicate);
+            //return PagedList<Menu>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+        }
+
+        public System.Threading.Tasks.Task<IEnumerable<Menu>> GetMenus(MenuQueryParameters parameters)
+        {
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
-            return PagedList<Menu>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+            return GetByConditionAsync(predicate);
         }
 
         private Expression<Func<Menu, bool>> BuildPredicate(MenuQueryParameters parameters)

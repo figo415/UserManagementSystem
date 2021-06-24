@@ -51,6 +51,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             role.CreatedAt = DateTime.Now;
             role.IsDeleted = false;
             _repoWrapper.RoleRepo.Create(role);
+            if(dto.MenuIds.Any())
+            {
+                foreach(var menuid in dto.MenuIds)
+                {
+                    var rolemenu = new RoleMenu() { RoleID = role.Id, MenuID = menuid };
+                    _repoWrapper.RoleMenuRepo.Create(rolemenu);
+                }
+            }
             var result = await _repoWrapper.RoleRepo.SaveAsync();
             return result;
         }
@@ -65,6 +73,19 @@ namespace Megarobo.KunPengLIMS.Application.Services
             _mapper.Map(dto, role, typeof(RoleUpdateDto), typeof(Role));
             role.LastModifiedAt = DateTime.Now;
             _repoWrapper.RoleRepo.Update(role);
+            var rolemenus = await _repoWrapper.RoleMenuRepo.GetRoleMenusByRole(roleId);
+            foreach(var rolemenu in rolemenus)
+            {
+                _repoWrapper.RoleMenuRepo.Delete(rolemenu);
+            }
+            if (dto.MenuIds.Any())
+            {
+                foreach (var menuid in dto.MenuIds)
+                {
+                    var rolemenu = new RoleMenu() { RoleID = role.Id, MenuID = menuid };
+                    _repoWrapper.RoleMenuRepo.Create(rolemenu);
+                }
+            }
             var result = await _repoWrapper.RoleRepo.SaveAsync();
             return result;
         }

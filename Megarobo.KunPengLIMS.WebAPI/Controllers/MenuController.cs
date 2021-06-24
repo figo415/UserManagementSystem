@@ -37,9 +37,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<MenuDtoList>>> GetMenus([FromQuery] MenuQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Menu: Name={0}", parameters.Name);
-            var pageddtos = await _service.GetMenusByPage(parameters);
-            var list = new MenuDtoList(pageddtos);
-            return ApiResult<MenuDtoList>.HasData(list, pageddtos.TotalCount);
+            //var pageddtos = await _service.GetMenusByPage(parameters);
+            var menutos = await _service.GetMenuTree(parameters);
+            var list = new MenuDtoList(menutos);
+            return ApiResult<MenuDtoList>.HasData(list, menutos.Count());
         }
 
         /// <summary>

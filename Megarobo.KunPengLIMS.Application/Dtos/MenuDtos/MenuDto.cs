@@ -26,5 +26,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public string Code { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public List<MenuDto> Children { get; set; }
     }
 }
