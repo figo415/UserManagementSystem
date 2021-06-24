@@ -21,7 +21,7 @@ namespace Megarobo.KunPengLIMS.Domain
 
         public PagedList(List<T> items, int totalCount, int pageNumber, int pageSize)
         {
-            TotalCount = TotalCount;
+            TotalCount = totalCount;
             CurrentPage = pageNumber;
             PageSize = pageSize;
             TotalPages = (int)Math.Ceiling((double)totalCount / PageSize);

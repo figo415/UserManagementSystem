@@ -49,6 +49,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             _mapper.Map(dto, dictitem, typeof(DictItemUpdateDto), typeof(DictItem));
+            dictitem.LastModifiedAt = DateTime.Now;
             _repoWrapper.DictItemRepo.Update(dictitem);
             var result = await _repoWrapper.DictItemRepo.SaveAsync();
             return result;
@@ -64,6 +65,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 dictitem.IsDeleted = true;
+                dictitem.LastModifiedAt = DateTime.Now;
                 _repoWrapper.DictItemRepo.Update(dictitem);
             }
             var result = await _repoWrapper.DictItemRepo.SaveAsync();

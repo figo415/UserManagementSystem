@@ -49,10 +49,32 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return predicate;
         }
 
+        public System.Threading.Tasks.Task<IEnumerable<Department>> GetChildrenOfDepartment(Guid departmentId)
+        {
+            return System.Threading.Tasks.Task.FromResult(GetChildren(departmentId));
+        }
+
+        private IEnumerable<Department> GetChildren(Guid departmentId)
+        {
+            var departments = new List<Department>();
+            var children = DbContext.Set<Department>().Where(d => d.ParentId == departmentId && !d.IsDeleted).ToList();
+            foreach(var child in children)
+            {
+                departments.Add(child);
+                var grandsons = GetChildren(child.Id);
+                departments.AddRange(grandsons);
+            }
+            return departments;
+        }
+
         public System.Threading.Tasks.Task<PagedList<User>> GetUsersByDepartment(Guid departmentId, PagedParameters parameters)
         {
-            var department = DbContext.Set<Department>().Include(d => d.UserRoles).ThenInclude(u => u.User).Where(d => d.Id == departmentId).SingleOrDefault();
+            var department = DbContext.Set<Department>().Include(d => d.UserRoles).ThenInclude(u => u.User).ThenInclude(u=>u.DepartmentRoles).Where(d => d.Id == departmentId).SingleOrDefault();
             var users = department.UserRoles.Select(u => u.User).AsQueryable();
+            foreach(var user in users)
+            {
+                user.Skills = DbContext.Set<UserSkill>().Include(us => us.Skill).Where(us => us.UserID == user.Id).ToList();
+            }
             return PagedList<User>.CreateAsync(users, parameters.PageNumber, parameters.PageSize);
         }
     }

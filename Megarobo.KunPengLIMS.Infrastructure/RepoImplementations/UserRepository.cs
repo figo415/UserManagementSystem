@@ -43,6 +43,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(u => u.IsActive == parameters.IsActive);
             }
+            if(parameters.DepartmentId!=null)
+            {
+                predicate = predicate.And(u => u.DepartmentRoles.Any(d => d.DepartmentID == parameters.DepartmentId));
+            }
             if(parameters.StartDate!=null && parameters.EndDate==null)
             {
                 predicate = predicate.And(u => u.CreatedAt >= parameters.StartDate);
@@ -78,7 +82,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         private User GetUserWithDepartmentRoleInternal(Guid userId)
         {
-            var user = DbContext.Set<User>().Include(u => u.DepartmentRoles).ThenInclude(udr => udr.Department).SingleOrDefault();
+            var user = DbContext.Set<User>().Include(u => u.DepartmentRoles).ThenInclude(udr => udr.Department).Where(u=>u.Id==userId).SingleOrDefault();
             foreach(var dr in user.DepartmentRoles)
             {
                 dr.Role = DbContext.Set<Role>().SingleOrDefault(s => s.Id == dr.RoleID);

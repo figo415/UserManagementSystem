@@ -96,6 +96,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             _mapper.Map(dto, user, typeof(UserUpdateDto), typeof(User));
+            user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
             var userskills = await _repoWrapper.UserSkillRepo.GetSkillsByUser(userId);
             foreach(var userskill in userskills)
@@ -135,6 +136,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             user.IsActive = dto.IsActive;
+            user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
@@ -148,6 +150,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             user.Password = dto.Password;
+            user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
             var result = await _repoWrapper.UserRepo.SaveAsync();
             return result;
@@ -163,6 +166,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 user.IsDeleted = true;
+                user.LastModifiedAt = DateTime.Now;
                 _repoWrapper.UserRepo.Update(user);
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();

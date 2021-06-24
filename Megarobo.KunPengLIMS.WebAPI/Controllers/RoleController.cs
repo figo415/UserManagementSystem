@@ -64,7 +64,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var dtos = await _service.GetMenusForRole(roleId);
             var list = new MenuDtoList(dtos);
-            return ApiResult<MenuDtoList>.HasData(list, 0);
+            return ApiResult<MenuDtoList>.HasData(list, dtos.Count());
         }
 
         /// <summary>

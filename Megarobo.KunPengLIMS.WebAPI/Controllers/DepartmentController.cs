@@ -52,7 +52,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<DepartmentDto>>> GetDepartment(Guid departmentId)
         {
             var departmentdto = await _service.GetDepartment(departmentId);
-            return ApiResult<DepartmentDto>.HasData(departmentdto, 0);
+            return ApiResult<DepartmentDto>.HasData(departmentdto, 1);
         }
 
         /// <summary>

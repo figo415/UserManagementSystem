@@ -63,6 +63,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             _mapper.Map(dto, role, typeof(RoleUpdateDto), typeof(Role));
+            role.LastModifiedAt = DateTime.Now;
             _repoWrapper.RoleRepo.Update(role);
             var result = await _repoWrapper.RoleRepo.SaveAsync();
             return result;
@@ -76,6 +77,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             role.IsActive = dto.IsActive;
+            role.LastModifiedAt = DateTime.Now;
             _repoWrapper.RoleRepo.Update(role);
             var result = await _repoWrapper.RoleRepo.SaveAsync();
             return result;
@@ -91,6 +93,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 role.IsDeleted = true;
+                role.LastModifiedAt = DateTime.Now;
                 _repoWrapper.RoleRepo.Update(role);
             }
             var result = await _repoWrapper.RoleRepo.SaveAsync();

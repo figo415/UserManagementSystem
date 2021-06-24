@@ -52,7 +52,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<UserDto>>> GetUser(Guid userId)
         {
             var userdto = await _service.GetUser(userId);
-            return ApiResult<UserDto>.HasData(userdto,0);
+            return ApiResult<UserDto>.HasData(userdto, 1);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var dtos = await _service.GetSkillsForUser(userId);
             var list = new SkillDtoList(dtos);
-            return ApiResult<SkillDtoList>.HasData(list,0);
+            return ApiResult<SkillDtoList>.HasData(list,dtos.Count());
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         {
             var dtos = await _service.GetDepartmentRolesForUser(userId);
             var list = new UserDepartmentRoleDtoList(dtos);
-            return ApiResult<UserDepartmentRoleDtoList>.HasData(list,0);
+            return ApiResult<UserDepartmentRoleDtoList>.HasData(list, dtos.Count());
         }
 
         /// <summary>

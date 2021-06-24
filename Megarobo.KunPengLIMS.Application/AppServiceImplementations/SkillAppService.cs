@@ -67,6 +67,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             _mapper.Map(dto, skill, typeof(SkillUpdateDto), typeof(Skill));
+            skill.LastModifiedAt = DateTime.Now;
             _repoWrapper.SkillRepo.Update(skill);
             var result = await _repoWrapper.SkillRepo.SaveAsync();
             return result;
@@ -82,6 +83,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 skill.IsDeleted = true;
+                skill.LastModifiedAt = DateTime.Now;
                 _repoWrapper.SkillRepo.Update(skill);
             }
             var result = await _repoWrapper.SkillRepo.SaveAsync();

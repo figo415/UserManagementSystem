@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public abstract class PagedParameters
+    public class PagedParameters
     {
         private const int MaxPageSize = 50;
 

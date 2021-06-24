@@ -48,6 +48,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             _mapper.Map(dto, menu, typeof(MenuUpdateDto), typeof(Menu));
+            menu.LastModifiedAt = DateTime.Now;
             _repoWrapper.MenuRepo.Update(menu);
             var result = await _repoWrapper.MenuRepo.SaveAsync();
             return result;
@@ -61,6 +62,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             menu.IsActive = dto.IsActive;
+            menu.LastModifiedAt = DateTime.Now;
             _repoWrapper.MenuRepo.Update(menu);
             var result = await _repoWrapper.MenuRepo.SaveAsync();
             return result;
@@ -76,6 +78,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 menu.IsDeleted = true;
+                menu.LastModifiedAt = DateTime.Now;
                 _repoWrapper.MenuRepo.Update(menu);
             }
             var result = await _repoWrapper.MenuRepo.SaveAsync();

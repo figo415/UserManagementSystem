@@ -82,10 +82,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 return false;
             }
+            var guids = await GetSelfAndChildren(departmentId);
+            if(guids.Contains(dto.ParentId))
+            {
+                return false;
+            }
             _mapper.Map(dto, department, typeof(DepartmentUpdateDto), typeof(Department));
+            department.LastModifiedAt = DateTime.Now;
             _repoWrapper.DepartmentRepo.Update(department);
             var result = await _repoWrapper.DepartmentRepo.SaveAsync();
             return result;
+        }
+
+        private async Task<List<Guid>> GetSelfAndChildren(Guid id)
+        {
+            var children = await _repoWrapper.DepartmentRepo.GetChildrenOfDepartment(id);
+            var guids = children.Select(d => d.Id).ToList();
+            guids.Add(id);
+            return guids;
         }
 
         public async Task<bool> EnableDepartment(Guid departmentId, DepartmentUpdateStatusDto dto)
@@ -96,6 +110,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 return false;
             }
             department.IsActive = dto.IsActive;
+            department.LastModifiedAt = DateTime.Now;
             _repoWrapper.DepartmentRepo.Update(department);
             var result = await _repoWrapper.DepartmentRepo.SaveAsync();
             return result;
@@ -111,6 +126,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     continue;
                 }
                 department.IsDeleted = true;
+                department.LastModifiedAt = DateTime.Now;
                 _repoWrapper.DepartmentRepo.Update(department);
             }
             var result = await _repoWrapper.DepartmentRepo.SaveAsync();
