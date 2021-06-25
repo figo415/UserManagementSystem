@@ -8,6 +8,7 @@ using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -63,7 +64,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var menu = await _repoWrapper.MenuRepo.GetByIdAsync(menuId);
             if (menu == null)
             {
-                return false;
+                throw new NotExistedException("Menu with Guid=" + menuId + " is not existed");
             }
             _mapper.Map(dto, menu, typeof(MenuUpdateDto), typeof(Menu));
             menu.LastModifiedAt = DateTime.Now;
@@ -77,7 +78,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var menu = await _repoWrapper.MenuRepo.GetByIdAsync(menuId);
             if (menu == null)
             {
-                return false;
+                throw new NotExistedException("Menu with Guid=" + menuId + " is not existed");
             }
             menu.IsActive = dto.IsActive;
             menu.LastModifiedAt = DateTime.Now;

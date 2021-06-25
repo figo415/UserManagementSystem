@@ -16,6 +16,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         Task<bool> UpdateDictItem(Guid dictItemId, DictItemUpdateDto dto);
 
+        Task<bool> UpdateDictItemValues(Guid dictItemId, DictItemUpdateValueDto dto);
+
         Task<bool> DeleteDictItems(DeleteMultiDto dto);
     }
 }

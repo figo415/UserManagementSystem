@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -68,7 +69,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var role = await _repoWrapper.RoleRepo.GetByIdAsync(roleId);
             if (role == null)
             {
-                return false;
+                throw new NotExistedException("Role with Guid=" + roleId + " is not existed");
             }
             _mapper.Map(dto, role, typeof(RoleUpdateDto), typeof(Role));
             role.LastModifiedAt = DateTime.Now;
@@ -95,7 +96,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var role = await _repoWrapper.RoleRepo.GetByIdAsync(roleId);
             if (role == null)
             {
-                return false;
+                throw new NotExistedException("Role with Guid=" + roleId + " is not existed");
             }
             role.IsActive = dto.IsActive;
             role.LastModifiedAt = DateTime.Now;

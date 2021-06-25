@@ -9,6 +9,7 @@ using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Dtos;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -46,9 +47,23 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var dictitem = await _repoWrapper.DictItemRepo.GetByIdAsync(dictItemId);
             if (dictitem == null)
             {
-                return false;
+                throw new NotExistedException("Dictionary item with Guid=" + dictItemId + " is not existed");
             }
             _mapper.Map(dto, dictitem, typeof(DictItemUpdateDto), typeof(DictItem));
+            dictitem.LastModifiedAt = DateTime.Now;
+            _repoWrapper.DictItemRepo.Update(dictitem);
+            var result = await _repoWrapper.DictItemRepo.SaveAsync();
+            return result;
+        }
+
+        public async Task<bool> UpdateDictItemValues(Guid dictItemId, DictItemUpdateValueDto dto)
+        {
+            var dictitem = await _repoWrapper.DictItemRepo.GetByIdAsync(dictItemId);
+            if (dictitem == null)
+            {
+                throw new NotExistedException("Dictionary item with Guid=" + dictItemId + " is not existed");
+            }
+            _mapper.Map(dto, dictitem, typeof(DictItemUpdateValueDto), typeof(DictItem));
             dictitem.LastModifiedAt = DateTime.Now;
             _repoWrapper.DictItemRepo.Update(dictitem);
             var result = await _repoWrapper.DictItemRepo.SaveAsync();

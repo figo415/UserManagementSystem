@@ -110,7 +110,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{dictItemId}/values")]
         public async Task<ActionResult<ApiStringResult>> MaintainValuesForDictItem(Guid dictItemId,DictItemUpdateValueDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateDictItemValues(dictItemId, dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>

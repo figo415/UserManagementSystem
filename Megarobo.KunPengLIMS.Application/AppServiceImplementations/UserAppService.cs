@@ -9,6 +9,7 @@ using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -93,7 +94,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
             if (user == null)
             {
-                return false;
+                throw new NotExistedException("User with Guid=" + userId + " is not existed");
             }
             _mapper.Map(dto, user, typeof(UserUpdateDto), typeof(User));
             user.LastModifiedAt = DateTime.Now;
@@ -133,7 +134,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
             if (user == null)
             {
-                return false;
+                throw new NotExistedException("User with Guid=" + userId + " is not existed");
             }
             user.IsActive = dto.IsActive;
             user.LastModifiedAt = DateTime.Now;
@@ -147,7 +148,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
             if (user == null)
             {
-                return false;
+                throw new NotExistedException("User with Guid=" + userId + " is not existed");
             }
             user.Password = dto.Password;
             user.LastModifiedAt = DateTime.Now;

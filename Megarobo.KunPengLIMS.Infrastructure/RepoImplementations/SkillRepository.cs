@@ -39,7 +39,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             Expression<Func<Skill, bool>> predicate = PredicateBuilder.True<Skill>();
             if (!string.IsNullOrEmpty(parameters.SkillName))
             {
-                predicate = predicate.And(s => s.SkillName == parameters.SkillName);
+                predicate = predicate.And(s => s.SkillName.ToLower().Contains(parameters.SkillName.ToLower()));
             }
             predicate = predicate.And(s => !s.IsDeleted);
             return predicate;

@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Megarobo.KunPengLIMS.Infrastructure;
@@ -21,6 +22,7 @@ using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
+using Megarobo.KunPengLIMS.WebAPI.Converters;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -37,7 +39,8 @@ namespace Megarobo.KunPengLIMS.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
-            services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>());
+            services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>())
+                .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()));
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));

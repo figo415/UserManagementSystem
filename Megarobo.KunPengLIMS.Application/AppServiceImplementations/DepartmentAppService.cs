@@ -8,6 +8,7 @@ using AutoMapper;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -80,12 +81,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var department = await _repoWrapper.DepartmentRepo.GetByIdAsync(departmentId);
             if (department == null)
             {
-                return false;
+                throw new NotExistedException("Department with Guid=" + departmentId + " is not existed");
             }
             var guids = await GetSelfAndChildren(departmentId);
             if(guids.Contains(dto.ParentId))
             {
-                return false;
+                throw new InvalidParentException("Parent department can't be it self and its children");
             }
             _mapper.Map(dto, department, typeof(DepartmentUpdateDto), typeof(Department));
             department.LastModifiedAt = DateTime.Now;
@@ -107,7 +108,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var department = await _repoWrapper.DepartmentRepo.GetByIdAsync(departmentId);
             if (department == null)
             {
-                return false;
+                throw new NotExistedException("Department with Guid=" + departmentId + " is not existed");
             }
             department.IsActive = dto.IsActive;
             department.LastModifiedAt = DateTime.Now;

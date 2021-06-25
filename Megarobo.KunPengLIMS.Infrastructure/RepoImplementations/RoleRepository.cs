@@ -40,7 +40,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             Expression<Func<Role, bool>> predicate = PredicateBuilder.True<Role>();
             if (!string.IsNullOrEmpty(parameters.Name))
             {
-                predicate = predicate.And(r => r.Name == parameters.Name);
+                predicate = predicate.And(r => r.Name.ToLower().Contains(parameters.Name.ToLower()));
             }
             if (parameters.IsActive != null)
             {

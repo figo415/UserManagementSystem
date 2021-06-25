@@ -9,6 +9,7 @@ using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -64,7 +65,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var skill = await _repoWrapper.SkillRepo.GetByIdAsync(skillId);
             if (skill == null)
             {
-                return false;
+                throw new NotExistedException("Skill with Guid=" + skillId + " is not existed");
             }
             _mapper.Map(dto, skill, typeof(SkillUpdateDto), typeof(Skill));
             skill.LastModifiedAt = DateTime.Now;

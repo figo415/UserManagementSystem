@@ -27,16 +27,18 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
 
         public void OnException(ExceptionContext context)
         {
-            var error = new ApiError();
+            var error = new ApiStringResult();
             if(Environment.IsDevelopment())
             {
+                error.Code = 2;
                 error.Message = context.Exception.Message;
-                error.Detail = context.Exception.ToString();
+                error.Data = context.Exception.ToString();
             }
             else
             {
+                error.Code = 2;
                 error.Message = "Server error";
-                error.Detail = context.Exception.Message;
+                error.Data = context.Exception.Message;
             }
             context.Result = new ObjectResult(error) { StatusCode = StatusCodes.Status500InternalServerError };
 

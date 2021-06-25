@@ -33,7 +33,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             Expression<Func<User, bool>> predicate = PredicateBuilder.True<User>();
             if (!string.IsNullOrEmpty(parameters.UserName))
             {
-                predicate = predicate.And(u => u.UserName == parameters.UserName);
+                predicate = predicate.And(u => u.UserName.ToLower().Contains(parameters.UserName.ToLower()));
             }
             if (!string.IsNullOrEmpty(parameters.MobileNumber))
             {
