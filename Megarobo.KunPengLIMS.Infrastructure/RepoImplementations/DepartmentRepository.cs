@@ -21,11 +21,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<Department>> GetDepartmentsByPage(DepartmentQueryParameters parameters)
         {
-            throw new NotImplementedException();
-            //IQueryable<Department> queryable = DbContext.Set<Department>();
-            //var predicate = BuildPredicate(parameters);
-            //queryable = queryable.Where(predicate);
-            //return PagedList<Department>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+            IQueryable<Department> queryable = DbContext.Set<Department>();
+            var predicate = BuildPredicate(parameters);
+            queryable = queryable.Where(predicate);
+            return PagedList<Department>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
         public System.Threading.Tasks.Task<IEnumerable<Department>> GetDepartments(DepartmentQueryParameters parameters)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class DepartmentQueryParameters//:PagedParameters
+    public class DepartmentQueryParameters:PagedParameters
     {
         public string Name { get; set; }
 

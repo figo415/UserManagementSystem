@@ -7,6 +7,11 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 {
     public class DepartmentDto
     {
+        public DepartmentDto()
+        {
+            Children = new List<DepartmentDto>();
+        }
+
         public Guid Id { get; set; }
 
         public string Name { get; set; }

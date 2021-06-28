@@ -37,8 +37,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<DepartmentDtoList>>> GetDepartments([FromQuery] DepartmentQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Department: Name={0}", parameters.Name);
-            //var pageddtos = await _service.GetDepartmentsByPage(parameters);
-            var pageddtos = await _service.GetDepartmentTree(parameters);
+            if(string.IsNullOrEmpty(parameters.Name))
+            {
+                var dtos = await _service.GetDepartmentTree(parameters);
+                var dtolist = new DepartmentDtoList(dtos);
+                return ApiResult<DepartmentDtoList>.HasData(dtolist, dtos.Count());
+            }
+            var pageddtos = await _service.GetDepartmentsByPage(parameters);
             var list = new DepartmentDtoList(pageddtos);
             return ApiResult<DepartmentDtoList>.HasData(list, pageddtos.Count());
         }

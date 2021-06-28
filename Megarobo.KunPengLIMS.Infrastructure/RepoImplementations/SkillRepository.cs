@@ -21,11 +21,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<Skill>> GetSkillsByPage(SkillQueryParameters parameters)
         {
-            throw new NotImplementedException();
-            //IQueryable<Skill> queryable = DbContext.Set<Skill>();
-            //var predicate = BuildPredicate(parameters);
-            //queryable = queryable.Where(predicate);
-            //return PagedList<Skill>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+            IQueryable<Skill> queryable = DbContext.Set<Skill>();
+            var predicate = BuildPredicate(parameters);
+            queryable = queryable.Where(predicate);
+            return PagedList<Skill>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
         public System.Threading.Tasks.Task<IEnumerable<Skill>> GetSkills(SkillQueryParameters parameters)

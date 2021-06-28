@@ -32,7 +32,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             Expression<Func<LogItem, bool>> predicate = PredicateBuilder.True<LogItem>();
             if (!string.IsNullOrEmpty(parameters.Operator))
             {
-                predicate = predicate.And(l => l.Operator == parameters.Operator);
+                predicate = predicate.And(l => l.Operator.ToLower().Contains(parameters.Operator.ToLower()));
             }
             if (parameters.IsSuccess != null)
             {

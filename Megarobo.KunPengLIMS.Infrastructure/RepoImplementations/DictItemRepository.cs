@@ -32,7 +32,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             Expression<Func<DictItem, bool>> predicate = PredicateBuilder.True<DictItem>();
             if (!string.IsNullOrEmpty(parameters.KeyName))
             {
-                predicate = predicate.And(d => d.KeyName == parameters.KeyName);
+                predicate = predicate.And(d => d.KeyName.ToLower().Contains(parameters.KeyName.ToLower()));
             }
             if (!string.IsNullOrEmpty(parameters.Type))
             {
