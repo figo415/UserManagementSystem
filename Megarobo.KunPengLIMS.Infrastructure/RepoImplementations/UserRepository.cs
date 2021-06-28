@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         }
 
-        public System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParameters parameters)
+        public System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParametersExt parameters)
         {
             //IQueryable<User> queryable = DbContext.Set<User>();
             IQueryable<User> queryable = DbContext.Set<User>().Include(u => u.Skills).ThenInclude(us => us.Skill).Include(u => u.DepartmentRoles);
@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return PagedList<User>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
-        private Expression<Func<User,bool>> BuildPredicate(UserQueryParameters parameters)
+        private Expression<Func<User,bool>> BuildPredicate(UserQueryParametersExt parameters)
         {
             Expression<Func<User, bool>> predicate = PredicateBuilder.True<User>();
             if (!string.IsNullOrEmpty(parameters.UserName))
@@ -45,7 +45,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             if(parameters.DepartmentId!=null)
             {
-                predicate = predicate.And(u => u.DepartmentRoles.Any(d => d.DepartmentID == parameters.DepartmentId));
+                predicate = predicate.And(u => u.DepartmentRoles.Any(d => parameters.DepartmentIds.Contains(d.DepartmentID)));
             }
             if(parameters.StartDate!=null && parameters.EndDate==null)
             {

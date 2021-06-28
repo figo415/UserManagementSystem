@@ -9,7 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 {
     public interface IUserRepository:IRepositoryBase<User>,IRepositoryBase2<User,Guid>
     {
-        System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParameters parameters);
+        System.Threading.Tasks.Task<PagedList<User>> GetUsersByPage(UserQueryParametersExt parameters);
 
         System.Threading.Tasks.Task<User> GetUserWithSkill(Guid userId);
 

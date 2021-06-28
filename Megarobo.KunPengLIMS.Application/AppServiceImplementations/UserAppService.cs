@@ -29,7 +29,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters)
         {
-            var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parameters);
+            var parametersext = new UserQueryParametersExt(parameters);
+            if(parameters.DepartmentId!=null)
+            {
+                var children = await _repoWrapper.DepartmentRepo.GetChildrenOfDepartment(parameters.DepartmentId.Value);
+                var guids = children.Select(d => d.Id).ToList();
+                guids.Add(parameters.DepartmentId.Value);
+                parametersext.DepartmentIds = guids;
+            }
+            var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parametersext);
             var pagedDtos = _mapper.Map<IEnumerable<UserDto>>(pagedUsers);
             return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
         }
