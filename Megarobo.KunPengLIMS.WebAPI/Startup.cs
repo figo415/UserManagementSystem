@@ -71,6 +71,8 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
+            services.AddScoped<LogFilterAttribute>();
+
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
             #region Swagger

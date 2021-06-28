@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
     public interface ILogItemAppService
     {
         Task<PagedList<LogItemDto>> GetLogItemsByPage(LogItemQueryParameters parameters);
+
+        Task<bool> InsertLogItem(LogItemCreationDto dto);
     }
 }

@@ -9,5 +9,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public string Operator { get; set; }
 
         public bool? IsSuccess { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Operator={0}, IsSuccess={1}, PageNumber={2}, PageSize={3}", Operator, IsSuccess, PageNumber, PageSize);
+        }
     }
 }

@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/skills")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class SkillController : LimsControllerBase
     {
         private readonly ISkillAppService _service;
@@ -36,7 +38,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<SkillDtoList>>> GetSkills([FromQuery]SkillQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for Skill: SkillName={0}", parameters.SkillName);
+            _logger.LogInformation("Query string for Skill: {0}", parameters);
             if(string.IsNullOrEmpty(parameters.SkillName))
             {
                 var dtos = await _service.GetSkillTree(parameters);

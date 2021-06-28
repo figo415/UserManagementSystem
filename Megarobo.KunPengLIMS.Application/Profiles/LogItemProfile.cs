@@ -12,6 +12,8 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         public LogItemProfile()
         {
             CreateMap<LogItem, LogItemDto>();
+
+            CreateMap<LogItemCreationDto, LogItem>();
         }
     }
 }

@@ -11,5 +11,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public int? Type { get; set; }
 
         public bool? IsActive { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name={0}, Type={1}, IsActive={2}", Name, Type, IsActive);
+        }
     }
 }

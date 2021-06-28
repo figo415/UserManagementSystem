@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/departments")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class DepartmentController : LimsControllerBase
     {
         private readonly IDepartmentAppService _service;
@@ -36,7 +38,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<DepartmentDtoList>>> GetDepartments([FromQuery] DepartmentQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for Department: Name={0}", parameters.Name);
+            _logger.LogInformation("Query string for Department: {0}", parameters);
             if(string.IsNullOrEmpty(parameters.Name))
             {
                 var dtos = await _service.GetDepartmentTree(parameters);

@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/menus")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class MenuController : LimsControllerBase
     {
         private readonly IMenuAppService _service;
@@ -36,7 +38,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<MenuDtoList>>> GetMenus([FromQuery] MenuQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for Menu: Name={0}", parameters.Name);
+            _logger.LogInformation("Query string for Menu: {0}", parameters);
             if(string.IsNullOrEmpty(parameters.Name))
             {
                 var dtos = await _service.GetMenuTree(parameters);

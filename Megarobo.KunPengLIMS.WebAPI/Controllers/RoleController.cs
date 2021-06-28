@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/roles")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class RoleController : LimsControllerBase
     {
         private readonly IRoleAppService _service;
@@ -36,7 +38,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<RoleDtoList>>> GetRoles([FromQuery]RoleQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for Role: Name={0}", parameters.Name);
+            _logger.LogInformation("Query string for Role: {0}", parameters);
             //var pageddtos = await _service.GetRolesByPage(parameters);
             var pageddtos = await _service.GetRolesWithMenuByPage(parameters);
             var list = new RoleDtoList(pageddtos);

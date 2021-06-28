@@ -9,6 +9,7 @@ using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -18,6 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/users")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class UserController : LimsControllerBase
     {
         private readonly IUserAppService _service;
@@ -37,7 +39,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsers([FromQuery]UserQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for User: UserName={0}", parameters.UserName);
+            _logger.LogInformation("Query string for User: {0}", parameters);
             var pageddtos = await _service.GetUsersByPage(parameters);
             var list = new UserDtoList(pageddtos);
             return ApiResult<UserDtoList>.HasData(list,pageddtos.TotalCount);

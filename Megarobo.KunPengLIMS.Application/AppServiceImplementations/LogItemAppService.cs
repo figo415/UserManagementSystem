@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Dtos;
+using Megarobo.KunPengLIMS.Domain.Entities;
 
 
 namespace Megarobo.KunPengLIMS.Application.Services
@@ -28,6 +29,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var pagedLogItems = await _repoWrapper.LogItemRepo.GetLogItemsByPage(parameters);
             var pagedDtos = _mapper.Map<IEnumerable<LogItemDto>>(pagedLogItems);
             return new PagedList<LogItemDto>(pagedDtos.ToList(), pagedLogItems.TotalCount, pagedLogItems.CurrentPage, pagedLogItems.PageSize);
+        }
+
+        public async Task<bool> InsertLogItem(LogItemCreationDto dto)
+        {
+            var logitem = _mapper.Map<LogItem>(dto);
+            logitem.OperationTime = DateTime.Now;
+            _repoWrapper.LogItemRepo.Create(logitem);
+            var result = await _repoWrapper.LogItemRepo.SaveAsync();
+            return result;
         }
     }
 }

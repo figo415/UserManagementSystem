@@ -8,7 +8,7 @@ using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
-using Megarobo.KunPengLIMS.Application;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -18,6 +18,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/dictitems")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     public class DictitemController : LimsControllerBase
     {
         private readonly IDictItemAppService _service;
@@ -37,7 +38,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<DictItemDtoList>>> GetDictItems([FromQuery] DictItemQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for DictItem: KeyName={0}", parameters.KeyName);
+            _logger.LogInformation("Query string for DictItem: {0}", parameters);
             var pageddtos = await _service.GetDictItemsByPage(parameters);
             var list = new DictItemDtoList(pageddtos);
             return ApiResult<DictItemDtoList>.HasData(list, pageddtos.TotalCount);
