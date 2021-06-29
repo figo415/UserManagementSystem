@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -15,10 +16,12 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
     public class LogFilterAttribute:ActionFilterAttribute
     {
         private readonly ILogItemAppService _logService;
+        private readonly ILogger<LogFilterAttribute> _logger;
 
-        public LogFilterAttribute(ILogItemAppService logService)
+        public LogFilterAttribute(ILogItemAppService logService, ILogger<LogFilterAttribute> logger)
         {
             _logService = logService;
+            _logger = logger;
         }
 
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
@@ -37,12 +40,14 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
                 dto.IsSuccess = false;
                 dto.ErrorMessage = actionExecutedContext.Exception.Message;
                 dto.StackTrace = actionExecutedContext.Exception.StackTrace;
+                _logger.LogError("{0}: {1} {2}{3} ERROR: {4}", actionExecutedContext.HttpContext.Response.StatusCode, dto.OperationType, dto.RequestUrl, dto.RequestParameters, dto.ErrorMessage);
             }
             else
             {
                 dto.IsSuccess = true;
+                _logger.LogInformation("{0}: {1} {2}{3}", actionExecutedContext.HttpContext.Response.StatusCode, dto.OperationType, dto.RequestUrl, dto.RequestParameters);
             }
-            _logService.InsertLogItem(dto);
+            var result = _logService.InsertLogItem(dto);
             base.OnActionExecuted(actionExecutedContext);
         }
 

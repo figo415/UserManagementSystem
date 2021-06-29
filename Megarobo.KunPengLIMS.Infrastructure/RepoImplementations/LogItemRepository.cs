@@ -40,5 +40,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             return predicate;
         }
+
+        public bool Save()
+        {
+            var num = DbContext.SaveChanges();
+            return num > 0;
+        }
     }
 }

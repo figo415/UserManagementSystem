@@ -12,6 +12,6 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         Task<PagedList<LogItemDto>> GetLogItemsByPage(LogItemQueryParameters parameters);
 
-        Task<bool> InsertLogItem(LogItemCreationDto dto);
+        bool InsertLogItem(LogItemCreationDto dto);
     }
 }

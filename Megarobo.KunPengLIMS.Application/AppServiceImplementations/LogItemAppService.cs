@@ -31,12 +31,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<LogItemDto>(pagedDtos.ToList(), pagedLogItems.TotalCount, pagedLogItems.CurrentPage, pagedLogItems.PageSize);
         }
 
-        public async Task<bool> InsertLogItem(LogItemCreationDto dto)
+        public bool InsertLogItem(LogItemCreationDto dto)
         {
             var logitem = _mapper.Map<LogItem>(dto);
             logitem.OperationTime = DateTime.Now;
             _repoWrapper.LogItemRepo.Create(logitem);
-            var result = await _repoWrapper.LogItemRepo.SaveAsync();
+            //var result = await _repoWrapper.LogItemRepo.SaveAsync();
+            var result = _repoWrapper.LogItemRepo.Save();
             return result;
         }
     }

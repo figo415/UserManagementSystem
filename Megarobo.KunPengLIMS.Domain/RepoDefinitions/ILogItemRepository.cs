@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface ILogItemRepository:IRepositoryBase<LogItem>,IRepositoryBase2<LogItem,int>
     {
         System.Threading.Tasks.Task<PagedList<LogItem>> GetLogItemsByPage(LogItemQueryParameters parameters);
+
+        bool Save();
     }
 }
