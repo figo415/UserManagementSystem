@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/departments")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class DepartmentController : LimsControllerBase
+    public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentAppService _service;
         private readonly ILogger<DepartmentController> _logger;

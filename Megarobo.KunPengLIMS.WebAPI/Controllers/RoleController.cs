@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/roles")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class RoleController : LimsControllerBase
+    public class RoleController : ControllerBase
     {
         private readonly IRoleAppService _service;
         private readonly ILogger<RoleController> _logger;

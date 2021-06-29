@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/menus")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class MenuController : LimsControllerBase
+    public class MenuController : ControllerBase
     {
         private readonly IMenuAppService _service;
         private readonly ILogger<UserController> _logger;

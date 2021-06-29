@@ -17,7 +17,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Produces("application/json")]
     [Route("limsapi/logitems")]
     [ApiController]
-    public class LogitemController : LimsControllerBase
+    public class LogitemController : ControllerBase
     {
         private readonly ILogItemAppService _service;
         private readonly ILogger<LogitemController> _logger;

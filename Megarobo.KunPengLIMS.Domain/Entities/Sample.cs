@@ -11,27 +11,43 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// </summary>
 	/// 与Task多对多
 	/// 与SampleDosage一对多
-	public class Sample:Entity
+	public class Sample:PurchasableEntity
 	{
 		/// <summary>
-		/// 购买来源:嵌入值对象：链接
+		/// 样本名称
 		/// </summary>
-		public Link BoughtFrom { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
-		/// 样本大类：细胞,核酸,蛋白质,抗体
+		/// 样本类型：细胞,核酸,蛋白质,抗体
 		/// </summary>
-		public string Category { get; set; }
+		public string Type { get; set; }
 
 		/// <summary>
-		/// 细胞子类：外键到细胞系
+		/// 样本描述
 		/// </summary>
-		//private int CellID;
+		public string Description { get; set; }
 
 		/// <summary>
-		/// 产生时间：yyyy-MM-dd hh:mm:ss
+		/// 体积
 		/// </summary>
-		public DateTime CreatedTime { get; set; }
+		public Cubage Cubage { get; set; }
+
+		/// <summary>
+		/// 质量
+		/// </summary>
+		public Quality Quality { get; set; }
+
+		/// <summary>
+		/// 浓度
+		/// </summary>
+		public Thickness Thickness { get; set; }
+
+		/// <summary>
+		/// 外键到位置
+		/// </summary>
+		/// undefined
+		public Guid PositionId { get; set; }
 
 		/// <summary>
 		/// 消失时间：yyyy-MM-dd hh:mm:ss
@@ -39,55 +55,9 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public DateTime DeletedTime { get; set; }
 
 		/// <summary>
-		/// 基因组子类：外键到基因组
-		/// </summary>
-		//private int GenomeID;
-
-		public string Name { get; set; }
-
-		/// <summary>
 		/// 下次拍摄时间：yyyy-MM-dd hh:mm:ss
 		/// </summary>
 		public DateTime NextPhotoTime { get; set; }
-
-		/// <summary>
-		/// 质粒子类：外键到质粒
-		/// </summary>
-		//private int PlasmidID;
-
-		/// <summary>
-		/// 外键到位置
-		/// </summary>
-		/// undefined
-		public Guid PositionID;
-
-		[ForeignKey("PositionID")]
-		public Position Position { get; set; }
-
-		/// <summary>
-		/// 购买价格:嵌入值对象：价格
-		/// </summary>
-		public Price Price { get; set; }
-
-		/// <summary>
-		/// 蛋白质子类：外键到蛋白质
-		/// </summary>
-		//private int ProteinID;
-
-		/// <summary>
-		/// 购买日期：yyyy-MM-dd
-		/// </summary>
-		public DateTime PurchaseDate { get; set; }
-
-		/// <summary>
-		/// 备注
-		/// </summary>
-		public string Remarks { get; set; }
-
-		/// <summary>
-		/// RNA子类：外键到RNA
-		/// </summary>
-		//private int RNAID;
 
 		/// <summary>
 		/// 状态：存活,消失
@@ -95,9 +65,32 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Status { get; set; }
 
 		/// <summary>
-		/// 供应商：ThermoFisher,全式金,诺维赞,碧云天,Gibco,Merck,invitrogen
+		/// 细胞子类：外键到细胞系
 		/// </summary>
-		public string Supplier { get; set; }
+		//private int CellID;
+
+		/// <summary>
+		/// 基因组子类：外键到基因组
+		/// </summary>
+		//private int GenomeID;
+
+		/// <summary>
+		/// 质粒子类：外键到质粒
+		/// </summary>
+		//private int PlasmidID;
+
+		/// <summary>
+		/// 蛋白质子类：外键到蛋白质
+		/// </summary>
+		//private int ProteinID;
+
+		/// <summary>
+		/// RNA子类：外键到RNA
+		/// </summary>
+		//private int RNAID;
+
+		[ForeignKey("PositionId")]
+		public Position Position { get; set; }
 
 		/// <summary>
 		/// 来源任务：外键到任务
@@ -112,6 +105,5 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public virtual ICollection<TaskSample> Tasks { get; set; }
 
 		public virtual ICollection<SampleDosage> SampleDosages { get; set; }
-
 	}
 }

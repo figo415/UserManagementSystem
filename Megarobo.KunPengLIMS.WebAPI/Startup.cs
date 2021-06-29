@@ -56,7 +56,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
             }
             else
             {
-                connectionString = Configuration.GetConnectionString("Postgre");
+                connectionString = Configuration.GetConnectionString("PostgreLocal");
             }
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             #endregion

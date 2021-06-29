@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/dictitems")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class DictitemController : LimsControllerBase
+    public class DictitemController : ControllerBase
     {
         private readonly IDictItemAppService _service;
         private readonly ILogger<DictitemController> _logger;

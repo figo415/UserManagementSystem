@@ -46,6 +46,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// </summary>
 		public string Zone { get; set; }
 
+		public Guid ParentId { get; set; }
+
 		/// <summary>
 		/// 外键到设备
 		/// </summary>
