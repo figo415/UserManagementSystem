@@ -148,15 +148,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 .HasOne(ts => ts.Sample)
                 .WithMany(s => s.Tasks)
                 .HasForeignKey(ts => ts.SampleID);
-       
+
+            modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserID, u.DepartmentID, u.RoleID });
+            modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserID, us.SkillID });
+            modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleID, rm.MenuID });
             modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareID, lp.PositionID });
+            modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentID, rp.PositionID });
+            modelBuilder.Entity<DevicePosition>().HasKey(dp => new { dp.DeviceId, dp.PositionId });
+            modelBuilder.Entity<SamplePosition>().HasKey(sp => new { sp.SampleId, sp.PositionId });
             modelBuilder.Entity<NodeDevice>().HasKey(nd => new { nd.NodeID,nd.DeviceID });
             modelBuilder.Entity<NodeLabware>().HasKey(nl => new { nl.NodeID,nl.LabwareID });
             modelBuilder.Entity<NodeProtocolStep>().HasKey(np => new { np.NodeID,np.ProtocolStepID });
             modelBuilder.Entity<NodeReagent>().HasKey(nr => new { nr.NodeID,nr.ReagentID });
             modelBuilder.Entity<ProjectTask>().HasKey(pt => new { pt.ProjectID,pt.TaskID });
-            modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentID,rp.PositionID });
-            modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleID,rm.MenuID });
             modelBuilder.Entity<SolutionReagentDosage>().HasKey(sr => new { sr.SolutionID,sr.ReagentDosageID });
             modelBuilder.Entity<SolutionSampleDosage>().HasKey(ss => new { ss.SolutionID,ss.SampleDosageID });
             modelBuilder.Entity<TakeTask>().HasKey(tt => new { tt.TakeID,tt.TaskID });
@@ -164,8 +168,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             modelBuilder.Entity<TaskReagent>().HasKey(tr => new { tr.TaskID, tr.ReagentID });
             modelBuilder.Entity<TaskSample>().HasKey(ts => new { ts.TaskID, ts.SampleID });
             modelBuilder.Entity<TaskUser>().HasKey(tu => new { tu.TaskID, tu.UserID });
-            modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserID, u.DepartmentID, u.RoleID });
-            modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserID, us.SkillID });
+            
 
             //启用Guid主键类型扩展
             modelBuilder.HasPostgresExtension("uuid-ossp");

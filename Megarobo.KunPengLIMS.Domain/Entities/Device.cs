@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// </summary>
 	/// 与Node多对多
 	/// 与DeviceParameter一对多
-	/// 与Position一对多
+	/// 与Position多对多
 	/// 与Task一对多
 	public class Device:PurchasableEntity
 	{
@@ -39,7 +39,9 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
 		public virtual ICollection<DeviceParameter> DeviceParameters { get; set; }
 
-		public virtual ICollection<Position> Positions { get; set; }
+		//public virtual ICollection<Position> Positions { get; set; }
+
+		public virtual ICollection<DevicePosition> Positions { get; set; }
 
 		public virtual ICollection<Task> Tasks { get; set; }
 	}

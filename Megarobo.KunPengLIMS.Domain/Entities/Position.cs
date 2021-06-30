@@ -9,11 +9,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// 位置
 	/// </summary>
-	/// 与Device多对一
+	/// 与Device多对多
 	/// 与Labware多对多
 	/// 与Reagent多对多
+	/// 与Sample多对多
 	public class Position:Entity
 	{
+		public string Name { get; set; }
+
 		/// <summary>
 		/// 孔位：1~10000
 		/// </summary>
@@ -23,8 +26,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// 层：1~10
 		/// </summary>
 		public int Layer { get; set; }
-
-		public string Name { get; set; }
 
 		/// <summary>
 		/// 房间：细胞1,细胞2,分子1,分子2
@@ -48,16 +49,19 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
 		public Guid ParentId { get; set; }
 
-		/// <summary>
-		/// 外键到设备
-		/// </summary>
-		public Guid DeviceID { get; set; }
+		///// <summary>
+		///// 外键到设备
+		///// </summary>
+		//public Guid DeviceID { get; set; }
 
-		[ForeignKey("DeviceID")]
-		public Device Device { get; set; }
+		//[ForeignKey("DeviceID")]
+		//public Device Device { get; set; }
+		public virtual ICollection<DevicePosition> Devices { get; set; }
 
 		public virtual ICollection<LabwarePosition> Labwares { get; set; }
 
 		public virtual ICollection<ReagentPosition> Reagents { get; set; }
+
+		public virtual ICollection<SamplePosition> Samples { get; set; }
 	}
 }

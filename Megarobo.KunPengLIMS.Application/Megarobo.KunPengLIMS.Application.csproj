@@ -12,14 +12,4 @@
     <ProjectReference Include="..\Megarobo.KunPengLIMS.Domain\Megarobo.KunPengLIMS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\PisitionDtos\" />
-    <Folder Include="Dtos\SpeciesDtos\" />
-    <Folder Include="Dtos\CellDtos\" />
-    <Folder Include="Dtos\LabwareDtos\" />
-    <Folder Include="Dtos\ReagentDtos\" />
-    <Folder Include="Dtos\DeviceDtos\" />
-    <Folder Include="Dtos\SampleDtos\" />
-  </ItemGroup>
-
 </Project>

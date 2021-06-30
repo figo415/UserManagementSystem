@@ -16,16 +16,18 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             _dbContext = aasContext;
         }
 
+        #region System management module
+
         private readonly IUserRepository _userRepo;
         private readonly IUserSkillRepository _userSkillRepo;
         private readonly IUserDepartmentRoleRepository _userDepartmentRoleRepo;
         private readonly ISkillRepository _skillRepo;
+        private readonly IDepartmentRepository _departmentRepo;
         private readonly IRoleRepository _roleRepo;
         private readonly IRoleMenuRepository _roleMenuRepo;
         private readonly IMenuRepository _menuRepo;
-        private readonly ILogItemRepository _logItemRepo;
         private readonly IDictItemRepository _dictItemRepo;
-        private readonly IDepartmentRepository _departmentRepo;
+        private readonly ILogItemRepository _logItemRepo;
 
         public IUserRepository UserRepo => _userRepo ?? new UserRepository(_dbContext);
 
@@ -35,16 +37,43 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public ISkillRepository SkillRepo => _skillRepo ?? new SkillRepository(_dbContext);
 
+        public IDepartmentRepository DepartmentRepo => _departmentRepo ?? new DepartmentRepository(_dbContext);
+
         public IRoleRepository RoleRepo => _roleRepo ?? new RoleRepository(_dbContext);
 
         public IRoleMenuRepository RoleMenuRepo => _roleMenuRepo ?? new RoleMenuRepository(_dbContext);
 
-        public IMenuRepository MenuRepo => _menuRepo ?? new MenuRepository(_dbContext);
-
-        public ILogItemRepository LogItemRepo => _logItemRepo ?? new LogItemRepository(_dbContext);
+        public IMenuRepository MenuRepo => _menuRepo ?? new MenuRepository(_dbContext);   
 
         public IDictItemRepository DictItemRepo => _dictItemRepo ?? new DictItemRepository(_dbContext);
 
-        public IDepartmentRepository DepartmentRepo => _departmentRepo ?? new DepartmentRepository(_dbContext);
+        public ILogItemRepository LogItemRepo => _logItemRepo ?? new LogItemRepository(_dbContext);
+
+        #endregion
+
+        #region Basic data configuration module and Sample management module
+
+        private readonly ISpeciesRepository _speciesRepo;
+        private readonly ICellRepository _cellRepo;
+        private readonly IPositionRepository _positionRepo;
+        private readonly ILabwareRepository _labwareRepo;
+        private readonly IReagentRepository _reagentRepo;
+        private readonly IDeviceRepository _deviceRepo;
+        private readonly ISampleRepository _sampleRepo;
+        public ISpeciesRepository SpeciesRepo => _speciesRepo ?? new SpeciesRepository(_dbContext);
+
+        public ICellRepository CellRepo => _cellRepo ?? new CellRepository(_dbContext);
+
+        public IPositionRepository PositionRepo => _positionRepo ?? new PositionRepository(_dbContext);
+
+        public ILabwareRepository LabwareRepo => _labwareRepo ?? new LabwareRepository(_dbContext);
+
+        public IReagentRepository ReagentRepo => _reagentRepo ?? new ReagentRepository(_dbContext);
+
+        public IDeviceRepository DeviceRepo => _deviceRepo ?? new DeviceRepository(_dbContext);
+
+        public ISampleRepository SampleRepo => _sampleRepo ?? new SampleRepository(_dbContext);
+
+        #endregion
     }
 }

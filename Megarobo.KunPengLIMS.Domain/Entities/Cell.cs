@@ -73,5 +73,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// 备注
         /// </summary>
         public string Remarks { get; set; }
+
+        public virtual ICollection<Sample> Samples { get; set; }
     }
 }

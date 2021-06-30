@@ -11,6 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// </summary>
 	/// 与Task多对多
 	/// 与SampleDosage一对多
+	/// 与Position多对多
 	public class Sample:PurchasableEntity
 	{
 		/// <summary>
@@ -43,11 +44,11 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// </summary>
 		public Thickness Thickness { get; set; }
 
-		/// <summary>
-		/// 外键到位置
-		/// </summary>
-		/// undefined
-		public Guid PositionId { get; set; }
+		///// <summary>
+		///// 外键到位置
+		///// </summary>
+		///// undefined
+		//public Guid PositionId { get; set; }
 
 		/// <summary>
 		/// 消失时间：yyyy-MM-dd hh:mm:ss
@@ -68,6 +69,10 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// 细胞子类：外键到细胞系
 		/// </summary>
 		//private int CellID;
+		public Guid CellId { get; set; }
+
+		[ForeignKey("CellId")]
+		public Cell Cell { get; set; }
 
 		/// <summary>
 		/// 基因组子类：外键到基因组
@@ -89,8 +94,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// </summary>
 		//private int RNAID;
 
-		[ForeignKey("PositionId")]
-		public Position Position { get; set; }
+		//[ForeignKey("PositionId")]
+		//public Position Position { get; set; }
 
 		/// <summary>
 		/// 来源任务：外键到任务
@@ -105,5 +110,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public virtual ICollection<TaskSample> Tasks { get; set; }
 
 		public virtual ICollection<SampleDosage> SampleDosages { get; set; }
+
+		public virtual ICollection<SamplePosition> Positions { get; set; }
 	}
 }
