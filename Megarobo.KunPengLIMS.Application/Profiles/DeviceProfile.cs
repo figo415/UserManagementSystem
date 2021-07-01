@@ -19,9 +19,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()))
                 .ForMember(d => d.CreatedTime, opt => opt.MapFrom(s => s.CreatedAt));
 
-            CreateMap<DeviceCreationDto,Device>()
+            CreateMap<DeviceCreationDto, Device>()
                 .ForMember(d => d.PurchaseFrom, opt => opt.MapFrom(s => new Link() { Name = s.PurchaseFromName, Url = s.PurchaseFromUrl }))
-                .ForMember(d => d.Price, opt => opt.MapFrom<DevicePriceResolver>());
+                //.ForMember(d => d.Price, opt => opt.MapFrom<DevicePriceResolver>());
+                .ForMember(d => d.Price, opt => opt.MapFrom(s => new Price() { Unit = s.PurchasePrice }));
 
             CreateMap<DeviceUpdateDto, Device>();
         }

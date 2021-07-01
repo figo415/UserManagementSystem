@@ -13,9 +13,11 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             CreateMap<Species, SpeciesDto>();
 
-            CreateMap<SpeciesCreationDto, Species>();
+            CreateMap<SpeciesCreationDto, Species>()
+                .ForMember(d => d.SpeciesId, opt => opt.MapFrom(s => new Link() { Name = s.Name, Url = s.Url }));
 
-            CreateMap<SpeciesUpdateDto, Species>();
+            CreateMap<SpeciesUpdateDto, Species>()
+                .ForMember(d => d.SpeciesId, opt => opt.MapFrom(s => new Link() { Name = s.Name, Url = s.Url }));
         }
     }
 }

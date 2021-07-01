@@ -13,6 +13,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string LatinName { get; set; }
 
-        public Link SpeciesId { get; set; }
+        public string Name { get; set; }
+
+        public string Url { get; set; }
     }
 }

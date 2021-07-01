@@ -17,6 +17,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         [Required(ErrorMessage ="请提供拉丁文")]
         public string LatinName { get; set; }
 
-        public Link SpeciesId { get; set; }
+        public string Name { get; set; }
+
+        public string Url { get; set; }
     }
 }
