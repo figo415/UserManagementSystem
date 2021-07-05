@@ -38,7 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<CellDtoList>>> GetCells([FromQuery] CellQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Cell: {0}", parameters);
+            var pageddtos = await _service.GetCellsByPage(parameters);
+            var list = new CellDtoList(pageddtos);
+            return ApiResult<CellDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -49,7 +52,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiStringResult>> CreateCell(CellCreationDto creationDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.InsertCell(creationDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -61,7 +76,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{cellId}")]
         public async Task<ActionResult<ApiStringResult>> UpdateCell(Guid cellId, CellUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateCell(cellId, updateDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -72,7 +99,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("deletemulti")]
         public async Task<ActionResult<ApiStringResult>> DeleteCell(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.DeleteCells(dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
     }
 }

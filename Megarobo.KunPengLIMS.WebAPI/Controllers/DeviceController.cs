@@ -38,7 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<DeviceDtoList>>> GetDevices([FromQuery] DeviceQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Device: {0}", parameters);
+            var pageddtos = await _service.GetDevicesByPage(parameters);
+            var list = new DeviceDtoList(pageddtos);
+            return ApiResult<DeviceDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -49,7 +52,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiStringResult>> CreateDevice(DeviceCreationDto creationDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.InsertDevice(creationDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -61,7 +76,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{deviceId}")]
         public async Task<ActionResult<ApiStringResult>> UpdateDevice(Guid deviceId, DeviceUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateDevice(deviceId, updateDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -72,7 +99,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("deletemulti")]
         public async Task<ActionResult<ApiStringResult>> DeleteSpecies(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.DeleteDevices(dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
     }
 }

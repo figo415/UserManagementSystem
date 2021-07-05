@@ -38,7 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<SpeciesDtoList>>> GetSpecies([FromQuery] SpeciesQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Species: {0}", parameters);
+            var pageddtos = await _service.GetSpeciesByPage(parameters);
+            var list = new SpeciesDtoList(pageddtos);
+            return ApiResult<SpeciesDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -49,7 +52,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiStringResult>> CreateSpecies(SpeciesCreationDto creationDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.InsertSpecies(creationDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -61,7 +76,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{speciesId}")]
         public async Task<ActionResult<ApiStringResult>> UpdateSpecies(Guid speciesId, SpeciesUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateSpecies(speciesId, updateDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -72,7 +99,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("deletemulti")]
         public async Task<ActionResult<ApiStringResult>> DeleteSpecies(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.DeleteSpecies(dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
     }
 }

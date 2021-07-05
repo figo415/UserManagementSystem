@@ -15,5 +15,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name={0}, TissueType={1}, CellLineType={2}, StartDate={3}, EndDate={4}", Name, TissueType, CellLineType, StartDate, EndDate);
+        }
     }
 }

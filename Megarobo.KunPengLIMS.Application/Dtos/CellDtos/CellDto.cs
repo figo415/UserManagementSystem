@@ -12,6 +12,9 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Name { get; set; }
 
+        /// <summary>
+        /// 来源物种
+        /// </summary>
         public string OriginalSpecies { get; set; }
 
         public string TissueType { get; set; }

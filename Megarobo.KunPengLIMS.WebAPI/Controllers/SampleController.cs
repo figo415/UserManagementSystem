@@ -38,7 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<SampleDtoList>>> GetSamples([FromQuery]SampleQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Sample: {0}", parameters);
+            var pageddtos = await _service.GetSamplesByPage(parameters);
+            var list = new SampleDtoList(pageddtos);
+            return ApiResult<SampleDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -49,7 +52,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiStringResult>> CreateSample(SampleCreationDto creationDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.InsertSample(creationDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -61,7 +76,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{sampleId}")]
         public async Task<ActionResult<ApiStringResult>> UpdateSpecies(Guid sampleId, SampleUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.UpdateSample(sampleId, updateDto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -72,7 +99,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("deletemulti")]
         public async Task<ActionResult<ApiStringResult>> DeleteSample(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.DeleteSamples(dto);
+                if (result)
+                {
+                    return ApiStringResult.Succeed();
+                }
+                return ApiStringResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return ApiStringResult.Error(ex.Message);
+            }
         }
     }
 }
