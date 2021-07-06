@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string Barcode { get; set; }
 
-		public DateTime CreatedTime { get; set; }
+		public DateTime CreateTime { get; set; }
 
 		public DateTime LastModifiedTime { get; set; }
 

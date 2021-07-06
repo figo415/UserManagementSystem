@@ -29,8 +29,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<DepartmentDto>> GetDepartmentsByPage(DepartmentQueryParameters parameters)
         {
             var pagedDepartments = await _repoWrapper.DepartmentRepo.GetDepartmentsByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<DepartmentDto>>(pagedDepartments);
-            return new PagedList<DepartmentDto>(pagedDtos.ToList(), pagedDepartments.TotalCount, pagedDepartments.CurrentPage, pagedDepartments.PageSize);
+            var pagedDtos = _mapper.Map<List<DepartmentDto>>(pagedDepartments);
+            return new PagedList<DepartmentDto>(pagedDtos, pagedDepartments.TotalCount, pagedDepartments.CurrentPage, pagedDepartments.PageSize);
         }
         
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentTree(DepartmentQueryParameters parameters)

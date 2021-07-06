@@ -28,6 +28,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string Supplier { get; set; }
 
-		public DateTime CreatedTime { get; set; }
+		public DateTime CreateTime { get; set; }
 	}
 }

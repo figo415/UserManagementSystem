@@ -27,8 +27,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<SampleDto>> GetSamplesByPage(SampleQueryParameters parameters)
         {
             var pagedSamples = await _repoWrapper.SampleRepo.GetSamplesByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<SampleDto>>(pagedSamples);
-            return new PagedList<SampleDto>(pagedDtos.ToList(), pagedSamples.TotalCount, pagedSamples.CurrentPage, pagedSamples.PageSize);
+            var pagedDtos = _mapper.Map<List<SampleDto>>(pagedSamples);
+            return new PagedList<SampleDto>(pagedDtos, pagedSamples.TotalCount, pagedSamples.CurrentPage, pagedSamples.PageSize);
         }
 
         public async Task<bool> InsertSample(SampleCreationDto dto)

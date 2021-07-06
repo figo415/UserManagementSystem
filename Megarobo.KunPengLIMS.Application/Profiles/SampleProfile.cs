@@ -16,7 +16,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.Thickness, opt => opt.MapFrom(s => s.Thickness.ToString()))
                 .ForMember(d => d.Quality, opt => opt.MapFrom(s => s.Quality.ToString()))
                 //.ForMember(d=>d.Position)
-                .ForMember(d => d.CreatedTime, opt => opt.MapFrom(s => s.CreatedAt))
+                .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()));
 
             CreateMap<SampleCreationDto, Sample>()

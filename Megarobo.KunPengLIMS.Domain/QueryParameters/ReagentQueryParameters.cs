@@ -13,5 +13,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name={0}, Type={1}, StartDate={2}, EndDate={3}", Name, Type, StartDate, EndDate);
+        }
     }
 }

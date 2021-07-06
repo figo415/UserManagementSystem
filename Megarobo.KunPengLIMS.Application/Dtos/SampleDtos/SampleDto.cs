@@ -24,7 +24,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string Position { get; set; }
 
-		public DateTime CreatedTime { get; set; }
+		public DateTime CreateTime { get; set; }
 
 		public DateTime DeletedTime { get; set; }
 

@@ -27,8 +27,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<DeviceDto>> GetDevicesByPage(DeviceQueryParameters parameters)
         {
             var pagedDevices = await _repoWrapper.DeviceRepo.GetDevicesByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<DeviceDto>>(pagedDevices);
-            return new PagedList<DeviceDto>(pagedDtos.ToList(), pagedDevices.TotalCount, pagedDevices.CurrentPage, pagedDevices.PageSize);
+            var pagedDtos = _mapper.Map<List<DeviceDto>>(pagedDevices);
+            return new PagedList<DeviceDto>(pagedDtos, pagedDevices.TotalCount, pagedDevices.CurrentPage, pagedDevices.PageSize);
         }
 
         public async Task<bool> InsertDevice(DeviceCreationDto dto)

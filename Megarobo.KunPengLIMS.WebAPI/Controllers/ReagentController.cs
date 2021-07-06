@@ -38,7 +38,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResult<ReagentDtoList>>> GetReagents([FromQuery] ReagentQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Query string for Labware: {0}", parameters);
+            var pageddtos = await _service.GetReagents(parameters);
+            var list = new ReagentDtoList(pageddtos);
+            return ApiResult<ReagentDtoList>.HasData(list, pageddtos.TotalCount);
         }
     }
 }

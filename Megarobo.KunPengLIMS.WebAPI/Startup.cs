@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +15,17 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
-using Megarobo.KunPengLIMS.Infrastructure;
 using System.Runtime.InteropServices;
-using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
-using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
+using Megarobo.KunPengLIMS.WebAPI.Converters;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
-using Megarobo.KunPengLIMS.WebAPI.Converters;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
+using Megarobo.KunPengLIMS.Infrastructure;
+using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
+using Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations;
+using Megarobo.KunPengLIMS.Infrastructure.Utility;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -61,6 +64,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             #endregion
 
+            #region AppService
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IDepartmentAppService, DepartmentAppService>();
             services.AddScoped<ISkillAppService, SkillAppService>();
@@ -68,12 +72,25 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddScoped<IMenuAppService, MenuAppService>();
             services.AddScoped<IDictItemAppService, DictItemAppService>();
             services.AddScoped<ILogItemAppService, LogItemAppService>();
+            services.AddScoped<ISpeciesAppService, SpeciesAppService>();
+            services.AddScoped<ICellAppService, CellAppService>();
+            services.AddScoped<IDeviceAppService, DeviceAppService>();
+            services.AddScoped<ILabwareAppService, LabwareAppService>();
+            services.AddScoped<IReagentAppService, ReagentAppService>();
+            services.AddScoped<IPositionAppService, PositionAppService>();
+            services.AddScoped<ISampleAppService, SampleAppService>();
+            #endregion
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddScoped<LogFilterAttribute>();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
+
+            var baseUrl = Configuration.GetSection("InventoryBaseUrl").Value;
+            ApiHelper.SetBaseUrl(baseUrl);
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<ILocationService, LocationService>();
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

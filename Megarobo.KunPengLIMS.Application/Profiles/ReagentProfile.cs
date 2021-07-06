@@ -18,7 +18,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.Position, opt => opt.MapFrom(s => s.Positions.Any() ? string.Join(',', s.Positions.Select(p => p.Position.Name).ToArray()) : string.Empty))
                 .ForMember(d => d.AvailableQuality, opt => opt.MapFrom(s => s.AvailableQuality.ToString()))
                 .ForMember(d => d.AvailableCubage, opt => opt.MapFrom(s => s.AvailableCubage.ToString()))
-                .ForMember(d => d.CreatedTime, opt => opt.MapFrom(s => s.CreatedAt))
+                .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
                 .ForMember(d => d.LastModifiedTime, opt => opt.MapFrom(s => s.LastModifiedAt))
                 .ForMember(d => d.PurchaseFromName, opt => opt.MapFrom(s => s.PurchaseFrom.Name))
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.PurchaseFrom.Url))
