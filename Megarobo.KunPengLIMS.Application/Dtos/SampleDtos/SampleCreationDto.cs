@@ -7,6 +7,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 {
     public class SampleCreationDto
     {
+		public bool IsRealSample { get; set; }
+
 		[Required(ErrorMessage ="样本名称不能为空")]
 		public string Name { get; set; }
 
@@ -14,25 +16,27 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 		public string Type { get; set; }
 
 		[Required(ErrorMessage = "请输入体积")]
-		public string Cubage { get; set; }
+		public string CubageValue { get; set; }
 
 		[Required(ErrorMessage ="请选择体积单位")]
 		public string CubageUnit { get; set; }
 
 		[Required(ErrorMessage = "请输入浓度")]
-		public string Thickness { get; set; }
+		public string ThicknessValue { get; set; }
 
 		[Required(ErrorMessage = "请选择浓度单位")]
 		public string ThicknessUnit { get; set; }
 
 		[Required(ErrorMessage = "请输入质量")]
-		public string Quality { get; set; }
+		public string QualityValue { get; set; }
 
 		[Required(ErrorMessage = "请选择质量单位")]
 		public string QualityUnit { get; set; }
 
 		[Required(ErrorMessage ="请选择供应商")]
 		public string Supplier { get; set; }
+
+		public SourceTask SourceTask { get; set; }
 
 		public string PurchaseFromName { get; set; }
 
@@ -44,8 +48,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string Description { get; set; }
 
-		public List<Guid> PositionIds { get; set; }
+		public List<LocationDto> Positions { get; set; }
 
-		public List<Guid> CellIds { get; set; }
+		public List<SampleCellDto> Cells { get; set; }
 	}
 }

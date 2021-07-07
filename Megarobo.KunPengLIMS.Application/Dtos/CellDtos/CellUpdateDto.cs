@@ -40,6 +40,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Remarks { get; set; }
 
-        public Guid SpeciesId { get; set; }
+        public List<SpeciesDto> SpeciesList { get; set; }
     }
 }

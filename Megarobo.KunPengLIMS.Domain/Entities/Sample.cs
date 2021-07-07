@@ -66,6 +66,11 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Status { get; set; }
 
 		/// <summary>
+		/// 真实样本或者虚拟样本
+		/// </summary>
+		public bool IsRealSample { get; set; }
+
+		/// <summary>
 		/// 细胞子类：外键到细胞系
 		/// </summary>
 		//private int CellID;

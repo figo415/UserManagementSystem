@@ -37,6 +37,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             cell.Id = Guid.NewGuid();
             cell.CreatedAt = DateTime.Now;
             cell.IsDeleted = false;
+            if(dto.SpeciesList.Any())
+            {
+                cell.SpeciesId = dto.SpeciesList[0].Id;
+            }
             _repoWrapper.CellRepo.Create(cell);
             var result = await _repoWrapper.CellRepo.SaveAsync();
             return result;
@@ -51,6 +55,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             _mapper.Map(dto, cell, typeof(CellUpdateDto), typeof(Cell));
             cell.LastModifiedAt = DateTime.Now;
+            if(dto.SpeciesList.Any())
+            {
+                cell.SpeciesId = dto.SpeciesList[0].Id;
+            }
+            else
+            {
+                cell.SpeciesId = Guid.Empty;
+            }
             _repoWrapper.CellRepo.Update(cell);
             var result = await _repoWrapper.CellRepo.SaveAsync();
             return result;

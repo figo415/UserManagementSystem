@@ -10,6 +10,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Type { get; set; }
 
-        public List<Guid> PositionIds { get; set; }
+        public List<LocationDto> Positions { get; set; }
     }
 }

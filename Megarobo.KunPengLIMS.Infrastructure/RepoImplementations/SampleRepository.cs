@@ -21,7 +21,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<PagedList<Sample>> GetSamplesByPage(SampleQueryParameters parameters)
         {
-            IQueryable<Sample> queryable = DbContext.Set<Sample>();
+            IQueryable<Sample> queryable = DbContext.Set<Sample>().Include(s => s.Cell);
             var predicate = BuildPredicate(parameters);
             queryable = queryable.Where(predicate);
             return PagedList<Sample>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);

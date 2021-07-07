@@ -31,12 +31,23 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<SampleDto>(pagedDtos, pagedSamples.TotalCount, pagedSamples.CurrentPage, pagedSamples.PageSize);
         }
 
+        public async Task<SampleDto> GetSample(Guid sampleId)
+        {
+            var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
+            var dto = _mapper.Map<SampleDto>(sample);
+            return dto;
+        }
+
         public async Task<bool> InsertSample(SampleCreationDto dto)
         {
             var sample = _mapper.Map<Sample>(dto);
             sample.Id = Guid.NewGuid();
             sample.CreatedAt = DateTime.Now;
             sample.IsDeleted = false;
+            if(dto.Cells.Any())
+            {
+                sample.CellId = dto.Cells[0].Id;
+            }
             _repoWrapper.SampleRepo.Create(sample);
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             return result;
@@ -51,6 +62,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             _mapper.Map(dto, sample, typeof(SampleUpdateDto), typeof(Sample));
             sample.LastModifiedAt = DateTime.Now;
+            if (dto.Cells.Any())
+            {
+                sample.CellId = dto.Cells[0].Id;
+            }
             _repoWrapper.SampleRepo.Update(sample);
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             return result;

@@ -44,5 +44,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public DateTime PurchaseDate { get; set; }
 
         public string Remarks { get; set; }
+
+        public List<SpeciesDto> SpeciesList { get; set; }
     }
 }

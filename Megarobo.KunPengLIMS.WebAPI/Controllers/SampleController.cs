@@ -45,6 +45,18 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据主键获取样本
+        /// </summary>
+        /// <param name="sampleId">Guid</param>
+        /// <returns>UserDto</returns>
+        [HttpGet("{sampleId}")]
+        public async Task<ActionResult<ApiResult<SampleDto>>> GetSample(Guid sampleId)
+        {
+            var sampledto = await _service.GetSample(sampleId);
+            return ApiResult<SampleDto>.HasData(sampledto, 1);
+        }
+
+        /// <summary>
         /// 添加样本
         /// </summary>
         /// <param name="creationDto">SampleCreationDto</param>

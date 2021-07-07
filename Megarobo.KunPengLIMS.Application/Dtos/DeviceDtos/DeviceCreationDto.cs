@@ -25,6 +25,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public DateTime PurchaseDate { get; set; }
 
-		public List<Guid> PositionIds { get; set; }
+		public List<LocationDto> Positions { get; set; }
 	}
 }

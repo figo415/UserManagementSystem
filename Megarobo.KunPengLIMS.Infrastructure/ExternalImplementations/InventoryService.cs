@@ -10,10 +10,17 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
 {
     public class InventoryService:IInventoryService
     {
+        private readonly ApiHelper _apiHelper;
+
+        public InventoryService(ApiHelper apiHelper)
+        {
+            _apiHelper = apiHelper;
+        }
+
         public async Task<InventoryData> GetInventory(InventoryParameters parameters)
         {
-            var tokenresponse = await ApiHelper.GetToken();
-            var inventory = ApiHelper.PostWebApi<Inventory>("/api/inventory/getInventoryList", tokenresponse.access_token, parameters);
+            var tokenresponse = await _apiHelper.GetToken();
+            var inventory = _apiHelper.PostWebApi<Inventory>("/api/inventory/getInventoryList", tokenresponse.access_token, parameters);
             return inventory.data;
         }
     }

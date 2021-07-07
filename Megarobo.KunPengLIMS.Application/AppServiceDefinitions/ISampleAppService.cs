@@ -12,6 +12,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         Task<PagedList<SampleDto>> GetSamplesByPage(SampleQueryParameters parameters);
 
+        Task<SampleDto> GetSample(Guid sampleId);
+
         Task<bool> InsertSample(SampleCreationDto dto);
 
         Task<bool> UpdateSample(Guid sampleId, SampleUpdateDto dto);

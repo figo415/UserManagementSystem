@@ -21,6 +21,7 @@ using Megarobo.KunPengLIMS.WebAPI.Converters;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Domain.Externals;
 using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure;
 using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
@@ -87,10 +88,12 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
-            var baseUrl = Configuration.GetSection("InventoryBaseUrl").Value;
-            ApiHelper.SetBaseUrl(baseUrl);
+            #region InventoryAPI
+            services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
+            services.AddScoped<ApiHelper>();
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<ILocationService, LocationService>();
+            #endregion
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

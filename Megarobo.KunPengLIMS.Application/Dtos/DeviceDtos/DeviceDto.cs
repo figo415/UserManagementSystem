@@ -12,7 +12,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string Type { get; set; }
 
-		public string Position { get; set; }
+		public string PositionText { get; set; }
 
 		public string ModelNumber { get; set; }
 
@@ -29,5 +29,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 		public string Supplier { get; set; }
 
 		public DateTime CreateTime { get; set; }
+
+		public List<LocationDto> Positions { get; set; }
 	}
 }
