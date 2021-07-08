@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Application.Dtos;
@@ -24,8 +25,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var locationData = await _service.GetLocations();
             var list = locationData.locationList;
             var dtos = _mapper.Map<List<LocationDto>>(list);
-            return dtos;
+            var tree = GetTree(0, dtos);
+            return tree;
         }
-        
+
+        private List<LocationDto> GetTree(int parentId, IEnumerable<LocationDto> dtos)
+        {
+            var tree = dtos.Where(s => s.pid == parentId).ToList();
+            foreach (var item in tree)
+            {
+                item.Children = GetTree(item.pid, dtos);
+            }
+            return tree;
+        }
     }
 }

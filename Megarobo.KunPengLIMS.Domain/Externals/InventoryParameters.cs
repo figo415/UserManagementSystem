@@ -15,6 +15,11 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
             sort = new Sort();
         }
 
+        /// <summary>
+        /// 0是试剂，1是耗材
+        /// </summary>
+        public int IsReagent { get; set; }
+
         public int labId { get; set; }
 
         public int page { get; set; }
@@ -22,6 +27,8 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         public int pageSize { get; set; }
 
         public string itemName { get; set; }
+
+        public DateTime[] AddDates { get; set; }
 
         public Sort sort { get; set; }
     }

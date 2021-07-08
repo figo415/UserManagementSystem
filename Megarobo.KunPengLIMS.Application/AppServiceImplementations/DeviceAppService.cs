@@ -33,6 +33,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertDevice(DeviceCreationDto dto)
         {
+            var existed = await _repoWrapper.DeviceRepo.GetDeviceByName(dto.Name);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Device with Name=" + dto.Name + " is already existed");
+            }
             var device = _mapper.Map<Device>(dto);
             device.Id = Guid.NewGuid();
             device.CreatedAt = DateTime.Now;
@@ -48,6 +53,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (device == null)
             {
                 throw new NotExistedException("Device with Guid=" + deviceId + " is not existed");
+            }
+            if(dto.Name!=device.Name)
+            {
+                var existed = await _repoWrapper.DeviceRepo.GetDeviceByName(dto.Name);
+                if (existed.Any())
+                {
+                    throw new AlreadyExistedException("Device with Name=" + dto.Name + " is already existed");
+                }
             }
             _mapper.Map(dto, device, typeof(DeviceUpdateDto), typeof(Device));
             device.LastModifiedAt = DateTime.Now;

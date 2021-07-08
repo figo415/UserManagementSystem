@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface ICellRepository:IRepositoryBase<Cell>,IRepositoryBase2<Cell,Guid>
     {
         System.Threading.Tasks.Task<PagedList<Cell>> GetCellsByPage(CellQueryParameters parameters);
+
+        System.Threading.Tasks.Task<IEnumerable<Cell>> GetCellsByName(string cellName);
     }
 }

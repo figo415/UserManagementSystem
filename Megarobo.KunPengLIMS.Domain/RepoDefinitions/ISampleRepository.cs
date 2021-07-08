@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<PagedList<Sample>> GetSamplesByPage(SampleQueryParameters parameters);
 
         System.Threading.Tasks.Task<Sample> GetSampleWithCell(Guid sampleId);
+
+        System.Threading.Tasks.Task<IEnumerable<Sample>> GetSampleByName(string sampleName);
     }
 }

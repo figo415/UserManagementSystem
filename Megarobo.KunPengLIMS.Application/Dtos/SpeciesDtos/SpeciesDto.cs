@@ -13,5 +13,9 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public string EnglishName { get; set; }
 
         public string LatinName { get; set; }
+
+        public string Name { get; set; }
+
+        public string Url { get; set; }
     }
 }

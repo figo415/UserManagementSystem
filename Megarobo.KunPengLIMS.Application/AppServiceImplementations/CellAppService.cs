@@ -33,6 +33,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
         
         public async Task<bool> InsertCell(CellCreationDto dto)
         {
+            var existed = await _repoWrapper.CellRepo.GetCellsByName(dto.Name);
+            if(existed.Any())
+            {
+                throw new AlreadyExistedException("Cell with Name=" + dto.Name + " is already existed");
+            }
             var cell = _mapper.Map<Cell>(dto);
             cell.Id = Guid.NewGuid();
             cell.CreatedAt = DateTime.Now;
@@ -52,6 +57,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (cell == null)
             {
                 throw new NotExistedException("Cell with Guid=" + cellId + " is not existed");
+            }
+            if(dto.Name!=cell.Name)
+            {
+                var existed = await _repoWrapper.CellRepo.GetCellsByName(dto.Name);
+                if (existed.Any())
+                {
+                    throw new AlreadyExistedException("Cell with Name=" + dto.Name + " is already existed");
+                }
             }
             _mapper.Map(dto, cell, typeof(CellUpdateDto), typeof(Cell));
             cell.LastModifiedAt = DateTime.Now;

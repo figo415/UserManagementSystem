@@ -33,6 +33,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertSpecies(SpeciesCreationDto dto)
         {
+            var existed = await _repoWrapper.SpeciesRepo.GetSpeciesByName(dto.ChineseName);
+            if(existed.Any())
+            {
+                throw new AlreadyExistedException("Species with ChineseName=" + dto.ChineseName + " is already existed");
+            }
             var species = _mapper.Map<Species>(dto);
             species.Id = Guid.NewGuid();
             species.CreatedAt = DateTime.Now;
@@ -48,6 +53,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (species == null)
             {
                 throw new NotExistedException("Species with Guid=" + speciesId + " is not existed");
+            }
+            if(dto.ChineseName!=species.ChineseName)
+            {
+                var existed = await _repoWrapper.SpeciesRepo.GetSpeciesByName(dto.ChineseName);
+                if (existed.Any())
+                {
+                    throw new AlreadyExistedException("Species with ChineseName=" + dto.ChineseName + " is already existed");
+                }
             }
             _mapper.Map(dto, species, typeof(SpeciesUpdateDto), typeof(Species));
             species.LastModifiedAt = DateTime.Now;

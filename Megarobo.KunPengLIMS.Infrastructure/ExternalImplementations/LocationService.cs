@@ -22,7 +22,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             var tokenresponse = await _apiHelper.GetToken();
             var paras = new Dictionary<string, object>();
             paras.Add("labId", 1);
-            var locationroot = _apiHelper.GetWebApi<LocationRoot>("/api/location/getLocationList", tokenresponse.access_token, paras);
+            var locationroot = _apiHelper.GetWebApi<LocationRoot>("/api/location/getLocationList/show", tokenresponse.access_token, paras);
             return locationroot.data;
         }
     }

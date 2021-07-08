@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Species> queryable = DbContext.Set<Species>();
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(s => s.CreatedAt);
             return PagedList<Species>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
@@ -63,6 +63,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             predicate = predicate.And(s => !s.IsDeleted);
             return predicate;
+        }
+
+        public System.Threading.Tasks.Task<IEnumerable<Species>> GetSpeciesByName(string chineseName)
+        {
+            return GetByConditionAsync(s => s.ChineseName == chineseName && !s.IsDeleted);
         }
     }
 }

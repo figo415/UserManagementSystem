@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Sample> queryable = DbContext.Set<Sample>().Include(s => s.Cell);
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(s => s.CreatedAt);
             return PagedList<Sample>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
@@ -48,6 +48,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public System.Threading.Tasks.Task<Sample> GetSampleWithCell(Guid sampleId)
         {
             return System.Threading.Tasks.Task.FromResult(DbContext.Set<Sample>().Include(s => s.Cell).Where(s => s.Id == sampleId).SingleOrDefault());
+        }
+
+        public System.Threading.Tasks.Task<IEnumerable<Sample>> GetSampleByName(string sampleName)
+        {
+            return GetByConditionAsync(s => s.Name == sampleName && !s.IsDeleted);
         }
     }
 }

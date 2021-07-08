@@ -41,6 +41,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertSample(SampleCreationDto dto)
         {
+            var existed = await _repoWrapper.SampleRepo.GetSampleByName(dto.Name);
+            if(existed.Any())
+            {
+                throw new AlreadyExistedException("Sample with Name=" + dto.Name + " is already existed");
+            }
             var sample = _mapper.Map<Sample>(dto);
             sample.Id = Guid.NewGuid();
             sample.CreatedAt = DateTime.Now;
@@ -60,6 +65,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (sample == null)
             {
                 throw new NotExistedException("Sample with Guid=" + sampleId + " is not existed");
+            }
+            if(dto.Name!=sample.Name)
+            {
+                var existed = await _repoWrapper.SampleRepo.GetSampleByName(dto.Name);
+                if (existed.Any())
+                {
+                    throw new AlreadyExistedException("Sample with Name=" + dto.Name + " is already existed");
+                }
             }
             _mapper.Map(dto, sample, typeof(SampleUpdateDto), typeof(Sample));
             sample.LastModifiedAt = DateTime.Now;

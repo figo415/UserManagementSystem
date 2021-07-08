@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Device> queryable = DbContext.Set<Device>();
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(d => d.CreatedAt);
             return PagedList<Device>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
@@ -59,6 +59,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             predicate = predicate.And(d => !d.IsDeleted);
             return predicate;
+        }
+
+        public System.Threading.Tasks.Task<IEnumerable<Device>> GetDeviceByName(string deviceName)
+        {
+            return GetByConditionAsync(d => d.Name == deviceName && !d.IsDeleted);
         }
     }
 }
