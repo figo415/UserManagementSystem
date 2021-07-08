@@ -33,7 +33,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<SampleDto> GetSample(Guid sampleId)
         {
-            var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
+            //var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
+            var sample = await _repoWrapper.SampleRepo.GetSampleWithCell(sampleId);
             var dto = _mapper.Map<SampleDto>(sample);
             return dto;
         }

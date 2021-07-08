@@ -67,7 +67,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             {
                 if (!rspse.Content.Contains("message")) //{"code":50000,"message":" 用户不存在，请重新登录"}
                 {
-                    result = JsonConvert.DeserializeObject<T>(rspse.Content);
+                    result = JsonConvert.DeserializeObject<T>(rspse.Content, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
                 }
             }
             var log = string.Format("{0}: POST {1}{2}", (int)rspse.StatusCode, _info.InventoryBaseUrl, resource);

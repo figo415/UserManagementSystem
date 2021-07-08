@@ -6,6 +6,9 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 {
     public class InventoryData
     {
+        /// <summary>
+        /// 数据总数
+        /// </summary>
         public int total { get; set; }
 
         public List<InventoryListItem> inventoryList { get; set; }

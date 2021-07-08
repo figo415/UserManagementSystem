@@ -44,5 +44,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(s => !s.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<Sample> GetSampleWithCell(Guid sampleId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Sample>().Include(s => s.Cell).Where(s => s.Id == sampleId).SingleOrDefault());
+        }
     }
 }

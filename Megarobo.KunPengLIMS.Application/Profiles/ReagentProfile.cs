@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using AutoMapper;
-using Megarobo.KunPengLIMS.Domain.Entities;
 using Megarobo.KunPengLIMS.Application.Dtos;
+using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Externals;
 
 namespace Megarobo.KunPengLIMS.Application.Profiles
 {
@@ -23,6 +24,22 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.PurchaseFromName, opt => opt.MapFrom(s => s.PurchaseFrom.Name))
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.PurchaseFrom.Url))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()));
+
+            CreateMap<InventoryListItem, ReagentDto>()
+                .ForMember(d => d.Id, opt => opt.Ignore())
+                .ForMember(d => d.Name, opt => opt.MapFrom(s => s.itemName))
+                .ForMember(d => d.Type, opt => opt.MapFrom(s => s.typeName))
+                .ForMember(d => d.ArticleNumber, opt => opt.MapFrom(s => s.articleNum))
+                .ForMember(d => d.Brand, opt => opt.MapFrom(s => s.brand))
+                .ForMember(d => d.Quality, opt => opt.MapFrom(s => s.number+s.numUnit))
+                .ForMember(d => d.Position, opt => opt.MapFrom(s => s.locationString))
+                .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => Convert.ToDateTime(s.addDate)))
+                .ForMember(d => d.LastModifiedTime, opt => opt.MapFrom(s => Convert.ToDateTime(s.updateDate)))
+                .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.url))
+                .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.price + s.priceUnit))
+                .ForMember(d => d.PurchaseDate, opt => opt.MapFrom(s => s.arrivalDate))
+                .ForMember(d => d.Supplier, opt => opt.MapFrom(s => s.vendor))
+                .ForMember(d => d.Remarks, opt => opt.MapFrom(s => s.inventoryNote));
         }
     }
 }

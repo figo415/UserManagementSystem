@@ -22,5 +22,9 @@ ENV DB_PORT="5432"
 ENV DB_USERNAME="postgres"
 ENV DB_PASSWORD="megarobo"
 ENV DB_NAME="limsdb"
+ENV INVENTORY_BASEURL="https://api.lims.test.aws.megarobo.tech"
+ENV INVENTORY_AUTHURL="https://keycloak.dev.aws.megarobo.tech/auth/realms/lims-test/protocol/openid-connect/token"
+ENV INVENTORY_USERNAME="admin@admin.com"
+ENV INVENTORY_PASSWORD="123456"
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Megarobo.KunPengLIMS.WebAPI.dll"]

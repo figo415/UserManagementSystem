@@ -89,7 +89,18 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
             #region InventoryAPI
-            services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
+            var inventoryBaseUrl = Environment.GetEnvironmentVariable("INVENTORY_BASEURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryAuthUrl = Environment.GetEnvironmentVariable("INVENTORY_AUTHURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryUsername = Environment.GetEnvironmentVariable("INVENTORY_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryPassword = Environment.GetEnvironmentVariable("INVENTORY_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(inventoryBaseUrl) && string.IsNullOrEmpty(inventoryAuthUrl) && string.IsNullOrEmpty(inventoryUsername) && string.IsNullOrEmpty(inventoryPassword))
+            {
+                services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
+            }
+            else
+            {
+                services.Configure<InventoryApiInfo>(i => { i.InventoryBaseUrl = inventoryBaseUrl; i.AuthUrl = inventoryAuthUrl; i.UserName = inventoryUsername; i.Password = inventoryPassword; i.ClientId = "web-ui"; i.GrantType = "password"; });
+            }
             services.AddScoped<ApiHelper>();
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<ILocationService, LocationService>();
