@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 
         public string label { get; set; }
 
-        public string boxId { get; set; }
+        public int? boxId { get; set; }
 
         public int pid { get; set; }
 
@@ -18,13 +18,15 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 
         public string name { get; set; }
 
-        public string boxCols { get; set; }
+        public List<LocationListItem> children { get; set; }
 
-        public string boxRows { get; set; }
+        public int? boxCols { get; set; }
+
+        public int? boxRows { get; set; }
 
         public string boxType { get; set; }
 
-        public List<string> selectedList { get; set; }
+        public string selectedList { get; set; }
 
         public List<BoxStoreItem> boxStore { get; set; }
 

@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public Price Price { get; set; }
 
-        public DateTime PurchaseDate { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
         public string Supplier { get; set; }
     }

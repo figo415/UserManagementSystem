@@ -16,7 +16,31 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
 
             CreateMap<BoxStoreItem, BoxStoreItemDto>();
 
-            CreateMap<LocationListItem, LocationDto>();
+            CreateMap<LocationListItem, LocationDto>()
+                .ForMember(d => d.selectedList, opt => opt.MapFrom<SelectedListResolver>());
         }
+    }
+}
+
+public class SelectedListResolver : IValueResolver<LocationListItem, LocationDto, List<string>>
+{
+    public List<string> Resolve(LocationListItem source, LocationDto destination, List<string> destMember, ResolutionContext context)
+    {
+        if(string.IsNullOrEmpty(source.selectedList))
+        {
+            return new List<string>();
+        }
+        var selectedText = source.selectedList.Substring(2, source.selectedList.Length - 4);
+        var ary = selectedText.Split("\",\"", StringSplitOptions.RemoveEmptyEntries);
+        var result = new List<string>();
+        for(var i=0; i<ary.Length; i++)
+        {
+            if(ary[i].Contains("\""))
+            {
+                ary[i] = ary[i].Replace("\"", "");
+            }
+            result.Add(ary[i]);
+        }
+        return result;
     }
 }

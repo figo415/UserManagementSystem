@@ -17,11 +17,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
+        private readonly ISpeciesAppService _speciesAppService;
 
-        public CellAppService(IRepositoryWrapper wrapper, IMapper mapper)
+        public CellAppService(IRepositoryWrapper wrapper, IMapper mapper, ISpeciesAppService speciesAppService)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;
+            _speciesAppService = speciesAppService;
         }
 
         public async Task<PagedList<CellDto>> GetCellsByPage(CellQueryParameters parameters)
@@ -46,6 +48,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 cell.SpeciesId = dto.SpeciesList[0].Id;
             }
+            var cnt = await _repoWrapper.CellRepo.GetCellCount();
+            cell.CellCode = "KPCL" + (cnt + 1).ToString().PadLeft(5, '0');
             _repoWrapper.CellRepo.Create(cell);
             var result = await _repoWrapper.CellRepo.SaveAsync();
             return result;
@@ -74,7 +78,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             else
             {
-                cell.SpeciesId = Guid.Empty;
+                cell.SpeciesId = null;
             }
             _repoWrapper.CellRepo.Update(cell);
             var result = await _repoWrapper.CellRepo.SaveAsync();

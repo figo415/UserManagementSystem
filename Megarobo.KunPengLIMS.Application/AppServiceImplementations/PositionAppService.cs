@@ -25,18 +25,26 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var locationData = await _service.GetLocations();
             var list = locationData.locationList;
             var dtos = _mapper.Map<List<LocationDto>>(list);
-            var tree = GetTree(0, dtos);
-            return tree;
+            foreach(var dto in dtos)
+            {
+                TraverseTree(dto);
+            }
+            return dtos;
         }
 
-        private List<LocationDto> GetTree(int parentId, IEnumerable<LocationDto> dtos)
+        private void TraverseTree(LocationDto root)
         {
-            var tree = dtos.Where(s => s.pid == parentId).ToList();
-            foreach (var item in tree)
+            if(root.children.Any())
             {
-                item.Children = GetTree(item.pid, dtos);
+                foreach(var node in root.children)
+                {
+                    TraverseTree(node);
+                }
             }
-            return tree;
+            else
+            {
+                root.children = null;
+            }
         }
     }
 }

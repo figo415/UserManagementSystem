@@ -12,7 +12,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         public CellProfile()
         {
             CreateMap<Cell, CellDto>()
-                .ForMember(d => d.OriginalSpecies, opt => opt.MapFrom(s => s.Species == null ? string.Empty : s.Species.ChineseName+" - "+s.Species.EnglishName+" - "+s.Species.LatinName))
+                .ForMember(d => d.OriginalSpecies, opt => opt.MapFrom(s => s.Species == null ? string.Empty : s.Species.ChineseName + " - " + s.Species.EnglishName + " - " + s.Species.LatinName))
                 .ForMember(d => d.PurchaseFromName, opt => opt.MapFrom(s => s.PurchaseFrom.Name))
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.PurchaseFrom.Url))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()))

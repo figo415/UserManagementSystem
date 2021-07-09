@@ -3,15 +3,17 @@ using System;
 using Megarobo.KunPengLIMS.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 {
     [DbContext(typeof(LimsDbContext))]
-    partial class LimsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210709034530_AddCellcode")]
+    partial class AddCellcode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("PurchaseDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Race")
@@ -155,7 +157,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("PurchaseDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Supplier")
@@ -268,7 +270,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("PurchaseDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Remarks")
@@ -706,7 +708,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("PurchaseDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Remarks")
@@ -828,7 +830,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<DateTime>("NextPhotoTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime?>("PurchaseDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Status")

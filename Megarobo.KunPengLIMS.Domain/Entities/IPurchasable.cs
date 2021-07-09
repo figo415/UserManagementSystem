@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// 购买日期：yyyy-MM-dd
 		/// </summary>
-		public DateTime PurchaseDate { get; set; }
+		public DateTime? PurchaseDate { get; set; }
 
 		/// <summary>
 		/// 供应商：ThermoFisher,全式金,诺维赞,碧云天,Gibco,Merck,invitrogen

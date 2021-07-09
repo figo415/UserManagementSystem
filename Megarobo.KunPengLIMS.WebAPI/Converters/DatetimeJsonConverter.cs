@@ -14,7 +14,9 @@ namespace Megarobo.KunPengLIMS.WebAPI.Converters
             if (reader.TokenType == JsonTokenType.String)
             {
                 if (DateTime.TryParse(reader.GetString(), out DateTime date))
+                {
                     return date;
+                }
             }
             return reader.GetDateTime();
         }

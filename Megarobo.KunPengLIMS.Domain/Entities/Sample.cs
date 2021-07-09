@@ -74,7 +74,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// 细胞子类：外键到细胞系
 		/// </summary>
 		//private int CellID;
-		public Guid CellId { get; set; }
+		public Guid? CellId { get; set; }
 
 		[ForeignKey("CellId")]
 		public Cell Cell { get; set; }

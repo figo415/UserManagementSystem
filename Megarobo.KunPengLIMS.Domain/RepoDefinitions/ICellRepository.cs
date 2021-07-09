@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<PagedList<Cell>> GetCellsByPage(CellQueryParameters parameters);
 
         System.Threading.Tasks.Task<IEnumerable<Cell>> GetCellsByName(string cellName);
+
+        System.Threading.Tasks.Task<int> GetCellCount();
     }
 }

@@ -52,7 +52,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string PurchasePrice { get; set; }
 
-		public DateTime PurchaseDate { get; set; }
+		public DateTime? PurchaseDate { get; set; }
 
 		public string Supplier { get; set; }
 

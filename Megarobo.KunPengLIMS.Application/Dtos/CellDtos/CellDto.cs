@@ -8,6 +8,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
     {
         public Guid Id { get; set; }
 
+        public string CellCode { get; set; }
+
         public string AtccId { get; set; }
 
         public string Name { get; set; }
@@ -41,7 +43,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string PurchasePrice { get; set; }
 
-        public DateTime PurchaseDate { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
         public string Remarks { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Megarobo.KunPengLIMS.Application.Dtos
 {
@@ -10,7 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string label { get; set; }
 
-        public string boxId { get; set; }
+        public int? boxId { get; set; }
 
         public int pid { get; set; }
 
@@ -18,9 +19,9 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string name { get; set; }
 
-        public string boxCols { get; set; }
+        public int? boxCols { get; set; }
 
-        public string boxRows { get; set; }
+        public int? boxRows { get; set; }
 
         public string boxType { get; set; }
 
@@ -30,6 +31,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string localInfo { get; set; }
 
-        public List<LocationDto> Children { get; set; }
+        [JsonProperty(NullValueHandling=NullValueHandling.Ignore)]
+        public List<LocationDto> children { get; set; }
     }
 }

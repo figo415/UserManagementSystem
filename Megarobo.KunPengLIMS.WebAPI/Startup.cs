@@ -44,7 +44,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
         {
             //services.AddControllers();
             services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>())
-                .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()));
+                .AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()); opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter()); }) ;
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));

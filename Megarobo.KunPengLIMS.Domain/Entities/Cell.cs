@@ -11,7 +11,12 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     public class Cell:PurchasableEntity
     {
         /// <summary>
-        /// 细胞名称：自动生成，KPCL前缀加上5位数字
+        /// 细胞编码：自动生成，KPCL前缀加上5位数字
+        /// </summary>
+        public string CellCode { get; set; }
+
+        /// <summary>
+        /// 细胞名称
         /// </summary>
         public string Name { get; set; }
 
@@ -64,7 +69,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public string AtccUrl { get; set; }
 
-        public Guid SpeciesId { get; set; }
+        public Guid? SpeciesId { get; set; }
 
         [ForeignKey("SpeciesId")]
         public Species Species { get; set; }

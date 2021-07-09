@@ -69,5 +69,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             return GetByConditionAsync(c => c.Name == cellName && !c.IsDeleted);
         }
+
+        public System.Threading.Tasks.Task<int> GetCellCount()
+        {
+            return DbContext.Set<Cell>().CountAsync();
+        }
     }
 }
