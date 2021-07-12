@@ -22,9 +22,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<IEnumerable<LocationDto>> GetPositions()
         {
-            var locationData = await _service.GetLocations();
-            var list = locationData.locationList;
-            var dtos = _mapper.Map<List<LocationDto>>(list);
+            var locationlist= await _service.GetLocations();
+            var dtos = _mapper.Map<List<LocationDto>>(locationlist);
             foreach(var dto in dtos)
             {
                 TraverseTree(dto);

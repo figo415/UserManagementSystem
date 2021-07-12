@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
-using Megarobo.KunPengLIMS.Domain.Entities;
-using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
+using Megarobo.KunPengLIMS.Application.Exceptions;
+using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Entities;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
-using Megarobo.KunPengLIMS.Application.Exceptions;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
+using Megarobo.KunPengLIMS.Domain.Externals;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -17,17 +19,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
+        private readonly ILocationService _locationService;
 
-        public SampleAppService(IRepositoryWrapper wrapper, IMapper mapper)
+        public SampleAppService(IRepositoryWrapper wrapper, IMapper mapper, ILocationService locationService)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;
+            _locationService = locationService;
         }
 
         public async Task<PagedList<SampleDto>> GetSamplesByPage(SampleQueryParameters parameters)
         {
             var pagedSamples = await _repoWrapper.SampleRepo.GetSamplesByPage(parameters);
             var pagedDtos = _mapper.Map<List<SampleDto>>(pagedSamples);
+            foreach(var dto in pagedDtos)
+            {
+                var locationlist = await  _locationService.GetLocation(dto.Id);
+                dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
+            }
             return new PagedList<SampleDto>(pagedDtos, pagedSamples.TotalCount, pagedSamples.CurrentPage, pagedSamples.PageSize);
         }
 
@@ -56,6 +65,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             _repoWrapper.SampleRepo.Create(sample);
             var result = await _repoWrapper.SampleRepo.SaveAsync();
+            if (result)
+            {
+                result = await InsertSampleLocation(dto, sample.Id);
+                if (!result)
+                {
+                    await DeleteSample(sample.Id);
+                }
+            }
+            return result;
+        }
+
+        private async Task<bool> InsertSampleLocation(SampleCreationDto dto, Guid sampleId)
+        {
+            var request = new LocationCreationRequest();
+            request.id = sampleId;
+            request.name = dto.Name;
+            request.positions = _mapper.Map<List<LocationForCreation>>(dto.Positions);
+            var result = await _locationService.InsertLocation(request);
             return result;
         }
 
@@ -86,7 +113,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         }
 
         public async Task<bool> DeleteSamples(DeleteMultiDto dto)
-{
+        {
             foreach (var sampleId in dto.Guids)
             {
                 var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
@@ -98,6 +125,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 sample.LastModifiedAt = DateTime.Now;
                 _repoWrapper.SampleRepo.Update(sample);
             }
+            var result = await _repoWrapper.SampleRepo.SaveAsync();
+            return result;
+        }
+
+        private async Task<bool> DeleteSample(Guid sampleId)
+        {
+            var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
+            if (sample == null)
+            {
+                return false;
+            }
+            _repoWrapper.SampleRepo.Delete(sample);
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             return result;
         }

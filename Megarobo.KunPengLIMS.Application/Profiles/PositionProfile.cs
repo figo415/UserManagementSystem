@@ -14,17 +14,22 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             CreateMap<Position, PositionDto>();
 
-            CreateMap<BoxStoreItem, BoxStoreItemDto>();
+            CreateMap<BoxStore, BoxStoreItemDto>();
 
-            CreateMap<LocationListItem, LocationDto>()
+            CreateMap<BoxStoreItemDto, BoxStore>();
+
+            CreateMap<Location, LocationDto>()
                 .ForMember(d => d.selectedList, opt => opt.MapFrom<SelectedListResolver>());
+
+            CreateMap<LocationDto, LocationForCreation>();
+            CreateMap<Location2, LocationDto>();
         }
     }
 }
 
-public class SelectedListResolver : IValueResolver<LocationListItem, LocationDto, List<string>>
+public class SelectedListResolver : IValueResolver<Location, LocationDto, List<string>>
 {
-    public List<string> Resolve(LocationListItem source, LocationDto destination, List<string> destMember, ResolutionContext context)
+    public List<string> Resolve(Location source, LocationDto destination, List<string> destMember, ResolutionContext context)
     {
         if(string.IsNullOrEmpty(source.selectedList))
         {

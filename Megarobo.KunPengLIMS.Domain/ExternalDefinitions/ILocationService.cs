@@ -8,6 +8,10 @@ namespace Megarobo.KunPengLIMS.Domain.ExternalDefinitions
 {
     public interface ILocationService
     {
-        Task<LocationData> GetLocations();
+        Task<List<Location>> GetLocations();
+
+        Task<List<Location2>> GetLocation(Guid id);
+
+        Task<bool> InsertLocation(LocationCreationRequest request);
     }
 }

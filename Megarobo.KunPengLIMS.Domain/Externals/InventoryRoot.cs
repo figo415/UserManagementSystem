@@ -4,7 +4,22 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.Externals
 {
-    public class InventoryListItem
+    public class InventoryRoot : ApiResponse
+    {
+        public InventoryData data { get; set; }
+    }
+
+    public class InventoryData
+    {
+        /// <summary>
+        /// 数据总数
+        /// </summary>
+        public int total { get; set; }
+
+        public List<Inventory> inventoryList { get; set; }
+    }
+
+    public class Inventory
     {
         #region 基本信息
 
@@ -172,7 +187,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         /// <summary>
         /// 存放位置
         /// </summary>
-        public List<LocationItem> location { get; set; }
+        public List<Location> location { get; set; }
 
         #endregion
 

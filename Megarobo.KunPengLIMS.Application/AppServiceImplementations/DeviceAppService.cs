@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
-using Megarobo.KunPengLIMS.Domain.Entities;
-using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
-using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
-using Megarobo.KunPengLIMS.Domain;
-using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Application.Exceptions;
+using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Domain.QueryParameters;
+using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
+using Megarobo.KunPengLIMS.Domain.Externals;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -17,17 +19,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
+        private readonly ILocationService _locationService;
 
-        public DeviceAppService(IRepositoryWrapper wrapper, IMapper mapper)
+        public DeviceAppService(IRepositoryWrapper wrapper, IMapper mapper, ILocationService locationService)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;
+            _locationService = locationService;
         }
 
         public async Task<PagedList<DeviceDto>> GetDevicesByPage(DeviceQueryParameters parameters)
         {
             var pagedDevices = await _repoWrapper.DeviceRepo.GetDevicesByPage(parameters);
             var pagedDtos = _mapper.Map<List<DeviceDto>>(pagedDevices);
+            foreach(var dto in pagedDtos)
+            {
+                var locationlist = await _locationService.GetLocation(dto.Id);
+                dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
+            }
             return new PagedList<DeviceDto>(pagedDtos, pagedDevices.TotalCount, pagedDevices.CurrentPage, pagedDevices.PageSize);
         }
 
@@ -44,6 +53,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
             device.IsDeleted = false;
             _repoWrapper.DeviceRepo.Create(device);
             var result = await _repoWrapper.DeviceRepo.SaveAsync();
+            if(result)
+            {
+                result = await InsertDeviceLocation(dto, device.Id);
+                if(!result)
+                {
+                     await DeleteDevice(device.Id);
+                }
+            }
+            return result;
+        }
+
+        private async Task<bool> InsertDeviceLocation(DeviceCreationDto dto, Guid deviceId)
+        {
+            var request = new LocationCreationRequest();
+            request.id = deviceId;
+            request.name = dto.Name;
+            request.positions = _mapper.Map<List<LocationForCreation>>(dto.Positions);
+            var result = await _locationService.InsertLocation(request);
             return result;
         }
 
@@ -82,6 +109,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 device.LastModifiedAt = DateTime.Now;
                 _repoWrapper.DeviceRepo.Update(device);
             }
+            var result = await _repoWrapper.DeviceRepo.SaveAsync();
+            return result;
+        }
+
+        private async Task<bool> DeleteDevice(Guid deviceId)
+        {
+            var device = await _repoWrapper.DeviceRepo.GetByIdAsync(deviceId);
+            if(device==null)
+            {
+                return false;
+            }
+            _repoWrapper.DeviceRepo.Delete(device);
             var result = await _repoWrapper.DeviceRepo.SaveAsync();
             return result;
         }

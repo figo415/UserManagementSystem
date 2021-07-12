@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             _info = options.Value;
         }
 
-        public T GetWebApi<T>(string resource, string token, Dictionary<string, object> dicParams = null)
+        public T GetWebApi<T>(string resource, string token, Dictionary<string, object> dicParams = null) where T:ApiResponse,new()
         {
             T result = default(T);
             try
@@ -37,7 +37,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
                 var response = client.Execute(request);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    if (!response.Content.Contains("message"))
+                    if (response.Content.Contains("message"))
+                    {
+                        var apiresponse = JsonConvert.DeserializeObject<NonQueryApiResponse>(response.Content);
+                        result = new T();
+                        result.msg = apiresponse.message;
+                        result.code = apiresponse.code;
+                    }
+                    else
                     {
                         result = JsonConvert.DeserializeObject<T>(response.Content);
                     }
@@ -53,7 +60,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             return result;
         }
 
-        public T PostWebApi<T>(string resource, string token, object obj)
+        public T PostWebApi<T>(string resource, string token, object obj) where T: ApiResponse,new()
         {
             T result = default(T);
             var client = new RestSharp.RestClient(_info.InventoryBaseUrl);
@@ -62,15 +69,22 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             request.AddHeader("token", token);
             var jb = JsonConvert.SerializeObject(obj);
             request.AddJsonBody(jb);
-            var rspse = client.Execute<T>(request);
-            if (rspse.StatusCode == System.Net.HttpStatusCode.OK)
+            var response = client.Execute<T>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                if (!rspse.Content.Contains("message")) //{"code":50000,"message":" 用户不存在，请重新登录"}
+                if (response.Content.Contains("message")) //{"code":50000,"message":" 用户不存在，请重新登录"}
                 {
-                    result = JsonConvert.DeserializeObject<T>(rspse.Content, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                    var apiresponse = JsonConvert.DeserializeObject<NonQueryApiResponse>(response.Content);
+                    result = new T();
+                    result.msg = apiresponse.message;
+                    result.code = apiresponse.code;
+                }
+                else
+                {
+                    result = JsonConvert.DeserializeObject<T>(response.Content, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
                 }
             }
-            var log = string.Format("{0}: POST {1}{2}", (int)rspse.StatusCode, _info.InventoryBaseUrl, resource);
+            var log = string.Format("{0}: POST {1}{2}", (int)response.StatusCode, _info.InventoryBaseUrl, resource);
             Console.WriteLine(log);
             return result;
         }

@@ -15,19 +15,11 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         /// </summary>
         public string boxInfo { get; set; }
 
-        /// <summary>
-        /// 盒子列数
-        /// </summary>
         public int boxCols { get; set; }
 
         /// <summary>
-        /// 盒子行数
-        /// </summary>
         public int boxRows { get; set; }
 
-        /// <summary>
-        /// 盒子类型
-        /// </summary>
         public string boxType { get; set; }
 
         public string name { get; set; }

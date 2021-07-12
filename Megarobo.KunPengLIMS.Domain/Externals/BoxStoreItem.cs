@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.Externals
 {
-    public class BoxStoreItem
+    public class BoxStore
     {
         public int id { get; set; }
 

@@ -21,7 +21,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.PurchaseFrom.Url))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()));
 
-            CreateMap<InventoryListItem, LabwareDto>()
+            CreateMap<Inventory, LabwareDto>()
                 .ForMember(d => d.Id, opt => opt.Ignore())
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.itemName))
                 .ForMember(d => d.Type, opt => opt.MapFrom(s => s.typeName))

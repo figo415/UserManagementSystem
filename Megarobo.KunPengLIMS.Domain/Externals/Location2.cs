@@ -4,7 +4,17 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.Externals
 {
-    public class LocationItem
+    public class LocationRoot2 : ApiResponse
+    {
+        public LocationData2 data { get; set; }
+    }
+
+    public class LocationData2
+    {
+        public List<Location2> locationList { get; set; }
+    }
+
+    public class Location2
     {
         /// <summary>
         /// 库存id
@@ -16,7 +26,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         /// <summary>
         /// 盒子id
         /// </summary>
-        public int boxId { get; set; }
+        public int? boxId { get; set; }
 
         /// <summary>
         /// 父id
@@ -26,31 +36,33 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         /// <summary>
         /// 实验室id
         /// </summary>
-        public string labId { get; set; }
+        public int? labId { get; set; }
 
         /// <summary>
         /// 位置名称
         /// </summary>
         public string name { get; set; }
 
+        public List<Location> children { get; set; }
+
         /// <summary>
         /// 盒子列数
         /// </summary>
-        public string boxCols { get; set; }
+        public int? boxCols { get; set; }
 
         /// <summary>
         /// 盒子行数
         /// </summary>
-        public string boxRows { get; set; }
+        public int? boxRows { get; set; }
 
         /// <summary>
         /// 盒子类型
         /// </summary>
         public string boxType { get; set; }
 
-        public string selectedList { get; set; }
+        public List<string> selectedList { get; set; }
 
-        public List<BoxStoreItem> boxStore { get; set; }
+        public List<BoxStore> boxStore { get; set; }
 
         /// <summary>
         /// 存放信息

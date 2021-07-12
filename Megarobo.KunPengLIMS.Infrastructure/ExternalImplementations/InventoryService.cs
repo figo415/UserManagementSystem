@@ -20,8 +20,15 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public async Task<InventoryData> GetInventory(InventoryParameters parameters)
         {
             var tokenresponse = await _apiHelper.GetToken();
-            var inventory = _apiHelper.PostWebApi<Inventory>("/api/inventory/getInventoryList/show", tokenresponse.access_token, parameters);
-            return inventory.data;
+            var inventory = _apiHelper.PostWebApi<InventoryRoot>("/api/inventory/getInventoryList/show", tokenresponse.access_token, parameters);
+            if (inventory.code == 20000)
+            {
+                return inventory.data;
+            }
+            else
+            {
+                throw new Exception("Inventory API error: " + inventory.msg);
+            }
         }
     }
 }
