@@ -69,7 +69,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var request = new LocationCreationRequest();
             request.id = deviceId;
             request.name = dto.Name;
-            request.positions = _mapper.Map<List<LocationForCreation>>(dto.Positions);
+            request.positions = _mapper.Map<List<Location>>(dto.Positions);
             var result = await _locationService.InsertLocation(request);
             return result;
         }

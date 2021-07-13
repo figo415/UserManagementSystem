@@ -60,7 +60,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         /// </summary>
         public string boxType { get; set; }
 
-        public string selectedList { get; set; }
+        public List<string> selectedList { get; set; }
 
         public List<BoxStore> boxStore { get; set; }
 

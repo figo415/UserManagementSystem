@@ -19,10 +19,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
 
         public async Task<List<Location>> GetLocations()
         {
-            var tokenresponse = await _apiHelper.GetToken();
+            //var tokenresponse = await _apiHelper.GetToken();
             var paras = new Dictionary<string, object>();
             paras.Add("labId", 1);
-            var locationroot = _apiHelper.GetWebApi<LocationRoot>("/api/location/getLocationList/show", tokenresponse.access_token, paras);
+            var locationroot = _apiHelper.GetWebApi<LocationRoot>("/api/location/getLocationList/show", "", paras);
             if(locationroot.code==20000)
             {
                 return locationroot.data.locationList;
@@ -33,11 +33,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             }
         }
 
-        public async Task<List<Location2>> GetLocation(Guid id)
+        public async Task<List<Location>> GetLocation(Guid id)
         {
             var paras= new Dictionary<string, object>();
             paras.Add("guid", id);
-            var locationRoot = _apiHelper.GetWebApi<LocationRoot2>("/api/location/getLocationList/ByGuid", "", paras);
+            var locationRoot = _apiHelper.GetWebApi<LocationRoot>("/api/location/getLocationList/ByGuid", "", paras);
             if (locationRoot.code == 20000)
             {
                 return locationRoot.data.locationList;

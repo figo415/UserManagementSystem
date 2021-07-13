@@ -10,7 +10,7 @@ namespace Megarobo.KunPengLIMS.Domain.ExternalDefinitions
     {
         Task<List<Location>> GetLocations();
 
-        Task<List<Location2>> GetLocation(Guid id);
+        Task<List<Location>> GetLocation(Guid id);
 
         Task<bool> InsertLocation(LocationCreationRequest request);
     }

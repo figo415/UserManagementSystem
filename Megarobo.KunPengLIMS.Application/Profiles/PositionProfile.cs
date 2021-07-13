@@ -12,40 +12,36 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public PositionProfile()
         {
-            CreateMap<Position, PositionDto>();
-
             CreateMap<BoxStore, BoxStoreItemDto>();
 
             CreateMap<BoxStoreItemDto, BoxStore>();
 
-            CreateMap<Location, LocationDto>()
-                .ForMember(d => d.selectedList, opt => opt.MapFrom<SelectedListResolver>());
-
-            CreateMap<LocationDto, LocationForCreation>();
-            CreateMap<Location2, LocationDto>();
+            CreateMap<Location, LocationDto>();
+            //.ForMember(d => d.selectedList, opt => opt.MapFrom<SelectedListResolver>());
+            CreateMap<LocationDto, Location>();
         }
     }
 }
 
-public class SelectedListResolver : IValueResolver<Location, LocationDto, List<string>>
-{
-    public List<string> Resolve(Location source, LocationDto destination, List<string> destMember, ResolutionContext context)
-    {
-        if(string.IsNullOrEmpty(source.selectedList))
-        {
-            return new List<string>();
-        }
-        var selectedText = source.selectedList.Substring(2, source.selectedList.Length - 4);
-        var ary = selectedText.Split("\",\"", StringSplitOptions.RemoveEmptyEntries);
-        var result = new List<string>();
-        for(var i=0; i<ary.Length; i++)
-        {
-            if(ary[i].Contains("\""))
-            {
-                ary[i] = ary[i].Replace("\"", "");
-            }
-            result.Add(ary[i]);
-        }
-        return result;
-    }
-}
+//public class SelectedListResolver : IValueResolver<Location, LocationDto, List<string>>
+//{
+//    public List<string> Resolve(Location source, LocationDto destination, List<string> destMember, ResolutionContext context)
+//    {
+//        if(string.IsNullOrEmpty(source.selectedList))
+//        {
+//            return new List<string>();
+//        }
+//        var selectedText = source.selectedList.Substring(2, source.selectedList.Length - 4);
+//        var ary = selectedText.Split("\",\"", StringSplitOptions.RemoveEmptyEntries);
+//        var result = new List<string>();
+//        for(var i=0; i<ary.Length; i++)
+//        {
+//            if(ary[i].Contains("\""))
+//            {
+//                ary[i] = ary[i].Replace("\"", "");
+//            }
+//            result.Add(ary[i]);
+//        }
+//        return result;
+//    }
+//}

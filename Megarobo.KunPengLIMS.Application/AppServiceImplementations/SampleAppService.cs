@@ -45,6 +45,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
             //var sample = await _repoWrapper.SampleRepo.GetByIdAsync(sampleId);
             var sample = await _repoWrapper.SampleRepo.GetSampleWithCell(sampleId);
             var dto = _mapper.Map<SampleDto>(sample);
+            var locationlist = await _locationService.GetLocation(dto.Id);
+            dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
             return dto;
         }
 
@@ -81,7 +83,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var request = new LocationCreationRequest();
             request.id = sampleId;
             request.name = dto.Name;
-            request.positions = _mapper.Map<List<LocationForCreation>>(dto.Positions);
+            request.positions = _mapper.Map<List<Location>>(dto.Positions);
             var result = await _locationService.InsertLocation(request);
             return result;
         }
