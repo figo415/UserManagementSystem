@@ -47,6 +47,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertRole(RoleCreationDto dto)
         {
+            var existed = await _repoWrapper.RoleRepo.GetRolesByName(dto.Name);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Role with Name=" + dto.Name + " is already existed");
+            }
             var role = _mapper.Map<Role>(dto);
             role.Id = Guid.NewGuid();
             role.CreatedAt = DateTime.Now;

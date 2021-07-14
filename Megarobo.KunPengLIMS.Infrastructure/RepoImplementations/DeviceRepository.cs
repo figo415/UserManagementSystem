@@ -63,7 +63,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<Device>> GetDeviceByName(string deviceName)
         {
-            return GetByConditionAsync(d => d.Name == deviceName && !d.IsDeleted);
+            return GetByConditionAsync(d => d.Name == deviceName);
         }
     }
 }

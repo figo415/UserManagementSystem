@@ -67,7 +67,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<Species>> GetSpeciesByName(string chineseName)
         {
-            return GetByConditionAsync(s => s.ChineseName == chineseName && !s.IsDeleted);
+            return GetByConditionAsync(s => s.ChineseName == chineseName);
         }
     }
 }

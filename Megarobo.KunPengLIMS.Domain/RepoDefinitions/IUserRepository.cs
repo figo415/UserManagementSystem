@@ -14,5 +14,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<User> GetUserWithSkill(Guid userId);
 
         System.Threading.Tasks.Task<User> GetUserWithDepartmentRole(Guid userId);
+
+        System.Threading.Tasks.Task<IEnumerable<User>> GetUsersByName(string userName);
     }
 }

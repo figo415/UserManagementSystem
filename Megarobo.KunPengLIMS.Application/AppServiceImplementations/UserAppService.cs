@@ -72,6 +72,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertUser(UserCreationDto dto)
         {
+            var existed = await _repoWrapper.UserRepo.GetUsersByName(dto.UserName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("User with Name=" + dto.UserName + " is already existed");
+            }
             var user = _mapper.Map<User>(dto);
             user.Id = Guid.NewGuid();
             user.CreatedAt = DateTime.Now;

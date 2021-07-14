@@ -67,7 +67,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<Cell>> GetCellsByName(string cellName)
         {
-            return GetByConditionAsync(c => c.Name == cellName && !c.IsDeleted);
+            return GetByConditionAsync(c => c.Name == cellName);
         }
 
         public System.Threading.Tasks.Task<int> GetCellCount()

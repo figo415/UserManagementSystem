@@ -52,7 +52,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<Sample>> GetSampleByName(string sampleName)
         {
-            return GetByConditionAsync(s => s.Name == sampleName && !s.IsDeleted);
+            return GetByConditionAsync(s => s.Name == sampleName);
         }
     }
 }

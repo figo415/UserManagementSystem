@@ -54,5 +54,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             return System.Threading.Tasks.Task.FromResult(DbContext.Set<Role>().Include(r => r.Menus).ThenInclude(rm => rm.Menu).Where(r => r.Id == roleId).SingleOrDefault());
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<Role>> GetRolesByName(string roleName)
+        {
+            return GetByConditionAsync(s => s.Name == roleName);
+        }
     }
 }

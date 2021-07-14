@@ -76,5 +76,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             return PagedList<User>.CreateAsync(users, parameters.PageNumber, parameters.PageSize);
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<Department>> GetDepartmentsByName(string departmentName)
+        {
+            return GetByConditionAsync(d => d.Name == departmentName);
+        }
     }
 }

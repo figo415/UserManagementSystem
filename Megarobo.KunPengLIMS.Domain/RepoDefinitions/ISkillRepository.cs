@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<PagedList<Skill>> GetSkillsByPage(SkillQueryParameters parameters);
 
         System.Threading.Tasks.Task<IEnumerable<Skill>> GetSkills(SkillQueryParameters parameters);
+
+        System.Threading.Tasks.Task<IEnumerable<Skill>> GetSkillsByName(string skillName);
     }
 }

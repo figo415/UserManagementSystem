@@ -51,6 +51,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertSkill(SkillCreationDto dto)
         {
+            var existed = await _repoWrapper.SkillRepo.GetSkillsByName(dto.SkillName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Skill with Name=" + dto.SkillName + " is already existed");
+            }
             var skill = _mapper.Map<Skill>(dto);
             skill.Id = Guid.NewGuid();
             skill.CreatedAt = DateTime.Now;

@@ -33,6 +33,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertDictItem(DictItemCreationDto dto)
         {
+            var existed = await _repoWrapper.DictItemRepo.GetDictItemsByName(dto.KeyName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("DictItem with Name=" + dto.KeyName + " is already existed");
+            }
             var dictitem = _mapper.Map<DictItem>(dto);
             dictitem.Id = Guid.NewGuid();
             dictitem.CreatedAt = DateTime.Now;
