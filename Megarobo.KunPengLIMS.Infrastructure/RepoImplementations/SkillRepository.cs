@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Skill> queryable = DbContext.Set<Skill>();
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(s => s.CreatedAt);
             return PagedList<Skill>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 

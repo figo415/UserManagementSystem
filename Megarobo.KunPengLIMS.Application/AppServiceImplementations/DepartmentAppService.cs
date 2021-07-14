@@ -36,6 +36,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentTree(DepartmentQueryParameters parameters)
         {
             var departments = await _repoWrapper.DepartmentRepo.GetDepartments(parameters);
+            departments = departments.OrderByDescending(d => d.CreatedAt);
             var departmentDtos = _mapper.Map<IEnumerable<DepartmentDto>>(departments);
             var tree = GetTree(Guid.Empty, departmentDtos);
             return tree;

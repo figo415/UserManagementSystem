@@ -33,6 +33,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<IEnumerable<MenuDto>> GetMenuTree(MenuQueryParameters parameters)
         {
             var menus = await _repoWrapper.MenuRepo.GetMenus(parameters);
+            menus = menus.OrderByDescending(m => m.CreatedAt);
             var menuDtos = _mapper.Map<IEnumerable<MenuDto>>(menus);
             var tree = GetTree(Guid.Empty, menuDtos);
             return tree;

@@ -34,6 +34,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<IEnumerable<SkillDto>> GetSkillTree(SkillQueryParameters parameters)
         {
             var skills = await _repoWrapper.SkillRepo.GetSkills(parameters);
+            skills=skills.OrderByDescending(s => s.CreatedAt);
             var skillDtos = _mapper.Map<IEnumerable<SkillDto>>(skills);
             var tree = GetTree(Guid.Empty, skillDtos);
             return tree;

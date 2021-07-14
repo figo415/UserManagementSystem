@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Role> queryable = DbContext.Set<Role>();
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(r => r.CreatedAt);
             return PagedList<Role>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
@@ -31,7 +31,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             IQueryable<Role> queryable = DbContext.Set<Role>().Include(r => r.Menus).ThenInclude(rm => rm.Menu);
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(r => r.CreatedAt);
             return PagedList<Role>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 

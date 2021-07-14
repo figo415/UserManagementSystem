@@ -24,7 +24,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             //IQueryable<User> queryable = DbContext.Set<User>();
             IQueryable<User> queryable = DbContext.Set<User>().Include(u => u.Skills).ThenInclude(us => us.Skill).Include(u => u.DepartmentRoles);
             var predicate = BuildPredicate(parameters);
-            queryable = queryable.Where(predicate);
+            queryable = queryable.Where(predicate).OrderByDescending(u => u.CreatedAt);
             return PagedList<User>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
         }
 
