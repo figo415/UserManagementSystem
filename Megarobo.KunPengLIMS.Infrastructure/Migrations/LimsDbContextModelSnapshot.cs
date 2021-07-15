@@ -20,6 +20,79 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Cell", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("AtccId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AtccUrl")
+                        .HasColumnType("text");
+
+                    b.Property<int>("BioSafetyLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CellCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CellLineType")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CrisprOrderLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CultivationMethod")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Disease")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("PurchaseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Race")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("SpeciesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TissueType")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpeciesId");
+
+                    b.ToTable("Cell");
+                });
+
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Department", b =>
                 {
                     b.Property<Guid>("Id")
@@ -64,10 +137,31 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ModelNumber")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("SubClass")
+                    b.Property<DateTime?>("PurchaseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Supplier")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -92,6 +186,21 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasIndex("DeviceID");
 
                     b.ToTable("DeviceParameters");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.DevicePosition", b =>
+                {
+                    b.Property<Guid>("DeviceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PositionId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("DeviceId", "PositionId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("DevicePosition");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.DictItem", b =>
@@ -129,6 +238,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ArticleNumber")
+                        .HasColumnType("text");
+
                     b.Property<int>("AvailableHole")
                         .HasColumnType("integer");
 
@@ -141,28 +253,28 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("text");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DeletedTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PurchaseDate")
+                    b.Property<DateTime?>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("text");
 
                     b.Property<string>("Specification")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
                         .HasColumnType("text");
 
                     b.Property<string>("Subclass")
@@ -173,9 +285,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedTime")
-                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -431,9 +540,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DeviceID")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Hole")
                         .HasColumnType("integer");
 
@@ -442,6 +548,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Room")
                         .HasColumnType("text");
@@ -456,8 +565,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeviceID");
 
                     b.ToTable("Positions");
                 });
@@ -584,22 +691,25 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DeletedTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PurchaseDate")
+                    b.Property<DateTime?>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Remarks")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
                         .HasColumnType("text");
 
                     b.Property<string>("Supplier")
@@ -607,9 +717,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedTime")
-                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -694,13 +801,25 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("CellId")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRealSample")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
@@ -709,14 +828,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<DateTime>("NextPhotoTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("PositionID")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("PurchaseDate")
+                    b.Property<DateTime?>("PurchaseDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("text");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
@@ -724,9 +837,12 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Supplier")
                         .HasColumnType("text");
 
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PositionID");
+                    b.HasIndex("CellId");
 
                     b.ToTable("Samples");
                 });
@@ -748,6 +864,21 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasIndex("SampleID");
 
                     b.ToTable("SampleDosages");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.SamplePosition", b =>
+                {
+                    b.Property<Guid>("SampleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PositionId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SampleId", "PositionId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("SamplePosition");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Skill", b =>
@@ -821,6 +952,35 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasIndex("SampleDosageID");
 
                     b.ToTable("SolutionSampleDosages");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Species", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ChineseName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("LatinName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Take", b =>
@@ -1041,6 +1201,92 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.ToTable("UserSkills");
                 });
 
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Cell", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Species", "Species")
+                        .WithMany("Cells")
+                        .HasForeignKey("SpeciesId");
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "PurchaseFrom", b1 =>
+                        {
+                            b1.Property<Guid>("CellId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Url")
+                                .HasColumnType("text");
+
+                            b1.HasKey("CellId");
+
+                            b1.ToTable("Cell");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CellId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Price", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("CellId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("CellId");
+
+                            b1.ToTable("Cell");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CellId");
+                        });
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Device", b =>
+                {
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "PurchaseFrom", b1 =>
+                        {
+                            b1.Property<Guid>("DeviceId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Url")
+                                .HasColumnType("text");
+
+                            b1.HasKey("DeviceId");
+
+                            b1.ToTable("Devices");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DeviceId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Price", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("DeviceId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("DeviceId");
+
+                            b1.ToTable("Devices");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DeviceId");
+                        });
+                });
+
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.DeviceParameter", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
@@ -1069,9 +1315,24 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.DevicePosition", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
+                        .WithMany("Positions")
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Position", "Position")
+                        .WithMany("Devices")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Labware", b =>
                 {
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "BoughtFrom", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "PurchaseFrom", b1 =>
                         {
                             b1.Property<Guid>("LabwareId")
                                 .HasColumnType("uuid");
@@ -1260,15 +1521,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Position", b =>
-                {
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
-                        .WithMany("Positions")
-                        .HasForeignKey("DeviceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Project", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "ARD")
@@ -1332,7 +1584,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Reagent", b =>
                 {
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "Cubage", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "AvailableCubage", b1 =>
                         {
                             b1.Property<Guid>("ReagentId")
                                 .HasColumnType("uuid");
@@ -1351,7 +1603,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                                 .HasForeignKey("ReagentId");
                         });
 
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "BoughtFrom", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "PurchaseFrom", b1 =>
                         {
                             b1.Property<Guid>("ReagentId")
                                 .HasColumnType("uuid");
@@ -1389,7 +1641,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                                 .HasForeignKey("ReagentId");
                         });
 
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "Quality", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "AvailableQuality", b1 =>
                         {
                             b1.Property<Guid>("ReagentId")
                                 .HasColumnType("uuid");
@@ -1408,7 +1660,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                                 .HasForeignKey("ReagentId");
                         });
 
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "UnusedQuality", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "Quality", b1 =>
                         {
                             b1.Property<Guid>("ReagentId")
                                 .HasColumnType("uuid");
@@ -1526,13 +1778,30 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Sample", b =>
                 {
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Position", "Position")
-                        .WithMany()
-                        .HasForeignKey("PositionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Cell", "Cell")
+                        .WithMany("Samples")
+                        .HasForeignKey("CellId");
 
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "BoughtFrom", b1 =>
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "Cubage", b1 =>
+                        {
+                            b1.Property<Guid>("SampleId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("SampleId");
+
+                            b1.ToTable("Samples");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SampleId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "PurchaseFrom", b1 =>
                         {
                             b1.Property<Guid>("SampleId")
                                 .HasColumnType("uuid");
@@ -1552,6 +1821,44 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         });
 
                     b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Price", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("SampleId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("SampleId");
+
+                            b1.ToTable("Samples");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SampleId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "Quality", b1 =>
+                        {
+                            b1.Property<Guid>("SampleId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("SampleId");
+
+                            b1.ToTable("Samples");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SampleId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Thickness", "Thickness", b1 =>
                         {
                             b1.Property<Guid>("SampleId")
                                 .HasColumnType("uuid");
@@ -1618,6 +1925,21 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.SamplePosition", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Position", "Position")
+                        .WithMany("Samples")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Sample", "Sample")
+                        .WithMany("Positions")
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Solution", b =>
                 {
                     b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "Total", b1 =>
@@ -1668,6 +1990,28 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .HasForeignKey("SolutionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Species", b =>
+                {
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Link", "SpeciesId", b1 =>
+                        {
+                            b1.Property<Guid>("SpeciesId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Url")
+                                .HasColumnType("text");
+
+                            b1.HasKey("SpeciesId");
+
+                            b1.ToTable("Species");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SpeciesId");
+                        });
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Take", b =>

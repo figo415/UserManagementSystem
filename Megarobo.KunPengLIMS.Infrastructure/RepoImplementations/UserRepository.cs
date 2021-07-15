@@ -89,5 +89,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             return user;
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<User>> GetUsersByName(string userName)
+        {
+            return GetByConditionAsync(u => u.UserName == userName);
+        }
     }
 }

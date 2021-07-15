@@ -26,8 +26,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<RoleDto>> GetRolesByPage(RoleQueryParameters parameters)
         {
             var pagedRoles = await _repoWrapper.RoleRepo.GetRolesByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<RoleDto>>(pagedRoles);
-            return new PagedList<RoleDto>(pagedDtos.ToList(), pagedRoles.TotalCount, pagedRoles.CurrentPage, pagedRoles.PageSize);
+            var pagedDtos = _mapper.Map<List<RoleDto>>(pagedRoles);
+            return new PagedList<RoleDto>(pagedDtos, pagedRoles.TotalCount, pagedRoles.CurrentPage, pagedRoles.PageSize);
         }
 
         public async Task<PagedList<RoleDto>> GetRolesWithMenuByPage(RoleQueryParameters parameters)
@@ -47,6 +47,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertRole(RoleCreationDto dto)
         {
+            var existed = await _repoWrapper.RoleRepo.GetRolesByName(dto.Name);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Role with Name=" + dto.Name + " is already existed");
+            }
             var role = _mapper.Map<Role>(dto);
             role.Id = Guid.NewGuid();
             role.CreatedAt = DateTime.Now;

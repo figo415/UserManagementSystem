@@ -41,5 +41,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(u => !u.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<DictItem>> GetDictItemsByName(string dictItemName)
+        {
+            return GetByConditionAsync(d => d.KeyName == dictItemName);
+        }
     }
 }

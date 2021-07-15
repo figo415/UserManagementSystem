@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<PagedList<Menu>> GetMenusByPage(MenuQueryParameters parameters);
 
         System.Threading.Tasks.Task<IEnumerable<Menu>> GetMenus(MenuQueryParameters parameters);
+
+        System.Threading.Tasks.Task<IEnumerable<Menu>> GetMenusByName(string menuName);
     }
 }

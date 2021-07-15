@@ -27,8 +27,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<SkillDto>> GetSkillsByPage(SkillQueryParameters parameters)
         {
             var pagedSkills = await _repoWrapper.SkillRepo.GetSkillsByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<SkillDto>>(pagedSkills);
-            return new PagedList<SkillDto>(pagedDtos.ToList(), pagedSkills.TotalCount, pagedSkills.CurrentPage, pagedSkills.PageSize);
+            var pagedDtos = _mapper.Map<List<SkillDto>>(pagedSkills);
+            return new PagedList<SkillDto>(pagedDtos, pagedSkills.TotalCount, pagedSkills.CurrentPage, pagedSkills.PageSize);
         }
 
         public async Task<IEnumerable<SkillDto>> GetSkillTree(SkillQueryParameters parameters)
@@ -52,6 +52,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertSkill(SkillCreationDto dto)
         {
+            var existed = await _repoWrapper.SkillRepo.GetSkillsByName(dto.SkillName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Skill with Name=" + dto.SkillName + " is already existed");
+            }
             var skill = _mapper.Map<Skill>(dto);
             skill.Id = Guid.NewGuid();
             skill.CreatedAt = DateTime.Now;

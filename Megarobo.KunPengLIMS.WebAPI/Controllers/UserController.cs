@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Megarobo.KunPengLIMS.Application.Services;
@@ -20,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/users")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class UserController : LimsControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserAppService _service;
         private readonly ILogger<UserController> _logger;

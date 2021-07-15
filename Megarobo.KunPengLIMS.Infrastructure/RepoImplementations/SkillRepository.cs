@@ -43,5 +43,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(s => !s.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<Skill>> GetSkillsByName(string skillName)
+        {
+            return GetByConditionAsync(s => s.SkillName == skillName);
+        }
     }
 }

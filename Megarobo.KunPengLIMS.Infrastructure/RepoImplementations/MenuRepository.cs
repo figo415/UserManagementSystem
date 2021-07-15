@@ -51,5 +51,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(u => !u.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<IEnumerable<Menu>> GetMenusByName(string menuName)
+        {
+            return GetByConditionAsync(m => m.Name == menuName);
+        }
     }
 }

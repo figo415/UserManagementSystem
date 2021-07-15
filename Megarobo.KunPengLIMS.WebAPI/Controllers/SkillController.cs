@@ -19,7 +19,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/skills")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class SkillController : LimsControllerBase
+    public class SkillController : ControllerBase
     {
         private readonly ISkillAppService _service;
         private readonly ILogger<SkillController> _logger;

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +15,18 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
-using Megarobo.KunPengLIMS.Infrastructure;
 using System.Runtime.InteropServices;
-using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
-using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
+using Megarobo.KunPengLIMS.WebAPI.Converters;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
-using Megarobo.KunPengLIMS.WebAPI.Converters;
+using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
+using Megarobo.KunPengLIMS.Domain.Externals;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
+using Megarobo.KunPengLIMS.Infrastructure;
+using Megarobo.KunPengLIMS.Infrastructure.RepoImplementations;
+using Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations;
+using Megarobo.KunPengLIMS.Infrastructure.Utility;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -40,7 +44,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
         {
             //services.AddControllers();
             services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>())
-                .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()));
+                .AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()); opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter()); }) ;
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
@@ -56,11 +60,12 @@ namespace Megarobo.KunPengLIMS.WebAPI
             }
             else
             {
-                connectionString = Configuration.GetConnectionString("Postgre");
+                connectionString = Configuration.GetConnectionString("PostgreLocal");
             }
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             #endregion
 
+            #region AppService
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IDepartmentAppService, DepartmentAppService>();
             services.AddScoped<ISkillAppService, SkillAppService>();
@@ -68,12 +73,38 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddScoped<IMenuAppService, MenuAppService>();
             services.AddScoped<IDictItemAppService, DictItemAppService>();
             services.AddScoped<ILogItemAppService, LogItemAppService>();
+            services.AddScoped<ISpeciesAppService, SpeciesAppService>();
+            services.AddScoped<ICellAppService, CellAppService>();
+            services.AddScoped<IDeviceAppService, DeviceAppService>();
+            services.AddScoped<ILabwareAppService, LabwareAppService>();
+            services.AddScoped<IReagentAppService, ReagentAppService>();
+            services.AddScoped<IPositionAppService, PositionAppService>();
+            services.AddScoped<ISampleAppService, SampleAppService>();
+            #endregion
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddScoped<LogFilterAttribute>();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
+
+            #region InventoryAPI
+            var inventoryBaseUrl = Environment.GetEnvironmentVariable("INVENTORY_BASEURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryAuthUrl = Environment.GetEnvironmentVariable("INVENTORY_AUTHURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryUsername = Environment.GetEnvironmentVariable("INVENTORY_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            var inventoryPassword = Environment.GetEnvironmentVariable("INVENTORY_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(inventoryBaseUrl) && string.IsNullOrEmpty(inventoryAuthUrl) && string.IsNullOrEmpty(inventoryUsername) && string.IsNullOrEmpty(inventoryPassword))
+            {
+                services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
+            }
+            else
+            {
+                services.Configure<InventoryApiInfo>(i => { i.InventoryBaseUrl = inventoryBaseUrl; i.AuthUrl = inventoryAuthUrl; i.UserName = inventoryUsername; i.Password = inventoryPassword; i.ClientId = "web-ui"; i.GrantType = "password"; });
+            }
+            services.AddScoped<ApiHelper>();
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<ILocationService, LocationService>();
+            #endregion
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

@@ -27,12 +27,17 @@ namespace Megarobo.KunPengLIMS.Application.Services
         public async Task<PagedList<DictItemDto>> GetDictItemsByPage(DictItemQueryParameters parameters)
         {
             var pagedDictItems = await _repoWrapper.DictItemRepo.GetDictItemsByPage(parameters);
-            var pagedDtos = _mapper.Map<IEnumerable<DictItemDto>>(pagedDictItems);
-            return new PagedList<DictItemDto>(pagedDtos.ToList(), pagedDictItems.TotalCount, pagedDictItems.CurrentPage, pagedDictItems.PageSize);
+            var pagedDtos = _mapper.Map<List<DictItemDto>>(pagedDictItems);
+            return new PagedList<DictItemDto>(pagedDtos, pagedDictItems.TotalCount, pagedDictItems.CurrentPage, pagedDictItems.PageSize);
         }
 
         public async Task<bool> InsertDictItem(DictItemCreationDto dto)
         {
+            var existed = await _repoWrapper.DictItemRepo.GetDictItemsByName(dto.KeyName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("DictItem with Name=" + dto.KeyName + " is already existed");
+            }
             var dictitem = _mapper.Map<DictItem>(dto);
             dictitem.Id = Guid.NewGuid();
             dictitem.CreatedAt = DateTime.Now;

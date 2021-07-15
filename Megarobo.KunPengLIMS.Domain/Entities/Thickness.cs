@@ -21,5 +21,10 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Unit { get; set; }
 
 		public float Value { get; set; }
-	}
+
+        public override string ToString()
+        {
+			return Value.ToString() + Unit;
+        }
+    }
 }

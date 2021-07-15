@@ -38,8 +38,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 parametersext.DepartmentIds = guids;
             }
             var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parametersext);
-            var pagedDtos = _mapper.Map<IEnumerable<UserDto>>(pagedUsers);
-            return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
+            var pagedDtos = _mapper.Map<List<UserDto>>(pagedUsers);
+            return new PagedList<UserDto>(pagedDtos, pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
         }
 
         public async Task<UserDto> GetUser(Guid userId)
@@ -72,6 +72,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertUser(UserCreationDto dto)
         {
+            var existed = await _repoWrapper.UserRepo.GetUsersByName(dto.UserName);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("User with Name=" + dto.UserName + " is already existed");
+            }
             var user = _mapper.Map<User>(dto);
             user.Id = Guid.NewGuid();
             user.CreatedAt = DateTime.Now;

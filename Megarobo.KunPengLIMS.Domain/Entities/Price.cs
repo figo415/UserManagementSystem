@@ -18,11 +18,13 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// µ¥Î»£ºÔª,$
 		/// </summary>
-		public string Unit
-        {
-            get; set;
-		}
+		public string Unit { get; set; }
 
 		public float Value { get; set; }
-	}
+
+        public override string ToString()
+        {
+			return Unit + Value;
+        }
+    }
 }
