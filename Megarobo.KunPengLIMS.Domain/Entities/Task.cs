@@ -23,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// 外键到设备
 		/// </summary>
-		public Guid DeviceID { get; set; }
+		public Guid DeviceId { get; set; }
 
 		/// <summary>
 		/// yyyy-MM-dd hh:mm:ss
@@ -43,23 +43,23 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// 外键到节点
 		/// </summary>
-		public Guid NodeID { get; set; }
+		public Guid NodeId { get; set; }
 
 		/// <summary>
 		/// 母任务列表
 		/// </summary>
 		//public List<Task> ParentTasks { get; set; }
-		public Guid ParentID { get; set; }
+		public Guid ParentId { get; set; }
 
 		/// <summary>
 		/// 外键到ProtocolStep
 		/// </summary>
-		public Guid ProtocolID { get; set; }
+		public Guid ProtocolId { get; set; }
 
 		/// <summary>
 		/// Take号
 		/// </summary>
-		public Guid TakeID { get; set; }
+		public Guid TakeId { get; set; }
 
 		/// <summary>
 		/// 结果附件:文件列表
@@ -69,13 +69,13 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		//[ForeignKey("TakeID")]
 		//public Take Take { get; set; }
 
-		[ForeignKey("DeviceID")]
+		[ForeignKey("DeviceId")]
 		public virtual Device Device { get; set; }
 
-		[ForeignKey("NodeID")]
+		[ForeignKey("NodeId")]
 		public virtual Node Node { get; set; }
 
-		[ForeignKey("ProtocolID")]
+		[ForeignKey("ProtocolId")]
 		public ProtocolStep ProtocolStep { get; set; }
 
 		/// <summary>

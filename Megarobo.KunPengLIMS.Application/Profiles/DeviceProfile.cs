@@ -13,7 +13,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         public DeviceProfile()
         {
             CreateMap<Device, DeviceDto>()
-                .ForMember(d => d.PositionText, opt => opt.MapFrom(s => s.Positions.Any() ? string.Join(',', s.Positions.Select(dp => dp.Position.Name).ToArray()) : string.Empty))
+                //.ForMember(d => d.PositionText, opt => opt.MapFrom(s => s.Positions.Any() ? string.Join(',', s.Positions.Select(dp => dp.Position.Name).ToArray()) : string.Empty))
                 .ForMember(d => d.PurchaseFromName, opt => opt.MapFrom(s => s.PurchaseFrom.Name))
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.PurchaseFrom.Url))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.Price.ToString()))
@@ -21,11 +21,11 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
 
             CreateMap<DeviceCreationDto, Device>()
                 .ForMember(d => d.PurchaseFrom, opt => opt.MapFrom(s => new Link() { Name = s.PurchaseFromName, Url = s.PurchaseFromUrl }))
-                .ForMember(d => d.Price, opt => opt.MapFrom(s => new Price() { Unit = s.PurchasePrice }))
-                .ForMember(d => d.Positions, opt => opt.Ignore());
+                .ForMember(d => d.Price, opt => opt.MapFrom(s => new Price() { Unit = s.PurchasePrice }));
+            //.ForMember(d => d.Positions, opt => opt.Ignore());
 
-            CreateMap<DeviceUpdateDto, Device>()
-                .ForMember(d => d.Positions, opt => opt.Ignore());
+            CreateMap<DeviceUpdateDto, Device>();
+                //.ForMember(d => d.Positions, opt => opt.Ignore());
         }
     }
 }

@@ -9,19 +9,19 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("User、Department和Role三方关系")]
     public class UserDepartmentRole
     {
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
-        public Guid RoleID { get; set; }
+        public Guid RoleId { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey("UserId")]
         public User User { get; set; }
 
-        [ForeignKey("DepartmentID")]
+        [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
 
-        [ForeignKey("RoleID")]
+        [ForeignKey("RoleId")]
         public Role Role { get; set; }
     }
 }

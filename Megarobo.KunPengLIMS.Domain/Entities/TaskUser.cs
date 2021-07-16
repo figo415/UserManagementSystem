@@ -9,14 +9,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Task与User多对多关系")]
     public class TaskUser
     {
-        public Guid TaskID { get; set; }
+        public Guid TaskId { get; set; }
 
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        [ForeignKey("TaskID")]
+        [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
 }

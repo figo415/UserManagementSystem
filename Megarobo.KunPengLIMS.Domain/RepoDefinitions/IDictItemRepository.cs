@@ -10,6 +10,6 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     {
         System.Threading.Tasks.Task<PagedList<DictItem>> GetDictItemsByPage(DictItemQueryParameters parameters);
 
-        System.Threading.Tasks.Task<IEnumerable<DictItem>> GetDictItemsByName(string dictItemName);
+        System.Threading.Tasks.Task<IEnumerable<DictItem>> GetDictItemsByName(string dictItemName, bool? isDeleted);
     }
 }

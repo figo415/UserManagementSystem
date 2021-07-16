@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Labware与Position多对多关系")]
     public class LabwarePosition
     {
-        public Guid LabwareID { get; set; }
+        public Guid LabwareId { get; set; }
 
-        public Guid PositionID { get; set; }
+        public Guid PositionId { get; set; }
 
-        [ForeignKey("LabwareID")]
+        [ForeignKey("LabwareId")]
         public virtual Labware Labware { get; set; }
 
-        [ForeignKey("PositionID")]
+        [ForeignKey("PositionId")]
         public virtual Position Position { get; set; }
     }
 }

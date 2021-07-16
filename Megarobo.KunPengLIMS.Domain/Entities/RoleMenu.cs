@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Role与Menu多对多关系")]
     public class RoleMenu
     {
-        public Guid RoleID { get; set; }
+        public Guid RoleId { get; set; }
 
-        public Guid MenuID { get; set; }
+        public Guid MenuId { get; set; }
 
-        [ForeignKey("RoleID")]
+        [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
 
-        [ForeignKey("MenuID")]
+        [ForeignKey("MenuId")]
         public virtual Menu Menu { get; set; }
     }
 }

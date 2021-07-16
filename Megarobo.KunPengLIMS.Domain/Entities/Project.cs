@@ -15,51 +15,65 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// 与User多对一
 	public class Project:Entity
 	{
+		/// <summary>
+		/// 项目名称
+		/// </summary>
 		public string Name { get; set; }
-
-		/// <summary>
-		/// 项目状态：未开始,进行中,完成,终止
-		/// </summary>
-		public string Status { get; set; }
-
-		/// <summary>
-		/// 外键到用户
-		/// </summary>
-		public Guid ProjectManagerID { get; set; }
-
-		/// <summary>
-		/// 外键到用户
-		/// </summary>
-		public Guid ARDID { get; set; }
-
-		/// <summary>
-		/// 外键到用户
-		/// </summary>
-		public Guid FRDID { get; set; }
-
-		/// <summary>
-		/// 外键到用户
-		/// </summary>
-		public Guid SRDID { get; set; }
 
 		/// <summary>
 		/// 外键到流程
 		/// </summary>
-		public Guid ProcessID { get; set; }
+		public Guid ProcessId { get; set; }
 
-		[ForeignKey("ProjectManagerID")]
-		public User ProjectManager { get; set; }
+		/// <summary>
+		/// 计划开始时间
+		/// </summary>
+		public DateTime? PlannedStartTime { get; set; }
 
-		[ForeignKey("ARDID")]
-		public User ARD { get; set; }
+		/// <summary>
+		/// 项目状态：已创建、进行中、已终止、已完成。
+		/// 至少一个take已完成项目状态更新为已完成
+		/// 进行中不可修改
+		/// 如果项目已经在进行中就不能修改流程，修改保持重新排程
+		/// 项目进行中不可删除
+		/// </summary>
+		public string Status { get; set; }
 
-		[ForeignKey("FRDID")]
-		public User FRD { get; set; }
+		public List<ProjectUser> Users { get; set; }
 
-		[ForeignKey("SRDID")]
-		public User SRD { get; set; }
+		///// <summary>
+		///// 外键到用户
+		///// </summary>
+		//public Guid ProjectManagerId { get; set; }
 
-		[ForeignKey("ProcessID")]
+		///// <summary>
+		///// 外键到用户
+		///// </summary>
+		//public Guid ARDId { get; set; }
+
+		///// <summary>
+		///// 外键到用户
+		///// </summary>
+		//public Guid FRDId { get; set; }
+
+		///// <summary>
+		///// 外键到用户
+		///// </summary>
+		//public Guid SRDId { get; set; }
+
+		//[ForeignKey("ProjectManagerId")]
+		//public User ProjectManager { get; set; }
+
+		//[ForeignKey("ARDId")]
+		//public User ARD { get; set; }
+
+		//[ForeignKey("FRDId")]
+		//public User FRD { get; set; }
+
+		//[ForeignKey("SRDId")]
+		//public User SRD { get; set; }
+
+		[ForeignKey("ProcessId")]
 		public Process Process { get; set; }
 
 		/// <summary>

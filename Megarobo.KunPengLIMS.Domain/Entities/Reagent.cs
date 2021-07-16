@@ -36,22 +36,22 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Brand { get; set; }
 
 		/// <summary>
-		/// 质量规格:嵌入值对象：质量
+		/// 质量规格
 		/// </summary>
 		public Quality Quality { get; set; }
 
 		/// <summary>
-		/// 浓度规格：嵌入值对象：浓度
+		/// 浓度规格
 		/// </summary>
 		public Thickness Thickness { get; set; }
 
 		/// <summary>
-		/// 可用质量:嵌入值对象：质量
+		/// 可用质量
 		/// </summary>
 		public Quality AvailableQuality { get; set; }
 
 		/// <summary>
-		/// 可用体积:嵌入值对象：体积
+		/// 可用体积
 		/// </summary>
 		public Cubage AvailableCubage { get; set; }
 

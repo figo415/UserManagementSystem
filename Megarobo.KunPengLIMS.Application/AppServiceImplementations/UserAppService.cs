@@ -86,7 +86,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach (var skillid in dto.SkillIds)
                 {
-                    var userskill = new UserSkill() { UserID = user.Id, SkillID = skillid };
+                    var userskill = new UserSkill() { UserId = user.Id, SkillId = skillid };
                     _repoWrapper.UserSkillRepo.Create(userskill);
                 }
             }
@@ -94,7 +94,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach(var deptrole in dto.DepartmentRoleIds)
                 {
-                    var userdepartmentrole = new UserDepartmentRole() { UserID = user.Id, DepartmentID = deptrole.DepartmentId, RoleID = deptrole.RoleId };
+                    var userdepartmentrole = new UserDepartmentRole() { UserId = user.Id, DepartmentId = deptrole.DepartmentId, RoleId = deptrole.RoleId };
                     _repoWrapper.UserDepartmentRoleRepo.Create(userdepartmentrole);
                 }
             }
@@ -121,7 +121,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach (var skillid in dto.SkillIds)
                 {
-                    var userskill = new UserSkill() { UserID = user.Id, SkillID = skillid };
+                    var userskill = new UserSkill() { UserId = user.Id, SkillId = skillid };
                     _repoWrapper.UserSkillRepo.Create(userskill);
                 }
             }
@@ -134,7 +134,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach (var deptrole in dto.DepartmentRoleIds)
                 {
-                    var userdepartmentrole = new UserDepartmentRole() { UserID = user.Id, DepartmentID = deptrole.DepartmentId, RoleID = deptrole.RoleId };
+                    var userdepartmentrole = new UserDepartmentRole() { UserId = user.Id, DepartmentId = deptrole.DepartmentId, RoleId = deptrole.RoleId };
                     _repoWrapper.UserDepartmentRoleRepo.Create(userdepartmentrole);
                 }
             }

@@ -55,7 +55,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.DeviceRepo.SaveAsync();
             if(result)
             {
-                result = await InsertDeviceLocation(dto, device.Id);
+                result = await InsertDeviceLocation(device.Id, dto.Name, dto.Positions);
                 if(!result)
                 {
                      await DeleteDevice(device.Id);
@@ -64,12 +64,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return result;
         }
 
-        private async Task<bool> InsertDeviceLocation(DeviceCreationDto dto, Guid deviceId)
+        private async Task<bool> InsertDeviceLocation(Guid deviceId, string name, List<LocationDto> positions)
         {
             var request = new LocationCreationRequest();
             request.id = deviceId;
-            request.name = dto.Name;
-            request.positions = _mapper.Map<List<Location>>(dto.Positions);
+            request.name = name;
+            request.positions = _mapper.Map<List<Location>>(positions);
             var result = await _locationService.InsertLocation(request);
             return result;
         }
@@ -93,6 +93,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             device.LastModifiedAt = DateTime.Now;
             _repoWrapper.DeviceRepo.Update(device);
             var result = await _repoWrapper.DeviceRepo.SaveAsync();
+            if (result)
+            {
+                result = await InsertDeviceLocation(device.Id, device.Name, dto.Positions);
+            }
             return result;
         }
 

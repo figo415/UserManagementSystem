@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     {
         [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string ModuleName { get; set; }
 

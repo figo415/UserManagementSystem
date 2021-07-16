@@ -44,15 +44,28 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<DictItemDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
+        ///// <summary>
+        ///// 根据主键获取字典项
+        ///// </summary>
+        ///// <param name="dictItemId">Guid</param>
+        ///// <returns>DictItemDto</returns>
+        //[HttpGet("{dictItemId}")]
+        //public ActionResult<ApiResult<DictItemDto>> GetDictItem(Guid dictItemId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         /// <summary>
-        /// 根据主键获取字典项
+        /// 根据字典名称获取字典值
         /// </summary>
-        /// <param name="dictItemId">Guid</param>
-        /// <returns>DictItemDto</returns>
-        [HttpGet("{dictItemId}")]
-        public ActionResult<ApiResult<DictItemDto>> GetDictItem(Guid dictItemId)
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        [HttpGet("{keyName}")]
+        public async Task<ActionResult<ApiResult<StringDtoList>>> GetDictItemValues(string keyName)
         {
-            throw new NotImplementedException();
+            var result = await _service.GetDictItemValues(keyName);
+            var lst = new StringDtoList(result);
+            return ApiResult<StringDtoList>.HasData(lst, result.Count());
         }
 
         /// <summary>

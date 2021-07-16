@@ -46,7 +46,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if (source.Menus.Any())
             {
-                return source.Menus.Select(rm => rm.MenuID).ToList();
+                return source.Menus.Select(rm => rm.MenuId).ToList();
             }
             return new List<Guid>();
         }

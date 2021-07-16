@@ -14,21 +14,21 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	public class ReagentDosage:Entity
 	{
 		/// <summary>
-		/// 嵌入值对象：体积
+		/// 体积
 		/// </summary>
 		public Cubage Cubage { get; set; }
 
 		/// <summary>
-		/// 嵌入值对象：质量
+		/// 质量
 		/// </summary>
 		public Quality Quality { get; set; }
 
 		/// <summary>
 		/// 外键到试剂
 		/// </summary>
-		public Guid ReagentID { get; set; }
+		public Guid ReagentId { get; set; }
 
-		[ForeignKey("ReagentID")]
+		[ForeignKey("ReagentId")]
 		public Reagent Reagent { get; set; }
 
 		public virtual ICollection<SolutionReagentDosage> Solutions { get; set; }

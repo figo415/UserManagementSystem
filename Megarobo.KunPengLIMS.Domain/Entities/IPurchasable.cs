@@ -7,12 +7,12 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     interface IPurchasable
     {
 		/// <summary>
-		/// 购买来源：嵌入值对象：链接
+		/// 购买来源
 		/// </summary>
 		public Link PurchaseFrom { get; set; }
 
 		/// <summary>
-		/// 购买价格：嵌入值对象：价格
+		/// 购买价格
 		/// </summary>
 		public Price Price { get; set; }
 

@@ -45,7 +45,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             if(parameters.DepartmentId!=null)
             {
-                predicate = predicate.And(u => u.DepartmentRoles.Any(d => parameters.DepartmentIds.Contains(d.DepartmentID)));
+                predicate = predicate.And(u => u.DepartmentRoles.Any(d => parameters.DepartmentIds.Contains(d.DepartmentId)));
             }
             if(parameters.StartDate!=null && parameters.EndDate==null)
             {
@@ -85,7 +85,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             var user = DbContext.Set<User>().Include(u => u.DepartmentRoles).ThenInclude(udr => udr.Department).Where(u=>u.Id==userId).SingleOrDefault();
             foreach(var dr in user.DepartmentRoles)
             {
-                dr.Role = DbContext.Set<Role>().SingleOrDefault(s => s.Id == dr.RoleID);
+                dr.Role = DbContext.Set<Role>().SingleOrDefault(s => s.Id == dr.RoleId);
             }
             return user;
         }

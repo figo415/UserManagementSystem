@@ -17,7 +17,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<UserDepartmentRole>> GetUserDepartmentRolesByUser(Guid userId)
         {
-            return System.Threading.Tasks.Task.FromResult(DbContext.Set<UserDepartmentRole>().Where(udr => udr.UserID == userId).AsEnumerable());
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<UserDepartmentRole>().Where(udr => udr.UserId == userId).AsEnumerable());
         }
     }
 }

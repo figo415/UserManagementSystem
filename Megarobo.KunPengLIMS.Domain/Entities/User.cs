@@ -33,13 +33,15 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public virtual ICollection<UserSkill> Skills { get; set; }
 
-        public virtual ICollection<Project> ManagerProjects { get; set; }
+        //public virtual ICollection<Project> ManagerProjects { get; set; }
 
-        public virtual ICollection<Project> ARDProjects { get; set; }
+        //public virtual ICollection<Project> ARDProjects { get; set; }
 
-        public virtual ICollection<Project> FRDProjects { get; set; }
+        //public virtual ICollection<Project> FRDProjects { get; set; }
 
-        public virtual ICollection<Project> SRDProjects { get; set; }
+        //public virtual ICollection<Project> SRDProjects { get; set; }
+
+        public virtual ICollection<ProjectUser> Projects { get; set; }
 
         public virtual ICollection<TaskUser> Tasks { get; set; }
     }

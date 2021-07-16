@@ -17,7 +17,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<UserSkill>> GetUserSkillsByUser(Guid userId)
         {
-            return System.Threading.Tasks.Task.FromResult(DbContext.Set<UserSkill>().Where(us => us.UserID == userId).AsEnumerable());
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<UserSkill>().Where(us => us.UserId == userId).AsEnumerable());
         }
     }
 }

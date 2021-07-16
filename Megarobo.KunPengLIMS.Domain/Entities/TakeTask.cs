@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Take与Task多对多关系")]
     public class TakeTask
     {
-        public Guid TakeID { get; set; }
+        public Guid TakeId { get; set; }
 
-        public Guid TaskID { get; set; }
+        public Guid TaskId { get; set; }
 
-        [ForeignKey("TakeID")]
+        [ForeignKey("TakeId")]
         public virtual Take Take { get; set; }
 
-        [ForeignKey("TaskID")]
+        [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
     }
 }

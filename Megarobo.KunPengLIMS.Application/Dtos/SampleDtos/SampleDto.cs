@@ -58,6 +58,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public string History { get; set; }
 
+		public string SubType { get; set; }
+
 		public List<SampleCellDto> Cells { get; set; }
 	}
 }

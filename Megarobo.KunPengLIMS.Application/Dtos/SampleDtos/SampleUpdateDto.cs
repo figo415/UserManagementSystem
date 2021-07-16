@@ -40,6 +40,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
 		public List<LocationDto> Positions { get; set; }
 
+		public string SubType { get; set; }
+
 		public List<SampleCellDto> Cells { get; set; }
 	}
 }

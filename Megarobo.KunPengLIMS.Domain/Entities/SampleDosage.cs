@@ -14,14 +14,24 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	public class SampleDosage:Entity
 	{
 		/// <summary>
-		/// 嵌入值对象：体积
+		/// 样本名称
+		/// </summary>
+		public string Name { get; set; }
+
+		/// <summary>
+		///体积
 		/// </summary>
 		public Cubage Cubage { get; set; }
 
 		/// <summary>
-		/// 嵌入值对象：质量
+		///质量
 		/// </summary>
 		public Quality Quality { get; set; }
+
+		/// <summary>
+		/// 是细胞则体积数量有效，否则体积和质量有效
+		/// </summary>
+		public bool IsCell { get; set; }
 
 		/// <summary>
 		/// 数量
@@ -31,19 +41,19 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// 外键到样本
 		/// </summary>
-		public Guid SampleID;
+		public Guid SampleId;
 
-		[ForeignKey("SampleID")]
+		[ForeignKey("SampleId")]
 		public Sample Sample { get; set; }
 
-		/// <summary>
-		/// 外键到Soluation
-		/// </summary>
-		//public Guid SolutionID { get; set; }
+        /// <summary>
+        /// 外键到Soluation
+        /// </summary>
+        public Guid SolutionId { get; set; }
 
-		//[ForeignKey("SolutionID")]
-		//public Solution Solution { get; set; }
+        [ForeignKey("SolutionId")]
+        public Solution Solution { get; set; }
 
-		public virtual ICollection<SolutionSampleDosage> Solutions { get; set; }
-	}
+        //public virtual ICollection<SolutionSampleDosage> Solutions { get; set; }
+    }
 }

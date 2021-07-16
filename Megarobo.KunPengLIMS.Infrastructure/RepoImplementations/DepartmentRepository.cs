@@ -72,7 +72,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             var users = department.UserRoles.Select(u => u.User).AsQueryable();
             foreach(var user in users)
             {
-                user.Skills = DbContext.Set<UserSkill>().Include(us => us.Skill).Where(us => us.UserID == user.Id).ToList();
+                user.Skills = DbContext.Set<UserSkill>().Include(us => us.Skill).Where(us => us.UserId == user.Id).ToList();
             }
             return PagedList<User>.CreateAsync(users, parameters.PageNumber, parameters.PageSize);
         }

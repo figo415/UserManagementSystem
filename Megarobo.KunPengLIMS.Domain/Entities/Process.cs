@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// </summary>
 	/// 与Line一对多
 	/// 与Project一对多
-	public class Process:Entity
+	public class Process:AuditableEntity
 	{
 		public string Name { get; set; }
 

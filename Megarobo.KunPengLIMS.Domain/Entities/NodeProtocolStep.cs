@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Node与ProtocolStep多对多关系")]
     public class NodeProtocolStep
     {
-        public Guid NodeID { get; set; }
+        public Guid NodeId { get; set; }
 
-        public Guid ProtocolStepID { get; set; }
+        public Guid ProtocolStepId { get; set; }
 
-        [ForeignKey("NodeID")]
+        [ForeignKey("NodeId")]
         public virtual Node Node { get; set; }
 
-        [ForeignKey("ProtocolStepID")]
+        [ForeignKey("ProtocolStepId")]
         public virtual ProtocolStep ProtocolStep { get; set; }
     }
 }

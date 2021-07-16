@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Task与Sample多对多关系")]
     public class TaskSample
     {
-        public Guid TaskID { get; set; }
+        public Guid TaskId { get; set; }
 
-        public Guid SampleID { get; set; }
+        public Guid SampleId { get; set; }
 
-        [ForeignKey("TaskID")]
+        [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
 
-        [ForeignKey("SampleID")]
+        [ForeignKey("SampleId")]
         public virtual Sample Sample { get; set; }
     }
 }

@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Node与Labware多对多关系")]
     public class NodeLabware
     {
-        public Guid NodeID { get; set; }
+        public Guid NodeId { get; set; }
 
-        public Guid LabwareID { get; set; }
+        public Guid LabwareId { get; set; }
 
-        [ForeignKey("NodeID")]
+        [ForeignKey("NodeId")]
         public virtual Node Node { get; set; }
 
-        [ForeignKey("LabwareID")]
+        [ForeignKey("LabwareId")]
         public virtual Labware Labware { get; set; }
     }
 }

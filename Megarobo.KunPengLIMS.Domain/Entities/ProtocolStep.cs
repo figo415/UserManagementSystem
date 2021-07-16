@@ -13,30 +13,32 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// 与DeviceParameter多对一
 	/// 与Task一对多
 	/// </summary>
-	public class ProtocolStep:Entity
+	public class ProtocolStep:AuditableEntity
 	{
 		[Description("文字描述")]
 		public string Description { get; set; }
 
+		public string Note { get; set; }
+
+		public Guid ParentId { get; set; }
+
+		///// <summary>
+		///// 反应体系：外键到溶液体系
+		///// </summary>
+		//public Guid SolutionId { get; set; }
+
+		//[ForeignKey("SoluationId")]
+		public Solution Solution { get; set; }
+
+		public virtual ICollection<LabwareUsage> LabwareUsages { get; set; }
+
 		/// <summary>
 		/// 外键到设备使用参数
 		/// </summary>
-		public Guid DeviceParameterID { get; set; }
+		public Guid DeviceParameterId { get; set; }
 
-		[ForeignKey("DeviceParameterID")]
+		[ForeignKey("DeviceParameterId")]
 		public DeviceParameter DeviceParameter { get; set; }
-
-		public string Note { get; set; }
-
-		/// <summary>
-		/// 反应体系：外键到溶液体系
-		/// </summary>
-		public Guid SolutionID { get; set; }
-
-		[ForeignKey("SoluationID")]
-		public Solution Solution { get; set; }
-
-		public Guid ParentID { get; set; }
 
 		public virtual ICollection<NodeProtocolStep> Nodes { get; set; }
 

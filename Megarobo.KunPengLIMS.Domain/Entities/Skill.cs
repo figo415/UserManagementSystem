@@ -13,12 +13,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     {
         public string SkillName { get; set; }
 
-        public Guid ParentID { get; set; }
+        public Guid ParentId { get; set; }
 
         public int OrdinalNumber { get; set; }
 
         public bool IsActive { get; set; }
 
         public virtual ICollection<UserSkill> Users { get; set; }
+
+        public virtual ICollection<Node> Nodes { get; set; }
     }
 }

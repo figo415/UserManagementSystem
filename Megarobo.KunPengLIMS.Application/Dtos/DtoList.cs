@@ -8,4 +8,12 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
     {
         public IEnumerable<T> ObjectList { get; set; }
     }
+
+    public class StringDtoList:DtoList<string>
+    {
+        public StringDtoList(IEnumerable<string> lst)
+        {
+            ObjectList = lst;
+        }
+    }
 }

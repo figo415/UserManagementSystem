@@ -41,7 +41,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
 		//public virtual ICollection<Position> Positions { get; set; }
 
-		public virtual ICollection<DevicePosition> Positions { get; set; }
+		//public virtual ICollection<DevicePosition> Positions { get; set; }
 
 		public virtual ICollection<Task> Tasks { get; set; }
 	}

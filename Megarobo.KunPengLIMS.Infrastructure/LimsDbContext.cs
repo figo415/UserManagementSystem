@@ -49,8 +49,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure
 
         public DbSet<NodeReagent> NodeReagents { get; set; }
 
-        public DbSet<NodeType> NodeTypes { get; set; }
-
         public DbSet<Position> Positions { get; set; }
 
         public DbSet<Process> Processes { get; set; }
@@ -106,68 +104,69 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.ProjectManager)
-                .WithMany(u => u.ManagerProjects)
-                .HasForeignKey(p => p.ProjectManagerID)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.ARD)
-                .WithMany(u => u.ARDProjects)
-                .HasForeignKey(p => p.ARDID)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.FRD)
-                .WithMany(u => u.FRDProjects)
-                .HasForeignKey(p => p.FRDID)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.SRD)
-                .WithMany(u => u.SRDProjects)
-                .HasForeignKey(p => p.SRDID)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
+            //modelBuilder.Entity<Project>()
+            //    .HasOne(p => p.ProjectManager)
+            //    .WithMany(u => u.ManagerProjects)
+            //    .HasForeignKey(p => p.ProjectManagerId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .IsRequired();
+            //modelBuilder.Entity<Project>()
+            //    .HasOne(p => p.ARD)
+            //    .WithMany(u => u.ARDProjects)
+            //    .HasForeignKey(p => p.ARDId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .IsRequired();
+            //modelBuilder.Entity<Project>()
+            //    .HasOne(p => p.FRD)
+            //    .WithMany(u => u.FRDProjects)
+            //    .HasForeignKey(p => p.FRDId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .IsRequired();
+            //modelBuilder.Entity<Project>()
+            //    .HasOne(p => p.SRD)
+            //    .WithMany(u => u.SRDProjects)
+            //    .HasForeignKey(p => p.SRDId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .IsRequired();
 
             modelBuilder.Entity<TakeTask>()
                 .HasOne(t => t.Take)
                 .WithMany(tk => tk.Tasks)
-                .HasForeignKey(t => t.TakeID);
+                .HasForeignKey(t => t.TakeId);
             modelBuilder.Entity<TakeTask>()
                 .HasOne(t => t.Task)
                 .WithMany(ts=> ts.Takes)
-                .HasForeignKey(t => t.TaskID);
+                .HasForeignKey(t => t.TaskId);
 
             modelBuilder.Entity<TaskSample>()
                 .HasOne(ts => ts.Task)
                 .WithMany(t => t.Samples)
-                .HasForeignKey(ts => ts.TaskID);
+                .HasForeignKey(ts => ts.TaskId);
             modelBuilder.Entity<TaskSample>()
                 .HasOne(ts => ts.Sample)
                 .WithMany(s => s.Tasks)
-                .HasForeignKey(ts => ts.SampleID);
+                .HasForeignKey(ts => ts.SampleId);
 
-            modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserID, u.DepartmentID, u.RoleID });
-            modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserID, us.SkillID });
-            modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleID, rm.MenuID });
-            modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareID, lp.PositionID });
-            modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentID, rp.PositionID });
+            modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserId, u.DepartmentId, u.RoleId });
+            modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserId, us.SkillId });
+            modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleId, rm.MenuId });
+            modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareId, lp.PositionId });
+            modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentId, rp.PositionId });
             modelBuilder.Entity<DevicePosition>().HasKey(dp => new { dp.DeviceId, dp.PositionId });
             modelBuilder.Entity<SamplePosition>().HasKey(sp => new { sp.SampleId, sp.PositionId });
-            modelBuilder.Entity<NodeDevice>().HasKey(nd => new { nd.NodeID,nd.DeviceID });
-            modelBuilder.Entity<NodeLabware>().HasKey(nl => new { nl.NodeID,nl.LabwareID });
-            modelBuilder.Entity<NodeProtocolStep>().HasKey(np => new { np.NodeID,np.ProtocolStepID });
-            modelBuilder.Entity<NodeReagent>().HasKey(nr => new { nr.NodeID,nr.ReagentID });
-            modelBuilder.Entity<ProjectTask>().HasKey(pt => new { pt.ProjectID,pt.TaskID });
-            modelBuilder.Entity<SolutionReagentDosage>().HasKey(sr => new { sr.SolutionID,sr.ReagentDosageID });
-            modelBuilder.Entity<SolutionSampleDosage>().HasKey(ss => new { ss.SolutionID,ss.SampleDosageID });
-            modelBuilder.Entity<TakeTask>().HasKey(tt => new { tt.TakeID,tt.TaskID });
-            modelBuilder.Entity<TaskLabware>().HasKey(tl => new { tl.TaskID,tl.LabwareID });
-            modelBuilder.Entity<TaskReagent>().HasKey(tr => new { tr.TaskID, tr.ReagentID });
-            modelBuilder.Entity<TaskSample>().HasKey(ts => new { ts.TaskID, ts.SampleID });
-            modelBuilder.Entity<TaskUser>().HasKey(tu => new { tu.TaskID, tu.UserID });
+            modelBuilder.Entity<NodeDevice>().HasKey(nd => new { nd.NodeId,nd.DeviceId });
+            modelBuilder.Entity<NodeLabware>().HasKey(nl => new { nl.NodeId,nl.LabwareId });
+            modelBuilder.Entity<NodeProtocolStep>().HasKey(np => new { np.NodeId,np.ProtocolStepId });
+            modelBuilder.Entity<NodeReagent>().HasKey(nr => new { nr.NodeId,nr.ReagentId });
+            modelBuilder.Entity<ProjectTask>().HasKey(pt => new { pt.ProjectId,pt.TaskId });
+            modelBuilder.Entity<ProjectUser>().HasKey(pu => new { pu.ProjectId, pu.UserId });
+            modelBuilder.Entity<SolutionReagentDosage>().HasKey(sr => new { sr.SolutionId,sr.ReagentDosageId });
+            modelBuilder.Entity<SolutionSampleDosage>().HasKey(ss => new { ss.SolutionId,ss.SampleDosageId });
+            modelBuilder.Entity<TakeTask>().HasKey(tt => new { tt.TakeId,tt.TaskId });
+            modelBuilder.Entity<TaskLabware>().HasKey(tl => new { tl.TaskId,tl.LabwareId });
+            modelBuilder.Entity<TaskReagent>().HasKey(tr => new { tr.TaskId, tr.ReagentId });
+            modelBuilder.Entity<TaskSample>().HasKey(ts => new { ts.TaskId, ts.SampleId });
+            modelBuilder.Entity<TaskUser>().HasKey(tu => new { tu.TaskId, tu.UserId });
             
 
             //启用Guid主键类型扩展

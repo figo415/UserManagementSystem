@@ -34,6 +34,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var pagedDtos = _mapper.Map<List<SampleDto>>(pagedSamples);
             foreach(var dto in pagedDtos)
             {
+                dto.SubType = "cell";
                 var locationlist = await  _locationService.GetLocation(dto.Id);
                 dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
             }
@@ -69,7 +70,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             if (result)
             {
-                result = await InsertSampleLocation(dto, sample.Id);
+                result = await InsertSampleLocation(sample.Id, dto.Name, dto.Positions);
                 if (!result)
                 {
                     await DeleteSample(sample.Id);
@@ -78,12 +79,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return result;
         }
 
-        private async Task<bool> InsertSampleLocation(SampleCreationDto dto, Guid sampleId)
+        private async Task<bool> InsertSampleLocation(Guid sampleId, string name, List<LocationDto> positions)
         {
             var request = new LocationCreationRequest();
             request.id = sampleId;
-            request.name = dto.Name;
-            request.positions = _mapper.Map<List<Location>>(dto.Positions);
+            request.name = name;
+            request.positions = _mapper.Map<List<Location>>(positions);
             var result = await _locationService.InsertLocation(request);
             return result;
         }
@@ -111,6 +112,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             _repoWrapper.SampleRepo.Update(sample);
             var result = await _repoWrapper.SampleRepo.SaveAsync();
+            if (result)
+            {
+                result = await InsertSampleLocation(sample.Id, sample.Name, dto.Positions);
+            }
             return result;
         }
 

@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Solution与ReagentDosage多对多关系")]
     public class SolutionReagentDosage
     {
-        public Guid SolutionID { get; set; }
+        public Guid SolutionId { get; set; }
 
-        public Guid ReagentDosageID { get; set; }
+        public Guid ReagentDosageId { get; set; }
 
-        [ForeignKey("SolutionID")]
+        [ForeignKey("SolutionId")]
         public virtual Solution Solution { get; set; }
 
-        [ForeignKey("ReagentDosageID")]
+        [ForeignKey("ReagentDosageId")]
         public virtual ReagentDosage ReagentDosage { get; set; }
     }
 }

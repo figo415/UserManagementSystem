@@ -33,7 +33,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> InsertDictItem(DictItemCreationDto dto)
         {
-            var existed = await _repoWrapper.DictItemRepo.GetDictItemsByName(dto.KeyName);
+            var existed = await _repoWrapper.DictItemRepo.GetDictItemsByName(dto.KeyName, null);
             if (existed.Any())
             {
                 throw new AlreadyExistedException("DictItem with Name=" + dto.KeyName + " is already existed");
@@ -90,6 +90,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             var result = await _repoWrapper.DictItemRepo.SaveAsync();
             return result;
+        }
+
+        public async Task<List<string>> GetDictItemValues(string keyName)
+        {
+            var existed = await _repoWrapper.DictItemRepo.GetDictItemsByName(keyName, false);
+            if(existed.Any())
+            {
+                var dictitem = existed.First();
+                var dictitemDto = _mapper.Map<DictItemDto>(dictitem);
+                return dictitemDto.Values;
+            }
+            return new List<string>();
         }
     }
 }

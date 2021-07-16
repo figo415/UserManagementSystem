@@ -17,7 +17,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<IEnumerable<RoleMenu>> GetRoleMenusByRole(Guid roleId)
         {
-            return System.Threading.Tasks.Task.FromResult(DbContext.Set<RoleMenu>().Where(rm => rm.RoleID == roleId).AsEnumerable());
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<RoleMenu>().Where(rm => rm.RoleId == roleId).AsEnumerable());
         }
     }
 }

@@ -9,14 +9,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("User和Skill多对多关系")]
     public class UserSkill
     {
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid SkillID { get; set; }
+        public Guid SkillId { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
-        [ForeignKey("SkillID")]
+        [ForeignKey("SkillId")]
         public virtual Skill Skill { get; set; }
     }
 }

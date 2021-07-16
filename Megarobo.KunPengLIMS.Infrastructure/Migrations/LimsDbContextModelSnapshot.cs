@@ -175,7 +175,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DeviceID")
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Note")
@@ -183,7 +183,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceID");
+                    b.HasIndex("DeviceId");
 
                     b.ToTable("DeviceParameters");
                 });
@@ -293,17 +293,39 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.LabwarePosition", b =>
                 {
-                    b.Property<Guid>("LabwareID")
+                    b.Property<Guid>("LabwareId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("PositionID")
+                    b.Property<Guid>("PositionId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("LabwareID", "PositionID");
+                    b.HasKey("LabwareId", "PositionId");
 
-                    b.HasIndex("PositionID");
+                    b.HasIndex("PositionId");
 
                     b.ToTable("LabwarePositions");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.LabwareUsage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ProtocolStepId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProtocolStepId");
+
+                    b.ToTable("LabwareUsage");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Line", b =>
@@ -337,7 +359,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.LogItem", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -372,7 +394,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("StackTrace")
                         .HasColumnType("text");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("LogItems");
                 });
@@ -424,30 +446,39 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("DeviceSearchString")
+                    b.Property<bool>("CanGenerateResultFile")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("CanGenerateResultSample")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("InteractiveTime")
                         .HasColumnType("text");
 
-                    b.Property<string>("LabwareSearchString")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("NodeTypeID")
+                    b.Property<Guid>("NodeTypeId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("ProcessId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ReagentSearchString")
+                    b.Property<string>("TimeWaitToRun")
                         .HasColumnType("text");
-
-                    b.Property<int>("ResultSample")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Samples")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NodeTypeID");
+                    b.HasIndex("NodeTypeId");
 
                     b.HasIndex("ProcessId");
 
@@ -456,82 +487,62 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeDevice", b =>
                 {
-                    b.Property<Guid>("NodeID")
+                    b.Property<Guid>("NodeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DeviceID")
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("NodeID", "DeviceID");
+                    b.HasKey("NodeId", "DeviceId");
 
-                    b.HasIndex("DeviceID");
+                    b.HasIndex("DeviceId");
 
                     b.ToTable("NodeDevices");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeLabware", b =>
                 {
-                    b.Property<Guid>("NodeID")
+                    b.Property<Guid>("NodeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("LabwareID")
+                    b.Property<Guid>("LabwareId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("NodeID", "LabwareID");
+                    b.HasKey("NodeId", "LabwareId");
 
-                    b.HasIndex("LabwareID");
+                    b.HasIndex("LabwareId");
 
                     b.ToTable("NodeLabwares");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeProtocolStep", b =>
                 {
-                    b.Property<Guid>("NodeID")
+                    b.Property<Guid>("NodeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProtocolStepID")
+                    b.Property<Guid>("ProtocolStepId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("NodeID", "ProtocolStepID");
+                    b.HasKey("NodeId", "ProtocolStepId");
 
-                    b.HasIndex("ProtocolStepID");
+                    b.HasIndex("ProtocolStepId");
 
                     b.ToTable("NodeProtocolSteps");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeReagent", b =>
                 {
-                    b.Property<Guid>("NodeID")
+                    b.Property<Guid>("NodeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ReagentID")
+                    b.Property<Guid>("ReagentId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("NodeID", "ReagentID");
+                    b.HasKey("NodeId", "ReagentId");
 
-                    b.HasIndex("ReagentID");
+                    b.HasIndex("ReagentId");
 
                     b.ToTable("NodeReagents");
-                });
-
-            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
-
-                    b.Property<string>("GrandClass")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SubClass")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NodeTypes");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Position", b =>
@@ -575,6 +586,15 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -592,22 +612,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ARDID")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FRDID")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ProcessID")
-                        .HasColumnType("uuid");
+                    b.Property<DateTime?>("PlannedStartTime")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("ProjectManagerID")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SRDID")
+                    b.Property<Guid>("ProcessId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Status")
@@ -615,32 +626,39 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ARDID");
-
-                    b.HasIndex("FRDID");
-
-                    b.HasIndex("ProcessID");
-
-                    b.HasIndex("ProjectManagerID");
-
-                    b.HasIndex("SRDID");
+                    b.HasIndex("ProcessId");
 
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ProjectTask", b =>
                 {
-                    b.Property<Guid>("ProjectID")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("ProjectID", "TaskID");
+                    b.HasKey("ProjectId", "TaskId");
 
-                    b.HasIndex("TaskID");
+                    b.HasIndex("TaskId");
 
                     b.ToTable("ProjectTasks");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ProjectUser", b =>
+                {
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ProjectId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProjectUser");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ProtocolStep", b =>
@@ -649,29 +667,30 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("DeviceParameterID")
+                    b.Property<Guid>("DeviceParameterId")
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Note")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ParentID")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("SoluationID")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SolutionID")
+                    b.Property<Guid>("ParentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceParameterID");
-
-                    b.HasIndex("SoluationID");
+                    b.HasIndex("DeviceParameterId");
 
                     b.ToTable("ProtocolSteps");
                 });
@@ -729,29 +748,48 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ReagentID")
+                    b.Property<Guid>("ReagentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReagentID");
+                    b.HasIndex("ReagentId");
 
                     b.ToTable("ReagentDosages");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ReagentPosition", b =>
                 {
-                    b.Property<Guid>("ReagentID")
+                    b.Property<Guid>("ReagentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("PositionID")
+                    b.Property<Guid>("PositionId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("ReagentID", "PositionID");
+                    b.HasKey("ReagentId", "PositionId");
 
-                    b.HasIndex("PositionID");
+                    b.HasIndex("PositionId");
 
                     b.ToTable("ReagentPositions");
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ReagentUsage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("SolutionId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SolutionId");
+
+                    b.ToTable("ReagentUsage");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Role", b =>
@@ -782,15 +820,15 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.RoleMenu", b =>
                 {
-                    b.Property<Guid>("RoleID")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MenuID")
+                    b.Property<Guid>("MenuId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("RoleID", "MenuID");
+                    b.HasKey("RoleId", "MenuId");
 
-                    b.HasIndex("MenuID");
+                    b.HasIndex("MenuId");
 
                     b.ToTable("RoleMenu");
                 });
@@ -853,15 +891,26 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsCell")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("SampleID")
+                    b.Property<Guid>("SampleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SolutionId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SampleID");
+                    b.HasIndex("SampleId");
+
+                    b.HasIndex("SolutionId");
 
                     b.ToTable("SampleDosages");
                 });
@@ -902,7 +951,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<int>("OrdinalNumber")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ParentID")
+                    b.Property<Guid>("ParentId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("SkillName")
@@ -919,37 +968,43 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("ProtocolStepId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProtocolStepId")
+                        .IsUnique();
 
                     b.ToTable("Solutions");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.SolutionReagentDosage", b =>
                 {
-                    b.Property<Guid>("SolutionID")
+                    b.Property<Guid>("SolutionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ReagentDosageID")
+                    b.Property<Guid>("ReagentDosageId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("SolutionID", "ReagentDosageID");
+                    b.HasKey("SolutionId", "ReagentDosageId");
 
-                    b.HasIndex("ReagentDosageID");
+                    b.HasIndex("ReagentDosageId");
 
                     b.ToTable("SolutionReagentDosages");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.SolutionSampleDosage", b =>
                 {
-                    b.Property<Guid>("SolutionID")
+                    b.Property<Guid>("SolutionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("SampleDosageID")
+                    b.Property<Guid>("SampleDosageId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("SolutionID", "SampleDosageID");
+                    b.HasKey("SolutionId", "SampleDosageId");
 
-                    b.HasIndex("SampleDosageID");
+                    b.HasIndex("SampleDosageId");
 
                     b.ToTable("SolutionSampleDosages");
                 });
@@ -989,10 +1044,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CurrentTaskID")
+                    b.Property<Guid>("CurrentTaskId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectID")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Status")
@@ -1003,22 +1058,22 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Takes");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.TakeTask", b =>
                 {
-                    b.Property<Guid>("TakeID")
+                    b.Property<Guid>("TakeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("TakeID", "TaskID");
+                    b.HasKey("TakeId", "TaskId");
 
-                    b.HasIndex("TaskID");
+                    b.HasIndex("TaskId");
 
                     b.ToTable("TakeTasks");
                 });
@@ -1029,19 +1084,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DeviceID")
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("NodeID")
+                    b.Property<Guid>("NodeId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ParentID")
+                    b.Property<Guid>("ParentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProtocolID")
+                    b.Property<Guid>("ProtocolId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("StartTime")
@@ -1050,80 +1105,80 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TakeID")
+                    b.Property<Guid>("TakeId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceID");
+                    b.HasIndex("DeviceId");
 
-                    b.HasIndex("NodeID");
+                    b.HasIndex("NodeId");
 
-                    b.HasIndex("ProtocolID");
+                    b.HasIndex("ProtocolId");
 
                     b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.TaskLabware", b =>
                 {
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("LabwareID")
+                    b.Property<Guid>("LabwareId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.HasKey("TaskID", "LabwareID");
+                    b.HasKey("TaskId", "LabwareId");
 
-                    b.HasIndex("LabwareID");
+                    b.HasIndex("LabwareId");
 
                     b.ToTable("TaskLabwares");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.TaskReagent", b =>
                 {
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ReagentID")
+                    b.Property<Guid>("ReagentId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("TaskID", "ReagentID");
+                    b.HasKey("TaskId", "ReagentId");
 
-                    b.HasIndex("ReagentID");
+                    b.HasIndex("ReagentId");
 
                     b.ToTable("TaskReagents");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.TaskSample", b =>
                 {
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("SampleID")
+                    b.Property<Guid>("SampleId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("TaskID", "SampleID");
+                    b.HasKey("TaskId", "SampleId");
 
-                    b.HasIndex("SampleID");
+                    b.HasIndex("SampleId");
 
                     b.ToTable("TaskSamples");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.TaskUser", b =>
                 {
-                    b.Property<Guid>("TaskID")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("TaskID", "UserID");
+                    b.HasKey("TaskId", "UserId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("TaskUser");
                 });
@@ -1168,35 +1223,35 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.UserDepartmentRole", b =>
                 {
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DepartmentID")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RoleID")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("UserID", "DepartmentID", "RoleID");
+                    b.HasKey("UserId", "DepartmentId", "RoleId");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DepartmentId");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("UserDepartmentRole");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.UserSkill", b =>
                 {
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("SkillID")
+                    b.Property<Guid>("SkillId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("UserID", "SkillID");
+                    b.HasKey("UserId", "SkillId");
 
-                    b.HasIndex("SkillID");
+                    b.HasIndex("SkillId");
 
                     b.ToTable("UserSkills");
                 });
@@ -1291,7 +1346,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
                         .WithMany("DeviceParameters")
-                        .HasForeignKey("DeviceID")
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1318,7 +1373,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.DevicePosition", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
-                        .WithMany("Positions")
+                        .WithMany()
                         .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1375,13 +1430,22 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Labware", "Labware")
                         .WithMany("Positions")
-                        .HasForeignKey("LabwareID")
+                        .HasForeignKey("LabwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Position", "Position")
                         .WithMany("Labwares")
-                        .HasForeignKey("PositionID")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.LabwareUsage", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.ProtocolStep", "ProtocolStep")
+                        .WithMany("LabwareUsages")
+                        .HasForeignKey("ProtocolStepId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1409,37 +1473,15 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Node", b =>
                 {
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.NodeType", "NodeType")
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Skill", "NodeType")
                         .WithMany("Nodes")
-                        .HasForeignKey("NodeTypeID")
+                        .HasForeignKey("NodeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Process", null)
                         .WithMany("Nodes")
                         .HasForeignKey("ProcessId");
-
-                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Period", "InteractiveTimes", b1 =>
-                        {
-                            b1.Property<Guid>("NodeId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("End")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Start")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("Unit")
-                                .HasColumnType("text");
-
-                            b1.HasKey("NodeId");
-
-                            b1.ToTable("Nodes");
-
-                            b1.WithOwner()
-                                .HasForeignKey("NodeId");
-                        });
 
                     b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.TimeInterval", "Duration", b1 =>
                         {
@@ -1465,13 +1507,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
                         .WithMany("Nodes")
-                        .HasForeignKey("DeviceID")
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Node", "Node")
-                        .WithMany("Devices")
-                        .HasForeignKey("NodeID")
+                        .WithMany()
+                        .HasForeignKey("NodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1480,13 +1522,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Labware", "Labware")
                         .WithMany("Nodes")
-                        .HasForeignKey("LabwareID")
+                        .HasForeignKey("LabwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Node", "Node")
-                        .WithMany("Labwares")
-                        .HasForeignKey("NodeID")
+                        .WithMany()
+                        .HasForeignKey("NodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1495,13 +1537,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Node", "Node")
                         .WithMany("ProtocolSteps")
-                        .HasForeignKey("NodeID")
+                        .HasForeignKey("NodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.ProtocolStep", "ProtocolStep")
                         .WithMany("Nodes")
-                        .HasForeignKey("ProtocolStepID")
+                        .HasForeignKey("ProtocolStepId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1509,48 +1551,24 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.NodeReagent", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Node", "Node")
-                        .WithMany("Reagents")
-                        .HasForeignKey("NodeID")
+                        .WithMany()
+                        .HasForeignKey("NodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Reagent", "Reagent")
                         .WithMany("Nodes")
-                        .HasForeignKey("ReagentID")
+                        .HasForeignKey("ReagentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Project", b =>
                 {
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "ARD")
-                        .WithMany("ARDProjects")
-                        .HasForeignKey("ARDID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "FRD")
-                        .WithMany("FRDProjects")
-                        .HasForeignKey("FRDID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Process", "Process")
                         .WithMany("Projects")
-                        .HasForeignKey("ProcessID")
+                        .HasForeignKey("ProcessId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "ProjectManager")
-                        .WithMany("ManagerProjects")
-                        .HasForeignKey("ProjectManagerID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "SRD")
-                        .WithMany("SRDProjects")
-                        .HasForeignKey("SRDID")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1558,13 +1576,28 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Project", "Project")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Projects")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ProjectUser", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Project", "Project")
+                        .WithMany("Users")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "User")
+                        .WithMany("Projects")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1573,13 +1606,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.DeviceParameter", "DeviceParameter")
                         .WithMany("ProtocolSteps")
-                        .HasForeignKey("DeviceParameterID")
+                        .HasForeignKey("DeviceParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Solution", "Solution")
-                        .WithMany("ProtocolSteps")
-                        .HasForeignKey("SoluationID");
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Reagent", b =>
@@ -1703,7 +1732,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Reagent", "Reagent")
                         .WithMany("ReagentDosages")
-                        .HasForeignKey("ReagentID")
+                        .HasForeignKey("ReagentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1750,28 +1779,75 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Position", "Position")
                         .WithMany("Reagents")
-                        .HasForeignKey("PositionID")
+                        .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Reagent", "Reagent")
                         .WithMany("Positions")
-                        .HasForeignKey("ReagentID")
+                        .HasForeignKey("ReagentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.ReagentUsage", b =>
+                {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Solution", "Solution")
+                        .WithMany("ReagentUsages")
+                        .HasForeignKey("SolutionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "Cubage", b1 =>
+                        {
+                            b1.Property<Guid>("ReagentUsageId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("ReagentUsageId");
+
+                            b1.ToTable("ReagentUsage");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ReagentUsageId");
+                        });
+
+                    b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Quality", "Quality", b1 =>
+                        {
+                            b1.Property<Guid>("ReagentUsageId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("text");
+
+                            b1.Property<float>("Value")
+                                .HasColumnType("real");
+
+                            b1.HasKey("ReagentUsageId");
+
+                            b1.ToTable("ReagentUsage");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ReagentUsageId");
+                        });
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.RoleMenu", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Menu", "Menu")
                         .WithMany("Roles")
-                        .HasForeignKey("MenuID")
+                        .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Role", "Role")
                         .WithMany("Menus")
-                        .HasForeignKey("RoleID")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1882,7 +1958,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Sample", "Sample")
                         .WithMany("SampleDosages")
-                        .HasForeignKey("SampleID")
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Solution", "Solution")
+                        .WithMany("SampleDosages")
+                        .HasForeignKey("SolutionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1942,6 +2024,12 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Solution", b =>
                 {
+                    b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.ProtocolStep", "ProtocolStep")
+                        .WithOne("Solution")
+                        .HasForeignKey("Megarobo.KunPengLIMS.Domain.Entities.Solution", "ProtocolStepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("Megarobo.KunPengLIMS.Domain.Entities.Cubage", "Total", b1 =>
                         {
                             b1.Property<Guid>("SolutionId")
@@ -1966,13 +2054,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.ReagentDosage", "ReagentDosage")
                         .WithMany("Solutions")
-                        .HasForeignKey("ReagentDosageID")
+                        .HasForeignKey("ReagentDosageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Solution", "Solution")
-                        .WithMany("ReagentDosages")
-                        .HasForeignKey("SolutionID")
+                        .WithMany()
+                        .HasForeignKey("SolutionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1980,14 +2068,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.SolutionSampleDosage", b =>
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.SampleDosage", "SampleDosage")
-                        .WithMany("Solutions")
-                        .HasForeignKey("SampleDosageID")
+                        .WithMany()
+                        .HasForeignKey("SampleDosageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Solution", "Solution")
-                        .WithMany("SampleDosages")
-                        .HasForeignKey("SolutionID")
+                        .WithMany()
+                        .HasForeignKey("SolutionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2018,7 +2106,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Project", "Project")
                         .WithMany("Takes")
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2027,13 +2115,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Take", "Take")
                         .WithMany("Tasks")
-                        .HasForeignKey("TakeID")
+                        .HasForeignKey("TakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Takes")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2042,19 +2130,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Device", "Device")
                         .WithMany("Tasks")
-                        .HasForeignKey("DeviceID")
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Node", "Node")
                         .WithMany("Tasks")
-                        .HasForeignKey("NodeID")
+                        .HasForeignKey("NodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.ProtocolStep", "ProtocolStep")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProtocolID")
+                        .HasForeignKey("ProtocolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2087,13 +2175,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Labware", "Labware")
                         .WithMany("Tasks")
-                        .HasForeignKey("LabwareID")
+                        .HasForeignKey("LabwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Labwares")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2102,13 +2190,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Reagent", "Reagent")
                         .WithMany("Tasks")
-                        .HasForeignKey("ReagentID")
+                        .HasForeignKey("ReagentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Reagents")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2117,13 +2205,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Sample", "Sample")
                         .WithMany("Tasks")
-                        .HasForeignKey("SampleID")
+                        .HasForeignKey("SampleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Samples")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2132,13 +2220,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Task", "Task")
                         .WithMany("Users")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "User")
                         .WithMany("Tasks")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2147,19 +2235,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Department", "Department")
                         .WithMany("UserRoles")
-                        .HasForeignKey("DepartmentID")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Role", "Role")
                         .WithMany("UserDepartments")
-                        .HasForeignKey("RoleID")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "User")
                         .WithMany("DepartmentRoles")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2168,13 +2256,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                 {
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.Skill", "Skill")
                         .WithMany("Users")
-                        .HasForeignKey("SkillID")
+                        .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Megarobo.KunPengLIMS.Domain.Entities.User", "User")
                         .WithMany("Skills")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -42,9 +42,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return predicate;
         }
 
-        public System.Threading.Tasks.Task<IEnumerable<DictItem>> GetDictItemsByName(string dictItemName)
+        public System.Threading.Tasks.Task<IEnumerable<DictItem>> GetDictItemsByName(string dictItemName, bool? isDeleted)
         {
-            return GetByConditionAsync(d => d.KeyName == dictItemName);
+            if (isDeleted == null)
+            {
+                return GetByConditionAsync(d => d.KeyName == dictItemName);
+            }
+            return GetByConditionAsync(d => d.KeyName == dictItemName && d.IsDeleted == isDeleted);
         }
     }
 }

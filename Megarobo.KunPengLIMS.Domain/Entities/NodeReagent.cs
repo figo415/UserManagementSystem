@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Node与Reagent多对多关系")]
     public class NodeReagent
     {
-        public Guid NodeID { get; set; }
+        public Guid NodeId { get; set; }
 
-        public Guid ReagentID { get; set; }
+        public Guid ReagentId { get; set; }
 
-        [ForeignKey("NodeID")]
+        [ForeignKey("NodeId")]
         public virtual Node Node { get; set; }
 
-        [ForeignKey("ReagentID")]
+        [ForeignKey("ReagentId")]
         public virtual Reagent Reagent { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         public UserProfile()
         {
             CreateMap<UserDepartmentRole, DepartmentIdRoleId>()
-                .ForMember(d => d.DepartmentId, opt => opt.MapFrom(s => s.DepartmentID))
-                .ForMember(d => d.RoleId, opt => opt.MapFrom(s => s.RoleID));
+                .ForMember(d => d.DepartmentId, opt => opt.MapFrom(s => s.DepartmentId))
+                .ForMember(d => d.RoleId, opt => opt.MapFrom(s => s.RoleId));
 
             CreateMap<User, UserDto>()
                 .ForMember(d => d.Skill, opt => opt.MapFrom<SkillResolver>())
@@ -53,7 +53,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if(source.Skills.Any())
             {
-                return source.Skills.Select(s => s.SkillID).ToList();
+                return source.Skills.Select(s => s.SkillId).ToList();
             }
             return new List<Guid>();
         }

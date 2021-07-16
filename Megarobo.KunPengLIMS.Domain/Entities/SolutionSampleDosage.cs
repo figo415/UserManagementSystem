@@ -10,14 +10,14 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
     [Description("Solution与SampleDosage多对多关系")]
     public class SolutionSampleDosage
     {
-        public Guid SolutionID { get; set; }
+        public Guid SolutionId { get; set; }
 
-        public Guid SampleDosageID { get; set; }
+        public Guid SampleDosageId { get; set; }
 
-        [ForeignKey("SolutionID")]
+        [ForeignKey("SolutionId")]
         public virtual Solution Solution { get; set; }
 
-        [ForeignKey("SampleDosageID")]
+        [ForeignKey("SampleDosageId")]
         public virtual SampleDosage SampleDosage { get; set; }
     }
 }

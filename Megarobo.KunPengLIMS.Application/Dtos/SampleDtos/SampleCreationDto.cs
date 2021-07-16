@@ -33,7 +33,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 		[Required(ErrorMessage = "请选择质量单位")]
 		public string QualityUnit { get; set; }
 
-		[Required(ErrorMessage ="请选择供应商")]
 		public string Supplier { get; set; }
 
 		public SourceTask SourceTask { get; set; }
@@ -49,6 +48,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 		public string Description { get; set; }
 
 		public List<LocationDto> Positions { get; set; }
+
+		public string SubType { get; set; }
 
 		public List<SampleCellDto> Cells { get; set; }
 	}

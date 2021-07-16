@@ -61,7 +61,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach(var menuid in dto.MenuIds)
                 {
-                    var rolemenu = new RoleMenu() { RoleID = role.Id, MenuID = menuid };
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menuid };
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }
@@ -88,7 +88,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 foreach (var menuid in dto.MenuIds)
                 {
-                    var rolemenu = new RoleMenu() { RoleID = role.Id, MenuID = menuid };
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menuid };
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }
