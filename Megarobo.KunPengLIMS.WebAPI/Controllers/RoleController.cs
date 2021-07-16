@@ -45,16 +45,16 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<RoleDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
-        /// <summary>
-        /// 根据主键获取角色
-        /// </summary>
-        /// <param name="roleId">Guid</param>
-        /// <returns>RoleDto</returns>
-        [HttpGet("{roleId}")]
-        public async Task<ActionResult<ApiResult<RoleDto>>> GetRole(Guid roleId)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// 根据主键获取角色
+        ///// </summary>
+        ///// <param name="roleId">Guid</param>
+        ///// <returns>RoleDto</returns>
+        //[HttpGet("{roleId}")]
+        //public async Task<ActionResult<ApiResult<RoleDto>>> GetRole(Guid roleId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// 获取某个角色对应的菜单列表

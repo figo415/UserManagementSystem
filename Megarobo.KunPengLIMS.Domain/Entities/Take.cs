@@ -24,14 +24,17 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Status { get; set; }
 
 		/// <summary>
-		/// 外键到任务
-		/// </summary>
-		public Guid CurrentTaskId { get; set; }
-
-		/// <summary>
 		/// 外键到项目
 		/// </summary>
 		public Guid ProjectId { get; set; }
+
+		[ForeignKey("ProjectId")]
+		public virtual Project Project { get; set; }
+
+		/// <summary>
+		/// 外键到任务
+		/// </summary>
+		public Guid CurrentTaskId { get; set; }
 
 		//[ForeignKey("CurrentTaskID")]
 		//public Task CurrentTask { get; set; }
@@ -50,7 +53,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
 		public virtual ICollection<TakeTask> Tasks { get; set; }
 
-		[ForeignKey("ProjectId")]
-		public virtual Project Project { get; set; }
+		
 	}
 }

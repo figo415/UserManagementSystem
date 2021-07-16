@@ -50,16 +50,16 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<MenuDtoList>.HasData(list, pageddtos.Count());
         }
 
-        /// <summary>
-        /// 根据主键获取菜单
-        /// </summary>
-        /// <param name="menuId">Guid</param>
-        /// <returns>MenuDto</returns>
-        [HttpGet("{menuId}")]
-        public async Task<ActionResult<ApiResult<MenuDto>>> GetMenu(Guid menuId)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// 根据主键获取菜单
+        ///// </summary>
+        ///// <param name="menuId">Guid</param>
+        ///// <returns>MenuDto</returns>
+        //[HttpGet("{menuId}")]
+        //public async Task<ActionResult<ApiResult<MenuDto>>> GetMenu(Guid menuId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// 新增菜单

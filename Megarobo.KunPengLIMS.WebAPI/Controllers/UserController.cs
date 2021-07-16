@@ -44,17 +44,17 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<UserDtoList>.HasData(list,pageddtos.TotalCount);
         }
 
-        /// <summary>
-        /// 根据主键获取用户
-        /// </summary>
-        /// <param name="userId">Guid</param>
-        /// <returns>UserDto</returns>
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<ApiResult<UserDto>>> GetUser(Guid userId)
-        {
-            var userdto = await _service.GetUser(userId);
-            return ApiResult<UserDto>.HasData(userdto, 1);
-        }
+        ///// <summary>
+        ///// 根据主键获取用户
+        ///// </summary>
+        ///// <param name="userId">Guid</param>
+        ///// <returns>UserDto</returns>
+        //[HttpGet("{userId}")]
+        //public async Task<ActionResult<ApiResult<UserDto>>> GetUser(Guid userId)
+        //{
+        //    var userdto = await _service.GetUser(userId);
+        //    return ApiResult<UserDto>.HasData(userdto, 1);
+        //}
 
         /// <summary>
         /// 获取用户的技能列表

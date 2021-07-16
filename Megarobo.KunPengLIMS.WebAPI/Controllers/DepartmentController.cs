@@ -50,17 +50,17 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
             return ApiResult<DepartmentDtoList>.HasData(list, pageddtos.Count());
         }
 
-        /// <summary>
-        /// 根据主键获取部门
-        /// </summary>
-        /// <param name="departmentId">Guid</param>
-        /// <returns>DepartmentDto</returns>
-        [HttpGet("{departmentId}")]
-        public async Task<ActionResult<ApiResult<DepartmentDto>>> GetDepartment(Guid departmentId)
-        {
-            var departmentdto = await _service.GetDepartment(departmentId);
-            return ApiResult<DepartmentDto>.HasData(departmentdto, 1);
-        }
+        ///// <summary>
+        ///// 根据主键获取部门
+        ///// </summary>
+        ///// <param name="departmentId">Guid</param>
+        ///// <returns>DepartmentDto</returns>
+        //[HttpGet("{departmentId}")]
+        //public async Task<ActionResult<ApiResult<DepartmentDto>>> GetDepartment(Guid departmentId)
+        //{
+        //    var departmentdto = await _service.GetDepartment(departmentId);
+        //    return ApiResult<DepartmentDto>.HasData(departmentdto, 1);
+        //}
 
         /// <summary>
         /// 获取某个部门下的用户

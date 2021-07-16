@@ -30,7 +30,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         #endregion
 
-        #region Basic data configuration module and Sample management module
+        #region Basic data configuration module
 
         ISpeciesRepository SpeciesRepo { get; }
 
@@ -44,7 +44,17 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IDeviceRepository DeviceRepo { get; }
 
+        #endregion
+
+        #region Sample management module
+
         ISampleRepository SampleRepo { get; }
+
+        #endregion
+
+        #region Project management module
+
+
 
         #endregion
     }

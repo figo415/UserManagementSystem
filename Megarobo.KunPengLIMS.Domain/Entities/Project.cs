@@ -13,7 +13,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// 与Task多对多
 	/// 与Take一对多
 	/// 与User多对一
-	public class Project:Entity
+	public class Project:AuditableEntity
 	{
 		/// <summary>
 		/// 项目名称
@@ -24,6 +24,9 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// 外键到流程
 		/// </summary>
 		public Guid ProcessId { get; set; }
+
+		[ForeignKey("ProcessId")]
+		public Process Process { get; set; }
 
 		/// <summary>
 		/// 计划开始时间
@@ -39,7 +42,12 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// </summary>
 		public string Status { get; set; }
 
-		public List<ProjectUser> Users { get; set; }
+		public virtual ICollection<ProjectUser> Users { get; set; }
+
+		/// <summary>
+		/// Take列表，通过任务母子关系生成
+		/// </summary>
+		public virtual ICollection<Take> Takes { get; set; }
 
 		///// <summary>
 		///// 外键到用户
@@ -73,18 +81,10 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		//[ForeignKey("SRDId")]
 		//public User SRD { get; set; }
 
-		[ForeignKey("ProcessId")]
-		public Process Process { get; set; }
-
 		/// <summary>
 		/// 任务列表
 		/// </summary>
 		//public List<Task> Tasks { get; set; }
 		public virtual ICollection<ProjectTask> Tasks { get; set; }
-
-		/// <summary>
-		/// Take列表，通过任务母子关系生成
-		/// </summary>
-		public virtual ICollection<Take> Takes { get; set; }
 	}
 }

@@ -29,7 +29,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             }
             else
             {
-                throw new Exception("Inventory API error: " + locationroot.msg);
+                throw new Exception("Inventory API (/api/location/getLocationList/show) error: " + locationroot.msg);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             }
             else
             {
-                throw new Exception("Inventory API error: " + locationRoot.msg);
+                throw new Exception("Inventory API (/api/location/getLocationList/ByGuid?Guid=" + id + ") error: " + locationRoot.msg);
             }
         }
 
