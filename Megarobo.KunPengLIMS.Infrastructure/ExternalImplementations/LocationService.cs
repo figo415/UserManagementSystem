@@ -51,7 +51,15 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public Task<bool> InsertLocation(LocationCreationRequest request)
         {
             var apiresponse = _apiHelper.PostWebApi<ApiResponse>("/api/inventory/editInventory", "", request);
-            return Task.FromResult(apiresponse.code == 20000);
+            return Task.FromResult(apiresponse!=null && apiresponse.code == 20000);
+        }
+
+        public Task<bool> DeleteLocation(Guid id)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("Guid", id);
+            var apiResponse = _apiHelper.GetWebApi<ApiResponse>("/api/location/deleteLocation/ByGuid", "", paras);
+            return Task.FromResult(apiResponse!=null && apiResponse.code == 20000);
         }
     }
 }

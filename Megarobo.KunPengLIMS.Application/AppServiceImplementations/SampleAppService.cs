@@ -135,7 +135,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 sample.IsDeleted = true;
                 sample.LastModifiedAt = DateTime.Now;
                 _repoWrapper.SampleRepo.Update(sample);
-                await InsertSampleLocation(sample.Id, sample.Name, new List<LocationDto>());
+                await _locationService.DeleteLocation(sample.Id);
             }
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             return result;

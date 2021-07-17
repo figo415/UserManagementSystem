@@ -116,7 +116,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 device.IsDeleted = true;
                 device.LastModifiedAt = DateTime.Now;
                 _repoWrapper.DeviceRepo.Update(device);
-                await InsertDeviceLocation(device.Id, device.Name, new List<LocationDto>());
+                await _locationService.DeleteLocation(device.Id);
             }
             var result = await _repoWrapper.DeviceRepo.SaveAsync();
             return result;
