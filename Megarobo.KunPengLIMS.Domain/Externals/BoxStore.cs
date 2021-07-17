@@ -6,7 +6,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 {
     public class BoxStore
     {
-        public int id { get; set; }
+        public int? id { get; set; }
 
         public string boxLocal { get; set; }
 
@@ -56,7 +56,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 
         public string typeId { get; set; }
 
-        public int labId { get; set; }
+        public int? labId { get; set; }
 
         public string materialDesc { get; set; }
 

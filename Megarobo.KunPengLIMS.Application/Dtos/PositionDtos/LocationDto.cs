@@ -27,7 +27,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public List<string> selectedList { get; set; }
 
-        public List<BoxStoreItemDto> boxStore { get; set; }
+        public List<BoxStoreDto> boxStore { get; set; }
 
         public string localInfo { get; set; }
 

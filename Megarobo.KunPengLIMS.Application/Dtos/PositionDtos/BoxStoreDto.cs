@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Application.Dtos
 {
-    public class BoxStoreItemDto
+    public class BoxStoreDto
     {
-        public int id { get; set; }
+        public int? id { get; set; }
 
         public string boxLocal { get; set; }
 
@@ -56,7 +56,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string typeId { get; set; }
 
-        public int labId { get; set; }
+        public int? labId { get; set; }
 
         public string materialDesc { get; set; }
 

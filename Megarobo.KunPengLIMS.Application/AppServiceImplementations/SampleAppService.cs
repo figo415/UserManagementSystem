@@ -115,6 +115,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (result)
             {
                 result = await InsertSampleLocation(sample.Id, sample.Name, dto.Positions);
+                if(!result)
+                {
+
+                }
             }
             return result;
         }
@@ -131,6 +135,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 sample.IsDeleted = true;
                 sample.LastModifiedAt = DateTime.Now;
                 _repoWrapper.SampleRepo.Update(sample);
+                await InsertSampleLocation(sample.Id, sample.Name, new List<LocationDto>());
             }
             var result = await _repoWrapper.SampleRepo.SaveAsync();
             return result;

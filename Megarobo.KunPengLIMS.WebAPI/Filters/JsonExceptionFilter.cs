@@ -37,7 +37,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             else
             {
                 error.Code = 2;
-                error.Message = "Server error";
+                error.Message = DateTime.Now + ": Server error";
                 error.Data = context.Exception.Message;
             }
             context.Result = new ObjectResult(error) { StatusCode = StatusCodes.Status500InternalServerError };

@@ -43,7 +43,10 @@ namespace Megarobo.KunPengLIMS.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
-            services.AddControllers(cfg => cfg.Filters.Add<JsonExceptionFilter>())
+            services.AddControllers(cfg => { 
+                cfg.Filters.Add<JsonExceptionFilter>();
+                cfg.Filters.Add<ModelVerificationFilter>();
+            })
                 .AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()); opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter()); }) ;
 
             #region Database

@@ -12,9 +12,9 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public PositionProfile()
         {
-            CreateMap<BoxStore, BoxStoreItemDto>();
+            CreateMap<BoxStore, BoxStoreDto>();
 
-            CreateMap<BoxStoreItemDto, BoxStore>();
+            CreateMap<BoxStoreDto, BoxStore>();
 
             CreateMap<Location, LocationDto>();
             //.ForMember(d => d.selectedList, opt => opt.MapFrom<SelectedListResolver>());
