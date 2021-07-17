@@ -31,6 +31,8 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         public DateTime[] AddDates { get; set; }
 
         public Sort sort { get; set; }
+
+        public int TypeId { get; set; }
     }
 
     public class Sort

@@ -35,6 +35,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             paras.page = parameters.PageNumber;
             paras.pageSize = parameters.PageSize;
+            paras.TypeId = 20;
             var inventoryData = await _service.GetInventory(paras);
             var list = inventoryData.inventoryList;
             var dtos = _mapper.Map<List<LabwareDto>>(list);

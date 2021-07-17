@@ -33,9 +33,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.LastModifiedTime, opt => opt.MapFrom(s => Convert.ToDateTime(s.updateDate)))
                 .ForMember(d => d.PurchaseFromUrl, opt => opt.MapFrom(s => s.url))
                 .ForMember(d => d.PurchasePrice, opt => opt.MapFrom(s => s.price + s.priceUnit))
-                .ForMember(d => d.PurchaseDate, opt => opt.MapFrom(s => s.arrivalDate))
+                .ForMember(d => d.PurchaseDate, opt => opt.MapFrom(s => s.requestDate))
                 .ForMember(d => d.Supplier, opt => opt.MapFrom(s => s.vendor))
                 .ForMember(d => d.Remarks, opt => opt.MapFrom(s => s.inventoryNote));
+                //.ForMember(d => d.AvailableQuantity, opt => opt.MapFrom(s => s.number + s.numUnit));
         }
     }
 }
