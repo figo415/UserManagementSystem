@@ -31,29 +31,29 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         }
     }
 
-    public class PriceResolver : IValueResolver<CellCreationDto, Cell, Price>
-    {
-        public Price Resolve(CellCreationDto source, Cell destination, Price destMember, ResolutionContext context)
-        {
-            if(string.IsNullOrEmpty(source.PurchasePrice))
-            {
-                return new Price();
-            }
-            return new Price() { Unit = source.PurchasePrice };
-        }
-    }
+    //public class PriceResolver : IValueResolver<CellCreationDto, Cell, Price>
+    //{
+    //    public Price Resolve(CellCreationDto source, Cell destination, Price destMember, ResolutionContext context)
+    //    {
+    //        if(string.IsNullOrEmpty(source.PurchasePrice))
+    //        {
+    //            return new Price();
+    //        }
+    //        return new Price() { Unit = source.PurchasePrice };
+    //    }
+    //}
 
-    public class Price2Resolver : IValueResolver<CellUpdateDto, Cell, Price>
-    {
-        public Price Resolve(CellUpdateDto source, Cell destination, Price destMember, ResolutionContext context)
-        {
-            if (string.IsNullOrEmpty(source.PurchasePrice))
-            {
-                return new Price();
-            }
-            return new Price() { Unit = source.PurchasePrice };
-        }
-    }
+    //public class Price2Resolver : IValueResolver<CellUpdateDto, Cell, Price>
+    //{
+    //    public Price Resolve(CellUpdateDto source, Cell destination, Price destMember, ResolutionContext context)
+    //    {
+    //        if (string.IsNullOrEmpty(source.PurchasePrice))
+    //        {
+    //            return new Price();
+    //        }
+    //        return new Price() { Unit = source.PurchasePrice };
+    //    }
+    //}
 
     public class SpeciesListResolver : IValueResolver<Cell, CellDto, List<SpeciesDto>>
     {

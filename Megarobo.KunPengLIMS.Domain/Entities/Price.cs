@@ -24,7 +24,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public override string ToString()
         {
-			return Unit + Value;
+			return Unit;
         }
     }
 }
