@@ -81,20 +81,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentDto">DepartmentCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateDepartment(DepartmentCreationDto departmentDto)
+        public async Task<ActionResult<StringApiResult>> CreateDepartment(DepartmentCreationDto departmentDto)
         {
             try
             {
                 var result = await _service.InsertDepartment(departmentDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -105,20 +105,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentDto">DepartmentUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{departmentId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateDepartment(Guid departmentId,DepartmentUpdateDto departmentDto)
+        public async Task<ActionResult<StringApiResult>> UpdateDepartment(Guid departmentId,DepartmentUpdateDto departmentDto)
         {
             try
             {
                 var result = await _service.UpdateDepartment(departmentId, departmentDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -129,20 +129,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DepartmentUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{departmentId}/enable")]
-        public async Task<ActionResult<ApiStringResult>> EnableDepartment(Guid departmentId, DepartmentUpdateStatusDto dto)
+        public async Task<ActionResult<StringApiResult>> EnableDepartment(Guid departmentId, DepartmentUpdateStatusDto dto)
         {
             try
             {
                 var result = await _service.EnableDepartment(departmentId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -152,20 +152,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="ids">Guid列表</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteDepartments(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteDepartments(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteDepartments(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

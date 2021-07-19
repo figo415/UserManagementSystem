@@ -9,5 +9,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public string Description { get; set; }
 
         public string Note { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Description={0}, Note={1}", Description, Note);
+        }
     }
 }

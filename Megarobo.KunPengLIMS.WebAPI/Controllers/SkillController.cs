@@ -56,20 +56,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="skillDto">SkillCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateSkill(SkillCreationDto skillDto)
+        public async Task<ActionResult<StringApiResult>> CreateSkill(SkillCreationDto skillDto)
         {
             try
             {
                 var result = await _service.InsertSkill(skillDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -80,20 +80,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="skillDto">SkillUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{skillId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateSkill(Guid skillId,SkillUpdateDto skillDto)
+        public async Task<ActionResult<StringApiResult>> UpdateSkill(Guid skillId,SkillUpdateDto skillDto)
         {
             try
             {
                 var result = await _service.UpdateSkill(skillId, skillDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -103,20 +103,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteSkills(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteSkills(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteSkills(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

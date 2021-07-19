@@ -13,5 +13,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public string Note { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public List<ProtocolStepDto> Children { get; set; }
     }
 }

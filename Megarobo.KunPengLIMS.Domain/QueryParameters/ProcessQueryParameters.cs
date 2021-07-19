@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 {
-    public class NodeQueryParameters
+    public class ProcessQueryParameters:PagedParameters
     {
         public string Name { get; set; }
 
-        public string NodeTypeName { get; set; }
+        public string Type { get; set; }
 
         public DateTime? StartDate { get; set; }
 
@@ -16,7 +16,7 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 
         public override string ToString()
         {
-            return string.Format("Name={0}, NodeTypeName={1}, StartDate={2}, EndDate={3}", Name, NodeTypeName, StartDate, EndDate);
+            return string.Format("Name={0}, Type={1}, StartDate={2}, EndDate={3}", Name, Type, StartDate, EndDate);
         }
     }
 }

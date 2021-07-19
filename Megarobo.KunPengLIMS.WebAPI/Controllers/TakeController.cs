@@ -13,48 +13,48 @@ using Megarobo.KunPengLIMS.WebAPI.Filters;
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
-    /// 设备管理
+    /// Take管理
     /// </summary>
     [Produces("application/json")]
-    [Route("limsapi/devices")]
+    [Route("limsapi/takes")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    public class DeviceController : ControllerBase
+    public class TakeController : ControllerBase
     {
-        private readonly IDeviceAppService _service;
-        private readonly ILogger<DeviceController> _logger;
+        private readonly ITakeAppService _service;
+        private readonly ILogger<TakeController> _logger;
 
-        public DeviceController(IDeviceAppService service, ILogger<DeviceController> logger)
+        public TakeController(ITakeAppService service, ILogger<TakeController> logger)
         {
             _service = service;
             _logger = logger;
         }
 
         /// <summary>
-        /// 获取设备，可根据名称、类型或创建时间查询
+        /// 获取Take，可根据项目名称、Take号或状态查询
         /// </summary>
-        /// <param name="parameters">DeviceQueryParameters</param>
-        /// <returns>DeviceDto列表</returns>
+        /// <param name="parameters">TakeQueryParameters</param>
+        /// <returns>TakeDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<DeviceDtoList>>> GetDevices([FromQuery] DeviceQueryParameters parameters)
+        public async Task<ActionResult<ApiResult<TakeDtoList>>> GetTakes([FromQuery] TakeQueryParameters parameters)
         {
-            _logger.LogInformation("Query string for Device: {0}", parameters);
-            var pageddtos = await _service.GetDevicesByPage(parameters);
-            var list = new DeviceDtoList(pageddtos);
-            return ApiResult<DeviceDtoList>.HasData(list, pageddtos.TotalCount);
+            _logger.LogInformation("Query string for Take: {0}", parameters);
+            var pageddtos = await _service.GetTakesByPage(parameters);
+            var list = new TakeDtoList(pageddtos);
+            return ApiResult<TakeDtoList>.HasData(list, pageddtos.TotalCount);
         }
 
         /// <summary>
-        /// 添加设备
+        /// 添加Take
         /// </summary>
-        /// <param name="creationDto">DeviceCreationDto</param>
+        /// <param name="creationDto">TakeCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<StringApiResult>> CreateDevice(DeviceCreationDto creationDto)
+        public async Task<ActionResult<StringApiResult>> CreateTake(TakeCreationDto creationDto)
         {
             try
             {
-                var result = await _service.InsertDevice(creationDto);
+                var result = await _service.InsertTake(creationDto);
                 if (result)
                 {
                     return StringApiResult.Succeed();
@@ -68,17 +68,17 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 修改设备
+        /// 修改Take
         /// </summary>
-        /// <param name="deviceId">Guid</param>
-        /// <param name="updateDto">DeviceUpdateDto</param>
+        /// <param name="takeId">Guid</param>
+        /// <param name="updateDto">TakeUpdateDto</param>
         /// <returns></returns>
-        [HttpPut("{deviceId}")]
-        public async Task<ActionResult<StringApiResult>> UpdateDevice(Guid deviceId, DeviceUpdateDto updateDto)
+        [HttpPut("{takeId}")]
+        public async Task<ActionResult<StringApiResult>> UpdateTake(Guid takeId, TakeUpdateDto updateDto)
         {
             try
             {
-                var result = await _service.UpdateDevice(deviceId, updateDto);
+                var result = await _service.UpdateTake(takeId, updateDto);
                 if (result)
                 {
                     return StringApiResult.Succeed();
@@ -92,16 +92,28 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 批量删除设备
+        /// 终止Take
+        /// </summary>
+        /// <param name="takeId">Guid</param>
+        /// <param name="updateDto">TakeUpdateDto</param>
+        /// <returns></returns>
+        [HttpPut("{takeId}/status")]
+        public Task<ActionResult<StringApiResult>> UpdateStatusOfTake(Guid takeId, TakeUpdateDto updateDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 批量删除Take
         /// </summary>
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<StringApiResult>> DeleteSpecies(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteTake(DeleteMultiDto dto)
         {
             try
             {
-                var result = await _service.DeleteDevices(dto);
+                var result = await _service.DeleteTakes(dto);
                 if (result)
                 {
                     return StringApiResult.Succeed();

@@ -27,7 +27,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
 
         public void OnException(ExceptionContext context)
         {
-            var error = new ApiStringResult();
+            var error = new StringApiResult();
             if(Environment.IsDevelopment())
             {
                 error.Code = 2;

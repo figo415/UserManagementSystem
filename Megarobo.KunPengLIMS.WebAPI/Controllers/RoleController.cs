@@ -75,20 +75,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="roleDto">RoleCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateRole(RoleCreationDto roleDto)
+        public async Task<ActionResult<StringApiResult>> CreateRole(RoleCreationDto roleDto)
         {
             try
             {
                 var result = await _service.InsertRole(roleDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -99,20 +99,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="roleDto">RoleUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{roleId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateRole(Guid roleId,RoleUpdateDto roleDto)
+        public async Task<ActionResult<StringApiResult>> UpdateRole(Guid roleId,RoleUpdateDto roleDto)
         {
             try
             {
                 var result = await _service.UpdateRole(roleId, roleDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -123,20 +123,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">RoleUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{roleId}/enable")]
-        public async Task<ActionResult<ApiStringResult>> EnableRole(Guid roleId,RoleUpdateStatusDto dto)
+        public async Task<ActionResult<StringApiResult>> EnableRole(Guid roleId,RoleUpdateStatusDto dto)
         {
             try
             {
                 var result = await _service.EnableRole(roleId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -147,20 +147,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteRoles(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteRoles(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteRoles(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

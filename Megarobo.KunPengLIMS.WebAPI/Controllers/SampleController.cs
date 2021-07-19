@@ -62,20 +62,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="creationDto">SampleCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateSample(SampleCreationDto creationDto)
+        public async Task<ActionResult<StringApiResult>> CreateSample(SampleCreationDto creationDto)
         {
             try
             {
                 var result = await _service.InsertSample(creationDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -86,20 +86,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="updateDto">SampleUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{sampleId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateSpecies(Guid sampleId, SampleUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> UpdateSpecies(Guid sampleId, SampleUpdateDto updateDto)
         {
             try
             {
                 var result = await _service.UpdateSample(sampleId, updateDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -109,20 +109,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteSample(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteSample(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteSamples(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

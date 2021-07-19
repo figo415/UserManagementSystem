@@ -50,20 +50,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="creationDto">CellCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateCell(CellCreationDto creationDto)
+        public async Task<ActionResult<StringApiResult>> CreateCell(CellCreationDto creationDto)
         {
             try
             {
                 var result = await _service.InsertCell(creationDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -74,20 +74,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="updateDto">CellUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{cellId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateCell(Guid cellId, CellUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> UpdateCell(Guid cellId, CellUpdateDto updateDto)
         {
             try
             {
                 var result = await _service.UpdateCell(cellId, updateDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -97,20 +97,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteCell(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteCell(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteCells(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

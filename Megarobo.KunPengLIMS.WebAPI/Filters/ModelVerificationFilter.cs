@@ -31,7 +31,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
                         message += error.ErrorMessage;
                     }
                 }
-                var apierror = new ApiStringResult()
+                var apierror = new StringApiResult()
                 {
                     Code = 5,
                     Message = "Model state is not valid",

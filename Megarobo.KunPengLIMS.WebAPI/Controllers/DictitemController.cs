@@ -74,20 +74,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dictItemDto">DictItemCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public  async Task<ActionResult<ApiStringResult>> CreateDictItem(DictItemCreationDto dictItemDto)
+        public  async Task<ActionResult<StringApiResult>> CreateDictItem(DictItemCreationDto dictItemDto)
         {
             try
             {
                 var result = await _service.InsertDictItem(dictItemDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -98,20 +98,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dictItemDto">DictItemUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{dictItemId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateDictItem(Guid dictItemId,DictItemUpdateDto dictItemDto)
+        public async Task<ActionResult<StringApiResult>> UpdateDictItem(Guid dictItemId,DictItemUpdateDto dictItemDto)
         {
             try
             {
                 var result = await _service.UpdateDictItem(dictItemId, dictItemDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -122,20 +122,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DictItemUpdateValueDto</param>
         /// <returns></returns>
         [HttpPut("{dictItemId}/values")]
-        public async Task<ActionResult<ApiStringResult>> MaintainValuesForDictItem(Guid dictItemId,DictItemUpdateValueDto dto)
+        public async Task<ActionResult<StringApiResult>> MaintainValuesForDictItem(Guid dictItemId,DictItemUpdateValueDto dto)
         {
             try
             {
                 var result = await _service.UpdateDictItemValues(dictItemId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -145,20 +145,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteDictItems(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteDictItems(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteDictItems(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

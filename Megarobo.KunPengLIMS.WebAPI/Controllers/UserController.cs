@@ -93,20 +93,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPost]
         //[ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiStringResult>> CreateUser(UserCreationDto userDto)
+        public async Task<ActionResult<StringApiResult>> CreateUser(UserCreationDto userDto)
         {
             try
             {
                 var result = await _service.InsertUser(userDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -117,20 +117,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userDto">UserUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{userId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateUser(Guid userId,UserUpdateDto userDto)
+        public async Task<ActionResult<StringApiResult>> UpdateUser(Guid userId,UserUpdateDto userDto)
         {
             try
             {
                 var result = await _service.UpdateUser(userId, userDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -141,20 +141,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">UserUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{userId}/enable")]
-        public async Task<ActionResult<ApiStringResult>> EnableUser(Guid userId,UserUpdateStatusDto dto)
+        public async Task<ActionResult<StringApiResult>> EnableUser(Guid userId,UserUpdateStatusDto dto)
         {
             try
             {
                 var result = await _service.EnableUser(userId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -165,20 +165,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">UserUpdatePasswordDto</param>
         /// <returns></returns>
         [HttpPut("{userId}/password")]
-        public async Task<ActionResult<ApiStringResult>> ResetPassword(Guid userId,UserUpdatePasswordDto dto)
+        public async Task<ActionResult<StringApiResult>> ResetPassword(Guid userId,UserUpdatePasswordDto dto)
         {
             try
             {
                 var result = await _service.ResetPassword(userId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -188,20 +188,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteUsers(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteUsers(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteUsers(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

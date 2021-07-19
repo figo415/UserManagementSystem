@@ -11,5 +11,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public int TakeNum { get; set; }
 
         public string Status { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("ProjectName={0}, TakeNum={1}, Status={2}", ProjectName, TakeNum, Status);
+        }
     }
 }

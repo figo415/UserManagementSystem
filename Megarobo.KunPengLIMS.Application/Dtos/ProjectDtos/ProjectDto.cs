@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.Application.Dtos
 {
-    class ProjectDto
+    public class ProjectDto
     {
         public string Name { get; set; }
 

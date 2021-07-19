@@ -67,20 +67,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="menuDto">MenuCreationDto</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiStringResult>> CreateMenu(MenuCreationDto menuDto)
+        public async Task<ActionResult<StringApiResult>> CreateMenu(MenuCreationDto menuDto)
         {
             try
             {
                 var result = await _service.InsertMenu(menuDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -91,20 +91,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="menuDto">MenuUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{menuId}")]
-        public async Task<ActionResult<ApiStringResult>> UpdateMenu(Guid menuId,MenuUpdateDto menuDto)
+        public async Task<ActionResult<StringApiResult>> UpdateMenu(Guid menuId,MenuUpdateDto menuDto)
         {
             try
             {
                 var result = await _service.UpdateMenu(menuId, menuDto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -115,20 +115,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">MenuUpdateStatusDto</param>
         /// <returns></returns>
         [HttpPut("{menuId}/enable")]
-        public async Task<ActionResult<ApiStringResult>> EnableMenu(Guid menuId,MenuUpdateStatusDto dto)
+        public async Task<ActionResult<StringApiResult>> EnableMenu(Guid menuId,MenuUpdateStatusDto dto)
         {
             try
             {
                 var result = await _service.EnableMenu(menuId, dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
 
@@ -138,20 +138,20 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="dto">DeleteMultiDto</param>
         /// <returns></returns>
         [HttpPut("deletemulti")]
-        public async Task<ActionResult<ApiStringResult>> DeleteMenus(DeleteMultiDto dto)
+        public async Task<ActionResult<StringApiResult>> DeleteMenus(DeleteMultiDto dto)
         {
             try
             {
                 var result = await _service.DeleteMenus(dto);
                 if (result)
                 {
-                    return ApiStringResult.Succeed();
+                    return StringApiResult.Succeed();
                 }
-                return ApiStringResult.Fail();
+                return StringApiResult.Fail();
             }
             catch (Exception ex)
             {
-                return ApiStringResult.Error(ex.Message);
+                return StringApiResult.Error(ex.Message);
             }
         }
     }

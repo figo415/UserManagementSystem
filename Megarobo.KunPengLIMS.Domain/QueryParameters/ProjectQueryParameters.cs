@@ -11,5 +11,10 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
         public string ProcessName { get; set; }
 
         public string Status { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name={0}, ProcessName={1}, Status={2}", Name, ProcessName, Status);
+        }
     }
 }
