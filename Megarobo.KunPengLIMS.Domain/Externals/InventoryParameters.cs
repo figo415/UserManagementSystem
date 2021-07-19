@@ -28,11 +28,19 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
 
         public string itemName { get; set; }
 
-        public DateTime[] AddDates { get; set; }
+        public DateTime[] addDates { get; set; }
 
         public Sort sort { get; set; }
 
-        public int TypeId { get; set; }
+        //public int typeId { get; set; }
+
+        //public string brand { get; set; }
+
+        //public DateTime[] endDates { get; set; }
+
+        //public int[] location { get; set; }
+
+        //public int owner { get; set; }
     }
 
     public class Sort

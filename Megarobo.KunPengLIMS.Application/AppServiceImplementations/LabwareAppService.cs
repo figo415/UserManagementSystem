@@ -29,13 +29,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
             paras.itemName = parameters.Name;
             if(!(parameters.StartDate==null && parameters.EndDate==null))
             {
-                paras.AddDates = new DateTime[2];
-                paras.AddDates[0] = parameters.StartDate.Value;
-                paras.AddDates[1] = parameters.EndDate.Value;
+                paras.addDates = new DateTime[2];
+                paras.addDates[0] = parameters.StartDate.Value;
+                paras.addDates[1] = parameters.EndDate.Value;
             }
             paras.page = parameters.PageNumber;
             paras.pageSize = parameters.PageSize;
-            paras.TypeId = 20;
+            //paras.typeId = 20;
             var inventoryData = await _service.GetInventory(paras);
             var list = inventoryData.inventoryList;
             var dtos = _mapper.Map<List<LabwareDto>>(list);
