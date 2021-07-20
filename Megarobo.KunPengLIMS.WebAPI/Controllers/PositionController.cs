@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">PositionQueryParameters</param>
         /// <returns>PositionDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<LocationDtoList>>> GetPositions([FromQuery] PositionQueryParameters parameters)
+        public async Task<ActionResult<PositionApiResult>> GetPositions([FromQuery] PositionQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Position: {0}", parameters);
             var dtos = await _service.GetPositions();
-            var list = new LocationDtoList(dtos);
-            return ApiResult<LocationDtoList>.HasData(list, dtos.Count());
+            return PositionApiResult.Succeed(dtos, dtos.Count());
         }
     }
 }

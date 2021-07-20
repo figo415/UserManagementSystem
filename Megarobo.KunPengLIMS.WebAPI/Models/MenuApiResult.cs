@@ -6,12 +6,12 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Models
 {
-    public class CellApiResult:ApiResult<CellDtoList>
+    public class MenuApiResult:ApiResult<MenuDtoList>
     {
-        public static CellApiResult Succeed(IEnumerable<CellDto> dtos, int totalCount)
+        public static MenuApiResult Succeed(IEnumerable<MenuDto> dtos, int totalCount)
         {
-            var result = new CellApiResult();
-            result.Data = new CellDtoList(dtos);
+            var result = new MenuApiResult();
+            result.Data = new MenuDtoList(dtos);
             result.Code = 0;
             result.Message = "Success";
             result.RowCount = totalCount;

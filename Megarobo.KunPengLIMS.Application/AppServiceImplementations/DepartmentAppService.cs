@@ -30,7 +30,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedDepartments = await _repoWrapper.DepartmentRepo.GetDepartmentsByPage(parameters);
             var pagedDtos = _mapper.Map<List<DepartmentDto>>(pagedDepartments);
-            return new PagedList<DepartmentDto>(pagedDtos, pagedDepartments.TotalCount, pagedDepartments.CurrentPage, pagedDepartments.PageSize);
+            return new PagedList<DepartmentDto>(pagedDtos, pagedDepartments.TotalCount, pagedDepartments.PageNumber, pagedDepartments.PageSize);
         }
         
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentTree(DepartmentQueryParameters parameters)
@@ -63,7 +63,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedUsers = await _repoWrapper.DepartmentRepo.GetUsersByDepartment(departmentId, parameters);
             var pagedDtos = _mapper.Map<IEnumerable<UserDto>>(pagedUsers);
-            return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
+            return new PagedList<UserDto>(pagedDtos.ToList(), pagedUsers.TotalCount, pagedUsers.PageNumber, pagedUsers.PageSize);
         }
 
         public async Task<bool> InsertDepartment(DepartmentCreationDto dto)

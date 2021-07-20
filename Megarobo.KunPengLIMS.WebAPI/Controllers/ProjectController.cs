@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">ProjectQueryParameters</param>
         /// <returns>ProjectDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<ProjectDtoList>>> GetProjects([FromQuery] ProjectQueryParameters parameters)
+        public async Task<ActionResult<ProjectApiResult>> GetProjects([FromQuery] ProjectQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Project: {0}", parameters);
             var pageddtos = await _service.GetProjectsByPage(parameters);
-            var list = new ProjectDtoList(pageddtos);
-            return ApiResult<ProjectDtoList>.HasData(list, pageddtos.TotalCount);
+            return ProjectApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

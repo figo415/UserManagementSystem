@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">LabwareQueryParameters</param>
         /// <returns>LabwareDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<LabwareDtoList>>> GetLabwares([FromQuery] LabwareQueryParameters parameters)
+        public async Task<ActionResult<LabwareApiResult>> GetLabwares([FromQuery] LabwareQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Labware: {0}", parameters);
             var pageddtos = await _service.GetLabwares(parameters);
-            var list = new LabwareDtoList(pageddtos);
-            return ApiResult<LabwareDtoList>.HasData(list, pageddtos.TotalCount);
+            return LabwareApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
     }
 }

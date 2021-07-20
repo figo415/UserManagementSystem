@@ -32,47 +32,14 @@ namespace Megarobo.KunPengLIMS.WebAPI.Models
         /// </summary>
         public T Data { get; set; }
 
-        public static ApiResult<T> HasData(T value,int total)
+        public static ApiResult<T> HasSingleData(T value)
         {
             var result = new ApiResult<T>();
             result.Code = 0;
             result.Message = "Success";
-            result.RowCount = total;
+            result.RowCount = 1;
             result.Data = value;
             return result;
-        }
-    }
-
-    /// <summary>
-    /// 用于返回新增、修改和删除API的结果
-    /// </summary>
-    public class StringApiResult:ApiResult<string>
-    {
-        public static StringApiResult Succeed()
-        {
-            return new StringApiResult()
-            {
-                Code = 0,
-                Message = "Success"
-            };
-        }
-
-        public static StringApiResult Fail()
-        {
-            return new StringApiResult()
-            {
-                Code = 1,
-                Message = "Failed"
-            };
-        }
-
-        public static StringApiResult Error(string msg)
-        {
-            return new StringApiResult()
-            {
-                Code = 2,
-                Message = msg
-            };
         }
     }
 }

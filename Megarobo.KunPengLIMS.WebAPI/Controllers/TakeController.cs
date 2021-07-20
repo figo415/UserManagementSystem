@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">TakeQueryParameters</param>
         /// <returns>TakeDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<TakeDtoList>>> GetTakes([FromQuery] TakeQueryParameters parameters)
+        public async Task<ActionResult<TakeApiResult>> GetTakes([FromQuery] TakeQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Take: {0}", parameters);
             var pageddtos = await _service.GetTakesByPage(parameters);
-            var list = new TakeDtoList(pageddtos);
-            return ApiResult<TakeDtoList>.HasData(list, pageddtos.TotalCount);
+            return TakeApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedDictItems = await _repoWrapper.DictItemRepo.GetDictItemsByPage(parameters);
             var pagedDtos = _mapper.Map<List<DictItemDto>>(pagedDictItems);
-            return new PagedList<DictItemDto>(pagedDtos, pagedDictItems.TotalCount, pagedDictItems.CurrentPage, pagedDictItems.PageSize);
+            return new PagedList<DictItemDto>(pagedDtos, pagedDictItems.TotalCount, pagedDictItems.PageNumber, pagedDictItems.PageSize);
         }
 
         public async Task<bool> InsertDictItem(DictItemCreationDto dto)

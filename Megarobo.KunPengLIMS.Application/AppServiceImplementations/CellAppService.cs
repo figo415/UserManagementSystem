@@ -30,7 +30,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedCells = await _repoWrapper.CellRepo.GetCellsByPage(parameters);
             var pagedDtos = _mapper.Map<List<CellDto>>(pagedCells);
-            return new PagedList<CellDto>(pagedDtos, pagedCells.TotalCount, pagedCells.CurrentPage, pagedCells.PageSize);
+            return new PagedList<CellDto>(pagedDtos, pagedCells.TotalCount, pagedCells.PageNumber, pagedCells.PageSize);
         }
         
         public async Task<bool> InsertCell(CellCreationDto dto)

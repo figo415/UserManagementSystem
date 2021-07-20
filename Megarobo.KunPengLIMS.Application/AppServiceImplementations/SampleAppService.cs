@@ -38,7 +38,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 var locationlist = await  _locationService.GetLocation(dto.Id);
                 dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
             }
-            return new PagedList<SampleDto>(pagedDtos, pagedSamples.TotalCount, pagedSamples.CurrentPage, pagedSamples.PageSize);
+            return new PagedList<SampleDto>(pagedDtos, pagedSamples.TotalCount, pagedSamples.PageNumber, pagedSamples.PageSize);
         }
 
         public async Task<SampleDto> GetSample(Guid sampleId)

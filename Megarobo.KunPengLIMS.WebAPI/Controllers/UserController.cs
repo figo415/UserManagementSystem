@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">UserQueryParameters</param>
         /// <returns>UserDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsers([FromQuery]UserQueryParameters parameters)
+        public async Task<ActionResult<UserApiResult>> GetUsers([FromQuery]UserQueryParameters parameters)
         {
             _logger.LogInformation("Query string for User: {0}", parameters);
             var pageddtos = await _service.GetUsersByPage(parameters);
-            var list = new UserDtoList(pageddtos);
-            return ApiResult<UserDtoList>.HasData(list,pageddtos.TotalCount);
+            return UserApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         ///// <summary>
@@ -62,11 +61,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>SkillDto列表</returns>
         [HttpGet("{userId}/skills")]
-        public async Task<ActionResult<ApiResult<SkillDtoList>>> GetSkillsForUser(Guid userId)
+        public async Task<ActionResult<SkillApiResult>> GetSkillsForUser(Guid userId)
         {
             var dtos = await _service.GetSkillsForUser(userId);
-            var list = new SkillDtoList(dtos);
-            return ApiResult<SkillDtoList>.HasData(list,dtos.Count());
+            return SkillApiResult.Succeed(dtos, dtos.Count());
         }
 
         /// <summary>
@@ -75,11 +73,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="userId">Guid</param>
         /// <returns>UserDepartmentRoleDto列表</returns>
         [HttpGet("{userId}/departmentroles")]
-        public async Task<ActionResult<ApiResult<UserDepartmentRoleDtoList>>> GetDepartmentRolesForUser(Guid userId)
+        public async Task<ActionResult<UserDepartmentRoleApiResult>> GetDepartmentRolesForUser(Guid userId)
         {
             var dtos = await _service.GetDepartmentRolesForUser(userId);
-            var list = new UserDepartmentRoleDtoList(dtos);
-            return ApiResult<UserDepartmentRoleDtoList>.HasData(list, dtos.Count());
+            return UserDepartmentRoleApiResult.Succeed(dtos, dtos.Count());
         }
 
         /// <summary>

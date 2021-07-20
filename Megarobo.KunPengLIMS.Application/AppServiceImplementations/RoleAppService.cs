@@ -27,14 +27,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedRoles = await _repoWrapper.RoleRepo.GetRolesByPage(parameters);
             var pagedDtos = _mapper.Map<List<RoleDto>>(pagedRoles);
-            return new PagedList<RoleDto>(pagedDtos, pagedRoles.TotalCount, pagedRoles.CurrentPage, pagedRoles.PageSize);
+            return new PagedList<RoleDto>(pagedDtos, pagedRoles.TotalCount, pagedRoles.PageNumber, pagedRoles.PageSize);
         }
 
         public async Task<PagedList<RoleDto>> GetRolesWithMenuByPage(RoleQueryParameters parameters)
         {
             var pagedRoles = await _repoWrapper.RoleRepo.GetRolesWithMenuByPage(parameters);
             var pagedDtos = _mapper.Map<IEnumerable<RoleDto>>(pagedRoles);
-            return new PagedList<RoleDto>(pagedDtos.ToList(), pagedRoles.TotalCount, pagedRoles.CurrentPage, pagedRoles.PageSize);
+            return new PagedList<RoleDto>(pagedDtos.ToList(), pagedRoles.TotalCount, pagedRoles.PageNumber, pagedRoles.PageSize);
         }
 
         public async Task<IEnumerable<MenuDto>> GetMenusForRole(Guid roleId)

@@ -36,18 +36,16 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">DepartmentQueryParameters</param>
         /// <returns>DepartmentDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<DepartmentDtoList>>> GetDepartments([FromQuery] DepartmentQueryParameters parameters)
+        public async Task<ActionResult<DepartmentApiResult>> GetDepartments([FromQuery] DepartmentQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Department: {0}", parameters);
             if(string.IsNullOrEmpty(parameters.Name))
             {
                 var dtos = await _service.GetDepartmentTree(parameters);
-                var dtolist = new DepartmentDtoList(dtos);
-                return ApiResult<DepartmentDtoList>.HasData(dtolist, dtos.Count());
+                return DepartmentApiResult.Succeed(dtos, dtos.Count());
             }
             var pageddtos = await _service.GetDepartmentsByPage(parameters);
-            var list = new DepartmentDtoList(pageddtos);
-            return ApiResult<DepartmentDtoList>.HasData(list, pageddtos.Count());
+            return DepartmentApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         ///// <summary>
@@ -68,11 +66,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="departmentId">Guid</param>
         /// <returns>UserDto列表</returns>
         [HttpGet("{departmentId}/users")]
-        public async Task<ActionResult<ApiResult<UserDtoList>>> GetUsersByDepartment(Guid departmentId,[FromQuery]PagedParameters parameters)
+        public async Task<ActionResult<UserApiResult>> GetUsersByDepartment(Guid departmentId,[FromQuery]PagedParameters parameters)
         {
             var pageddtos = await _service.GetUsersByDepartment(departmentId, parameters);
-            var list = new UserDtoList(pageddtos);
-            return ApiResult<UserDtoList>.HasData(list, pageddtos.TotalCount);
+            return UserApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

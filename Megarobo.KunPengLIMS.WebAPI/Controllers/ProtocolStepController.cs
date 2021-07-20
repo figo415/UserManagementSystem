@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">ProtocolStepQueryParameters</param>
         /// <returns>ProtocolStepDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<ProtocolStepDtoList>>> GetProtocolSteps([FromQuery] ProtocolStepQueryParameters parameters)
+        public async Task<ActionResult<ProtocolStepApiResult>> GetProtocolSteps([FromQuery] ProtocolStepQueryParameters parameters)
         {
             _logger.LogInformation("Query string for ProtocolStep: {0}", parameters);
-            var pageddtos = await _service.GetProtocolStepTree(parameters);
-            var list = new ProtocolStepDtoList(pageddtos);
-            return ApiResult<ProtocolStepDtoList>.HasData(list, pageddtos.Count());
+            var dtos = await _service.GetProtocolStepTree(parameters);
+            return ProtocolStepApiResult.Succeed(dtos, dtos.Count());
         }
 
         /// <summary>

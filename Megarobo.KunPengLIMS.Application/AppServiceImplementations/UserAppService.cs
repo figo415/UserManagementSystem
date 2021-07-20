@@ -39,7 +39,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             var pagedUsers = await _repoWrapper.UserRepo.GetUsersByPage(parametersext);
             var pagedDtos = _mapper.Map<List<UserDto>>(pagedUsers);
-            return new PagedList<UserDto>(pagedDtos, pagedUsers.TotalCount, pagedUsers.CurrentPage, pagedUsers.PageSize);
+            return new PagedList<UserDto>(pagedDtos, pagedUsers.TotalCount, pagedUsers.PageNumber, pagedUsers.PageSize);
         }
 
         public async Task<UserDto> GetUser(Guid userId)

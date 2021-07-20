@@ -27,7 +27,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedMenus = await _repoWrapper.MenuRepo.GetMenusByPage(parameters);
             var pagedDtos = _mapper.Map<List<MenuDto>>(pagedMenus);
-            return new PagedList<MenuDto>(pagedDtos, pagedMenus.TotalCount, pagedMenus.CurrentPage, pagedMenus.PageSize);
+            return new PagedList<MenuDto>(pagedDtos, pagedMenus.TotalCount, pagedMenus.PageNumber, pagedMenus.PageSize);
         }
 
         public async Task<IEnumerable<MenuDto>> GetMenuTree(MenuQueryParameters parameters)

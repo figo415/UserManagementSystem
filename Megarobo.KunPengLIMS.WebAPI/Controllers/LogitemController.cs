@@ -33,12 +33,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// </summary>
         /// <returns>LogItemDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<LogItemDtoList>>> GetLogItems([FromQuery] LogItemQueryParameters parameters)
+        public async Task<ActionResult<LogItemApiResult>> GetLogItems([FromQuery] LogItemQueryParameters parameters)
         {
             _logger.LogInformation("Query string for LogItem: {0}", parameters);
             var pageddtos = await _service.GetLogItemsByPage(parameters);
-            var list = new LogItemDtoList(pageddtos);
-            return ApiResult<LogItemDtoList>.HasData(list, pageddtos.TotalCount);
+            return LogItemApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

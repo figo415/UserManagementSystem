@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">NodeQueryParameters</param>
         /// <returns>NodeDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<NodeDtoList>>> GetNodes([FromQuery] NodeQueryParameters parameters)
+        public async Task<ActionResult<NodeApiResult>> GetNodes([FromQuery] NodeQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Node: {0}", parameters);
             var pageddtos = await _service.GetNodesByPage(parameters);
-            var list = new NodeDtoList(pageddtos);
-            return ApiResult<NodeDtoList>.HasData(list, pageddtos.TotalCount);
+            return NodeApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

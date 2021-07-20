@@ -36,13 +36,12 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">RoleQueryParameters</param>
         /// <returns>RoleDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<RoleDtoList>>> GetRoles([FromQuery]RoleQueryParameters parameters)
+        public async Task<ActionResult<RoleApiResult>> GetRoles([FromQuery]RoleQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Role: {0}", parameters);
             //var pageddtos = await _service.GetRolesByPage(parameters);
             var pageddtos = await _service.GetRolesWithMenuByPage(parameters);
-            var list = new RoleDtoList(pageddtos);
-            return ApiResult<RoleDtoList>.HasData(list, pageddtos.TotalCount);
+            return RoleApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         ///// <summary>
@@ -62,11 +61,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="roleId">Guid</param>
         /// <returns>MenuDto列表</returns>
         [HttpGet("{roleId}/menus")]
-        public async Task<ActionResult<ApiResult<MenuDtoList>>> GetMenusForRole(Guid roleId)
+        public async Task<ActionResult<MenuApiResult>> GetMenusForRole(Guid roleId)
         {
             var dtos = await _service.GetMenusForRole(roleId);
-            var list = new MenuDtoList(dtos);
-            return ApiResult<MenuDtoList>.HasData(list, dtos.Count());
+            return MenuApiResult.Succeed(dtos, dtos.Count());
         }
 
         /// <summary>

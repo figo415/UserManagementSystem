@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">SpeciesQueryParameters</param>
         /// <returns>SampleDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<SampleDtoList>>> GetSamples([FromQuery]SampleQueryParameters parameters)
+        public async Task<ActionResult<SampleApiResult>> GetSamples([FromQuery]SampleQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Sample: {0}", parameters);
             var pageddtos = await _service.GetSamplesByPage(parameters);
-            var list = new SampleDtoList(pageddtos);
-            return ApiResult<SampleDtoList>.HasData(list, pageddtos.TotalCount);
+            return SampleApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         public async Task<ActionResult<ApiResult<SampleDto>>> GetSample(Guid sampleId)
         {
             var sampledto = await _service.GetSample(sampleId);
-            return ApiResult<SampleDto>.HasData(sampledto, 1);
+            return ApiResult<SampleDto>.HasSingleData(sampledto);
         }
 
         /// <summary>

@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">SpeciesQueryParameters</param>
         /// <returns>SpeciesDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<SpeciesDtoList>>> GetSpecies([FromQuery] SpeciesQueryParameters parameters)
+        public async Task<ActionResult<SpeciesApiResult>> GetSpecies([FromQuery] SpeciesQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Species: {0}", parameters);
             var pageddtos = await _service.GetSpeciesByPage(parameters);
-            var list = new SpeciesDtoList(pageddtos);
-            return ApiResult<SpeciesDtoList>.HasData(list, pageddtos.TotalCount);
+            return SpeciesApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

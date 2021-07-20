@@ -16,7 +16,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// 流程管理
     /// </summary>
     [Produces("application/json")]
-    [Route("limsapi/nodes")]
+    [Route("limsapi/processes")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
     public class ProcessController : ControllerBase
@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">ProcessQueryParameters</param>
         /// <returns>ProcessDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<ProcessDtoList>>> GetProcesses([FromQuery] ProcessQueryParameters parameters)
+        public async Task<ActionResult<ProcessApiResult>> GetProcesses([FromQuery] ProcessQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Process: {0}", parameters);
             var pageddtos = await _service.GetProcessesByPage(parameters);
-            var list = new ProcessDtoList(pageddtos);
-            return ApiResult<ProcessDtoList>.HasData(list, pageddtos.TotalCount);
+            return ProcessApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

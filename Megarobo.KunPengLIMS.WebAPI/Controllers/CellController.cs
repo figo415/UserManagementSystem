@@ -36,12 +36,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">CellQueryParameters</param>
         /// <returns>CellDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<CellDtoList>>> GetCells([FromQuery] CellQueryParameters parameters)
+        public async Task<ActionResult<CellApiResult>> GetCells([FromQuery] CellQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Cell: {0}", parameters);
             var pageddtos = await _service.GetCellsByPage(parameters);
-            var list = new CellDtoList(pageddtos);
-            return ApiResult<CellDtoList>.HasData(list, pageddtos.TotalCount);
+            //var list = new CellDtoList(pageddtos);
+            //return ApiResult<CellDtoList>.HasData(list, pageddtos.TotalCount);
+            return CellApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>

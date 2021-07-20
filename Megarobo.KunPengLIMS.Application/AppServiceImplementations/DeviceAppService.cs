@@ -37,7 +37,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 var locationlist = await _locationService.GetLocation(dto.Id);
                 dto.Positions = _mapper.Map<List<LocationDto>>(locationlist);
             }
-            return new PagedList<DeviceDto>(pagedDtos, pagedDevices.TotalCount, pagedDevices.CurrentPage, pagedDevices.PageSize);
+            return new PagedList<DeviceDto>(pagedDtos, pagedDevices.TotalCount, pagedDevices.PageNumber, pagedDevices.PageSize);
         }
 
         public async Task<bool> InsertDevice(DeviceCreationDto dto)

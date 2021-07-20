@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">DictItemQueryParameters</param>
         /// <returns>DictItemDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<DictItemDtoList>>> GetDictItems([FromQuery] DictItemQueryParameters parameters)
+        public async Task<ActionResult<DictItemApiResult>> GetDictItems([FromQuery] DictItemQueryParameters parameters)
         {
             _logger.LogInformation("Query string for DictItem: {0}", parameters);
             var pageddtos = await _service.GetDictItemsByPage(parameters);
-            var list = new DictItemDtoList(pageddtos);
-            return ApiResult<DictItemDtoList>.HasData(list, pageddtos.TotalCount);
+            return DictItemApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         ///// <summary>
@@ -61,11 +60,10 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="keyName"></param>
         /// <returns></returns>
         [HttpGet("{keyName}")]
-        public async Task<ActionResult<ApiResult<StringDtoList>>> GetDictItemValues(string keyName)
+        public async Task<ActionResult<StringListApiResult>> GetDictItemValues(string keyName)
         {
             var result = await _service.GetDictItemValues(keyName);
-            var lst = new StringDtoList(result);
-            return ApiResult<StringDtoList>.HasData(lst, result.Count());
+            return StringListApiResult.Succeed(result, result.Count());
         }
 
         /// <summary>

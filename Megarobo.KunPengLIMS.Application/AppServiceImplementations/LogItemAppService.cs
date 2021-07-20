@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedLogItems = await _repoWrapper.LogItemRepo.GetLogItemsByPage(parameters);
             var pagedDtos = _mapper.Map<List<LogItemDto>>(pagedLogItems);
-            return new PagedList<LogItemDto>(pagedDtos, pagedLogItems.TotalCount, pagedLogItems.CurrentPage, pagedLogItems.PageSize);
+            return new PagedList<LogItemDto>(pagedDtos, pagedLogItems.TotalCount, pagedLogItems.PageNumber, pagedLogItems.PageSize);
         }
 
         public bool InsertLogItem(LogItemCreationDto dto)

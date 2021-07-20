@@ -7,7 +7,7 @@ namespace Megarobo.KunPengLIMS.Domain
 {
     public class PagedList<T> : List<T>
     {
-        public int CurrentPage { get; private set; }
+        public int PageNumber { get; private set; }
 
         public int TotalPages { get; private set; }
 
@@ -15,14 +15,14 @@ namespace Megarobo.KunPengLIMS.Domain
 
         public int TotalCount { get; private set; }
 
-        public bool HasPrevious => CurrentPage > 1;
+        public bool HasPrevious => PageNumber > 1;
 
-        public bool HasNext => CurrentPage < TotalPages;
+        public bool HasNext => PageNumber < TotalPages;
 
         public PagedList(List<T> items, int totalCount, int pageNumber, int pageSize)
         {
             TotalCount = totalCount;
-            CurrentPage = pageNumber;
+            PageNumber = pageNumber;
             PageSize = pageSize;
             TotalPages = (int)Math.Ceiling((double)totalCount / PageSize);
             AddRange(items);

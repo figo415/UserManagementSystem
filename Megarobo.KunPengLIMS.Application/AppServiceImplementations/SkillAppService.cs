@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedSkills = await _repoWrapper.SkillRepo.GetSkillsByPage(parameters);
             var pagedDtos = _mapper.Map<List<SkillDto>>(pagedSkills);
-            return new PagedList<SkillDto>(pagedDtos, pagedSkills.TotalCount, pagedSkills.CurrentPage, pagedSkills.PageSize);
+            return new PagedList<SkillDto>(pagedDtos, pagedSkills.TotalCount, pagedSkills.PageNumber, pagedSkills.PageSize);
         }
 
         public async Task<IEnumerable<SkillDto>> GetSkillTree(SkillQueryParameters parameters)

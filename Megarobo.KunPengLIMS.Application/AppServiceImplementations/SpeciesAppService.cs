@@ -28,7 +28,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         {
             var pagedSpecies = await _repoWrapper.SpeciesRepo.GetSpeciesByPage(parameters);
             var pagedDtos = _mapper.Map<List<SpeciesDto>>(pagedSpecies);
-            return new PagedList<SpeciesDto>(pagedDtos, pagedSpecies.TotalCount, pagedSpecies.CurrentPage, pagedSpecies.PageSize);
+            return new PagedList<SpeciesDto>(pagedDtos, pagedSpecies.TotalCount, pagedSpecies.PageNumber, pagedSpecies.PageSize);
         }
 
         public async Task<bool> InsertSpecies(SpeciesCreationDto dto)

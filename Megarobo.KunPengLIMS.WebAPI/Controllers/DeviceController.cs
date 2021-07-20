@@ -36,12 +36,11 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <param name="parameters">DeviceQueryParameters</param>
         /// <returns>DeviceDto列表</returns>
         [HttpGet]
-        public async Task<ActionResult<ApiResult<DeviceDtoList>>> GetDevices([FromQuery] DeviceQueryParameters parameters)
+        public async Task<ActionResult<DeviceApiResult>> GetDevices([FromQuery] DeviceQueryParameters parameters)
         {
             _logger.LogInformation("Query string for Device: {0}", parameters);
             var pageddtos = await _service.GetDevicesByPage(parameters);
-            var list = new DeviceDtoList(pageddtos);
-            return ApiResult<DeviceDtoList>.HasData(list, pageddtos.TotalCount);
+            return DeviceApiResult.Succeed(pageddtos, pageddtos.TotalCount);
         }
 
         /// <summary>
