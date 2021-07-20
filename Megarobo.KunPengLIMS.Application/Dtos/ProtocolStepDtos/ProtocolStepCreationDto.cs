@@ -13,5 +13,9 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public string Description { get; set; }
 
         public string Note { get; set; }
+
+        public SolutionDto Solution { get; set; }
+
+        public List<LabwareUsageDto> LabwareUsages { get; set; }
     }
 }
