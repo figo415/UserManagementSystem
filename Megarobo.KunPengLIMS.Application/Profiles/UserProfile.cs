@@ -23,6 +23,9 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.DepartmentRoleIds, opt => opt.MapFrom(s => s.DepartmentRoles))
                 .ForMember(d => d.WorkTime, opt => opt.MapFrom<WorkTimeResolver>());
 
+            CreateMap<User, UserWithRightsDto>()
+                .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt));
+
             CreateMap<UserCreationDto, User>()
                 .ForMember(d => d.WorkTime, opt => opt.MapFrom<WorkTime1Resolver>());
 

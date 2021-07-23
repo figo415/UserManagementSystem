@@ -39,7 +39,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return tree;
         }
 
-        private List<MenuDto> GetTree(Guid parentId, IEnumerable<MenuDto> dtos)
+        public List<MenuDto> GetTree(Guid parentId, IEnumerable<MenuDto> dtos)
         {
             var tree = dtos.Where(d => d.ParentId == parentId).ToList();
             foreach (var item in tree)
@@ -108,27 +108,6 @@ namespace Megarobo.KunPengLIMS.Application.Services
             }
             var result = await _repoWrapper.MenuRepo.SaveAsync();
             return result;
-        }
-
-
-        private List<MenuDto> GetMenusByUser(Guid userId)// 根据用户获取功能菜单
-        {
-            throw new NotImplementedException();
-            //List<MenuDto> result = new List<MenuDto>();
-            //var allMenus = _menuRepository.GetAllList(it=>it.Type == 0).OrderBy(it => it.OrdinalNumber);
-            //if (userId == Guid.Empty) //超级管理员
-            //    return _mapper.Map<List<MenuDto>>(allMenus);
-            //var user = new User(); //_userRepository.GetWithRoles(userId);
-            //if (user == null)
-            //    return result;
-            ////var userRoles = user.Roles;
-            //List<Guid> menuIds = new List<Guid>();
-            ////foreach (var role in userRoles)
-            ////{
-            ////    menuIds = menuIds.Union(_roleRepository.GetAllMenuListByRole(role.RoleID)).ToList();
-            ////}
-            //allMenus = allMenus.Where(it => menuIds.Contains(it.Id)).OrderBy(it => it.OrdinalNumber);
-            //return _mapper.Map<List<MenuDto>>(allMenus);
         }
     }
 }

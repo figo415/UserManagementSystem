@@ -9,12 +9,15 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.WebAPI.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
     /// <summary>
     /// 用户管理
     /// </summary>
+    //[Authorize]
+    //[RequestAuthorize]
     [Produces("application/json")]
     [Route("limsapi/users")]
     [ApiController]
@@ -54,6 +57,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         //    var userdto = await _service.GetUser(userId);
         //    return ApiResult<UserDto>.HasData(userdto, 1);
         //}
+
+        [HttpGet("info")]
+        public async Task<ActionResult<ApiResult<UserWithRightsDto>>> GetUserByToken()
+        {
+            var result = await _service.GetUserByToken("张三");
+            return ApiResult<UserWithRightsDto>.HasSingleData(result);
+        }
 
         /// <summary>
         /// 获取用户的技能列表

@@ -21,5 +21,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
         Task<bool> EnableMenu(Guid menuId, MenuUpdateStatusDto dto);
 
         Task<bool> DeleteMenus(DeleteMultiDto dto);
+
+        List<MenuDto> GetTree(Guid parentId, IEnumerable<MenuDto> dtos);
     }
 }

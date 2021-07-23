@@ -150,6 +150,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserId, u.DepartmentId, u.RoleId });
             modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserId, us.SkillId });
             modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleId, rm.MenuId });
+            modelBuilder.Entity<RoleButton>().HasKey(rb => new { rb.RoleId, rb.ButtonId });
             modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareId, lp.PositionId });
             modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentId, rp.PositionId });
             modelBuilder.Entity<DevicePosition>().HasKey(dp => new { dp.DeviceId, dp.PositionId });

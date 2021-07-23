@@ -28,40 +28,26 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public virtual ICollection<RoleMenu> Roles { get; set; }
 
         //路由路径
-        [NotMapped]
         public string Path { get; set; }
 
         //路由对应组件
-        [NotMapped]
         public string Component { get; set; }
 
         //重定向地址
-        [NotMapped]
         public string Redirect { get; set; }
 
         //是否侧边栏显示，默认False
-        [NotMapped]
         public bool Hidden { get; set; }
+
+        //标题
+        public string Title { get; set; }
+
+        //图标
+        public string Icon { get; set; }
 
         //一直显示根路由，默认False
         [NotMapped]
         public bool AlwaysShow { get; set; }
-
-        //子路由，仅返回时出现，不存数据库
-        [NotMapped]
-        public List<Menu> Children { get; set; }
-
-        //路由元信息，仅返回时出现，不存数据库
-        [NotMapped]
-        public object Meta { get; set; }
-
-        //标题
-        [NotMapped]
-        public string Title { get; set; }
-
-        //图标，属于Meta
-        [NotMapped]
-        public string Icon { get; set; }
 
         //是否缓存，默认False，属于Meta
         [NotMapped]

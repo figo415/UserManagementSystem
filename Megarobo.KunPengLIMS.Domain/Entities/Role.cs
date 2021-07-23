@@ -21,5 +21,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public virtual ICollection<UserDepartmentRole> UserDepartments { get; set; }
 
         public virtual ICollection<RoleMenu> Menus { get; set; }
+
+        public virtual ICollection<RoleButton> Buttons { get; set; }
     }
 }

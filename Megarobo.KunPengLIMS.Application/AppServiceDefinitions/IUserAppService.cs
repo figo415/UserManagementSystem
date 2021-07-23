@@ -19,6 +19,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         Task<IEnumerable<UserDepartmentRoleDto>> GetDepartmentRolesForUser(Guid userId);
 
+        Task<UserWithRightsDto> GetUserByToken(string userName);
+
         Task<bool> InsertUser(UserCreationDto dto);
 
         Task<bool> UpdateUser(Guid userId, UserUpdateDto dto);

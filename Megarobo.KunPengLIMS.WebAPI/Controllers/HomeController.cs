@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Megarobo.KunPengLIMS.WebAPI.Filters;
+using System.Net;
+using System.IO;
+using System.Text;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
@@ -17,7 +22,15 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok(string.Format("Welcome! {0}", DateTime.Now));
+            var result = new List<string>();
+            foreach (var claim in User.Claims)
+            {
+                result.Add(claim.Type + ": " + claim.Value);
+            }
+            result.Add("username: " + User.Identity.Name);
+            result.Add("IsAdmin: " + User.IsInRole("admin").ToString());
+            return Ok(result);
+            //return Ok(string.Format("Welcome! {0}", DateTime.Now));
         }
     }
 }

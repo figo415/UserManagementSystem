@@ -20,11 +20,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
+        private readonly IMenuAppService _menuAppService;
 
-        public UserAppService(IRepositoryWrapper wrapper,IMapper mapper)
+        public UserAppService(IRepositoryWrapper wrapper,IMapper mapper, IMenuAppService menuAppService)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;
+            _menuAppService = menuAppService;
         }
 
         public async Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters)
@@ -68,6 +70,33 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 dtos.Add(new UserDepartmentRoleDto() { Department = departmentDto, Role = roleDto });
             }
             return dtos;
+        }
+
+        public async Task<UserWithRightsDto> GetUserByToken(string userName)
+        {
+            var users = await _repoWrapper.UserRepo.GetUsersByName(userName);
+            if(users.Any())
+            {
+                var user = await _repoWrapper.UserRepo.GetUserWithDepartmentRole(users.First().Id);
+                if(user!=null)
+                {
+                    var result = _mapper.Map<UserWithRightsDto>(user);
+                    var menus = new List<Menu>();
+                    var buttons = new List<OpButton>();
+                    foreach(var departmentRole in user.DepartmentRoles)
+                    {
+                        var rolewithmenu = await _repoWrapper.RoleRepo.GetRoleWithMenu(departmentRole.RoleId);
+                        menus.AddRange(rolewithmenu.Menus.Select(rm => rm.Menu));
+                        var rolewithbutton = await _repoWrapper.RoleRepo.GetRoleWithButton(departmentRole.RoleId);
+                        buttons.AddRange(rolewithbutton.Buttons.Select(rb => rb.Button));
+                    }
+                    var menudtos= _mapper.Map<List<MenuDto>>(menus);
+                    result.Menus = _menuAppService.GetTree(Guid.Empty, menudtos);
+                    result.BtnList = buttons.Select(b => b.Name).ToList();
+                    return result;
+                }
+            }
+            return null;
         }
 
         public async Task<bool> InsertUser(UserCreationDto dto)

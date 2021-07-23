@@ -19,8 +19,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public string Name { get; set; }
 
         public string Code { get; set; }
-
-        public string RoutePath { get; set; }
         
         [Required(ErrorMessage = "请提供显示排序值")]
         public int OrdinalNumber { get; set; }
@@ -29,5 +27,18 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         [DefaultValue(true)]
         public bool IsActive { get; set; }
+
+        public string RoutePath { get; set; }
+
+        public string Component { get; set; }
+
+        public string Redirect { get; set; }
+
+        [DefaultValue(false)]
+        public bool Hidden { get; set; }
+
+        public string Title { get; set; }
+
+        public string Icon { get; set; }
     }
 }
