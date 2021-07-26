@@ -10,7 +10,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// µÁ»›
 	/// </summary>
-	//[ComplexType]
 	[Owned]
 	public class Capacity:IValueObject
 	{

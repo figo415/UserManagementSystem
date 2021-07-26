@@ -7,27 +7,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
 	/// <summary>
-	/// 耗材
+	/// 试剂
 	/// </summary>
-	/// 与Position多对多
 	/// 与Node多对多
+	/// 与Position多对多
+	/// 与ReagentDosage一对多
 	/// 与Task多对多
-	public class Labware:PurchasableEntity
+	public class Reagent:PurchasableEntity
 	{
 		/// <summary>
-		/// 耗材名称
+		/// 试剂名称
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// 耗材类型：存储(样本试剂),移液,配件
+		/// 试剂类型：转染试剂,抗体,化学品,试剂盒,培养基,血清,抗生素
 		/// </summary>
 		public string Type { get; set; }
-
-		/// <summary>
-		/// 耗材子类：6孔板,12孔板,24孔板,48孔板,96孔板,1.5mL管,15mL管,50mL管
-		/// </summary>
-		public string Subclass { get; set; }
 
 		/// <summary>
 		/// 货号
@@ -40,19 +36,24 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		public string Brand { get; set; }
 
 		/// <summary>
-		/// 规格
+		/// 质量规格
 		/// </summary>
-		public string Specification { get; set; }
+		public Quality Quality { get; set; }
 
 		/// <summary>
-		/// 可用量：0~100000000
+		/// 浓度规格
 		/// </summary>
-		public int AvailableQuantity { get; set; }
+		public Thickness Thickness { get; set; }
 
 		/// <summary>
-		/// 可用孔位数
+		/// 可用质量
 		/// </summary>
-		public int AvailableHole { get; set; }
+		public Quality AvailableQuality { get; set; }
+
+		/// <summary>
+		/// 可用体积
+		/// </summary>
+		public Cubage AvailableCubage { get; set; }
 
 		public string Barcode { get; set; }
 
@@ -69,11 +70,17 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 		/// <summary>
 		/// 位置列表
 		/// </summary>
-		//public List<Position> Positions;
-		public virtual ICollection<LabwarePosition> Positions { get; set; }
+		//public List<Position> Positions { get; set; }
+		//public virtual ICollection<ReagentPosition> Positions { get; set; }
 
-		public virtual ICollection<NodeLabware> Nodes { get; set; }
+		public virtual ICollection<NodeReagent> Nodes { get; set; }
 
-		public virtual ICollection<TaskLabware> Tasks { get; set; }
+		//public virtual ICollection<ReagentDosage> ReagentDosages { get; set; }
+
+		//public Guid TaskID { get; set; }
+
+		//[ForeignKey("TaskID")]
+		//public Task Task { get; set; }
+		public virtual ICollection<TaskReagent> Tasks { get; set; }
 	}
 }

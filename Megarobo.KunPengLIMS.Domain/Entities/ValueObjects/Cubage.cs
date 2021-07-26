@@ -11,7 +11,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// Με»ύ
 	/// </summary>
-	//[ComplexType]
 	[Owned]
 	public class Cubage:IValueObject
 	{

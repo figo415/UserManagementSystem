@@ -10,7 +10,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// Á´½Ó
 	/// </summary>
-	//[ComplexType]
 	[Owned]
 	public class Link:IValueObject
 	{

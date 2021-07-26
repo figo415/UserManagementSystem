@@ -35,8 +35,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.Quality, opt => opt.MapFrom(s => new Quality() { Value = Convert.ToSingle(s.QualityValue), Unit = s.QualityUnit }))
                 .ForMember(d => d.PurchaseFrom, opt => opt.MapFrom(s => new Link() { Name = s.PurchaseFromName, Url = s.PurchaseFromUrl }))
                 .ForMember(d => d.Price, opt => opt.MapFrom(s => new Price() { Unit = s.PurchasePrice }))
-                .ForMember(d => d.SourceTask, opt => opt.Ignore())
-                .ForMember(d => d.Positions, opt => opt.Ignore());
+                .ForMember(d => d.SourceTask, opt => opt.Ignore());
 
             CreateMap<SampleUpdateDto, Sample>()
                 .ForMember(d => d.Cubage, opt => opt.MapFrom(s => new Cubage() { Value = Convert.ToSingle(s.CubageValue), Unit = s.CubageUnit }))
@@ -44,8 +43,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
                 .ForMember(d => d.Quality, opt => opt.MapFrom(s => new Quality() { Value = Convert.ToSingle(s.QualityValue), Unit = s.QualityUnit }))
                 .ForMember(d => d.PurchaseFrom, opt => opt.MapFrom(s => new Link() { Name = s.PurchaseFromName, Url = s.PurchaseFromUrl }))
                 .ForMember(d => d.Price, opt => opt.MapFrom(s => new Price() { Unit = s.PurchasePrice }))
-                .ForMember(d => d.SourceTask, opt => opt.Ignore())
-                .ForMember(d => d.Positions, opt => opt.Ignore());
+                .ForMember(d => d.SourceTask, opt => opt.Ignore());
         }
     }
 

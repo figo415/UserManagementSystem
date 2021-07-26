@@ -9,7 +9,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// нд╪Ч
 	/// </summary>
-	//[ComplexType]
 	[Owned]
 	public class File:IValueObject
 	{

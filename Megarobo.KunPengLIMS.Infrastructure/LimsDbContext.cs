@@ -35,8 +35,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure
 
         public DbSet<Labware> Labwares { get; set; }
 
-        public DbSet<LabwarePosition> LabwarePositions { get; set; }
-
         public DbSet<Line> Lines { get; set; }
 
         public DbSet<Node> Nodes { get; set; }
@@ -49,8 +47,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure
 
         public DbSet<NodeReagent> NodeReagents { get; set; }
 
-        public DbSet<Position> Positions { get; set; }
-
         public DbSet<Process> Processes { get; set; }
 
         public DbSet<Project> Projects { get; set; }
@@ -61,19 +57,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure
 
         public DbSet<Reagent> Reagents { get; set; }
 
-        public DbSet<ReagentDosage> ReagentDosages { get; set; }
-
-        public DbSet<ReagentPosition> ReagentPositions { get; set; }
-
         public DbSet<Sample> Samples { get; set; }
 
         public DbSet<SampleDosage> SampleDosages { get; set; }
 
         public DbSet<Solution> Solutions { get; set; }
-
-        public DbSet<SolutionReagentDosage> SolutionReagentDosages { get; set; }
-
-        public DbSet<SolutionSampleDosage> SolutionSampleDosages { get; set; }
 
         public DbSet<Take> Takes { get; set; }
 
@@ -151,18 +139,18 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserId, us.SkillId });
             modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleId, rm.MenuId });
             modelBuilder.Entity<RoleButton>().HasKey(rb => new { rb.RoleId, rb.ButtonId });
-            modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareId, lp.PositionId });
-            modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentId, rp.PositionId });
-            modelBuilder.Entity<DevicePosition>().HasKey(dp => new { dp.DeviceId, dp.PositionId });
-            modelBuilder.Entity<SamplePosition>().HasKey(sp => new { sp.SampleId, sp.PositionId });
+            //modelBuilder.Entity<LabwarePosition>().HasKey(lp => new { lp.LabwareId, lp.PositionId });
+            //modelBuilder.Entity<ReagentPosition>().HasKey(rp => new { rp.ReagentId, rp.PositionId });
+            //modelBuilder.Entity<DevicePosition>().HasKey(dp => new { dp.DeviceId, dp.PositionId });
+            //modelBuilder.Entity<SamplePosition>().HasKey(sp => new { sp.SampleId, sp.PositionId });
             modelBuilder.Entity<NodeDevice>().HasKey(nd => new { nd.NodeId,nd.DeviceId });
             modelBuilder.Entity<NodeLabware>().HasKey(nl => new { nl.NodeId,nl.LabwareId });
             modelBuilder.Entity<NodeProtocolStep>().HasKey(np => new { np.NodeId,np.ProtocolStepId });
             modelBuilder.Entity<NodeReagent>().HasKey(nr => new { nr.NodeId,nr.ReagentId });
             modelBuilder.Entity<ProjectTask>().HasKey(pt => new { pt.ProjectId,pt.TaskId });
             modelBuilder.Entity<ProjectUser>().HasKey(pu => new { pu.ProjectId, pu.UserId });
-            modelBuilder.Entity<SolutionReagentDosage>().HasKey(sr => new { sr.SolutionId,sr.ReagentDosageId });
-            modelBuilder.Entity<SolutionSampleDosage>().HasKey(ss => new { ss.SolutionId,ss.SampleDosageId });
+            //modelBuilder.Entity<SolutionReagentDosage>().HasKey(sr => new { sr.SolutionId,sr.ReagentDosageId });
+            //modelBuilder.Entity<SolutionSampleDosage>().HasKey(ss => new { ss.SolutionId,ss.SampleDosageId });
             modelBuilder.Entity<TakeTask>().HasKey(tt => new { tt.TakeId,tt.TaskId });
             modelBuilder.Entity<TaskLabware>().HasKey(tl => new { tl.TaskId,tl.LabwareId });
             modelBuilder.Entity<TaskReagent>().HasKey(tr => new { tr.TaskId, tr.ReagentId });

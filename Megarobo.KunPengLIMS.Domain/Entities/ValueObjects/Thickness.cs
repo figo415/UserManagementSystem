@@ -2,28 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
 	/// <summary>
-	/// 电压
+	/// 浓度
 	/// </summary>
-	//[ComplexType]
 	[Owned]
-	public class Voltage : IValueObject
+	public class Thickness:IValueObject
 	{
 
 		/// <summary>
-		/// 单位：V,mV
+		/// 单位：%,mg/ml
 		/// </summary>
-		public string Unit
-        {
-            get; set;
-
-		}
+		public string Unit { get; set; }
 
 		public float Value { get; set; }
-	}
+
+        public override string ToString()
+        {
+			return Value.ToString() + Unit;
+        }
+    }
 }

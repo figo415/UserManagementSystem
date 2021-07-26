@@ -116,6 +116,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
 		public virtual ICollection<SampleDosage> SampleDosages { get; set; }
 
-		public virtual ICollection<SamplePosition> Positions { get; set; }
+		//public virtual ICollection<SamplePosition> Positions { get; set; }
 	}
 }

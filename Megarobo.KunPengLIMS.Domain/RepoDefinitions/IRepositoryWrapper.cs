@@ -36,7 +36,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         ICellRepository CellRepo { get; }
 
-        IPositionRepository PositionRepo { get; }
+        //IPositionRepository PositionRepo { get; }
 
         ILabwareRepository LabwareRepo { get; }
 

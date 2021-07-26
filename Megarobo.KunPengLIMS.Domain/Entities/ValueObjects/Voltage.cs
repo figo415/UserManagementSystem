@@ -2,22 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
 	/// <summary>
-	/// 转速
+	/// 电压
 	/// </summary>
-	//[ComplexType]
 	[Owned]
-	public class RotationRate:IValueObject
+	public class Voltage : IValueObject
 	{
+
 		/// <summary>
-		/// 单位:rpm,g
+		/// 单位：V,mV
 		/// </summary>
-		public string Unit { get; set; }
+		public string Unit
+        {
+            get; set;
+
+		}
 
 		public float Value { get; set; }
 	}

@@ -53,6 +53,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
 
         private bool HasAllowAnonymous(AuthorizationFilterContext context)
         {
+            //return true;
             var filters = context.Filters;
             for (var i = 0; i < filters.Count; i++)
             {

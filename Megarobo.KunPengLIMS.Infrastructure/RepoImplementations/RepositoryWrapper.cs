@@ -55,7 +55,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         private readonly ISpeciesRepository _speciesRepo;
         private readonly ICellRepository _cellRepo;
-        private readonly IPositionRepository _positionRepo;
+        //private readonly IPositionRepository _positionRepo;
         private readonly ILabwareRepository _labwareRepo;
         private readonly IReagentRepository _reagentRepo;
         private readonly IDeviceRepository _deviceRepo;
@@ -64,7 +64,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public ICellRepository CellRepo => _cellRepo ?? new CellRepository(_dbContext);
 
-        public IPositionRepository PositionRepo => _positionRepo ?? new PositionRepository(_dbContext);
+        //public IPositionRepository PositionRepo => _positionRepo ?? new PositionRepository(_dbContext);
 
         public ILabwareRepository LabwareRepo => _labwareRepo ?? new LabwareRepository(_dbContext);
 

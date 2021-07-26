@@ -10,7 +10,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 	/// <summary>
 	/// ¼Û¸ñ
 	/// </summary>
-	//[ComplexType]
 	[Owned]
 	public class Price:IValueObject
 	{
