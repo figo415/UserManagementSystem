@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Megarobo.KunPengLIMS.Domain.Entities
+namespace Megarobo.KunPengLIMS.Application.Dtos
 {
-    public class Order : AuditableEntity
+    public class OrderDto
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// 合同号
         /// </summary>
@@ -32,11 +34,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public string CarrierStructure { get; set; }
 
         /// <summary>
-        /// 质粒类型：大抽，小抽
-        /// </summary>
-        public string PlasmidType { get; set; }
-
-        /// <summary>
         /// 质粒大小/bp
         /// </summary>
         public int PlasmidSize { get; set; }
@@ -57,7 +54,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public float TotelDemand { get; set; }
 
         /// <summary>
-        /// 血清型：只有AAV有
+        /// 血清型
         /// </summary>
         public string SeroType { get; set; }
 
@@ -87,6 +84,16 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public DateTime FinisheDate { get; set; }
 
         /// <summary>
+        /// 实际滴度（vgs/ml)："SDS-PAGE检测"页面-蛋白滴度
+        /// </summary>
+        public float ActualTiter { get; set; }
+
+        /// <summary>
+        /// 实际产量/vgs：实际滴度*分装体积*分装支数
+        /// </summary>
+        public float ActualOutput { get; set; }
+
+        /// <summary>
         /// 分装体积/μL
         /// </summary>
         public float SubpackageCubage { get; set; }
@@ -112,11 +119,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public float Plasmid3 { get; set; }
 
         /// <summary>
-        /// 质粒4（ng/μL）
-        /// </summary>
-        public float Plasmid4 { get; set; }
-
-        /// <summary>
         /// 分析报告：pdf
         /// </summary>
         public object AnalysisReport { get; set; }
@@ -135,19 +137,5 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// 创建时间
         /// </summary>
         public string CreateTime { get; set; }
-
-        public virtual ICollection<MolecularCloning> MolecularClonings { get; set; }
-
-        public virtual ICollection<PlasmidPurification> PlasmidPurifications { get; set; }
-
-        public virtual ICollection<QpcrDetection> QpcrDetections { get; set; }
-
-        public virtual ICollection<SdsPageDetection> SdsPageDetections { get; set; }
-
-        public virtual ICollection<SterilityDetection> SterilityDetections { get; set; }
-
-        public virtual ICollection<StockIn> StockIns { get; set; }
-
-        public virtual ICollection<Shipment> Shipments { get; set; }
     }
 }
