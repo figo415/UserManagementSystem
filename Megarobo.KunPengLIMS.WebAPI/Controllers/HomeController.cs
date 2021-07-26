@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Megarobo.KunPengLIMS.WebAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("limsapi/home")]
     [ApiController]
     public class HomeController : ControllerBase
@@ -22,15 +23,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var result = new List<string>();
-            foreach (var claim in User.Claims)
-            {
-                result.Add(claim.Type + ": " + claim.Value);
-            }
-            result.Add("username: " + User.Identity.Name);
-            result.Add("IsAdmin: " + User.IsInRole("admin").ToString());
-            return Ok(result);
-            //return Ok(string.Format("Welcome! {0}", DateTime.Now));
+            return Ok(string.Format("Welcome to LIMS! {0}", DateTime.Now));
         }
     }
 }

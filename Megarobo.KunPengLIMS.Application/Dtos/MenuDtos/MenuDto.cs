@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Megarobo.KunPengLIMS.Application.Dtos
 {
@@ -37,6 +38,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public Meta Meta { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<MenuDto> Children { get; set; }
     }
 

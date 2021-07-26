@@ -33,10 +33,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Newtonsoft.Json.Linq;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -59,109 +55,6 @@ namespace Megarobo.KunPengLIMS.WebAPI
                 cfg.Filters.Add<KeycloakAuthorizeFilter>();
             })
                 .AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()); opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter()); }) ;
-
-            #region JWT
-
-            //    services.AddAuthentication(options =>
-            //    {
-            //        //Sets cookie authentication scheme
-            //        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-            //    })
-            //.AddCookie(cookie =>
-            //{
-            //    //Sets the cookie name and maxage, so the cookie is invalidated.
-            //    cookie.Cookie.Name = "keycloak.cookie";
-            //    cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
-            //    cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-            //    cookie.SlidingExpiration = true;
-            //})
-            // .AddOpenIdConnect(options =>
-            // {
-            //     /*
-            //      * ASP.NET core uses the http://*:5000 and https://*:5001 ports for default communication with the OIDC middleware
-            //      * The app requires load balancing services to work with :80 or :443
-            //      * These needs to be added to the keycloak client, in order for the redirect to work.
-            //      * If you however intend to use the app by itself then,
-            //      * Change the ports in launchsettings.json, but beware to also change the options.CallbackPath and options.SignedOutCallbackPath!
-            //      * Use LB services whenever possible, to reduce the config hazzle :)
-            //     */
-
-            //     //Use default signin scheme
-            //     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //     options.Authority = "http://localhost:8080/auth/realms/locallims";// Configuration.GetSection("Keycloak")["ServerRealm"];
-            //     options.ClientId = "webapi";// Configuration.GetSection("Keycloak")["ClientId"];
-            //     options.ClientSecret = "d8e1534d-c340-4943-8084-ed71b9cf149d";// Configuration.GetSection("Keycloak")["ClientSecret"];
-            //     options.MetadataAddress = "http://localhost:8080/auth/realms/locallims/.well-known/openid-configuration";// Configuration.GetSection("Keycloak")["Metadata"];
-            //     options.Configuration = new OpenIdConnectConfiguration();
-            //     options.RequireHttpsMetadata = false;
-            //     options.GetClaimsFromUserInfoEndpoint = true;
-            //     options.Scope.Add("openid");
-            //     options.Scope.Add("profile");
-            //     options.SaveTokens = true;
-            //     //Token response type, will sometimes need to be changed to IdToken, depending on config.
-            //     options.ResponseType = OpenIdConnectResponseType.Code;
-            //     //SameSite is needed for Chrome/Firefox, as they will give http error 500 back, if not set to unspecified.
-            //     options.NonceCookie.SameSite = SameSiteMode.Unspecified;
-            //     options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
-            //     options.TokenValidationParameters = new TokenValidationParameters
-            //     {
-            //         NameClaimType = "name",
-            //         RoleClaimType = ClaimTypes.Role,
-            //         ValidateIssuer = true
-            //     };
-            // });
-
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateAudience = true,
-            //            ValidateLifetime = true,
-            //            ValidateIssuer = true,
-            //            ValidateIssuerSigningKey = true,
-            //            ValidIssuer= "http://localhost:8080/auth/realms/locallims/test",
-            //            ValidAudience= "accounttes",
-            //            IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("938diejsiwiriqusk12"))
-            //        };
-            //    });
-            //    .AddJwtBearer(options =>
-            //{
-            //    options.Authority = "http://localhost:8080/auth/realms/locallims";
-            //    options.RequireHttpsMetadata = false;
-            //    options.Audience = "account";
-            //    options.MetadataAddress = "http://localhost:8080/auth/realms/locallims/.well-known/openid-configuration";
-            //    options.Configuration = new OpenIdConnectConfiguration();
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        //ValidIssuer = "http://localhost:8080/auth/realms/LIMS",
-            //        //ValidAudience = "account",
-            //        //NameClaimType = "preferred_username"
-            //        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("UsLtrk2vnIIadCvyRYoMb_jKvk25dqKGUARZD-7QRwI"))
-            //    };
-                //options.Events = new JwtBearerEvents
-                //{
-                //    OnTokenValidated = context =>
-                //    {
-                //        var identity = context.Principal.Identity as ClaimsIdentity;
-                //        var access = context.Principal.Claims.FirstOrDefault(p => p.Type == "realm_access");
-                //        var jo = JObject.Parse(access.Value);
-                //        foreach (var role in jo["roles"].Values())
-                //        {
-                //            identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
-                //        }
-                //        return Task.CompletedTask;
-                //    }
-                //};
-            //});
-
-            #endregion
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
@@ -202,7 +95,6 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddScoped<LogFilterAttribute>();
-            services.AddScoped<RequestAuthorizeAttribute>();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
@@ -280,8 +172,6 @@ namespace Megarobo.KunPengLIMS.WebAPI
             IdentityModelEventSource.ShowPII = true;
 
             app.UseRouting();
-
-            //app.UseAuthentication();
 
             app.UseAuthorization();
 

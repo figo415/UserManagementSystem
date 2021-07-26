@@ -17,5 +17,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
         public string ClientId { get; set; }
 
         public string GrantType { get; set; }
+
+        public string KeycloakBaseUrl { get; set; }
     }
 }

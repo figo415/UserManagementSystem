@@ -92,11 +92,30 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     }
                     var menudtos= _mapper.Map<List<MenuDto>>(menus);
                     result.Menus = _menuAppService.GetTree(Guid.Empty, menudtos);
+                    foreach(var menu in result.Menus)
+                    {
+                        TraverseTree(menu);
+                    }
                     result.BtnList = buttons.Select(b => b.Name).ToList();
                     return result;
                 }
             }
             return null;
+        }
+
+        private void TraverseTree(MenuDto root)
+        {
+            if (root.Children.Any())
+            {
+                foreach (var node in root.Children)
+                {
+                    TraverseTree(node);
+                }
+            }
+            else
+            {
+                root.Children = null;
+            }
         }
 
         public async Task<bool> InsertUser(UserCreationDto dto)

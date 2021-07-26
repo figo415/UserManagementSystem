@@ -60,6 +60,37 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             return result;
         }
 
+        public static T GetWithAuth<T>(string authurl, string resource, string token, Dictionary<string, object> dicParams = null) 
+        {
+            T result = default(T);
+            try
+            {
+                var client = new RestSharp.RestClient(authurl);
+                var request = new RestSharp.RestRequest(resource, RestSharp.Method.GET);
+                request.AddHeader("Authorization", $"Bearer {token}");
+                if (dicParams != null)
+                {
+                    foreach (var pair in dicParams)
+                    {
+                        request.AddParameter(pair.Key, pair.Value);
+                    }
+                }
+                var response = client.Execute(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    result = JsonConvert.DeserializeObject<T>(response.Content);
+                }
+                var log = string.Format("{0}: GET {1}{2}", (int)response.StatusCode, authurl, resource);
+                Console.WriteLine(log);
+            }
+            catch (Exception ex)
+            {
+                var log = string.Format("500: GET {0}{1} Error: {2}", authurl, resource, ex.Message);
+                Console.WriteLine(log);
+            }
+            return result;
+        }
+
         public T PostWebApi<T>(string resource, string token, object obj) where T: ApiResponse,new()
         {
             T result = default(T);

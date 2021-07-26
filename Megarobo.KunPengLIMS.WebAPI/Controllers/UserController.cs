@@ -16,8 +16,6 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     /// <summary>
     /// 用户管理
     /// </summary>
-    //[Authorize]
-    //[RequestAuthorize]
     [Produces("application/json")]
     [Route("limsapi/users")]
     [ApiController]
@@ -61,7 +59,8 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpGet("info")]
         public async Task<ActionResult<ApiResult<UserWithRightsDto>>> GetUserByToken()
         {
-            var result = await _service.GetUserByToken("张三");
+            var username = User.Claims.First(t => t.Type == System.Security.Claims.ClaimTypes.Name).Value;
+            var result = await _service.GetUserByToken(username);
             return ApiResult<UserWithRightsDto>.HasSingleData(result);
         }
 
