@@ -57,5 +57,11 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
 
         #endregion
+
+        #region Production management module
+
+        IOrderRepository OrderRepo { get; }
+
+        #endregion
     }
 }

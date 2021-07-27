@@ -54,7 +54,11 @@ namespace Megarobo.KunPengLIMS.WebAPI
                 cfg.Filters.Add<ModelVerificationFilter>();
                 cfg.Filters.Add<KeycloakAuthorizeFilter>();
             })
-                .AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter()); opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter()); }) ;
+                .AddJsonOptions(opt => { 
+                    opt.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
+                    opt.JsonSerializerOptions.Converters.Add(new NullableDatetimeJsonConverter());
+                    opt.JsonSerializerOptions.IgnoreNullValues = true;
+                }) ;
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));

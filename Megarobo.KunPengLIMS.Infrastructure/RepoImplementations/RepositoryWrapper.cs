@@ -75,5 +75,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public ISampleRepository SampleRepo => _sampleRepo ?? new SampleRepository(_dbContext);
 
         #endregion
+
+        #region Production management module
+
+        private readonly IOrderRepository _orderRepo;
+
+        public IOrderRepository OrderRepo => _orderRepo ?? new OrderRepository(_dbContext);
+
+        #endregion
     }
 }

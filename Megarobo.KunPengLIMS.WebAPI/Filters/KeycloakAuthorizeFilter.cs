@@ -41,7 +41,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
 
         private bool VerifyToken(HttpContext context, string token)
         {
-            var userinfo = ApiHelper.GetWithAuth<UserInfoResponse>("https://keycloak.dev.aws.megarobo.tech", "/auth/realms/lims-test/protocol/openid-connect/userinfo", token);
+            var userinfo = ApiHelper.GetWithAuth<UserInfoResponse>("https://keycloak.dev.aws.megarobo.tech", "/auth/realms/kplims-dev/protocol/openid-connect/userinfo", token);
             if(userinfo!=null)
             {
                 var claimsIdentity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, userinfo.preferred_username) });

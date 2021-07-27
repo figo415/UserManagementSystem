@@ -32,13 +32,14 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Component { get; set; }
 
+        [JsonProperty(PropertyName ="redirect",NullValueHandling =NullValueHandling.Ignore)]
         public string Redirect { get; set; }
 
         public bool Hidden { get; set; }
 
         public Meta Meta { get; set; }
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName ="children",NullValueHandling = NullValueHandling.Ignore)]
         public List<MenuDto> Children { get; set; }
     }
 
