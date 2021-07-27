@@ -99,7 +99,21 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         [HttpPut("{orderId}/cancel")]
         public async Task<ActionResult<StringApiResult>> CancelOrder(Guid orderId, OrderUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dto = new DeleteMultiDto();
+                dto.Guids = new List<Guid> { orderId };
+                var result = await _service.DeleteOrders(dto);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>

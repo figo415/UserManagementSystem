@@ -31,19 +31,51 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<OrderDto>(pagedDtos, pagedOrders.TotalCount, pagedOrders.PageNumber, pagedOrders.PageSize);
         }
 
-        public Task<bool> InsertOrder(OrderCreationDto dto)
+        public async Task<bool> InsertOrder(OrderCreationDto dto)
         {
-            throw new NotImplementedException();
+            var existed = await _repoWrapper.OrderRepo.GetOrdersByCode(dto.ContractCode);
+            if (existed.Any())
+            {
+                throw new AlreadyExistedException("Order with Contract Code=" + dto.ContractCode + " is already existed");
+            }
+            var order = _mapper.Map<Order>(dto);
+            order.Id = Guid.NewGuid();
+            order.CreatedAt = DateTime.Now;
+            order.IsDeleted = false;
+            _repoWrapper.OrderRepo.Create(order);
+            var result = await _repoWrapper.OrderRepo.SaveAsync();
+            return result;
         }
 
-        public Task<bool> UpdateOrder(Guid orderId, OrderUpdateDto dto)
+        public async Task<bool> UpdateOrder(Guid orderId, OrderUpdateDto dto)
         {
-            throw new NotImplementedException();
+            var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+            if (order == null)
+            {
+                throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
+            }
+            _mapper.Map(dto, order, typeof(OrderUpdateDto), typeof(Order));
+            order.LastModifiedAt = DateTime.Now;
+            _repoWrapper.OrderRepo.Update(order);
+            var result = await _repoWrapper.OrderRepo.SaveAsync();
+            return result;
         }
 
-        public Task<bool> DeleteOrders(DeleteMultiDto dto)
+        public async Task<bool> DeleteOrders(DeleteMultiDto dto)
         {
-            throw new NotImplementedException();
+            foreach (var orderId in dto.Guids)
+            {
+                var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+                if (order == null)
+                {
+                    continue;
+                }
+                order.IsDeleted = true;
+                order.LastModifiedAt = DateTime.Now;
+                _repoWrapper.OrderRepo.Update(order);
+            }
+            var result = await _repoWrapper.OrderRepo.SaveAsync();
+            return result;
         }
     }
 }

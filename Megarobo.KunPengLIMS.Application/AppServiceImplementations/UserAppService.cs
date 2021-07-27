@@ -90,7 +90,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                         var rolewithbutton = await _repoWrapper.RoleRepo.GetRoleWithButton(departmentRole.RoleId);
                         buttons.AddRange(rolewithbutton.Buttons.Select(rb => rb.Button));
                     }
-                    var menudtos= _mapper.Map<List<MenuDto>>(menus);
+                    var menudtos= _mapper.Map<List<MenuDto>>(menus.OrderBy(m=>m.OrdinalNumber));
                     result.Menus = _menuAppService.GetTree(Guid.Empty, menudtos);
                     foreach(var menu in result.Menus)
                     {

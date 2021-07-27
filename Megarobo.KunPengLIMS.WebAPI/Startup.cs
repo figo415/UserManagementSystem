@@ -96,11 +96,15 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddScoped<ISampleAppService, SampleAppService>();
             #endregion
 
+            #region Other services
+
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddScoped<LogFilterAttribute>();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
+
+            #endregion
 
             #region InventoryAPI
             var inventoryBaseUrl = Environment.GetEnvironmentVariable("INVENTORY_BASEURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
