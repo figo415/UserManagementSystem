@@ -79,8 +79,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         #region Production management module
 
         private readonly IOrderRepository _orderRepo;
+        private readonly IMolecularCloningRepository _molecularCloningRepo;
+        private readonly IPlasmidPurificationRepository _plasmidPurificationRepo;
 
         public IOrderRepository OrderRepo => _orderRepo ?? new OrderRepository(_dbContext);
+
+        public IMolecularCloningRepository MolecularCloningRepo => _molecularCloningRepo ?? new MolecularCloningRepository(_dbContext);
+
+        public IPlasmidPurificationRepository PlasmidPurificationRepo => _plasmidPurificationRepo ?? new PlasmidPurificationRepository(_dbContext);
 
         #endregion
     }

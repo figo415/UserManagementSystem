@@ -62,6 +62,10 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IOrderRepository OrderRepo { get; }
 
+        IMolecularCloningRepository MolecularCloningRepo { get; }
+
+        IPlasmidPurificationRepository PlasmidPurificationRepo { get; }
+
         #endregion
     }
 }

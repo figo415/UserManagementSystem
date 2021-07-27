@@ -61,6 +61,27 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return result;
         }
 
+        public async Task<bool> CloneMolecule(Guid orderId)
+        {
+            var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+            if (order == null)
+            {
+                throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
+            }
+            order.Status = "ToBeProduced";
+            order.LastModifiedAt = DateTime.Now;
+            _repoWrapper.OrderRepo.Update(order);
+            var molecule = new MolecularCloning();
+            molecule.Id = Guid.NewGuid();
+            molecule.CreatedAt = DateTime.Now;
+            molecule.IsDeleted = false;
+            molecule.OrderId = order.Id;
+            molecule.Status = "ToBeCloned";
+            _repoWrapper.MolecularCloningRepo.Create(molecule);
+            var result = await _repoWrapper.OrderRepo.SaveAsync();
+            return result;
+        }
+
         public async Task<bool> DeleteOrders(DeleteMultiDto dto)
         {
             foreach (var orderId in dto.Guids)
