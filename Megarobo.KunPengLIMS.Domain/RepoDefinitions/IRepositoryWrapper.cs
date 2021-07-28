@@ -66,6 +66,16 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IPlasmidPurificationRepository PlasmidPurificationRepo { get; }
 
+        IQpcrDetectionRepository QpcrDetectionRepo { get; }
+
+        ISdsPageDetectionRepository SdsPageDetectionRepo { get; }
+
+        ISterilityDetectionRepository SterilityDetectionRepo { get; }
+
+        IStockInRepository StockInRepo { get; }
+
+        IShipmentRepository ShipmentRepo { get; }
+
         #endregion
     }
 }

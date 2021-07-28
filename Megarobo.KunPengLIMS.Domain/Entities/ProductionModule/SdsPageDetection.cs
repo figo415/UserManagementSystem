@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
-    public class SdsPageDetection
+    public class SdsPageDetection:AuditableEntity
     {
         /// <summary>
         /// 检测日期

@@ -81,12 +81,27 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         private readonly IOrderRepository _orderRepo;
         private readonly IMolecularCloningRepository _molecularCloningRepo;
         private readonly IPlasmidPurificationRepository _plasmidPurificationRepo;
+        private readonly IQpcrDetectionRepository _qpcrDetectionRepo;
+        private readonly ISdsPageDetectionRepository _sdsPageDetectionRepo;
+        private readonly ISterilityDetectionRepository _sterilityDetectionRepo;
+        private readonly IStockInRepository _stockInRepo;
+        private readonly IShipmentRepository _shipmentRepo;
 
         public IOrderRepository OrderRepo => _orderRepo ?? new OrderRepository(_dbContext);
 
         public IMolecularCloningRepository MolecularCloningRepo => _molecularCloningRepo ?? new MolecularCloningRepository(_dbContext);
 
         public IPlasmidPurificationRepository PlasmidPurificationRepo => _plasmidPurificationRepo ?? new PlasmidPurificationRepository(_dbContext);
+
+        public IQpcrDetectionRepository QpcrDetectionRepo => _qpcrDetectionRepo ?? new QpcrDetectionRepository(_dbContext);
+
+        public ISdsPageDetectionRepository SdsPageDetectionRepo => _sdsPageDetectionRepo ?? new SdsPageDetectionRepository(_dbContext);
+
+        public ISterilityDetectionRepository SterilityDetectionRepo => _sterilityDetectionRepo ?? new SterilityDetectionRepository(_dbContext);
+
+        public IStockInRepository StockInRepo => _stockInRepo ?? new StockInRepository(_dbContext);
+
+        public IShipmentRepository ShipmentRepo => _shipmentRepo ?? new ShipmentRepository(_dbContext);
 
         #endregion
     }

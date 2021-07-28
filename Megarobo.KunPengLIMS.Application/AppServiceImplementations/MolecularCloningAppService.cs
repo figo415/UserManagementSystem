@@ -13,7 +13,7 @@ using Megarobo.KunPengLIMS.Application.Exceptions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
-    public class MolecularCloningAppService:IMolecularCloningAppService
+    public class MolecularCloningAppService: IMolecularCloningAppService
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
