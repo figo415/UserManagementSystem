@@ -82,13 +82,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 {
                     var result = _mapper.Map<UserWithRightsDto>(user);
                     var menus = new List<Menu>();
-                    var buttons = new List<OpButton>();
+                    var buttons = new List<string>();
                     foreach(var departmentRole in user.DepartmentRoles)
                     {
                         var rolewithmenu = await _repoWrapper.RoleRepo.GetRoleWithMenu(departmentRole.RoleId);
                         menus.AddRange(rolewithmenu.Menus.Select(rm => rm.Menu));
-                        var rolewithbutton = await _repoWrapper.RoleRepo.GetRoleWithButton(departmentRole.RoleId);
-                        buttons.AddRange(rolewithbutton.Buttons.Select(rb => rb.Button));
+                        buttons.AddRange(rolewithmenu.Menus.Select(m => m.Buttons));
                     }
                     var menudtos= _mapper.Map<List<MenuDto>>(menus.OrderBy(m=>m.OrdinalNumber));
                     result.Menus = _menuAppService.GetTree(Guid.Empty, menudtos);
@@ -96,7 +95,8 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     {
                         TraverseTree(menu);
                     }
-                    result.BtnList = buttons.Select(b => b.Name).ToList();
+                    var buttonstr = string.Join(',', buttons.ToArray());
+                    result.BtnList = buttonstr.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
                     return result;
                 }
             }

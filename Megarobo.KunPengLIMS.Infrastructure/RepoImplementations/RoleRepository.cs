@@ -59,10 +59,5 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         {
             return GetByConditionAsync(s => s.Name == roleName);
         }
-
-        public System.Threading.Tasks.Task<Role> GetRoleWithButton(Guid roleId)
-        {
-            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Role>().Include(r => r.Buttons).ThenInclude(rb => rb.Button).Where(r => r.Id == roleId).SingleOrDefault());
-        }
     }
 }

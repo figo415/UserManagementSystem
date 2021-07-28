@@ -57,11 +57,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
             role.CreatedAt = DateTime.Now;
             role.IsDeleted = false;
             _repoWrapper.RoleRepo.Create(role);
-            if(dto.MenuIds.Any())
+            if(dto.MenuButtons.Any())
             {
-                foreach(var menuid in dto.MenuIds)
+                foreach(var menubtn in dto.MenuButtons)
                 {
-                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menuid };
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menubtn.MenuId };
+                    if(menubtn.SelectedButtonList!=null && menubtn.SelectedButtonList.Any())
+                    {
+                        rolemenu.Buttons = string.Join(",", menubtn.SelectedButtonList.ToArray());
+                    }
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }
@@ -84,11 +88,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 _repoWrapper.RoleMenuRepo.Delete(rolemenu);
             }
-            if (dto.MenuIds.Any())
+            if (dto.MenuButtons.Any())
             {
-                foreach (var menuid in dto.MenuIds)
+                foreach (var menubtn in dto.MenuButtons)
                 {
-                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menuid };
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menubtn.MenuId };
+                    if (menubtn.SelectedButtonList != null && menubtn.SelectedButtonList.Any())
+                    {
+                        rolemenu.Buttons = string.Join(",", menubtn.SelectedButtonList.ToArray());
+                    }
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }

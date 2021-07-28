@@ -19,5 +19,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         [ForeignKey("MenuId")]
         public virtual Menu Menu { get; set; }
+
+        public string Buttons { get; set; }
     }
 }

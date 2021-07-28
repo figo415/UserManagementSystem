@@ -28,6 +28,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public DateTime CreateTime { get; set; }
 
+        public List<string> ButtonList { get; set; }
+
         public string Path { get; set; }
 
         public string Component { get; set; }
