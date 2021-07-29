@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -39,6 +40,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 throw new NotExistedException("SdsPageDetection with Guid=" + sdsPageDetectionId + " is not existed");
             }
             _mapper.Map(dto, sdspage, typeof(SdsPageDetectionUpdateDto), typeof(SdsPageDetection));
+            sdspage.Status = DetectionStatusEnum.Finished;
             sdspage.LastModifiedAt = DateTime.Now;
             _repoWrapper.SdsPageDetectionRepo.Update(sdspage);
             var result = await _repoWrapper.SdsPageDetectionRepo.SaveAsync();

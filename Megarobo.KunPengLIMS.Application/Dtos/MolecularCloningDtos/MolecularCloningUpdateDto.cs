@@ -6,7 +6,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 {
     public class MolecularCloningUpdateDto
     {
-        public float Thickness { get; set; }
+        public float ThicknessValue { get; set; }
 
         public float Od { get; set; }
 

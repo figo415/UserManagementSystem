@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -39,6 +40,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 throw new NotExistedException("StockIn with Guid=" + stockInId + " is not existed");
             }
             _mapper.Map(dto, stockin, typeof(StockInUpdateDto), typeof(StockIn));
+            stockin.Status = StockStatusEnum.StockedIn;
             stockin.LastModifiedAt = DateTime.Now;
             _repoWrapper.StockInRepo.Update(stockin);
             var result = await _repoWrapper.StockInRepo.SaveAsync();

@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -39,6 +40,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 throw new NotExistedException("QpcrDetection with Guid=" + qpcrDetectionId + " is not existed");
             }
             _mapper.Map(dto, qpcr, typeof(QpcrDetectionUpdateDto), typeof(QpcrDetection));
+            qpcr.Status = DetectionStatusEnum.Finished;
             qpcr.LastModifiedAt = DateTime.Now;
             _repoWrapper.QpcrDetectionRepo.Update(qpcr);
             var result = await _repoWrapper.QpcrDetectionRepo.SaveAsync();

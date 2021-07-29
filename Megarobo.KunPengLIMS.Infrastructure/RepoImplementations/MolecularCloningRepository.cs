@@ -22,7 +22,49 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public Task<PagedList<MolecularCloning>> GetMolecularCloningsByPage(MolecularCloningQueryParameters parameters)
         {
-            throw new NotImplementedException();
+            IQueryable<MolecularCloning> queryable = DbContext.Set<MolecularCloning>();
+            var predicate = BuildPredicate(parameters);
+            queryable = queryable.Where(predicate).OrderByDescending(c => c.CreatedAt);
+            return PagedList<MolecularCloning>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
+        }
+
+        private Expression<Func<MolecularCloning, bool>> BuildPredicate(MolecularCloningQueryParameters parameters)
+        {
+            Expression<Func<MolecularCloning, bool>> predicate = PredicateBuilder.True<MolecularCloning>();
+            if (!string.IsNullOrEmpty(parameters.ContractCode))
+            {
+                predicate = predicate.And(c => c.ContractCode == parameters.ContractCode);
+            }
+            if (!string.IsNullOrEmpty(parameters.CarrierCode))
+            {
+                predicate = predicate.And(c => c.CarrierCode == parameters.CarrierCode);
+            }
+            predicate = predicate.And(c => c.ContractType.ToString() == parameters.ContractType);
+            if (!string.IsNullOrEmpty(parameters.Status))
+            {
+                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
+            }
+            if (parameters.StartDate != null && parameters.EndDate == null)
+            {
+                predicate = predicate.And(c => c.OrderCreateTime >= parameters.StartDate);
+            }
+            else if (parameters.StartDate == null && parameters.EndDate != null)
+            {
+                predicate = predicate.And(c => c.OrderCreateTime <= parameters.EndDate);
+            }
+            else if (parameters.StartDate != null && parameters.EndDate != null)
+            {
+                if (parameters.StartDate > parameters.EndDate)
+                {
+                    predicate = predicate.And(c => c.OrderCreateTime >= parameters.EndDate && c.OrderCreateTime <= parameters.StartDate);
+                }
+                else
+                {
+                    predicate = predicate.And(c => c.OrderCreateTime >= parameters.StartDate && c.OrderCreateTime <= parameters.EndDate);
+                }
+            }
+            predicate = predicate.And(c => !c.IsDeleted);
+            return predicate;
         }
     }
 }

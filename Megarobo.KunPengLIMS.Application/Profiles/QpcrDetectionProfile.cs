@@ -11,7 +11,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public QpcrDetectionProfile()
         {
+            CreateMap<QpcrDetection, QpcrDetectionDto>()
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 
+            CreateMap<QpcrDetectionUpdateDto, QpcrDetection>();
         }
     }
 }

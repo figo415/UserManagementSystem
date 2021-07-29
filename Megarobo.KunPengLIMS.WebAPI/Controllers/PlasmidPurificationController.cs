@@ -46,15 +46,15 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <summary>
         /// 完成质粒纯化
         /// </summary>
-        /// <param name="plasmidPurificationId">Guid</param>
+        /// <param name="plasmidId">Guid</param>
         /// <param name="updateDto">PlasmidPurificationUpdateDto</param>
         /// <returns></returns>
-        [HttpPut("{plasmidPurificationId}")]
-        public async Task<ActionResult<StringApiResult>> UpdatePlasmidPurification(Guid plasmidPurificationId, PlasmidPurificationUpdateDto updateDto)
+        [HttpPut("{plasmidId}")]
+        public async Task<ActionResult<StringApiResult>> UpdatePlasmidPurification(Guid plasmidId, PlasmidPurificationUpdateDto updateDto)
         {
             try
             {
-                var result = await _service.UpdatePlasmidPurification(plasmidPurificationId, updateDto);
+                var result = await _service.UpdatePlasmidPurification(plasmidId, updateDto);
                 if (result)
                 {
                     return StringApiResult.Succeed();

@@ -1,30 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
-    public class Order : AuditableEntity
+    public class Order:Contract
     {
-        /// <summary>
-        /// 合同号
-        /// </summary>
-        public string ContractCode { get; set; }
-
-        /// <summary>
-        /// 合同类型：AAV, LV, ADV
-        /// </summary>
-        public string ContractType { get; set; }
-
         /// <summary>
         /// 状态：已接单，待生产，生产中，已完成，已取消
         /// </summary>
-        public string Status { get; set; }
-
-        /// <summary>
-        /// 载体编号
-        /// </summary>
-        public string CarrierCode { get; set; }
+        public OrderStatusEnum Status { get; set; }
 
         /// <summary>
         /// 载体结构
@@ -34,7 +20,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 质粒类型：大抽，小抽
         /// </summary>
-        public string PlasmidType { get; set; }
+        public PlasmidExtractionTypeEnum PlasmidType { get; set; }
 
         /// <summary>
         /// 质粒大小/bp
@@ -130,11 +116,6 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// 创建人
         /// </summary>
         public string CreatedBy { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public string CreateTime { get; set; }
 
         public virtual ICollection<MolecularCloning> MolecularClonings { get; set; }
 

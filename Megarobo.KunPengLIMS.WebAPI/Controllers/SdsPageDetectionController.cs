@@ -31,7 +31,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 获取SDS-PAGE检测，可根据合同编号、合同类型、载体编号、状态或创建时间查询
+        /// 获取SDS-PAGE检测，可根据合同编号、载体编号、状态或创建时间查询
         /// </summary>
         /// <param name="parameters">SdsPageDetectionQueryParameters</param>
         /// <returns>SdsPageDetectionDto列表</returns>

@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -31,14 +32,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<MolecularCloningDto>(pagedDtos, pagedMolecularClonings.TotalCount, pagedMolecularClonings.PageNumber, pagedMolecularClonings.PageSize);
         }
 
-        public async Task<bool> UpdateMolecularCloning(Guid molecularCloningId, MolecularCloningUpdateDto dto)
+        public async Task<bool> UpdateMolecularCloning(Guid molecularId, MolecularCloningUpdateDto dto)
         {
-            var molecular = await _repoWrapper.MolecularCloningRepo.GetByIdAsync(molecularCloningId);
+            var molecular = await _repoWrapper.MolecularCloningRepo.GetByIdAsync(molecularId);
             if (molecular == null)
             {
-                throw new NotExistedException("MolecularCloning with Guid=" + molecularCloningId + " is not existed");
+                throw new NotExistedException("MolecularCloning with Guid=" + molecularId + " is not existed");
             }
             _mapper.Map(dto, molecular, typeof(MolecularCloningUpdateDto), typeof(MolecularCloning));
+            molecular.Status = MolecularCloningStatusEnum.Finished;
             molecular.LastModifiedAt = DateTime.Now;
             _repoWrapper.MolecularCloningRepo.Update(molecular);
             var result = await _repoWrapper.MolecularCloningRepo.SaveAsync();

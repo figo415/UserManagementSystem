@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
-    public class PlasmidPurification:AuditableEntity
+    public class PlasmidPurification:Contract
     {
         /// <summary>
         /// 质粒类型：大抽，小抽
         /// </summary>
-        public string PlasmidType { get; set; }
+        public PlasmidExtractionTypeEnum PlasmidType { get; set; }
 
         /// <summary>
         /// 浓度（ng/μL）
@@ -27,11 +28,17 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 类型：待纯化，已完成
         /// </summary>
-        public string Status { get; set; }
+        public PlasmidPurificationStatusEnum Status { get; set; }
 
         public Guid OrderId { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+
+        public string CarrierStructure { get; set; }
+
+        public int PlasmidSize { get; set; }
+
+        public DateTime OrderCreateTime { get; set; }
     }
 }

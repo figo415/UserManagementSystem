@@ -11,7 +11,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public StockInProfile()
         {
+            CreateMap<StockIn, StockInDto>()
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 
+            CreateMap<StockInUpdateDto, StockIn>();
         }
     }
 }

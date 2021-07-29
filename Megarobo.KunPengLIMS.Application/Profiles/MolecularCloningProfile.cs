@@ -11,7 +11,12 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public MolecularCloningProfile()
         {
+            CreateMap<MolecularCloning, MolecularCloningDto>()
+                .ForMember(d => d.ThicknessValue, opt => opt.MapFrom(s => s.Thickness.Value))
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 
+            CreateMap<MolecularCloningUpdateDto, MolecularCloning>()
+                .ForMember(d => d.Thickness, opt => opt.MapFrom(s => new Thickness() { Value = s.ThicknessValue }));
         }
     }
 }

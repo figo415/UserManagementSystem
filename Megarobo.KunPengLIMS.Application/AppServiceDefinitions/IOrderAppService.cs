@@ -16,7 +16,17 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         Task<bool> UpdateOrder(Guid orderId, OrderUpdateDto dto);
 
+        Task<bool> CancelOrder(Guid orderId);
+
         Task<bool> CloneMolecule(Guid orderId);
+
+        Task<bool> PurifyPlasmid(Guid orderId);
+
+        Task<bool> StartProduce(Guid orderId);
+
+        Task<bool> QcAndStockIn(Guid orderId);
+
+        Task<bool> FinishOrder(Guid orderId);
 
         Task<bool> DeleteOrders(DeleteMultiDto dto);
     }

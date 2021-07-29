@@ -11,7 +11,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public SterilityDetectionProfile()
         {
+            CreateMap<SterilityDetection, SterilityDetectionDto>()
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 
+            CreateMap<SterilityDetectionUpdateDto, SterilityDetection>();
         }
     }
 }

@@ -11,7 +11,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public SdsPageDetectionProfile()
         {
+            CreateMap<SdsPageDetection, SdsPageDetectionDto>()
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 
+            CreateMap<SdsPageDetectionUpdateDto, SdsPageDetection>();
         }
     }
 }

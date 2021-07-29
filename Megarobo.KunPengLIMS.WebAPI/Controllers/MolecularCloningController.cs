@@ -46,15 +46,15 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// <summary>
         /// 完成分子克隆
         /// </summary>
-        /// <param name="molecularCloningId">Guid</param>
+        /// <param name="molecularId">Guid</param>
         /// <param name="updateDto">MolecularCloningUpdateDto</param>
         /// <returns></returns>
-        [HttpPut("{molecularCloningId}")]
-        public async Task<ActionResult<StringApiResult>> UpdateMolecularCloning(Guid molecularCloningId, MolecularCloningUpdateDto updateDto)
+        [HttpPut("{molecularId}")]
+        public async Task<ActionResult<StringApiResult>> UpdateMolecularCloning(Guid molecularId, MolecularCloningUpdateDto updateDto)
         {
             try
             {
-                var result = await _service.UpdateMolecularCloning(molecularCloningId, updateDto);
+                var result = await _service.UpdateMolecularCloning(molecularId, updateDto);
                 if (result)
                 {
                     return StringApiResult.Succeed();

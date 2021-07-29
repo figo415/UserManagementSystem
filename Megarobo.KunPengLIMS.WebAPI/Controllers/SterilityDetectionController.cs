@@ -47,7 +47,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// 完成无菌检测
         /// </summary>
         /// <param name="sterilityDetectionId">Guid</param>
-        /// <param name="updateDto">SdsPageDetectionUpdateDto</param>
+        /// <param name="updateDto">SterilityDetectionUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{sterilityDetectionId}")]
         public async Task<ActionResult<StringApiResult>> UpdateSterilityDetection(Guid sterilityDetectionId, SterilityDetectionUpdateDto updateDto)

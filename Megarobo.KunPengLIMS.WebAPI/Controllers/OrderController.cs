@@ -94,16 +94,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// 取消订单
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/cancel")]
-        public async Task<ActionResult<StringApiResult>> CancelOrder(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> CancelOrder(Guid orderId)
         {
             try
             {
-                var dto = new DeleteMultiDto();
-                dto.Guids = new List<Guid> { orderId };
-                var result = await _service.DeleteOrders(dto);
+                var result = await _service.CancelOrder(orderId);
                 if (result)
                 {
                     return StringApiResult.Succeed();
@@ -120,60 +117,115 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
         /// 分子克隆
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/clone")]
-        public async Task<ActionResult<StringApiResult>> CloneMolecule(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> CloneMolecule(Guid orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.CloneMolecule(orderId);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
         /// 质粒纯化
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/purify")]
-        public async Task<ActionResult<StringApiResult>> PurifyPlasmid(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> PurifyPlasmid(Guid orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.PurifyPlasmid(orderId);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
         /// 进入生产
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/produce")]
-        public async Task<ActionResult<StringApiResult>> StartProduce(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> StartProduce(Guid orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.StartProduce(orderId);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
-        /// QC & 入库
+        /// QC和入库
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/stockin")]
-        public async Task<ActionResult<StringApiResult>> TestStockIn(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> QcAndStockIn(Guid orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.QcAndStockIn(orderId);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>
-        /// 完成
+        /// 完成订单
         /// </summary>
         /// <param name="orderId">Guid</param>
-        /// <param name="updateDto">OrderUpdateDto</param>
         /// <returns></returns>
         [HttpPut("{orderId}/finish")]
-        public async Task<ActionResult<StringApiResult>> FinishOrder(Guid orderId, OrderUpdateDto updateDto)
+        public async Task<ActionResult<StringApiResult>> FinishOrder(Guid orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _service.FinishOrder(orderId);
+                if (result)
+                {
+                    return StringApiResult.Succeed();
+                }
+                return StringApiResult.Fail();
+            }
+            catch (Exception ex)
+            {
+                return StringApiResult.Error(ex.Message);
+            }
         }
 
         /// <summary>

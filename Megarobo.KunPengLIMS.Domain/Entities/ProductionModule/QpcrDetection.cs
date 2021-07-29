@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
-    public class QpcrDetection:AuditableEntity
+    public class QpcrDetection:Contract
     {
         /// <summary>
         /// 检测日期
@@ -20,11 +21,13 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 状态：待检测，已完成
         /// </summary>
-        public string Status { get; set; }
+        public DetectionStatusEnum Status { get; set; }
 
         public Guid OrderId { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+
+        public DateTime OrderCreateTime { get; set; }
     }
 }

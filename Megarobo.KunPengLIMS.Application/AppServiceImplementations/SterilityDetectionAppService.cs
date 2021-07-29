@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -39,6 +40,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 throw new NotExistedException("SterilityDetection with Guid=" + sterilityDetectionId + " is not existed");
             }
             _mapper.Map(dto, sterility, typeof(SterilityDetectionUpdateDto), typeof(SterilityDetection));
+            sterility.Status = DetectionStatusEnum.Finished;
             sterility.LastModifiedAt = DateTime.Now;
             _repoWrapper.SterilityDetectionRepo.Update(sterility);
             var result = await _repoWrapper.SterilityDetectionRepo.SaveAsync();

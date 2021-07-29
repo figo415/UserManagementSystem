@@ -22,7 +22,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public Task<PagedList<Order>> GetOrdersByPage(OrderQueryParameters parameters)
         {
-            IQueryable<Order> queryable = DbContext.Set<Order>();
+            IQueryable<Order> queryable = DbContext.Set<Order>().Include(o => o.SdsPageDetections);
             var predicate = BuildPredicate(parameters);
             queryable = queryable.Where(predicate).OrderByDescending(c => c.CreatedAt);
             return PagedList<Order>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
@@ -39,10 +39,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(c => c.CarrierCode == parameters.CarrierCode);
             }
-            predicate = predicate.And(c => c.ContractType == parameters.ContractType);
+            predicate = predicate.And(c => c.ContractType.ToString() == parameters.ContractType);
             if (!string.IsNullOrEmpty(parameters.Status))
             {
-                predicate = predicate.And(c => c.Status == parameters.Status);
+                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
             }
             if (parameters.StartDate != null && parameters.EndDate == null)
             {
@@ -69,7 +69,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public Task<IEnumerable<Order>> GetOrdersByCode(string contractCode)
         {
-            return GetByConditionAsync(c => c.ContractCode == contractCode);
+            return GetByConditionAsync(o => o.ContractCode == contractCode);
         }
     }
 }

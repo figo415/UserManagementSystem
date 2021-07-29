@@ -8,6 +8,7 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using AutoMapper;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
 
@@ -31,14 +32,15 @@ namespace Megarobo.KunPengLIMS.Application.Services
             return new PagedList<PlasmidPurificationDto>(pagedDtos, pagedPlasmidPurifications.TotalCount, pagedPlasmidPurifications.PageNumber, pagedPlasmidPurifications.PageSize);
         }
 
-        public async Task<bool> UpdatePlasmidPurification(Guid plasmidPurificationId, PlasmidPurificationUpdateDto dto)
+        public async Task<bool> UpdatePlasmidPurification(Guid plasmidId, PlasmidPurificationUpdateDto dto)
         {
-            var plasmid = await _repoWrapper.PlasmidPurificationRepo.GetByIdAsync(plasmidPurificationId);
+            var plasmid = await _repoWrapper.PlasmidPurificationRepo.GetByIdAsync(plasmidId);
             if (plasmid == null)
             {
-                throw new NotExistedException("PlasmidPurification with Guid=" + plasmidPurificationId + " is not existed");
+                throw new NotExistedException("PlasmidPurification with Guid=" + plasmidId + " is not existed");
             }
             _mapper.Map(dto, plasmid, typeof(PlasmidPurificationUpdateDto), typeof(PlasmidPurification));
+            plasmid.Status = PlasmidPurificationStatusEnum.Finished;
             plasmid.LastModifiedAt = DateTime.Now;
             _repoWrapper.PlasmidPurificationRepo.Update(plasmid);
             var result = await _repoWrapper.PlasmidPurificationRepo.SaveAsync();

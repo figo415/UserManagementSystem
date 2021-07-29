@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
-    public class MolecularCloning:AuditableEntity
+    public class MolecularCloning:Contract
     {
         /// <summary>
         /// 浓度（ng/μL）
@@ -22,11 +23,15 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 状态：待克隆，已完成
         /// </summary>
-        public string Status { get; set; }
+        public MolecularCloningStatusEnum Status { get; set; }
 
         public Guid OrderId { get; set; }
 
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+
+        public string CarrierStructure { get; set; }
+
+        public DateTime OrderCreateTime { get; set; }
     }
 }

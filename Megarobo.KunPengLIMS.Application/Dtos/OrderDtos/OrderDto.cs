@@ -91,7 +91,13 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         /// <summary>
         /// 实际产量/vgs：实际滴度*分装体积*分装支数
         /// </summary>
-        public float ActualOutput { get; set; }
+        public float ActualOutput
+        {
+            get
+            {
+                return ActualTiter * SubpackageCubage * SubpackageNumber;
+            }
+        }
 
         /// <summary>
         /// 分装体积/μL

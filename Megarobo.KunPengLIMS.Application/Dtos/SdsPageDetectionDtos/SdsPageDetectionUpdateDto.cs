@@ -6,5 +6,10 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 {
     public class SdsPageDetectionUpdateDto
     {
+        public DateTime DetectionDate { get; set; }
+
+        public float ProteinTiter { get; set; }
+
+        public bool IsPurityQualified { get; set; }
     }
 }
