@@ -58,7 +58,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public float Plasmid4 { get; set; }
 
-        public object AnalysisReport { get; set; } //TODO
+        //public object AnalysisReport { get; set; } //TODO
 
         public string Memo { get; set; }
     }

@@ -135,6 +135,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 .WithMany(s => s.Tasks)
                 .HasForeignKey(ts => ts.SampleId);
 
+            modelBuilder.Entity<MolecularCloning>().HasOne(m => m.Order).WithOne(o => o.MolecularCloning).HasForeignKey<MolecularCloning>(m => m.OrderId);
+            modelBuilder.Entity<PlasmidPurification>().HasOne(p => p.Order).WithOne(o => o.PlasmidPurification).HasForeignKey<PlasmidPurification>(p => p.OrderId);
+            modelBuilder.Entity<QpcrDetection>().HasOne(q => q.Order).WithOne(o => o.QpcrDetection).HasForeignKey<QpcrDetection>(q => q.OrderId);
+            modelBuilder.Entity<SdsPageDetection>().HasOne(s => s.Order).WithOne(o => o.SdsPageDetection).HasForeignKey<SdsPageDetection>(s => s.OrderId);
+            modelBuilder.Entity<SterilityDetection>().HasOne(s => s.Order).WithOne(o => o.SterilityDetection).HasForeignKey<SterilityDetection>(s => s.OrderId);
+            modelBuilder.Entity<StockIn>().HasOne(s => s.Order).WithOne(o => o.StockIn).HasForeignKey<StockIn>(s => s.OrderId);
+            modelBuilder.Entity<Shipment>().HasOne(s => s.Order).WithOne(o => o.Shipment).HasForeignKey<Shipment>(s => s.OrderId);
+
             modelBuilder.Entity<UserDepartmentRole>().HasKey(u => new { u.UserId, u.DepartmentId, u.RoleId });
             modelBuilder.Entity<UserSkill>().HasKey(us => new { us.UserId, us.SkillId });
             modelBuilder.Entity<RoleMenu>().HasKey(rm => new { rm.RoleId, rm.MenuId });

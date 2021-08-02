@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.Utility;
@@ -41,7 +42,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             }
             if (!string.IsNullOrEmpty(parameters.Status))
             {
-                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
+                DetectionStatusEnum sdspageStatus;
+                if (Enum.TryParse<DetectionStatusEnum>(parameters.Status, out sdspageStatus))
+                {
+                    predicate = predicate.And(c => c.Status == sdspageStatus);
+                }
             }
             if (parameters.StartDate != null && parameters.EndDate == null)
             {

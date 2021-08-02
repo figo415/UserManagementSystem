@@ -94,6 +94,14 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddScoped<IReagentAppService, ReagentAppService>();
             services.AddScoped<IPositionAppService, PositionAppService>();
             services.AddScoped<ISampleAppService, SampleAppService>();
+            services.AddScoped<IOrderAppService, OrderAppService>();
+            services.AddScoped<IMolecularCloningAppService, MolecularCloningAppService>();
+            services.AddScoped<IPlasmidPurificationAppService, PlasmidPurificationAppService>();
+            services.AddScoped<IQpcrDetectionAppService, QpcrDetectionAppService>();
+            services.AddScoped<ISdsPageDetectionAppService, SdsPageDetectionAppService>();
+            services.AddScoped<ISterilityDetectionAppService, SterilityDetectionAppService>();
+            services.AddScoped<IStockInAppService, StockInAppService>();
+            services.AddScoped<IShipmentAppService, ShipmentAppService>();
             #endregion
 
             #region Other services

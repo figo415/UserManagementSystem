@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("Shipment with Guid=" + shipmentId + " is not existed");
             }
+            if (shipment.Status == ShipmentStatusEnum.Shipped)
+            {
+                throw new InvalidOperationException("This order is already shipped");
+            }
             _mapper.Map(dto, shipment, typeof(ShipmentUpdateDto), typeof(Shipment));
             shipment.Status = ShipmentStatusEnum.Shipped;
             shipment.LastModifiedAt = DateTime.Now;

@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.Utility;
@@ -22,7 +23,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public Task<PagedList<Order>> GetOrdersByPage(OrderQueryParameters parameters)
         {
-            IQueryable<Order> queryable = DbContext.Set<Order>().Include(o => o.SdsPageDetections);
+            IQueryable<Order> queryable = DbContext.Set<Order>().Include(o => o.SdsPageDetection);
             var predicate = BuildPredicate(parameters);
             queryable = queryable.Where(predicate).OrderByDescending(c => c.CreatedAt);
             return PagedList<Order>.CreateAsync(queryable, parameters.PageNumber, parameters.PageSize);
@@ -39,10 +40,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(c => c.CarrierCode == parameters.CarrierCode);
             }
-            predicate = predicate.And(c => c.ContractType.ToString() == parameters.ContractType);
+            ContractTypeEnum contractType;
+             if(!Enum.TryParse<ContractTypeEnum>(parameters.ContractType,out contractType))
+            {
+                contractType = ContractTypeEnum.AAV;
+            }
+            predicate = predicate.And(c => c.ContractType == contractType);
             if (!string.IsNullOrEmpty(parameters.Status))
             {
-                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
+                OrderStatusEnum orderStatus;
+                if(Enum.TryParse<OrderStatusEnum>(parameters.Status,out orderStatus))
+                {
+                    predicate = predicate.And(c => c.Status == orderStatus);
+                }
             }
             if (parameters.StartDate != null && parameters.EndDate == null)
             {
@@ -70,6 +80,26 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public Task<IEnumerable<Order>> GetOrdersByCode(string contractCode)
         {
             return GetByConditionAsync(o => o.ContractCode == contractCode);
+        }
+
+        public Task<Order> GetOrderWithMolecule(Guid orderId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.MolecularCloning).Where(o => o.Id == orderId).SingleOrDefault());
+        }
+
+        public Task<Order> GetOrderWithPlasmid(Guid orderId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.PlasmidPurification).Where(o => o.Id == orderId).SingleOrDefault());
+        }
+
+        public Task<Order> GetOrderWithQpcr(Guid orderId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.QpcrDetection).Where(o => o.Id == orderId).SingleOrDefault());
+        }
+
+        public Task<Order> GetOrderWithShipment(Guid orderId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.Shipment).Where(o => o.Id == orderId).SingleOrDefault());
         }
     }
 }

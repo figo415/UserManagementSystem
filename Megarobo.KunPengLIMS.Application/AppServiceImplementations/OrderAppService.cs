@@ -40,6 +40,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 throw new AlreadyExistedException("Order with Contract Code=" + dto.ContractCode + " is already existed");
             }
             var order = _mapper.Map<Order>(dto);
+            if (!(order.Status == OrderStatusEnum.OrderReceived || order.Status==OrderStatusEnum.WaitForProducing))
+            {
+                throw new ArgumentException("New order only can be OrderReceived or WaitForProducing status");
+            }
             order.Id = Guid.NewGuid();
             order.CreatedAt = DateTime.Now;
             order.IsDeleted = false;
@@ -69,8 +73,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
             }
+            if(!(order.Status==OrderStatusEnum.OrderReceived || order.Status==OrderStatusEnum.WaitForProducing))
+            {
+                throw new InvalidOperationException("Order only with status OrderReceived or WaitForProducing can be cancelled");
+            }
             order.Status = OrderStatusEnum.Cancelled;
-            order.IsDeleted = true;
+            //order.IsDeleted = true;
             order.LastModifiedAt = DateTime.Now;
             _repoWrapper.OrderRepo.Update(order);
             var result = await _repoWrapper.OrderRepo.SaveAsync();
@@ -79,10 +87,23 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> CloneMolecule(Guid orderId)
         {
-            var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+            var order = await _repoWrapper.OrderRepo.GetOrderWithMolecule(orderId);
             if (order == null)
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
+            }
+            if(order.Status!=OrderStatusEnum.OrderReceived)
+            {
+                throw new InvalidOperationException("Order only with OrderReceived status can do Molecular Cloning");
+            }
+            if(order.MolecularCloning!=null)
+            {
+                throw new InvalidOperationException("Molecular Cloning was already done for this order");
+            }
+            var plasmidOrder = await _repoWrapper.OrderRepo.GetOrderWithPlasmid(orderId);
+            if(plasmidOrder!=null && plasmidOrder.PlasmidPurification!=null)
+            {
+                throw new InvalidOperationException("Plasmid Purification was already done, no need to do Molecular Cloning");
             }
             order.Status = OrderStatusEnum.WaitForProducing;
             order.LastModifiedAt = DateTime.Now;
@@ -105,10 +126,23 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> PurifyPlasmid(Guid orderId)
         {
-            var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+            var order = await _repoWrapper.OrderRepo.GetOrderWithPlasmid(orderId);
             if (order == null)
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
+            }
+            if (!(order.Status == OrderStatusEnum.OrderReceived || order.Status==OrderStatusEnum.WaitForProducing))
+            {
+                throw new InvalidOperationException("Order only with OrderReceived or WaitForProducing status can do Plasmid Purification");
+            }
+            if (order.PlasmidPurification != null)
+            {
+                throw new InvalidOperationException("Plasmid Purification was already done for this order");
+            }
+            var molecularOrder = await _repoWrapper.OrderRepo.GetOrderWithMolecule(orderId);
+            if (molecularOrder != null && molecularOrder.MolecularCloning != null && molecularOrder.MolecularCloning.Status!=MolecularCloningStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Molecular Cloning must be finished before doing Plasmid Purification");
             }
             order.Status = OrderStatusEnum.WaitForProducing;
             order.LastModifiedAt = DateTime.Now;
@@ -137,6 +171,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
             }
+            if (!(order.Status == OrderStatusEnum.OrderReceived || order.Status == OrderStatusEnum.WaitForProducing))
+            {
+                throw new InvalidOperationException("Order only with OrderReceived or WaitForProducing status can start producing");
+            }
             order.Status = OrderStatusEnum.InProducing;
             order.StartDate = DateTime.Now;
             order.LastModifiedAt = DateTime.Now;
@@ -152,7 +190,16 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
             }
-            order.Status = OrderStatusEnum.InProducing;
+            if(order.Status!=OrderStatusEnum.InProducing)
+            {
+                throw new InvalidOperationException("Order must be InProducing status");
+            }
+            var qpcrOrder = await _repoWrapper.OrderRepo.GetOrderWithQpcr(orderId);
+            if(qpcrOrder!=null && qpcrOrder.QpcrDetection!=null)
+            {
+                throw new InvalidOperationException("QpcrDetection etc. were already existed for this order");
+            }
+            //order.Status = OrderStatusEnum.InProducing;
             order.LastModifiedAt = DateTime.Now;
             _repoWrapper.OrderRepo.Update(order);
             var qpcr = new QpcrDetection();
@@ -208,10 +255,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<bool> FinishOrder(Guid orderId)
         {
-            var order = await _repoWrapper.OrderRepo.GetByIdAsync(orderId);
+            var order = await _repoWrapper.OrderRepo.GetOrderWithShipment(orderId);
             if (order == null)
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
+            }
+            if (order.Status != OrderStatusEnum.InProducing)
+            {
+                throw new InvalidOperationException("Order must be InProducing status");
+            }
+            if(order.Shipment!=null)
+            {
+                throw new InvalidOperationException("Shipment was already existed for this order");
             }
             order.Status = OrderStatusEnum.Finished;
             order.FinisheDate = DateTime.Now;

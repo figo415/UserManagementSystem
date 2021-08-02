@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Megarobo.KunPengLIMS.Application.Services;
 using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.WebAPI.Models;
@@ -19,6 +20,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/stockins")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
+    [AllowAnonymous]
     public class StockInController : ControllerBase
     {
         private readonly IStockInAppService _service;

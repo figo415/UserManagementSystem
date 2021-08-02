@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.Utility;
@@ -39,14 +40,27 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(c => c.CarrierCode == parameters.CarrierCode);
             }
-            predicate = predicate.And(c => c.ContractType.ToString() == parameters.ContractType);
+            ContractTypeEnum contractType;
+            if (!Enum.TryParse<ContractTypeEnum>(parameters.ContractType, out contractType))
+            {
+                contractType = ContractTypeEnum.AAV;
+            }
+            predicate = predicate.And(c => c.ContractType == contractType);
             if (!string.IsNullOrEmpty(parameters.PlasmidType))
             {
-                predicate = predicate.And(c => c.PlasmidType.ToString() == parameters.PlasmidType);
+                PlasmidExtractionTypeEnum plasmidType;
+                if (Enum.TryParse<PlasmidExtractionTypeEnum>(parameters.PlasmidType, out plasmidType))
+                {
+                    predicate = predicate.And(c => c.PlasmidType == plasmidType);
+                }
             }
             if (!string.IsNullOrEmpty(parameters.Status))
             {
-                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
+                PlasmidPurificationStatusEnum plasmidStatus;
+                if (Enum.TryParse<PlasmidPurificationStatusEnum>(parameters.Status, out plasmidStatus))
+                {
+                    predicate = predicate.And(c => c.Status==plasmidStatus);
+                }
             }
             if (parameters.StartDate != null && parameters.EndDate == null)
             {

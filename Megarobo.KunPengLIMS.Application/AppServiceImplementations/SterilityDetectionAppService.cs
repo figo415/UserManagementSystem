@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("SterilityDetection with Guid=" + sterilityDetectionId + " is not existed");
             }
+            if (sterility.Status == DetectionStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Sterility detection is already finished");
+            }
             _mapper.Map(dto, sterility, typeof(SterilityDetectionUpdateDto), typeof(SterilityDetection));
             sterility.Status = DetectionStatusEnum.Finished;
             sterility.LastModifiedAt = DateTime.Now;

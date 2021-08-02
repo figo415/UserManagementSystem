@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("QpcrDetection with Guid=" + qpcrDetectionId + " is not existed");
             }
+            if (qpcr.Status == DetectionStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("qPCR detection is already finished");
+            }
             _mapper.Map(dto, qpcr, typeof(QpcrDetectionUpdateDto), typeof(QpcrDetection));
             qpcr.Status = DetectionStatusEnum.Finished;
             qpcr.LastModifiedAt = DateTime.Now;

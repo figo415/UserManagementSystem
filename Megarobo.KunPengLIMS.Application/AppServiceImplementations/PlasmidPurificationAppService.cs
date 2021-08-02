@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("PlasmidPurification with Guid=" + plasmidId + " is not existed");
             }
+            if(plasmid.Status==PlasmidPurificationStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Plasmid Purification is already finished");
+            }
             _mapper.Map(dto, plasmid, typeof(PlasmidPurificationUpdateDto), typeof(PlasmidPurification));
             plasmid.Status = PlasmidPurificationStatusEnum.Finished;
             plasmid.LastModifiedAt = DateTime.Now;

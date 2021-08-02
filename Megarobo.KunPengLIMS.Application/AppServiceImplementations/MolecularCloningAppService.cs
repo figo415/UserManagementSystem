@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("MolecularCloning with Guid=" + molecularId + " is not existed");
             }
+            if(molecular.Status==MolecularCloningStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Molecular Cloning is already finished");
+            }
             _mapper.Map(dto, molecular, typeof(MolecularCloningUpdateDto), typeof(MolecularCloning));
             molecular.Status = MolecularCloningStatusEnum.Finished;
             molecular.LastModifiedAt = DateTime.Now;

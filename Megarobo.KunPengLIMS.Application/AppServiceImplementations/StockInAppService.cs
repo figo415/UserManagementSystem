@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("StockIn with Guid=" + stockInId + " is not existed");
             }
+            if (stockin.Status == StockStatusEnum.StockedIn)
+            {
+                throw new InvalidOperationException("This order is already stocked in");
+            }
             _mapper.Map(dto, stockin, typeof(StockInUpdateDto), typeof(StockIn));
             stockin.Status = StockStatusEnum.StockedIn;
             stockin.LastModifiedAt = DateTime.Now;

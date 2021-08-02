@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Enums;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.Utility;
@@ -39,10 +40,19 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             {
                 predicate = predicate.And(c => c.CarrierCode == parameters.CarrierCode);
             }
-            predicate = predicate.And(c => c.ContractType.ToString() == parameters.ContractType);
+            ContractTypeEnum contractType;
+            if (!Enum.TryParse<ContractTypeEnum>(parameters.ContractType, out contractType))
+            {
+                contractType = ContractTypeEnum.AAV;
+            }
+            predicate = predicate.And(c => c.ContractType == contractType);
             if (!string.IsNullOrEmpty(parameters.Status))
             {
-                predicate = predicate.And(c => c.Status.ToString() == parameters.Status);
+                DetectionStatusEnum qpcrStatus;
+                if(Enum.TryParse<DetectionStatusEnum>(parameters.Status,out qpcrStatus))
+                {
+                    predicate = predicate.And(c => c.Status == qpcrStatus);
+                }
             }
             if (parameters.StartDate != null && parameters.EndDate == null)
             {

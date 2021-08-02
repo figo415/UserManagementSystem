@@ -39,6 +39,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("SdsPageDetection with Guid=" + sdsPageDetectionId + " is not existed");
             }
+            if (sdspage.Status == DetectionStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("SDS-PAGE detection is already finished");
+            }
             _mapper.Map(dto, sdspage, typeof(SdsPageDetectionUpdateDto), typeof(SdsPageDetection));
             sdspage.Status = DetectionStatusEnum.Finished;
             sdspage.LastModifiedAt = DateTime.Now;

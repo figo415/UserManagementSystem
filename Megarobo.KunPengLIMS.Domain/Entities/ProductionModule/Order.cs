@@ -105,7 +105,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 分析报告：pdf
         /// </summary>
-        public object AnalysisReport { get; set; }
+        //public object AnalysisReport { get; set; }
 
         /// <summary>
         /// 备注
@@ -117,18 +117,25 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// </summary>
         public string CreatedBy { get; set; }
 
-        public virtual ICollection<MolecularCloning> MolecularClonings { get; set; }
+        public virtual MolecularCloning MolecularCloning { get; set; }
+        //public virtual ICollection<MolecularCloning> MolecularClonings { get; set; }
 
-        public virtual ICollection<PlasmidPurification> PlasmidPurifications { get; set; }
+        public virtual PlasmidPurification PlasmidPurification { get; set; }
+        //public virtual ICollection<PlasmidPurification> PlasmidPurifications { get; set; }
 
-        public virtual ICollection<QpcrDetection> QpcrDetections { get; set; }
+        public virtual QpcrDetection QpcrDetection { get; set; }
+        //public virtual ICollection<QpcrDetection> QpcrDetections { get; set; }
 
-        public virtual ICollection<SdsPageDetection> SdsPageDetections { get; set; }
+        public virtual SdsPageDetection SdsPageDetection { get; set; }
+        //public virtual ICollection<SdsPageDetection> SdsPageDetections { get; set; }
 
-        public virtual ICollection<SterilityDetection> SterilityDetections { get; set; }
+        public virtual SterilityDetection SterilityDetection { get; set; }
+        //public virtual ICollection<SterilityDetection> SterilityDetections { get; set; }
 
-        public virtual ICollection<StockIn> StockIns { get; set; }
+        public virtual StockIn StockIn { get; set; }
+        //public virtual ICollection<StockIn> StockIns { get; set; }
 
-        public virtual ICollection<Shipment> Shipments { get; set; }
+        public virtual Shipment Shipment { get; set; }
+        //public virtual ICollection<Shipment> Shipments { get; set; }
     }
 }

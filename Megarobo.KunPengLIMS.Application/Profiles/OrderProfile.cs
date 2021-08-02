@@ -20,7 +20,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
 
             CreateMap<Order, OrderDto>()
                 .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
-                .ForMember(d => d.ActualTiter, opt => opt.MapFrom(s => s.SdsPageDetections.Sum(s => s.ProteinTiter)))
+                .ForMember(d => d.ActualTiter, opt => opt.MapFrom(s => s.SdsPageDetection.ProteinTiter))
                 .ForMember(d => d.ContractType, opt => opt.MapFrom(s => s.ContractType.ToString()))
                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
 

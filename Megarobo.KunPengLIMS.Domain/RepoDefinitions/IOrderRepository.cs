@@ -11,5 +11,13 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
         System.Threading.Tasks.Task<PagedList<Order>> GetOrdersByPage(OrderQueryParameters parameters);
 
         System.Threading.Tasks.Task<IEnumerable<Order>> GetOrdersByCode(string contractCode);
+
+        System.Threading.Tasks.Task<Order> GetOrderWithMolecule(Guid orderId);
+
+        System.Threading.Tasks.Task<Order> GetOrderWithPlasmid(Guid orderId);
+
+        System.Threading.Tasks.Task<Order> GetOrderWithQpcr(Guid orderId);
+
+        System.Threading.Tasks.Task<Order> GetOrderWithShipment(Guid orderId);
     }
 }
