@@ -18,6 +18,6 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Menu { get; set; }
 
-        public List<Guid> MenuIds { get; set; }
+        public List<Guid> ButtonIds { get; set; }
     }
 }

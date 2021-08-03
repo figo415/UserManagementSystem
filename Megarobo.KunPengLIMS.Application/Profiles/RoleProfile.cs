@@ -15,7 +15,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
             CreateMap<Role, RoleDto>()
                 .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
                 .ForMember(d => d.Menu, opt => opt.MapFrom<MenuResolver>())
-                .ForMember(d => d.MenuIds, opt => opt.MapFrom<MenuIdsResolver>());
+                .ForMember(d => d.ButtonIds, opt => opt.MapFrom<ButtonIdsResolver>());
 
             CreateMap<RoleCreationDto, Role>()
                 .ForMember(d => d.Menus, opt => opt.Ignore());
@@ -33,19 +33,19 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if(source.Menus.Any())
             {
-                return string.Join(',', source.Menus.Select(rm => rm.Menu.Name).Distinct().ToArray());
+                return string.Join(',', source.Menus.Select(rm => rm.Menu.Title).Distinct().ToArray());
             }
             return string.Empty;
         }
     }
 
-    public class MenuIdsResolver : IValueResolver<Role, RoleDto, List<Guid>>
+    public class ButtonIdsResolver : IValueResolver<Role, RoleDto, List<Guid>>
     {
         public List<Guid> Resolve(Role source, RoleDto destination, List<Guid> destMember, ResolutionContext context)
         {
             if (source.Menus.Any())
             {
-                return source.Menus.Select(rm => rm.MenuId).Distinct().ToList();
+                return source.Menus.Select(rm => rm.ButtonId).ToList();
             }
             return new List<Guid>();
         }
