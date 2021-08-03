@@ -24,6 +24,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IMenuRepository MenuRepo { get; }
 
+        IButtonRepository ButtonRepo { get; }
+
         IDictItemRepository DictItemRepo { get; }
 
         ILogItemRepository LogItemRepo { get; }

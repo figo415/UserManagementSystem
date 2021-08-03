@@ -25,7 +25,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public bool IsActive { get; set; }
 
-        public string Buttons { get; set; }
+        //public string Buttons { get; set; }
+        public virtual ICollection<Button> Buttons { get; set; }
 
         public virtual ICollection<RoleMenu> Roles { get; set; }
 

@@ -86,8 +86,18 @@ namespace Megarobo.KunPengLIMS.Application.Services
                     foreach(var departmentRole in user.DepartmentRoles)
                     {
                         var rolewithmenu = await _repoWrapper.RoleRepo.GetRoleWithMenu(departmentRole.RoleId);
-                        menus.AddRange(rolewithmenu.Menus.Select(rm => rm.Menu));
-                        buttons.AddRange(rolewithmenu.Menus.Select(m => m.Buttons));
+                        foreach(var menubutton in rolewithmenu.Menus)
+                        {
+                            menubutton.Button = await _repoWrapper.ButtonRepo.GetByIdAsync(menubutton.ButtonId);
+                        }
+                        menus.AddRange(rolewithmenu.Menus.Select(rm => rm.Menu).Distinct());
+                        var parentids = rolewithmenu.Menus.Select(m => m.Menu.ParentId).Distinct().ToList();
+                        foreach(var parentId in parentids)
+                        {
+                            var pmenu = await _repoWrapper.MenuRepo.GetByIdAsync(parentId);
+                            menus.Add(pmenu);
+                        }
+                        buttons.AddRange(rolewithmenu.Menus.Select(m => m.Button.Code));
                     }
                     var menudtos= _mapper.Map<List<MenuDto>>(menus.OrderBy(m=>m.OrdinalNumber));
                     result.Menus = _menuAppService.GetTree(Guid.Empty, menudtos);

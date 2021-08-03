@@ -12,7 +12,6 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public RoleProfile()
         {
-
             CreateMap<Role, RoleDto>()
                 .ForMember(d => d.CreateTime, opt => opt.MapFrom(s => s.CreatedAt))
                 .ForMember(d => d.Menu, opt => opt.MapFrom<MenuResolver>())
@@ -34,7 +33,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if(source.Menus.Any())
             {
-                return string.Join(',', source.Menus.Select(rm => rm.Menu.Name).ToArray());
+                return string.Join(',', source.Menus.Select(rm => rm.Menu.Name).Distinct().ToArray());
             }
             return string.Empty;
         }
@@ -46,7 +45,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if (source.Menus.Any())
             {
-                return source.Menus.Select(rm => rm.MenuId).ToList();
+                return source.Menus.Select(rm => rm.MenuId).Distinct().ToList();
             }
             return new List<Guid>();
         }

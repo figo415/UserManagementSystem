@@ -14,12 +14,16 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public Guid MenuId { get; set; }
 
+        public Guid ButtonId { get; set; }
+
         [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
 
         [ForeignKey("MenuId")]
         public virtual Menu Menu { get; set; }
 
-        public string Buttons { get; set; }
+        //public string Buttons { get; set; }
+        [ForeignKey("ButtonId")]
+        public virtual Button Button { get; set; }
     }
 }

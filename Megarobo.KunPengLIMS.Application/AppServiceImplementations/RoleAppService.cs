@@ -57,15 +57,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             role.CreatedAt = DateTime.Now;
             role.IsDeleted = false;
             _repoWrapper.RoleRepo.Create(role);
-            if(dto.MenuButtons.Any())
+            if(dto.ButtonIds.Any())
             {
-                foreach(var menubtn in dto.MenuButtons)
+                foreach(var buttonId in dto.ButtonIds)
                 {
-                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menubtn.MenuId };
-                    if(menubtn.SelectedButtonList!=null && menubtn.SelectedButtonList.Any())
-                    {
-                        rolemenu.Buttons = string.Join(",", menubtn.SelectedButtonList.ToArray());
-                    }
+                    var button = await _repoWrapper.ButtonRepo.GetByIdAsync(buttonId);
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = button.MenuId, ButtonId=buttonId };
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }
@@ -88,15 +85,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 _repoWrapper.RoleMenuRepo.Delete(rolemenu);
             }
-            if (dto.MenuButtons.Any())
+            if (dto.ButtonIds.Any())
             {
-                foreach (var menubtn in dto.MenuButtons)
+                foreach (var buttonId in dto.ButtonIds)
                 {
-                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = menubtn.MenuId };
-                    if (menubtn.SelectedButtonList != null && menubtn.SelectedButtonList.Any())
-                    {
-                        rolemenu.Buttons = string.Join(",", menubtn.SelectedButtonList.ToArray());
-                    }
+                    var button = await _repoWrapper.ButtonRepo.GetByIdAsync(buttonId);
+                    var rolemenu = new RoleMenu() { RoleId = role.Id, MenuId = button.MenuId, ButtonId = buttonId };
                     _repoWrapper.RoleMenuRepo.Create(rolemenu);
                 }
             }

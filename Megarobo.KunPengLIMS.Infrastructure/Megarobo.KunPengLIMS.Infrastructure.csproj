@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20210609103810_InitCreation.Designer.cs" />
     <Compile Remove="Migrations\20210617055205_InitCreation.cs" />
     <Compile Remove="Migrations\20210617055205_InitCreation.Designer.cs" />
+    <Compile Remove="Migrations\20210803051735_AddButtonTable.cs" />
+    <Compile Remove="Migrations\20210803051735_AddButtonTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

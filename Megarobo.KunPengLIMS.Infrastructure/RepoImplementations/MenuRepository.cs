@@ -30,7 +30,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public System.Threading.Tasks.Task<IEnumerable<Menu>> GetMenus(MenuQueryParameters parameters)
         {
             var predicate = BuildPredicate(parameters);
-            return GetByConditionAsync(predicate);
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Menu>().Include(m => m.Buttons).Where(predicate).AsEnumerable());
+            //return GetByConditionAsync(predicate);
         }
 
         private Expression<Func<Menu, bool>> BuildPredicate(MenuQueryParameters parameters)

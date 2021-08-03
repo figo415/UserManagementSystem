@@ -13,6 +13,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public bool IsActive { get; set; }
 
         //public List<Guid> MenuIds { get; set; }
-        public List<MenuButtonForRole> MenuButtons { get; set; }
+        //public List<MenuButtonForRole> MenuButtons { get; set; }
+        public List<Guid> ButtonIds { get; set; }
     }
 }
