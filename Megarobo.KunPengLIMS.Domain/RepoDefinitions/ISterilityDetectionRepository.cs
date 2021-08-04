@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface ISterilityDetectionRepository : IRepositoryBase<SterilityDetection>, IRepositoryBase2<SterilityDetection, Guid>
     {
         System.Threading.Tasks.Task<PagedList<SterilityDetection>> GetSterilityDetectionsByPage(SterilityDetectionQueryParameters parameters);
+
+        System.Threading.Tasks.Task<SterilityDetection> GetSterilityDetectionByOrder(Guid orderId);
     }
 }

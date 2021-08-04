@@ -6,6 +6,9 @@ using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
+    /// <summary>
+    /// 质粒纯化
+    /// </summary>
     public class PlasmidPurification:Contract
     {
         /// <summary>

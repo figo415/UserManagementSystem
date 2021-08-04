@@ -43,6 +43,24 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new InvalidOperationException("This order is already stocked in");
             }
+            var qpcr = await _repoWrapper.QpcrDetectionRepo.GetQpcrDetectionByOrder(stockin.OrderId);
+            if(qpcr.Status!=DetectionStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("qPCR detection must be finished");
+            }
+            if(stockin.ContractType==ContractTypeEnum.AAV)
+            {
+                var sdspage = await _repoWrapper.SdsPageDetectionRepo.GetSdsPageDetectionByOrder(stockin.OrderId);
+                if (sdspage.Status != DetectionStatusEnum.Finished)
+                {
+                    throw new InvalidOperationException("SDS-PAGE detection must be finished");
+                }
+            }
+            var sterility = await _repoWrapper.SterilityDetectionRepo.GetSterilityDetectionByOrder(stockin.OrderId);
+            if(sterility.Status!=DetectionStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Sterility detection must be finished");
+            }
             _mapper.Map(dto, stockin, typeof(StockInUpdateDto), typeof(StockIn));
             stockin.Status = StockStatusEnum.StockedIn;
             stockin.LastModifiedAt = DateTime.Now;

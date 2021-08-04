@@ -27,9 +27,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<PagedList<SdsPageDetectionDto>> GetSdsPageDetectionsByPage(SdsPageDetectionQueryParameters parameters)
         {
-            var pagedSdsPageDetections = await _repoWrapper.SdsPageDetectionRepo.GetSdsPageDetectionsByPage(parameters);
-            var pagedDtos = _mapper.Map<List<SdsPageDetectionDto>>(pagedSdsPageDetections);
-            return new PagedList<SdsPageDetectionDto>(pagedDtos, pagedSdsPageDetections.TotalCount, pagedSdsPageDetections.PageNumber, pagedSdsPageDetections.PageSize);
+            var pagedSdsPages = await _repoWrapper.SdsPageDetectionRepo.GetSdsPageDetectionsByPage(parameters);
+            foreach(var sdspage in pagedSdsPages)
+            {
+                var qpcr = await _repoWrapper.QpcrDetectionRepo.GetQpcrDetectionByOrder(sdspage.OrderId);
+                sdspage.QpcrDetection = qpcr;
+            }
+            var pagedDtos = _mapper.Map<List<SdsPageDetectionDto>>(pagedSdsPages);
+            return new PagedList<SdsPageDetectionDto>(pagedDtos, pagedSdsPages.TotalCount, pagedSdsPages.PageNumber, pagedSdsPages.PageSize);
         }
 
         public async Task<bool> UpdateSdsPageDetection(Guid sdsPageDetectionId, SdsPageDetectionUpdateDto dto)

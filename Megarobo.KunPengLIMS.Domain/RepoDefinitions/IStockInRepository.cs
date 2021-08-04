@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface IStockInRepository : IRepositoryBase<StockIn>, IRepositoryBase2<StockIn, Guid>
     {
         System.Threading.Tasks.Task<PagedList<StockIn>> GetStockInsByPage(StockInQueryParameters parameters);
+
+        System.Threading.Tasks.Task<StockIn> GetStockInByOrder(Guid orderId);
     }
 }

@@ -12,7 +12,8 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         public SdsPageDetectionProfile()
         {
             CreateMap<SdsPageDetection, SdsPageDetectionDto>()
-                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()))
+                .ForMember(d => d.QpcrTiter, opt => opt.MapFrom(s => s.QpcrDetection == null ? 0f : s.QpcrDetection.Titer));
 
             CreateMap<SdsPageDetectionUpdateDto, SdsPageDetection>();
         }

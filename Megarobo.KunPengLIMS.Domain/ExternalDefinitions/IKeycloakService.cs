@@ -6,5 +6,6 @@ namespace Megarobo.KunPengLIMS.Domain.ExternalDefinitions
 {
     public interface IKeycloakService
     {
+        bool CreateUser(string username, string email);
     }
 }

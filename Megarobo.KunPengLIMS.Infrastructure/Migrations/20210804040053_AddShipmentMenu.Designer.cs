@@ -3,15 +3,17 @@ using System;
 using Megarobo.KunPengLIMS.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
 {
     [DbContext(typeof(LimsDbContext))]
-    partial class LimsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210804040053_AddShipmentMenu")]
+    partial class AddShipmentMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,654 +46,556 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1d69715a-8bd6-4ce5-9922-0ae6f8d72aba"),
+                            Id = new Guid("fe5b706c-cf43-4467-8341-6e20980d2d6e"),
                             Code = "QueryUser",
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Name = "查询用户"
                         },
                         new
                         {
-                            Id = new Guid("c08f730b-9fac-4881-a1cc-e1425b7035a4"),
+                            Id = new Guid("a3d61144-4e3e-46f3-a445-f7f9be882844"),
                             Code = "AddUser",
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Name = "新增用户"
                         },
                         new
                         {
-                            Id = new Guid("13cf0cf9-a7ec-4750-b24d-2fac424eebcc"),
+                            Id = new Guid("4ad196d3-5ed8-47af-9ca4-45a731dbc4b2"),
                             Code = "UpdateUser",
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Name = "修改用户"
                         },
                         new
                         {
-                            Id = new Guid("a549899f-9ea4-47bc-b80c-7d395a8e4d5d"),
+                            Id = new Guid("0fc0ecbc-6470-465a-9b01-9db147698428"),
                             Code = "DeleteUser",
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Name = "删除用户"
                         },
                         new
                         {
-                            Id = new Guid("daee4f52-497e-457c-9753-bc03c880a31b"),
+                            Id = new Guid("f65bcbd0-8426-4c13-9d20-8f2550d7ea35"),
                             Code = "ResetUser",
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Name = "重置用户"
                         },
                         new
                         {
-                            Id = new Guid("09ef5812-179a-4bb9-ae83-6d62dea75d43"),
+                            Id = new Guid("d2ed3697-438a-482a-a9a7-d2d090df27c0"),
                             Code = "QuerySkill",
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
                             Name = "查询技能"
                         },
                         new
                         {
-                            Id = new Guid("012cda32-a2fb-43c6-9b76-2ec669f6fd35"),
+                            Id = new Guid("549db880-e764-4273-b489-e004dde5c19d"),
                             Code = "AddSkill",
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
                             Name = "新增技能"
                         },
                         new
                         {
-                            Id = new Guid("57b25249-a86b-4c2d-89d1-1bca14d3481a"),
+                            Id = new Guid("2027f88f-3562-4e02-948d-8ebc6b06f77a"),
                             Code = "UpdateSkill",
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
                             Name = "修改技能"
                         },
                         new
                         {
-                            Id = new Guid("ae81ea0a-28ac-4b30-bcd3-47548f3a1791"),
+                            Id = new Guid("f1c22dba-0990-4ac2-80a6-dcd50e150bd0"),
                             Code = "DeleteSkill",
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
                             Name = "删除技能"
                         },
                         new
                         {
-                            Id = new Guid("3f6b21b8-dfc7-4dc3-b521-11a4e716e025"),
+                            Id = new Guid("f96aa350-94b6-4437-a9f6-f64a13305a85"),
                             Code = "QueryDepartment",
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
                             Name = "查询部门"
                         },
                         new
                         {
-                            Id = new Guid("57ba6a34-b252-4b0d-86d0-126b3ac11a62"),
+                            Id = new Guid("5bb11723-1d83-42b1-bf40-5f91e321a387"),
                             Code = "AddDepartment",
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
                             Name = "新增部门"
                         },
                         new
                         {
-                            Id = new Guid("8eb144f3-aceb-419c-998a-2544f18fe7c9"),
+                            Id = new Guid("cd8b207c-4b13-4cc2-9b18-d9bf28a0c362"),
                             Code = "UpdateDepartment",
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
                             Name = "修改部门"
                         },
                         new
                         {
-                            Id = new Guid("552c28a8-d929-4f0c-8f07-0aa5637e5224"),
+                            Id = new Guid("ad833ada-c1fe-4f77-aee7-1bf014487cc5"),
                             Code = "DeleteDepartment",
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
                             Name = "删除部门"
                         },
                         new
                         {
-                            Id = new Guid("68534b4a-66ec-4ed7-9df4-f34af68b94b5"),
+                            Id = new Guid("4c4d2f31-aa9b-4321-a1fc-591eab8bfb32"),
                             Code = "QueryRole",
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
                             Name = "查询角色"
                         },
                         new
                         {
-                            Id = new Guid("54a5e294-cd7e-4148-8013-3613be0821c6"),
+                            Id = new Guid("7526a5cd-9635-4b4e-8281-15b9b00ebcb7"),
                             Code = "AddRole",
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
                             Name = "新增角色"
                         },
                         new
                         {
-                            Id = new Guid("89cd1433-c1c8-42b5-9dcc-bd1b467c1849"),
+                            Id = new Guid("45b5c253-94c1-4c5f-b3cb-e283a8711243"),
                             Code = "UpdateRole",
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
                             Name = "修改角色"
                         },
                         new
                         {
-                            Id = new Guid("13ef5794-9e54-4b38-8561-cf118e297f41"),
+                            Id = new Guid("50211a2f-9aa9-4431-829b-c0e355c9cd07"),
                             Code = "DeleteRole",
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
                             Name = "删除角色"
                         },
                         new
                         {
-                            Id = new Guid("9a89e85a-66d0-4215-9778-cb13d4178e2d"),
+                            Id = new Guid("b7070bc7-7ac0-4f66-a874-b131486e7893"),
                             Code = "QueryMenu",
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
                             Name = "查询菜单"
                         },
                         new
                         {
-                            Id = new Guid("ec128b9a-650e-4ad1-9123-cdc0456956b9"),
+                            Id = new Guid("d74bdbf7-c019-41e2-81c9-9c7f57228234"),
                             Code = "AddMenu",
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
                             Name = "新增菜单"
                         },
                         new
                         {
-                            Id = new Guid("70ee8547-7219-4adc-b9ff-5ae20781f7e9"),
+                            Id = new Guid("99d0b4bb-12cc-4f97-8d3d-d9a870ebe814"),
                             Code = "UpdateMenu",
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
                             Name = "修改菜单"
                         },
                         new
                         {
-                            Id = new Guid("84e8059b-1ab5-4a16-a86a-71576931b20c"),
+                            Id = new Guid("0bad6c29-27a7-4cab-b154-f1db3732fd40"),
                             Code = "DeleteMenu",
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
                             Name = "删除菜单"
                         },
                         new
                         {
-                            Id = new Guid("a606cc31-e09b-438f-ab36-6da256be38b8"),
+                            Id = new Guid("ce9ce7b3-c7af-4c51-b1b5-6d2492eac5c6"),
                             Code = "QueryDict",
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Name = "查询字典项"
                         },
                         new
                         {
-                            Id = new Guid("a7cb75be-93fd-4233-acda-fcf8f5ebb9db"),
+                            Id = new Guid("c08e1bb1-cc50-4dc1-b633-76efb7824b21"),
                             Code = "AddDict",
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Name = "新增字典项"
                         },
                         new
                         {
-                            Id = new Guid("e9a78fd1-1e37-4ce9-a6c5-2a9390417979"),
+                            Id = new Guid("55e8ae74-5705-4d5a-b504-2de42c712593"),
                             Code = "UpdateDict",
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Name = "修改字典项"
                         },
                         new
                         {
-                            Id = new Guid("dd138026-b77e-4b7a-be6a-2ae9c558e4db"),
+                            Id = new Guid("4533bbb4-6b8d-4333-9882-d340910ca371"),
                             Code = "DeleteDict",
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Name = "删除字典项"
                         },
                         new
                         {
-                            Id = new Guid("cf6210e8-98c9-4c8a-a0f5-9b0394676a8d"),
+                            Id = new Guid("c690cc78-aa0b-4898-a81b-9b7c9c2e7ac5"),
                             Code = "UpdateDictValue",
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Name = "修改字典项值"
                         },
                         new
                         {
-                            Id = new Guid("e9104308-1843-4750-a147-29df6195f1df"),
+                            Id = new Guid("d99b42e1-db69-42a4-9e5d-b8b780a9a23a"),
                             Code = "QueryLog",
-                            MenuId = new Guid("e9138d88-16b6-4328-8000-cd199250c52e"),
+                            MenuId = new Guid("fd518834-4281-4cab-a7d5-efcfa69b3632"),
                             Name = "查询日志"
                         },
                         new
                         {
-                            Id = new Guid("5de2cbc6-89c8-43b4-aa74-a9d0b4a5bf3d"),
+                            Id = new Guid("f171f9a2-d4fa-4c4f-99a7-aec74e91e956"),
                             Code = "QuerySpecies",
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
                             Name = "查询物种"
                         },
                         new
                         {
-                            Id = new Guid("edda64b2-08df-49ca-9a29-fe569ed8c662"),
+                            Id = new Guid("772d87c0-87a8-4a9f-9eed-ac03789badf6"),
                             Code = "AddSpecies",
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
                             Name = "新增物种"
                         },
                         new
                         {
-                            Id = new Guid("d3271dca-fe4c-4b84-b36f-c76347503f3f"),
+                            Id = new Guid("b7919203-5b26-4aad-82cc-dfcba56bcb89"),
                             Code = "UpdateSpecies",
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
                             Name = "修改物种"
                         },
                         new
                         {
-                            Id = new Guid("aa0ffbe2-72eb-41e9-8f3c-6847967d84ba"),
+                            Id = new Guid("b18609d3-cfb3-480f-bb6b-6e68d2858d46"),
                             Code = "DeleteSpecies",
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
                             Name = "删除物种"
                         },
                         new
                         {
-                            Id = new Guid("6311122a-0edd-428e-b5fa-2b7f3be06d7d"),
+                            Id = new Guid("d1acf2f5-c2a9-452e-9489-c6bb970a0aea"),
                             Code = "QueryCell",
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
                             Name = "查询细胞"
                         },
                         new
                         {
-                            Id = new Guid("2e680f09-9e6a-407d-b4a1-c988005f72c7"),
+                            Id = new Guid("cc8714d0-2f55-4eb6-9951-34e7a31b2896"),
                             Code = "AddCell",
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
                             Name = "新增细胞"
                         },
                         new
                         {
-                            Id = new Guid("5927c638-909c-4411-8bac-0feaf977ae13"),
+                            Id = new Guid("71ad007d-3fb8-4a1b-bfe2-4e68aa62da6c"),
                             Code = "UpdateCell",
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
                             Name = "修改细胞"
                         },
                         new
                         {
-                            Id = new Guid("fc80caf3-9fcf-4d34-ad8a-f5faa2080828"),
+                            Id = new Guid("2a141afe-0acf-4437-90c6-bc7bbf96307c"),
                             Code = "DeleteCell",
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
                             Name = "删除细胞"
                         },
                         new
                         {
-                            Id = new Guid("8ca3359e-526c-42a4-9af1-edc3a8ce46a3"),
+                            Id = new Guid("87c3e722-b69c-4480-b0ec-0b42243fa21a"),
                             Code = "QueryPosition",
-                            MenuId = new Guid("142c6afc-6c03-493d-bd81-12c573fcdb85"),
+                            MenuId = new Guid("2806e5f6-0913-4c86-a6fd-d3712b47b75b"),
                             Name = "查询位置"
                         },
                         new
                         {
-                            Id = new Guid("056b4897-9453-4029-86f5-3cd533dbd33b"),
+                            Id = new Guid("42248e94-7021-4b3e-a959-4b552fe783fa"),
                             Code = "QueryLabware",
-                            MenuId = new Guid("d9ae9fb8-127e-444d-9cbe-e7e4a71d46c6"),
+                            MenuId = new Guid("8b1a27cc-d6b0-4663-940e-84bd94ec003b"),
                             Name = "查询耗材"
                         },
                         new
                         {
-                            Id = new Guid("1390f9f1-d68e-47f3-a1ce-cf33311b9d7b"),
+                            Id = new Guid("22f252e5-c3e8-4501-aca4-118b8cfd2600"),
                             Code = "QueryReagent",
-                            MenuId = new Guid("648d6d97-bde2-4e9f-92d1-16deae5cbe06"),
+                            MenuId = new Guid("c08903f4-e213-4b0b-92cc-94215e3c5231"),
                             Name = "查询试剂"
                         },
                         new
                         {
-                            Id = new Guid("2a42c765-cedb-4b0f-9c83-dc0bac9a3b58"),
+                            Id = new Guid("8f99a12a-332d-43f2-8d95-d20f80cfb90d"),
                             Code = "QueryDevice",
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
                             Name = "查询设备"
                         },
                         new
                         {
-                            Id = new Guid("71dbfe2c-c6cf-4bd1-b38f-96f91408a5a6"),
+                            Id = new Guid("d1154d60-f1d3-46d1-87b8-14abd32dfd4e"),
                             Code = "AddDevice",
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
                             Name = "新增设备"
                         },
                         new
                         {
-                            Id = new Guid("15d664ec-bd9d-4923-a8c5-df07aee6ed86"),
+                            Id = new Guid("e727894f-d0fe-4a61-9c55-058dbb807485"),
                             Code = "UpdateDevice",
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
                             Name = "修改设备"
                         },
                         new
                         {
-                            Id = new Guid("c5ee4c47-f840-4ee0-99f9-6b8e7b7616fd"),
+                            Id = new Guid("fd0b874f-bd7a-432f-a94d-f7694fb63fdc"),
                             Code = "DeleteDevice",
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
                             Name = "删除设备"
                         },
                         new
                         {
-                            Id = new Guid("71e3d88a-3d34-4eb8-b785-8dc84a986d32"),
+                            Id = new Guid("1651bd6b-1c41-4fa5-8653-ba50fd87a306"),
                             Code = "QuerySample",
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
                             Name = "查询样本"
                         },
                         new
                         {
-                            Id = new Guid("31c80f0d-6315-4794-b5e6-cdea6ef3b807"),
+                            Id = new Guid("504048ee-fbde-40df-90cc-7ae074eab642"),
                             Code = "AddSample",
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
                             Name = "新增样本"
                         },
                         new
                         {
-                            Id = new Guid("1aad03c0-cbf4-4039-bba4-df3339c65989"),
+                            Id = new Guid("dd499b8a-6d66-4d9a-8937-4cb576ddae76"),
                             Code = "UpdateSample",
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
                             Name = "修改样本"
                         },
                         new
                         {
-                            Id = new Guid("a94099cc-00ae-4ffb-b436-7a976ba31ce6"),
+                            Id = new Guid("0448d884-5b0c-456b-8feb-0d9fa3990415"),
                             Code = "DeleteSample",
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
                             Name = "删除样本"
                         },
                         new
                         {
-                            Id = new Guid("f00a4640-dc72-436b-81e4-5ae24b1a8165"),
+                            Id = new Guid("40d2ede0-becc-428f-bfd4-fe5bbbbd5749"),
                             Code = "QueryMyTask",
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
                             Name = "查询我的任务"
                         },
                         new
                         {
-                            Id = new Guid("1069195a-0207-4bba-813c-e67af4b7077e"),
+                            Id = new Guid("cdc1ddd8-c48b-4fa5-8900-6b30806a6175"),
                             Code = "AddMyTask",
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
                             Name = "新增我的任务"
                         },
                         new
                         {
-                            Id = new Guid("4d7333bc-191f-44f1-9db8-a8f60f7d724c"),
+                            Id = new Guid("cbf711ac-7fcd-4567-b9d9-1002878d35f7"),
                             Code = "UpdateMyTask",
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
                             Name = "修改我的任务"
                         },
                         new
                         {
-                            Id = new Guid("4837cff0-0a49-4d3a-932f-a2971fa4e9e1"),
+                            Id = new Guid("934c1c56-8ca0-4ee1-abcc-3b6620b0cade"),
                             Code = "DeleteMyTask",
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
                             Name = "删除我的任务"
                         },
                         new
                         {
-                            Id = new Guid("751e709a-6320-493e-8ae8-6373155aeb1b"),
+                            Id = new Guid("c3b44418-a8a5-44e0-acc0-139b2ed7a45c"),
                             Code = "QueryTask",
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
                             Name = "查询今日任务"
                         },
                         new
                         {
-                            Id = new Guid("a5e3dda1-6c94-4124-8c33-a84c17078465"),
+                            Id = new Guid("8e88541e-a7b8-413d-9763-305a0db06cb1"),
                             Code = "AddTask",
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
                             Name = "新增今日任务"
                         },
                         new
                         {
-                            Id = new Guid("50e243d1-2b09-4d6d-87a3-2c71e5c5d180"),
+                            Id = new Guid("3a167599-4fc9-4b5e-a3d2-e819151c5a10"),
                             Code = "UpdateTask",
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
                             Name = "修改今日任务"
                         },
                         new
                         {
-                            Id = new Guid("2ae7e99c-a6d5-44d4-a8f3-507d4cfa4c1d"),
+                            Id = new Guid("c3dc9cfb-72c1-46bf-a6e1-c1f27472a2cf"),
                             Code = "DeleteTask",
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
                             Name = "删除今日任务"
                         },
                         new
                         {
-                            Id = new Guid("58885f2a-cc81-42e3-8d33-5495a9f62e2a"),
+                            Id = new Guid("ebeffd64-2c62-4fbe-9b07-c8fc9ed82160"),
                             Code = "QueryProtocolStep",
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
                             Name = "查询ProtocolStep"
                         },
                         new
                         {
-                            Id = new Guid("fbb83a98-faeb-4198-9b70-ad7a13595a77"),
+                            Id = new Guid("7d0f42de-cee3-459b-9766-c84c19efefbc"),
                             Code = "AddProtocolStep",
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
                             Name = "新增ProtocolStep"
                         },
                         new
                         {
-                            Id = new Guid("1028415e-4daf-438f-bbf6-2c4b63119424"),
+                            Id = new Guid("048c83ab-38a7-4583-a9f6-54b510387921"),
                             Code = "UpdateProtocolStep",
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
                             Name = "修改ProtocolStep"
                         },
                         new
                         {
-                            Id = new Guid("6c4923e0-b13d-4604-b32d-a03235e24c53"),
+                            Id = new Guid("4a2675e0-78c9-4339-90f8-fd5f6d1a2c0a"),
                             Code = "DeleteProtocolStep",
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
                             Name = "删除ProtocolStep"
                         },
                         new
                         {
-                            Id = new Guid("718a2127-2b7f-4dff-bfbd-bd523b87b065"),
+                            Id = new Guid("e69066d2-051c-465c-9ddc-794cfe62a692"),
                             Code = "QueryNode",
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
                             Name = "查询节点"
                         },
                         new
                         {
-                            Id = new Guid("0ba90fe1-ff93-45ff-b5dd-34bb191913a1"),
+                            Id = new Guid("72d159ef-0b5e-4ed7-b109-f85c816163fd"),
                             Code = "AddNode",
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
                             Name = "新增节点"
                         },
                         new
                         {
-                            Id = new Guid("4e95416d-fc6a-4990-87a8-9f6bf97d0110"),
+                            Id = new Guid("663ec245-a1fa-488f-9ce6-09f8a2b8c246"),
                             Code = "UpdateNode",
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
                             Name = "修改节点"
                         },
                         new
                         {
-                            Id = new Guid("9dd59eba-7a0f-4f34-938b-1ef9e0f108a7"),
+                            Id = new Guid("8bf1c7ca-34d6-4f8d-8d18-7bc204879ed5"),
                             Code = "DeleteNode",
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
                             Name = "删除节点"
                         },
                         new
                         {
-                            Id = new Guid("a248465e-0469-4d43-9d85-dab7e4c2ee35"),
+                            Id = new Guid("7d03be34-6fb6-4dea-9085-27ee5f4f1323"),
                             Code = "QueryProject",
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
                             Name = "查询项目"
                         },
                         new
                         {
-                            Id = new Guid("f1a7d4cf-039b-423f-8f15-eb024016c271"),
+                            Id = new Guid("9bf5c256-b15c-4350-a958-df4c2a3d9f13"),
                             Code = "AddProject",
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
                             Name = "新增项目"
                         },
                         new
                         {
-                            Id = new Guid("a4ef5f38-c096-4a41-8ce6-2659b95f2222"),
+                            Id = new Guid("a3895501-2917-47d4-951e-3234134f30ea"),
                             Code = "UpdateProject",
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
                             Name = "修改项目"
                         },
                         new
                         {
-                            Id = new Guid("441d1453-662c-4227-810b-345ada55a063"),
+                            Id = new Guid("d39ffa41-7160-4cce-8a06-ffbf4101821c"),
                             Code = "DeleteProject",
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
                             Name = "删除项目"
                         },
                         new
                         {
-                            Id = new Guid("683055b8-6d45-4d3d-b0cc-f1f001e02f21"),
+                            Id = new Guid("d1367b99-84bf-4a19-9e21-ec344dceb17d"),
                             Code = "QueryTake",
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
                             Name = "查询Take"
                         },
                         new
                         {
-                            Id = new Guid("68624aca-6794-47af-9b2c-e5163c723ec0"),
+                            Id = new Guid("13348422-197b-4ea6-b19c-e21463ea713f"),
                             Code = "AddTake",
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
                             Name = "新增Take"
                         },
                         new
                         {
-                            Id = new Guid("f87689fa-6ff5-45ae-b53e-e9fb6cb6b7df"),
+                            Id = new Guid("ae756e5a-80f7-4920-b594-edc9db4a2326"),
                             Code = "UpdateTake",
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
                             Name = "修改Take"
                         },
                         new
                         {
-                            Id = new Guid("9be7938d-3053-43d8-85fd-f6f6769d016d"),
+                            Id = new Guid("c1c6209c-4021-4a56-a32e-7d88ea92d336"),
                             Code = "DeleteTake",
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
                             Name = "删除Take"
                         },
                         new
                         {
-                            Id = new Guid("c1ec031a-5b4f-4881-9076-25a5ebdc401f"),
+                            Id = new Guid("6a9f2a8d-a381-435b-be9c-cf13d0aefb39"),
                             Code = "QuerySchedule",
-                            MenuId = new Guid("b407ee58-dd9e-46b3-ab02-489f3ca8a240"),
+                            MenuId = new Guid("46f040e7-6e9c-4876-989f-8aca2a43892a"),
                             Name = "查询排程"
                         },
                         new
                         {
-                            Id = new Guid("c9bfee7a-c77f-4cea-87c2-63514ebb3219"),
+                            Id = new Guid("147c1e94-df99-407c-bc5d-32db5ef4d2c2"),
                             Code = "QueryOrder",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
                             Name = "查询订单"
                         },
                         new
                         {
-                            Id = new Guid("48bbc7e8-2bd3-42b8-901f-77a4529f6db0"),
+                            Id = new Guid("7f179360-1bdf-4578-9e91-6501030bc380"),
                             Code = "AddOrder",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
                             Name = "新增订单"
                         },
                         new
                         {
-                            Id = new Guid("91f6e8f6-f550-410f-8fec-633d7689f24a"),
+                            Id = new Guid("919e89fc-e015-4cab-a931-16fd197a32ae"),
                             Code = "UpdateOrder",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
                             Name = "修改订单"
                         },
                         new
                         {
-                            Id = new Guid("6a7d097f-9945-418d-82d7-f40544fdce37"),
-                            Code = "CloneMolecule",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            Name = "分子克隆"
+                            Id = new Guid("e43f67ea-6a39-475d-8e33-2e17bc31a110"),
+                            Code = "DeleteOrder",
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
+                            Name = "删除订单"
                         },
                         new
                         {
-                            Id = new Guid("def600da-e197-4dcf-b83b-4f9a291a5b20"),
-                            Code = "PurifyPlasmid",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            Name = "质粒纯化"
-                        },
-                        new
-                        {
-                            Id = new Guid("046641cc-41ac-4937-b621-f769dbc425d8"),
-                            Code = "StartProduce",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            Name = "进入生产"
-                        },
-                        new
-                        {
-                            Id = new Guid("347b9448-aa51-41c0-9e4f-a9f9ff7a829c"),
-                            Code = "Warehousing",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            Name = "QC&入库"
-                        },
-                        new
-                        {
-                            Id = new Guid("bd32aeb7-168c-4a67-90ac-1ee5280d289a"),
-                            Code = "FinishOrder",
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            Name = "完成"
-                        },
-                        new
-                        {
-                            Id = new Guid("de2bea7f-c84c-4b71-9d27-83fb608138fc"),
+                            Id = new Guid("2470d27f-5194-4871-aefc-22ce13c82681"),
                             Code = "QueryCloning",
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
                             Name = "查询分子克隆"
                         },
                         new
                         {
-                            Id = new Guid("09902b31-1c05-4094-a7e1-3af8b88a5565"),
-                            Code = "FinishCloning",
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
-                            Name = "完成分子克隆"
+                            Id = new Guid("a66410d3-df7e-46f2-8535-7dab18f1b191"),
+                            Code = "AddCloning",
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            Name = "新增分子克隆"
                         },
                         new
                         {
-                            Id = new Guid("5183be46-2d4e-4418-affe-d7bfd02b603b"),
-                            Code = "QueryPurifying",
-                            MenuId = new Guid("19e0f45f-e3b0-4faa-a920-29b15617474a"),
-                            Name = "查询质粒纯化"
+                            Id = new Guid("82903849-06bb-4a6e-92c9-d40dbf20625f"),
+                            Code = "UpdateCloning",
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            Name = "修改分子克隆"
                         },
                         new
                         {
-                            Id = new Guid("8d5fe15e-6304-40c3-9efd-e7f3cd77912c"),
-                            Code = "FinishPurifying",
-                            MenuId = new Guid("19e0f45f-e3b0-4faa-a920-29b15617474a"),
-                            Name = "完成质粒纯化"
-                        },
-                        new
-                        {
-                            Id = new Guid("364ec6c5-4962-4610-b907-6c189c91b1db"),
-                            Code = "QueryQpcr",
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
-                            Name = "查询qPCR检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("c155eb39-5b7b-4787-b8e3-dfd27b3e2d5b"),
-                            Code = "FinishQpcr",
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
-                            Name = "完成qPCR检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("ffda1e5b-1ab8-42a5-86e8-56dfd94153c4"),
-                            Code = "QuerySdspage",
-                            MenuId = new Guid("23f2cc65-939f-4ddd-8535-32eda765fc5a"),
-                            Name = "查询SDS-PAGE检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("075b2343-2578-4227-ae94-f60a5dacbeb6"),
-                            Code = "FinishSdspage",
-                            MenuId = new Guid("23f2cc65-939f-4ddd-8535-32eda765fc5a"),
-                            Name = "完成SDS-PAGE检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("7a6b5d07-e2c7-4b72-979e-de0464a6f3e9"),
-                            Code = "QuerySterility",
-                            MenuId = new Guid("bbdf1ef5-7f83-4be2-bb57-73f61ee99fbb"),
-                            Name = "查询无菌检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("28c73fcb-3334-417c-a2b8-7acf9fa53d11"),
-                            Code = "FinishSterility",
-                            MenuId = new Guid("bbdf1ef5-7f83-4be2-bb57-73f61ee99fbb"),
-                            Name = "完成无菌检测"
-                        },
-                        new
-                        {
-                            Id = new Guid("b3171048-ab03-4ee7-a1f9-55b823909ca4"),
-                            Code = "QueryWarehousing",
-                            MenuId = new Guid("c6a3b1ff-9a7b-4432-a46c-8b7ba677daba"),
-                            Name = "查询入库记录"
-                        },
-                        new
-                        {
-                            Id = new Guid("89c69f20-bda0-479d-b194-4727a9c389ff"),
-                            Code = "FinishWarehousing",
-                            MenuId = new Guid("c6a3b1ff-9a7b-4432-a46c-8b7ba677daba"),
-                            Name = "完成入库记录"
-                        },
-                        new
-                        {
-                            Id = new Guid("d4a8ce4c-d623-47cb-9772-772c59a44968"),
-                            Code = "QueryShipment",
-                            MenuId = new Guid("265c5849-a45e-4ad1-90ff-20a03f380163"),
-                            Name = "查询发货记录"
-                        },
-                        new
-                        {
-                            Id = new Guid("9cb4f820-f76e-442e-920d-7a7805cc46b2"),
-                            Code = "FinishShipment",
-                            MenuId = new Guid("265c5849-a45e-4ad1-90ff-20a03f380163"),
-                            Name = "完成发货记录"
+                            Id = new Guid("11299edd-571d-4aee-983c-a45dd27b81e7"),
+                            Code = "DeleteCloning",
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            Name = "删除分子克隆"
                         });
                 });
 
@@ -808,9 +712,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7f0d9e25-b4b3-4607-a568-fd503eaf5da7"),
+                            Id = new Guid("28189d8c-466f-42b7-aab8-9e2592bd6961"),
                             ContactNumber = "13245679856",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(1822),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(1495),
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -905,108 +809,6 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DictItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e2ac5b99-e9d3-482c-9df0-69f0c07d5538"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(74),
-                            IsDeleted = false,
-                            KeyName = "组织类型",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "cervix,lung,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("09b0711a-6966-4440-8c22-8b03cb9199fe"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(516),
-                            IsDeleted = false,
-                            KeyName = "细胞系种类",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "epithelial,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("df598876-a501-468e-a2d2-3ab605b044be"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(535),
-                            IsDeleted = false,
-                            KeyName = "培养方式",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "Adherent,Suspension,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("89d1aacb-3209-448c-8fa5-1117e792a273"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(538),
-                            IsDeleted = false,
-                            KeyName = "疾病",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "Carcinoma,Adenocarcinoma,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("161cb133-76ec-47aa-8e11-9106ad3db918"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(545),
-                            IsDeleted = false,
-                            KeyName = "性别",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "Female,Male,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("f8d1359f-3029-47af-9af4-dd9cd334036b"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(547),
-                            IsDeleted = false,
-                            KeyName = "种族",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "Black,Caucasian,Asian,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("b91d7ee0-7519-4931-94ff-7c2a7ebfa5cf"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(549),
-                            IsDeleted = false,
-                            KeyName = "体积",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "μL,mL",
-                            Value = "Carcinoma,Adenocarcinoma,ELSE"
-                        },
-                        new
-                        {
-                            Id = new Guid("2ba03fd0-8d4f-45eb-9f3c-7e60e037a8cd"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(552),
-                            IsDeleted = false,
-                            KeyName = "浓度",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "%,mg/ml"
-                        },
-                        new
-                        {
-                            Id = new Guid("dd5ce7ac-86dd-484b-a158-aac8e0f05713"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(554),
-                            IsDeleted = false,
-                            KeyName = "供应商",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "ThermoFisher,全式金,诺维赞,碧云天,Gibco,Merck,invitrogen"
-                        },
-                        new
-                        {
-                            Id = new Guid("73189c40-606d-46ed-9d8e-426e9b5e08ad"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 302, DateTimeKind.Local).AddTicks(556),
-                            IsDeleted = false,
-                            KeyName = "质量",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "string",
-                            Value = "ng,μg,mg,g,kg"
-                        });
                 });
 
             modelBuilder.Entity("Megarobo.KunPengLIMS.Domain.Entities.Labware", b =>
@@ -1222,10 +1024,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            Id = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Code = "系统管理",
                             Component = "Layout",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(5247),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(5243),
                             Hidden = false,
                             Icon = "el-icon-s-tools",
                             IsActive = true,
@@ -1242,10 +1044,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
+                            Id = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
                             Code = "用户管理",
                             Component = "system/user/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7113),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(6977),
                             Hidden = false,
                             Icon = "el-icon-user",
                             IsActive = true,
@@ -1253,7 +1055,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_user",
                             OrdinalNumber = 2,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "user",
                             Title = "用户管理",
                             Type = 1,
@@ -1261,10 +1063,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
+                            Id = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
                             Code = "技能管理",
                             Component = "system/skill/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7905),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7753),
                             Hidden = false,
                             Icon = "skill",
                             IsActive = true,
@@ -1272,7 +1074,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_skill",
                             OrdinalNumber = 3,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "skill",
                             Title = "技能管理",
                             Type = 1,
@@ -1280,10 +1082,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
+                            Id = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
                             Code = "部门管理",
                             Component = "system/department/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7921),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7765),
                             Hidden = false,
                             Icon = "peoples",
                             IsActive = true,
@@ -1291,7 +1093,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_department",
                             OrdinalNumber = 4,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "department",
                             Title = "部门管理",
                             Type = 1,
@@ -1299,10 +1101,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
+                            Id = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
                             Code = "角色管理",
                             Component = "system/role/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7978),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7775),
                             Hidden = false,
                             Icon = "el-icon-s-opportunity",
                             IsActive = true,
@@ -1310,7 +1112,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_role",
                             OrdinalNumber = 5,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "role",
                             Title = "角色管理",
                             Type = 1,
@@ -1318,10 +1120,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
+                            Id = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
                             Code = "菜单管理",
                             Component = "system/menu/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7987),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7784),
                             Hidden = false,
                             Icon = "el-icon-menu",
                             IsActive = true,
@@ -1329,7 +1131,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_menu",
                             OrdinalNumber = 6,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "menu",
                             Title = "菜单管理",
                             Type = 1,
@@ -1337,10 +1139,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
+                            Id = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
                             Code = "字典项管理",
                             Component = "system/dictionary/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(7997),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7791),
                             Hidden = false,
                             Icon = "el-icon-tickets",
                             IsActive = true,
@@ -1348,7 +1150,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_dictionary",
                             OrdinalNumber = 7,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "dictionary",
                             Title = "字典项管理",
                             Type = 1,
@@ -1356,10 +1158,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e9138d88-16b6-4328-8000-cd199250c52e"),
+                            Id = new Guid("fd518834-4281-4cab-a7d5-efcfa69b3632"),
                             Code = "日志管理",
                             Component = "system/logs/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8005),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7801),
                             Hidden = false,
                             Icon = "el-icon-edit-outline",
                             IsActive = true,
@@ -1367,7 +1169,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "system_log",
                             OrdinalNumber = 8,
-                            ParentId = new Guid("01391115-b139-4712-b555-8b241ab356f5"),
+                            ParentId = new Guid("947c1cfb-fc85-4ae6-89a2-fdaac07adb33"),
                             Path = "log",
                             Title = "日志管理",
                             Type = 1,
@@ -1375,10 +1177,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            Id = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Code = "基础数据配置",
                             Component = "Layout",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8011),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7805),
                             Hidden = false,
                             Icon = "el-icon-files",
                             IsActive = true,
@@ -1395,10 +1197,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
+                            Id = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
                             Code = "物种管理",
                             Component = "basic/species/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8021),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7815),
                             Hidden = false,
                             Icon = "el-icon-more",
                             IsActive = true,
@@ -1406,7 +1208,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_species",
                             OrdinalNumber = 10,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "species",
                             Title = "物种管理",
                             Type = 1,
@@ -1414,10 +1216,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
+                            Id = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
                             Code = "细胞管理",
                             Component = "basic/cells/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8030),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7825),
                             Hidden = false,
                             Icon = "cells",
                             IsActive = true,
@@ -1425,7 +1227,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_cells",
                             OrdinalNumber = 11,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "cells",
                             Title = "细胞管理",
                             Type = 1,
@@ -1433,10 +1235,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("142c6afc-6c03-493d-bd81-12c573fcdb85"),
+                            Id = new Guid("2806e5f6-0913-4c86-a6fd-d3712b47b75b"),
                             Code = "位置管理",
                             Component = "basic/place/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8039),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7834),
                             Hidden = false,
                             Icon = "el-icon-location",
                             IsActive = true,
@@ -1444,7 +1246,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_place",
                             OrdinalNumber = 12,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "place",
                             Title = "位置管理",
                             Type = 1,
@@ -1452,10 +1254,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d9ae9fb8-127e-444d-9cbe-e7e4a71d46c6"),
+                            Id = new Guid("8b1a27cc-d6b0-4663-940e-84bd94ec003b"),
                             Code = "耗材管理",
                             Component = "basic/material/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8043),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7838),
                             Hidden = false,
                             Icon = "el-icon-printer",
                             IsActive = true,
@@ -1463,7 +1265,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_material",
                             OrdinalNumber = 13,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "material",
                             Title = "耗材管理",
                             Type = 1,
@@ -1471,10 +1273,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("648d6d97-bde2-4e9f-92d1-16deae5cbe06"),
+                            Id = new Guid("c08903f4-e213-4b0b-92cc-94215e3c5231"),
                             Code = "试剂管理",
                             Component = "basic/reagent/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8047),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7842),
                             Hidden = false,
                             Icon = "chemistry",
                             IsActive = true,
@@ -1482,7 +1284,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_reagent",
                             OrdinalNumber = 14,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "reagent",
                             Title = "试剂管理",
                             Type = 1,
@@ -1490,10 +1292,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
+                            Id = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
                             Code = "设备管理",
                             Component = "basic/equipment/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8053),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7846),
                             Hidden = false,
                             Icon = "el-icon-suitcase",
                             IsActive = true,
@@ -1501,7 +1303,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "basic_equipment",
                             OrdinalNumber = 15,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "equipment",
                             Title = "设备管理",
                             Type = 1,
@@ -1509,10 +1311,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
+                            Id = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
                             Code = "样本管理",
                             Component = "sample/sample/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8060),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7855),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1520,7 +1322,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "sample_sample",
                             OrdinalNumber = 16,
-                            ParentId = new Guid("efce0453-d19a-4171-8caf-8b8d6dee3688"),
+                            ParentId = new Guid("05ab016f-5856-42f8-8ed4-4730b306941c"),
                             Path = "sample",
                             Title = "样本管理",
                             Type = 1,
@@ -1528,10 +1330,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("92355936-3b04-41a4-bc8d-692836d0935b"),
+                            Id = new Guid("bef5a4e2-4581-4a44-9163-1390306f1c68"),
                             Code = "任务管理",
                             Component = "Layout",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8069),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7864),
                             Hidden = false,
                             Icon = "el-icon-document-copy",
                             IsActive = true,
@@ -1548,10 +1350,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
+                            Id = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
                             Code = "我的任务",
                             Component = "task/myTask/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8072),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7867),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1559,7 +1361,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "task_owner",
                             OrdinalNumber = 18,
-                            ParentId = new Guid("92355936-3b04-41a4-bc8d-692836d0935b"),
+                            ParentId = new Guid("bef5a4e2-4581-4a44-9163-1390306f1c68"),
                             Path = "owner",
                             Title = "我的任务",
                             Type = 1,
@@ -1567,10 +1369,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
+                            Id = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
                             Code = "今日任务",
                             Component = "task/today/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8082),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7921),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1578,7 +1380,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "task_today",
                             OrdinalNumber = 19,
-                            ParentId = new Guid("92355936-3b04-41a4-bc8d-692836d0935b"),
+                            ParentId = new Guid("bef5a4e2-4581-4a44-9163-1390306f1c68"),
                             Path = "today",
                             Title = "今日任务",
                             Type = 1,
@@ -1586,10 +1388,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            Id = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Code = "项目管理",
                             Component = "Layout",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8089),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7931),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1606,10 +1408,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
+                            Id = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
                             Code = "Protocol Step管理",
                             Component = "items/proStep/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8092),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7934),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1617,7 +1419,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "items_protocol",
                             OrdinalNumber = 21,
-                            ParentId = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            ParentId = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Path = "protocol",
                             Title = "Protocol Step管理",
                             Type = 1,
@@ -1625,10 +1427,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
+                            Id = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
                             Code = "节点管理",
                             Component = "items/node/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8101),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7943),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1636,7 +1438,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "items_node",
                             OrdinalNumber = 22,
-                            ParentId = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            ParentId = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Path = "node",
                             Title = "节点管理",
                             Type = 1,
@@ -1644,10 +1446,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
+                            Id = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
                             Code = "项目管理",
                             Component = "items/project/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8110),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7950),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1655,7 +1457,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "items_project",
                             OrdinalNumber = 23,
-                            ParentId = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            ParentId = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Path = "project",
                             Title = "项目管理",
                             Type = 1,
@@ -1663,10 +1465,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
+                            Id = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
                             Code = "Take管理",
                             Component = "items/task/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8118),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7959),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1674,7 +1476,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "items_take",
                             OrdinalNumber = 24,
-                            ParentId = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            ParentId = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Path = "take",
                             Title = "Take管理",
                             Type = 1,
@@ -1682,10 +1484,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b407ee58-dd9e-46b3-ab02-489f3ca8a240"),
+                            Id = new Guid("46f040e7-6e9c-4876-989f-8aca2a43892a"),
                             Code = "排程",
                             Component = "items/aps/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8157),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7968),
                             Hidden = false,
                             Icon = "el-icon-document",
                             IsActive = true,
@@ -1693,7 +1495,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "items_aps",
                             OrdinalNumber = 25,
-                            ParentId = new Guid("a15625b7-1fd1-4116-b4de-4a1cd7b26885"),
+                            ParentId = new Guid("12c57331-1a3f-4159-8f54-d9abccb4ce5b"),
                             Path = "aps",
                             Title = "排程",
                             Type = 1,
@@ -1701,10 +1503,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            Id = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Code = "生产管理",
                             Component = "Layout",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8161),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7972),
                             Hidden = false,
                             Icon = "el-icon-s-cooperation",
                             IsActive = true,
@@ -1721,10 +1523,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
+                            Id = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
                             Code = "订单",
                             Component = "produce/order/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8164),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7975),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1732,7 +1534,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_order",
                             OrdinalNumber = 27,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "order",
                             Title = "订单",
                             Type = 1,
@@ -1740,10 +1542,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
+                            Id = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
                             Code = "分子克隆",
                             Component = "produce/clone/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8177),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7984),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1751,7 +1553,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_clone",
                             OrdinalNumber = 28,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "clone",
                             Title = "分子克隆",
                             Type = 1,
@@ -1759,10 +1561,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("19e0f45f-e3b0-4faa-a920-29b15617474a"),
+                            Id = new Guid("e5561cfc-191f-4e8f-b639-03549c7e8e69"),
                             Code = "质粒纯化",
                             Component = "produce/plasmid/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8184),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7991),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1770,7 +1572,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_plasmid",
                             OrdinalNumber = 29,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "plasmid",
                             Title = "质粒纯化",
                             Type = 1,
@@ -1778,10 +1580,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fbfe945e-f89a-4fbc-8f2a-ee002044e320"),
+                            Id = new Guid("57cd18af-26e3-4aa0-91b4-f6127ce80265"),
                             Code = "qPCR检测",
                             Component = "produce/qPCR/indexproduce/qPCR/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8190),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7994),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1789,7 +1591,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_qPCR",
                             OrdinalNumber = 30,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "qPCR",
                             Title = "qPCR检测",
                             Type = 1,
@@ -1797,10 +1599,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("23f2cc65-939f-4ddd-8535-32eda765fc5a"),
+                            Id = new Guid("938926df-4c75-4a4e-88d0-487e5bf2ff1f"),
                             Code = "SDS-PAGE检测",
                             Component = "produce/SDS/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8198),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(7999),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1808,7 +1610,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_SDS",
                             OrdinalNumber = 31,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "SDS",
                             Title = "SDS-PAGE检测",
                             Type = 1,
@@ -1816,10 +1618,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bbdf1ef5-7f83-4be2-bb57-73f61ee99fbb"),
+                            Id = new Guid("d4c5e07b-a663-4c58-a3a8-1268e416f5c0"),
                             Code = "无菌检测",
                             Component = "produce/asepticCheck/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8203),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(8002),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1827,7 +1629,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_asepticCheck",
                             OrdinalNumber = 32,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "asepticCheck",
                             Title = "无菌检测",
                             Type = 1,
@@ -1835,10 +1637,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6a3b1ff-9a7b-4432-a46c-8b7ba677daba"),
+                            Id = new Guid("a44c25a1-b4e0-4925-a929-f7bcda3031f3"),
                             Code = "入库登记",
                             Component = "produce/wareHouse/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8208),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(8005),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1846,7 +1648,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_wareHouse",
                             OrdinalNumber = 33,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "wareHouse",
                             Title = "入库登记",
                             Type = 1,
@@ -1854,10 +1656,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("265c5849-a45e-4ad1-90ff-20a03f380163"),
+                            Id = new Guid("ac5ecc27-d7ae-44d3-831d-2486c854f740"),
                             Code = "发货记录",
                             Component = "produce/deliverGoods/index",
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(8215),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(8008),
                             Hidden = false,
                             Icon = "el-icon-s-order",
                             IsActive = true,
@@ -1865,7 +1667,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "produce_deliverGoods",
                             OrdinalNumber = 34,
-                            ParentId = new Guid("c2556e1e-8d4a-4b20-9fe6-85a1310dc65e"),
+                            ParentId = new Guid("0b7c2088-f307-4a75-9c0a-8b4968649402"),
                             Path = "deliverGoods",
                             Title = "发货记录",
                             Type = 1,
@@ -2441,8 +2243,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 301, DateTimeKind.Local).AddTicks(3474),
+                            Id = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 51, DateTimeKind.Local).AddTicks(3263),
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2472,561 +2274,477 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
-                            ButtonId = new Guid("1d69715a-8bd6-4ce5-9922-0ae6f8d72aba")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
+                            ButtonId = new Guid("fe5b706c-cf43-4467-8341-6e20980d2d6e")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
-                            ButtonId = new Guid("c08f730b-9fac-4881-a1cc-e1425b7035a4")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
+                            ButtonId = new Guid("a3d61144-4e3e-46f3-a445-f7f9be882844")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
-                            ButtonId = new Guid("13cf0cf9-a7ec-4750-b24d-2fac424eebcc")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
+                            ButtonId = new Guid("4ad196d3-5ed8-47af-9ca4-45a731dbc4b2")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
-                            ButtonId = new Guid("a549899f-9ea4-47bc-b80c-7d395a8e4d5d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
+                            ButtonId = new Guid("0fc0ecbc-6470-465a-9b01-9db147698428")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("9030326b-a5b4-4616-a41b-62624572fdb6"),
-                            ButtonId = new Guid("daee4f52-497e-457c-9753-bc03c880a31b")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("e2331e8c-f238-40c4-abfa-956e03ed9ba5"),
+                            ButtonId = new Guid("f65bcbd0-8426-4c13-9d20-8f2550d7ea35")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
-                            ButtonId = new Guid("09ef5812-179a-4bb9-ae83-6d62dea75d43")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
+                            ButtonId = new Guid("d2ed3697-438a-482a-a9a7-d2d090df27c0")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
-                            ButtonId = new Guid("012cda32-a2fb-43c6-9b76-2ec669f6fd35")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
+                            ButtonId = new Guid("549db880-e764-4273-b489-e004dde5c19d")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
-                            ButtonId = new Guid("57b25249-a86b-4c2d-89d1-1bca14d3481a")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
+                            ButtonId = new Guid("2027f88f-3562-4e02-948d-8ebc6b06f77a")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("95fe9deb-b8b1-4edc-a045-fcf450c49069"),
-                            ButtonId = new Guid("ae81ea0a-28ac-4b30-bcd3-47548f3a1791")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("23a329c1-02dd-47b6-9d67-5d3591f984e8"),
+                            ButtonId = new Guid("f1c22dba-0990-4ac2-80a6-dcd50e150bd0")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
-                            ButtonId = new Guid("3f6b21b8-dfc7-4dc3-b521-11a4e716e025")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
+                            ButtonId = new Guid("f96aa350-94b6-4437-a9f6-f64a13305a85")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
-                            ButtonId = new Guid("57ba6a34-b252-4b0d-86d0-126b3ac11a62")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
+                            ButtonId = new Guid("5bb11723-1d83-42b1-bf40-5f91e321a387")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
-                            ButtonId = new Guid("8eb144f3-aceb-419c-998a-2544f18fe7c9")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
+                            ButtonId = new Guid("cd8b207c-4b13-4cc2-9b18-d9bf28a0c362")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c1884e1a-5cb2-46c0-bb11-efbca217cec8"),
-                            ButtonId = new Guid("552c28a8-d929-4f0c-8f07-0aa5637e5224")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e0e871a-dd1a-4403-97fe-e006dd424918"),
+                            ButtonId = new Guid("ad833ada-c1fe-4f77-aee7-1bf014487cc5")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
-                            ButtonId = new Guid("68534b4a-66ec-4ed7-9df4-f34af68b94b5")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
+                            ButtonId = new Guid("4c4d2f31-aa9b-4321-a1fc-591eab8bfb32")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
-                            ButtonId = new Guid("54a5e294-cd7e-4148-8013-3613be0821c6")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
+                            ButtonId = new Guid("7526a5cd-9635-4b4e-8281-15b9b00ebcb7")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
-                            ButtonId = new Guid("89cd1433-c1c8-42b5-9dcc-bd1b467c1849")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
+                            ButtonId = new Guid("45b5c253-94c1-4c5f-b3cb-e283a8711243")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("88c8bf66-8cf7-48d4-910b-316413f39725"),
-                            ButtonId = new Guid("13ef5794-9e54-4b38-8561-cf118e297f41")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("16844e51-6f7e-4502-bc4e-33193aa57c61"),
+                            ButtonId = new Guid("50211a2f-9aa9-4431-829b-c0e355c9cd07")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
-                            ButtonId = new Guid("9a89e85a-66d0-4215-9778-cb13d4178e2d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
+                            ButtonId = new Guid("b7070bc7-7ac0-4f66-a874-b131486e7893")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
-                            ButtonId = new Guid("ec128b9a-650e-4ad1-9123-cdc0456956b9")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
+                            ButtonId = new Guid("d74bdbf7-c019-41e2-81c9-9c7f57228234")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
-                            ButtonId = new Guid("70ee8547-7219-4adc-b9ff-5ae20781f7e9")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
+                            ButtonId = new Guid("99d0b4bb-12cc-4f97-8d3d-d9a870ebe814")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8dc13613-f35f-4050-acea-56e3143c2c1e"),
-                            ButtonId = new Guid("84e8059b-1ab5-4a16-a86a-71576931b20c")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("810a01d1-a1d5-475a-bc64-7229682722d3"),
+                            ButtonId = new Guid("0bad6c29-27a7-4cab-b154-f1db3732fd40")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
-                            ButtonId = new Guid("a606cc31-e09b-438f-ab36-6da256be38b8")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
+                            ButtonId = new Guid("ce9ce7b3-c7af-4c51-b1b5-6d2492eac5c6")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
-                            ButtonId = new Guid("a7cb75be-93fd-4233-acda-fcf8f5ebb9db")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
+                            ButtonId = new Guid("c08e1bb1-cc50-4dc1-b633-76efb7824b21")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
-                            ButtonId = new Guid("e9a78fd1-1e37-4ce9-a6c5-2a9390417979")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
+                            ButtonId = new Guid("55e8ae74-5705-4d5a-b504-2de42c712593")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
-                            ButtonId = new Guid("dd138026-b77e-4b7a-be6a-2ae9c558e4db")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
+                            ButtonId = new Guid("4533bbb4-6b8d-4333-9882-d340910ca371")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("4d04bdbe-df93-4fec-b41a-484b1d2fc3ed"),
-                            ButtonId = new Guid("cf6210e8-98c9-4c8a-a0f5-9b0394676a8d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("bf5c77c9-bdea-4aeb-ba3e-f293699a5cdd"),
+                            ButtonId = new Guid("c690cc78-aa0b-4898-a81b-9b7c9c2e7ac5")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("e9138d88-16b6-4328-8000-cd199250c52e"),
-                            ButtonId = new Guid("e9104308-1843-4750-a147-29df6195f1df")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("fd518834-4281-4cab-a7d5-efcfa69b3632"),
+                            ButtonId = new Guid("d99b42e1-db69-42a4-9e5d-b8b780a9a23a")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
-                            ButtonId = new Guid("5de2cbc6-89c8-43b4-aa74-a9d0b4a5bf3d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
+                            ButtonId = new Guid("f171f9a2-d4fa-4c4f-99a7-aec74e91e956")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
-                            ButtonId = new Guid("edda64b2-08df-49ca-9a29-fe569ed8c662")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
+                            ButtonId = new Guid("772d87c0-87a8-4a9f-9eed-ac03789badf6")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
-                            ButtonId = new Guid("d3271dca-fe4c-4b84-b36f-c76347503f3f")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
+                            ButtonId = new Guid("b7919203-5b26-4aad-82cc-dfcba56bcb89")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("a1fc86d7-8d7d-40ba-98a1-a066fd3b4746"),
-                            ButtonId = new Guid("aa0ffbe2-72eb-41e9-8f3c-6847967d84ba")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("01f8b333-d9c9-46ff-a8af-1b8ffe38d966"),
+                            ButtonId = new Guid("b18609d3-cfb3-480f-bb6b-6e68d2858d46")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
-                            ButtonId = new Guid("6311122a-0edd-428e-b5fa-2b7f3be06d7d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
+                            ButtonId = new Guid("d1acf2f5-c2a9-452e-9489-c6bb970a0aea")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
-                            ButtonId = new Guid("2e680f09-9e6a-407d-b4a1-c988005f72c7")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
+                            ButtonId = new Guid("cc8714d0-2f55-4eb6-9951-34e7a31b2896")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
-                            ButtonId = new Guid("5927c638-909c-4411-8bac-0feaf977ae13")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
+                            ButtonId = new Guid("71ad007d-3fb8-4a1b-bfe2-4e68aa62da6c")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("d2ff92e9-35c6-4df9-b3a8-f33d50315367"),
-                            ButtonId = new Guid("fc80caf3-9fcf-4d34-ad8a-f5faa2080828")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("ef7b2ce5-0a62-4ab8-8085-cfb25e516105"),
+                            ButtonId = new Guid("2a141afe-0acf-4437-90c6-bc7bbf96307c")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("142c6afc-6c03-493d-bd81-12c573fcdb85"),
-                            ButtonId = new Guid("8ca3359e-526c-42a4-9af1-edc3a8ce46a3")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("2806e5f6-0913-4c86-a6fd-d3712b47b75b"),
+                            ButtonId = new Guid("87c3e722-b69c-4480-b0ec-0b42243fa21a")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("d9ae9fb8-127e-444d-9cbe-e7e4a71d46c6"),
-                            ButtonId = new Guid("056b4897-9453-4029-86f5-3cd533dbd33b")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("8b1a27cc-d6b0-4663-940e-84bd94ec003b"),
+                            ButtonId = new Guid("42248e94-7021-4b3e-a959-4b552fe783fa")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("648d6d97-bde2-4e9f-92d1-16deae5cbe06"),
-                            ButtonId = new Guid("1390f9f1-d68e-47f3-a1ce-cf33311b9d7b")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("c08903f4-e213-4b0b-92cc-94215e3c5231"),
+                            ButtonId = new Guid("22f252e5-c3e8-4501-aca4-118b8cfd2600")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
-                            ButtonId = new Guid("2a42c765-cedb-4b0f-9c83-dc0bac9a3b58")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
+                            ButtonId = new Guid("8f99a12a-332d-43f2-8d95-d20f80cfb90d")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
-                            ButtonId = new Guid("71dbfe2c-c6cf-4bd1-b38f-96f91408a5a6")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
+                            ButtonId = new Guid("d1154d60-f1d3-46d1-87b8-14abd32dfd4e")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
-                            ButtonId = new Guid("15d664ec-bd9d-4923-a8c5-df07aee6ed86")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
+                            ButtonId = new Guid("e727894f-d0fe-4a61-9c55-058dbb807485")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("f0cf415b-d352-413d-9df8-c5d9a25291c4"),
-                            ButtonId = new Guid("c5ee4c47-f840-4ee0-99f9-6b8e7b7616fd")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5368cdcd-ccde-40a1-b8d3-52ec8fab80e2"),
+                            ButtonId = new Guid("fd0b874f-bd7a-432f-a94d-f7694fb63fdc")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
-                            ButtonId = new Guid("71e3d88a-3d34-4eb8-b785-8dc84a986d32")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
+                            ButtonId = new Guid("1651bd6b-1c41-4fa5-8653-ba50fd87a306")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
-                            ButtonId = new Guid("31c80f0d-6315-4794-b5e6-cdea6ef3b807")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
+                            ButtonId = new Guid("504048ee-fbde-40df-90cc-7ae074eab642")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
-                            ButtonId = new Guid("1aad03c0-cbf4-4039-bba4-df3339c65989")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
+                            ButtonId = new Guid("dd499b8a-6d66-4d9a-8937-4cb576ddae76")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("32e10c4c-fc5c-47a8-8ad8-33d69855d656"),
-                            ButtonId = new Guid("a94099cc-00ae-4ffb-b436-7a976ba31ce6")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("354ccee8-859b-44f5-8069-b053190ee170"),
+                            ButtonId = new Guid("0448d884-5b0c-456b-8feb-0d9fa3990415")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
-                            ButtonId = new Guid("f00a4640-dc72-436b-81e4-5ae24b1a8165")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
+                            ButtonId = new Guid("40d2ede0-becc-428f-bfd4-fe5bbbbd5749")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
-                            ButtonId = new Guid("1069195a-0207-4bba-813c-e67af4b7077e")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
+                            ButtonId = new Guid("cdc1ddd8-c48b-4fa5-8900-6b30806a6175")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
-                            ButtonId = new Guid("4d7333bc-191f-44f1-9db8-a8f60f7d724c")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
+                            ButtonId = new Guid("cbf711ac-7fcd-4567-b9d9-1002878d35f7")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("2e0574c5-cac2-4f0e-a3a9-c63a1cb6f789"),
-                            ButtonId = new Guid("4837cff0-0a49-4d3a-932f-a2971fa4e9e1")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("3e6363a3-0e62-4f8c-ab37-b437e4905a3f"),
+                            ButtonId = new Guid("934c1c56-8ca0-4ee1-abcc-3b6620b0cade")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
-                            ButtonId = new Guid("751e709a-6320-493e-8ae8-6373155aeb1b")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
+                            ButtonId = new Guid("c3b44418-a8a5-44e0-acc0-139b2ed7a45c")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
-                            ButtonId = new Guid("a5e3dda1-6c94-4124-8c33-a84c17078465")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
+                            ButtonId = new Guid("8e88541e-a7b8-413d-9763-305a0db06cb1")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
-                            ButtonId = new Guid("50e243d1-2b09-4d6d-87a3-2c71e5c5d180")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
+                            ButtonId = new Guid("3a167599-4fc9-4b5e-a3d2-e819151c5a10")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("be04a468-225f-45a0-b417-13f3da3618d6"),
-                            ButtonId = new Guid("2ae7e99c-a6d5-44d4-a8f3-507d4cfa4c1d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("169af775-c9e0-417c-950d-190bc12cc65a"),
+                            ButtonId = new Guid("c3dc9cfb-72c1-46bf-a6e1-c1f27472a2cf")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
-                            ButtonId = new Guid("58885f2a-cc81-42e3-8d33-5495a9f62e2a")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
+                            ButtonId = new Guid("ebeffd64-2c62-4fbe-9b07-c8fc9ed82160")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
-                            ButtonId = new Guid("fbb83a98-faeb-4198-9b70-ad7a13595a77")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
+                            ButtonId = new Guid("7d0f42de-cee3-459b-9766-c84c19efefbc")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
-                            ButtonId = new Guid("1028415e-4daf-438f-bbf6-2c4b63119424")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
+                            ButtonId = new Guid("048c83ab-38a7-4583-a9f6-54b510387921")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("10e18a05-6a25-4f54-b5ff-7f39bbfe0664"),
-                            ButtonId = new Guid("6c4923e0-b13d-4604-b32d-a03235e24c53")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("0c487d71-8d6e-4c2f-b209-0b1bc007e61a"),
+                            ButtonId = new Guid("4a2675e0-78c9-4339-90f8-fd5f6d1a2c0a")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
-                            ButtonId = new Guid("718a2127-2b7f-4dff-bfbd-bd523b87b065")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
+                            ButtonId = new Guid("e69066d2-051c-465c-9ddc-794cfe62a692")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
-                            ButtonId = new Guid("0ba90fe1-ff93-45ff-b5dd-34bb191913a1")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
+                            ButtonId = new Guid("72d159ef-0b5e-4ed7-b109-f85c816163fd")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
-                            ButtonId = new Guid("4e95416d-fc6a-4990-87a8-9f6bf97d0110")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
+                            ButtonId = new Guid("663ec245-a1fa-488f-9ce6-09f8a2b8c246")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8d92b9d4-b622-4afd-81b4-adaf4458864e"),
-                            ButtonId = new Guid("9dd59eba-7a0f-4f34-938b-1ef9e0f108a7")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("63ec3388-7f67-46f0-9e5b-4cd3b76fb8bb"),
+                            ButtonId = new Guid("8bf1c7ca-34d6-4f8d-8d18-7bc204879ed5")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
-                            ButtonId = new Guid("a248465e-0469-4d43-9d85-dab7e4c2ee35")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
+                            ButtonId = new Guid("7d03be34-6fb6-4dea-9085-27ee5f4f1323")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
-                            ButtonId = new Guid("f1a7d4cf-039b-423f-8f15-eb024016c271")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
+                            ButtonId = new Guid("9bf5c256-b15c-4350-a958-df4c2a3d9f13")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
-                            ButtonId = new Guid("a4ef5f38-c096-4a41-8ce6-2659b95f2222")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
+                            ButtonId = new Guid("a3895501-2917-47d4-951e-3234134f30ea")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("1a2722f4-661d-4946-9819-109f9a910dcf"),
-                            ButtonId = new Guid("441d1453-662c-4227-810b-345ada55a063")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("7b82ae08-06ee-442b-94ec-7b1d0ec5771d"),
+                            ButtonId = new Guid("d39ffa41-7160-4cce-8a06-ffbf4101821c")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
-                            ButtonId = new Guid("683055b8-6d45-4d3d-b0cc-f1f001e02f21")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
+                            ButtonId = new Guid("d1367b99-84bf-4a19-9e21-ec344dceb17d")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
-                            ButtonId = new Guid("68624aca-6794-47af-9b2c-e5163c723ec0")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
+                            ButtonId = new Guid("13348422-197b-4ea6-b19c-e21463ea713f")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
-                            ButtonId = new Guid("f87689fa-6ff5-45ae-b53e-e9fb6cb6b7df")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
+                            ButtonId = new Guid("ae756e5a-80f7-4920-b594-edc9db4a2326")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("b7d6ab23-0595-4c2f-8c72-9ee2b0ab66ae"),
-                            ButtonId = new Guid("9be7938d-3053-43d8-85fd-f6f6769d016d")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("81a58059-f201-43cd-9474-d32d0a6154e6"),
+                            ButtonId = new Guid("c1c6209c-4021-4a56-a32e-7d88ea92d336")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("b407ee58-dd9e-46b3-ab02-489f3ca8a240"),
-                            ButtonId = new Guid("c1ec031a-5b4f-4881-9076-25a5ebdc401f")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("46f040e7-6e9c-4876-989f-8aca2a43892a"),
+                            ButtonId = new Guid("6a9f2a8d-a381-435b-be9c-cf13d0aefb39")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("c9bfee7a-c77f-4cea-87c2-63514ebb3219")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
+                            ButtonId = new Guid("147c1e94-df99-407c-bc5d-32db5ef4d2c2")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("48bbc7e8-2bd3-42b8-901f-77a4529f6db0")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
+                            ButtonId = new Guid("7f179360-1bdf-4578-9e91-6501030bc380")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("91f6e8f6-f550-410f-8fec-633d7689f24a")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
+                            ButtonId = new Guid("919e89fc-e015-4cab-a931-16fd197a32ae")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("6a7d097f-9945-418d-82d7-f40544fdce37")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("5699239b-1dae-4d5f-8b30-67641b1389b1"),
+                            ButtonId = new Guid("e43f67ea-6a39-475d-8e33-2e17bc31a110")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("def600da-e197-4dcf-b83b-4f9a291a5b20")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            ButtonId = new Guid("2470d27f-5194-4871-aefc-22ce13c82681")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("046641cc-41ac-4937-b621-f769dbc425d8")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            ButtonId = new Guid("a66410d3-df7e-46f2-8535-7dab18f1b191")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("347b9448-aa51-41c0-9e4f-a9f9ff7a829c")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            ButtonId = new Guid("82903849-06bb-4a6e-92c9-d40dbf20625f")
                         },
                         new
                         {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("7b469257-3a7d-49cf-a4b0-a3edc8fac2a0"),
-                            ButtonId = new Guid("bd32aeb7-168c-4a67-90ac-1ee5280d289a")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
-                            ButtonId = new Guid("de2bea7f-c84c-4b71-9d27-83fb608138fc")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("8a3f1440-446f-4210-b924-411a1e391fe9"),
-                            ButtonId = new Guid("09902b31-1c05-4094-a7e1-3af8b88a5565")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("19e0f45f-e3b0-4faa-a920-29b15617474a"),
-                            ButtonId = new Guid("5183be46-2d4e-4418-affe-d7bfd02b603b")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("19e0f45f-e3b0-4faa-a920-29b15617474a"),
-                            ButtonId = new Guid("8d5fe15e-6304-40c3-9efd-e7f3cd77912c")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("fbfe945e-f89a-4fbc-8f2a-ee002044e320"),
-                            ButtonId = new Guid("364ec6c5-4962-4610-b907-6c189c91b1db")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("fbfe945e-f89a-4fbc-8f2a-ee002044e320"),
-                            ButtonId = new Guid("c155eb39-5b7b-4787-b8e3-dfd27b3e2d5b")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("23f2cc65-939f-4ddd-8535-32eda765fc5a"),
-                            ButtonId = new Guid("ffda1e5b-1ab8-42a5-86e8-56dfd94153c4")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("23f2cc65-939f-4ddd-8535-32eda765fc5a"),
-                            ButtonId = new Guid("075b2343-2578-4227-ae94-f60a5dacbeb6")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("bbdf1ef5-7f83-4be2-bb57-73f61ee99fbb"),
-                            ButtonId = new Guid("7a6b5d07-e2c7-4b72-979e-de0464a6f3e9")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("bbdf1ef5-7f83-4be2-bb57-73f61ee99fbb"),
-                            ButtonId = new Guid("28c73fcb-3334-417c-a2b8-7acf9fa53d11")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c6a3b1ff-9a7b-4432-a46c-8b7ba677daba"),
-                            ButtonId = new Guid("b3171048-ab03-4ee7-a1f9-55b823909ca4")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("c6a3b1ff-9a7b-4432-a46c-8b7ba677daba"),
-                            ButtonId = new Guid("89c69f20-bda0-479d-b194-4727a9c389ff")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("265c5849-a45e-4ad1-90ff-20a03f380163"),
-                            ButtonId = new Guid("d4a8ce4c-d623-47cb-9772-772c59a44968")
-                        },
-                        new
-                        {
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f"),
-                            MenuId = new Guid("265c5849-a45e-4ad1-90ff-20a03f380163"),
-                            ButtonId = new Guid("9cb4f820-f76e-442e-920d-7a7805cc46b2")
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81"),
+                            MenuId = new Guid("c6bd3005-6b00-4be9-840d-a3eefb7cd2a1"),
+                            ButtonId = new Guid("11299edd-571d-4aee-983c-a45dd27b81e7")
                         });
                 });
 
@@ -3572,8 +3290,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc09a30c-699c-420a-82fe-37476dda1890"),
-                            CreatedAt = new DateTime(2021, 8, 4, 14, 2, 23, 298, DateTimeKind.Local).AddTicks(7643),
+                            Id = new Guid("9525002b-2459-4dec-bd40-c5ebb2060cf4"),
+                            CreatedAt = new DateTime(2021, 8, 4, 12, 0, 53, 48, DateTimeKind.Local).AddTicks(6836),
                             EMail = "234298234@qq.com",
                             IsActive = true,
                             IsDeleted = false,
@@ -3606,9 +3324,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("dc09a30c-699c-420a-82fe-37476dda1890"),
-                            DepartmentId = new Guid("7f0d9e25-b4b3-4607-a568-fd503eaf5da7"),
-                            RoleId = new Guid("aa50c096-e0cd-4ace-8b88-1d968172f22f")
+                            UserId = new Guid("9525002b-2459-4dec-bd40-c5ebb2060cf4"),
+                            DepartmentId = new Guid("28189d8c-466f-42b7-aab8-9e2592bd6961"),
+                            RoleId = new Guid("ce4eced7-848d-4959-88ce-3d5b6d10fb81")
                         });
                 });
 

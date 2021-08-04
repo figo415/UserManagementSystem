@@ -620,7 +620,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             var orderButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询订单", Code = "QueryOrder", MenuId = orderMenu.Id };
             var orderButton2 = new Button() { Id = Guid.NewGuid(), Name = "新增订单", Code = "AddOrder", MenuId = orderMenu.Id };
             var orderButton3 = new Button() { Id = Guid.NewGuid(), Name = "修改订单", Code = "UpdateOrder", MenuId = orderMenu.Id };
-            var orderButton4 = new Button() { Id = Guid.NewGuid(), Name = "删除订单", Code = "DeleteOrder", MenuId = orderMenu.Id };
+            var orderButton4 = new Button() { Id = Guid.NewGuid(), Name = "分子克隆", Code = "CloneMolecule", MenuId = orderMenu.Id };
+            var orderButton5 = new Button() { Id = Guid.NewGuid(), Name = "质粒纯化", Code = "PurifyPlasmid", MenuId = orderMenu.Id };
+            var orderButton6 = new Button() { Id = Guid.NewGuid(), Name = "进入生产", Code = "StartProduce", MenuId = orderMenu.Id };
+            var orderButton7 = new Button() { Id = Guid.NewGuid(), Name = "QC&入库", Code = "Warehousing", MenuId = orderMenu.Id };
+            var orderButton8 = new Button() { Id = Guid.NewGuid(), Name = "完成", Code = "FinishOrder", MenuId = orderMenu.Id };
             var moleculeMenu = new Menu()
             {
                 Id = Guid.NewGuid(),
@@ -640,15 +644,133 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 Title = "分子克隆"
             };
             var moleculeButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询分子克隆", Code = "QueryCloning", MenuId = moleculeMenu.Id };
-            var moleculeButton2 = new Button() { Id = Guid.NewGuid(), Name = "新增分子克隆", Code = "AddCloning", MenuId = moleculeMenu.Id };
-            var moleculeButton3 = new Button() { Id = Guid.NewGuid(), Name = "修改分子克隆", Code = "UpdateCloning", MenuId = moleculeMenu.Id };
-            var moleculeButton4 = new Button() { Id = Guid.NewGuid(), Name = "删除分子克隆", Code = "DeleteCloning", MenuId = moleculeMenu.Id };
+            var moleculeButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成分子克隆", Code = "FinishCloning", MenuId = moleculeMenu.Id };
+            var plasmidMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_plasmid",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "质粒纯化",
+                Url = "plasmid",
+                OrdinalNumber = 29,
+                IsActive = true,
+                Component = "produce/plasmid/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "plasmid",
+                Title = "质粒纯化"
+            };
+            var plasmidButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询质粒纯化", Code = "QueryPurifying", MenuId = plasmidMenu.Id };
+            var plasmidButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成质粒纯化", Code = "FinishPurifying", MenuId = plasmidMenu.Id };
+            var qpcrMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_qPCR",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "qPCR检测",
+                Url = "qPCR",
+                OrdinalNumber = 30,
+                IsActive = true,
+                Component = "produce/qPCR/indexproduce/qPCR/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "qPCR",
+                Title = "qPCR检测"
+            };
+            var qpcrButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询qPCR检测", Code = "QueryQpcr", MenuId = moleculeMenu.Id };
+            var qpcrButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成qPCR检测", Code = "FinishQpcr", MenuId = moleculeMenu.Id };
+            var sdspageMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_SDS",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "SDS-PAGE检测",
+                Url = "SDS",
+                OrdinalNumber = 31,
+                IsActive = true,
+                Component = "produce/SDS/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "SDS",
+                Title = "SDS-PAGE检测"
+            };
+            var sdspageButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询SDS-PAGE检测", Code = "QuerySdspage", MenuId = sdspageMenu.Id };
+            var sdspageButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成SDS-PAGE检测", Code = "FinishSdspage", MenuId = sdspageMenu.Id };
+            var sterilityMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_asepticCheck",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "无菌检测",
+                Url = "asepticCheck",
+                OrdinalNumber = 32,
+                IsActive = true,
+                Component = "produce/asepticCheck/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "asepticCheck",
+                Title = "无菌检测"
+            };
+            var sterilityButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询无菌检测", Code = "QuerySterility", MenuId = sterilityMenu.Id };
+            var sterilityButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成无菌检测", Code = "FinishSterility", MenuId = sterilityMenu.Id };
+            var stockMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_wareHouse",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "入库登记",
+                Url = "wareHouse",
+                OrdinalNumber = 33,
+                IsActive = true,
+                Component = "produce/wareHouse/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "wareHouse",
+                Title = "入库登记"
+            };
+            var stockButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询入库记录", Code = "QueryWarehousing", MenuId = stockMenu.Id };
+            var stockButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成入库记录", Code = "FinishWarehousing", MenuId = stockMenu.Id };
+            var shipmentMenu = new Menu()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Name = "produce_deliverGoods",
+                Type = 1,
+                ParentId = produceMenu.Id,
+                Code = "发货记录",
+                Url = "deliverGoods",
+                OrdinalNumber = 34,
+                IsActive = true,
+                Component = "produce/deliverGoods/index",
+                Hidden = false,
+                Icon = "el-icon-s-order",
+                Path = "deliverGoods",
+                Title = "发货记录"
+            };
+            var shipmentButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询发货记录", Code = "QueryShipment", MenuId = shipmentMenu.Id };
+            var shipmentButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成发货记录", Code = "FinishShipment", MenuId = shipmentMenu.Id };
             modelBuilder.Entity<Menu>().HasData(
                 systemMenu, userMenu, skillMenu, departmentMenu, roleMenu, menuMenu, dictMenu, logMenu, 
                 basicMenu, speciesMenu, cellMenu, positionMenu, labwareMenu, reagentMenu, deviceMenu, sampleMenu, 
                 taskMenu, ownerMenu, todayMenu, 
                 projectManageMenu, protocolstepMenu, nodeMenu, projectMenu, takeMenu, scheduleMenu, 
-                produceMenu, orderMenu, moleculeMenu);
+                produceMenu, orderMenu, moleculeMenu, plasmidMenu, qpcrMenu, sdspageMenu, sterilityMenu, stockMenu, shipmentMenu);
             modelBuilder.Entity<Button>().HasData(
                 userButton1, userButton2, userButton3, userButton4, userButton5,
                 skillButton1, skillButton2, skillButton3, skillButton4,
@@ -671,8 +793,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 projectButton1, projectButton2, projectButton3, projectButton4,
                 takeButton1, takeButton2, takeButton3, takeButton4,
                 scheduleButton1,
-                orderButton1, orderButton2, orderButton3, orderButton4,
-                moleculeButton1, moleculeButton2, moleculeButton3, moleculeButton4);
+                orderButton1, orderButton2, orderButton3, orderButton4, orderButton5, orderButton6, orderButton7, orderButton8,
+                moleculeButton1, moleculeButton2,
+                plasmidButton1,plasmidButton2,
+                qpcrButton1,qpcrButton2,
+                sdspageButton1,sdspageButton2,
+                sterilityButton1,sterilityButton2,
+                stockButton1,stockButton2,
+                shipmentButton1,shipmentButton2);
             var rolemenu1 = new RoleMenu() { RoleId = role.Id, MenuId = userMenu.Id, ButtonId = userButton1.Id };
             var rolemenu2 = new RoleMenu() { RoleId = role.Id, MenuId = userMenu.Id, ButtonId = userButton2.Id };
             var rolemenu3 = new RoleMenu() { RoleId = role.Id, MenuId = userMenu.Id, ButtonId = userButton3.Id };
@@ -748,17 +876,124 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             var rolemenu73 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton2.Id };
             var rolemenu74 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton3.Id };
             var rolemenu75 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton4.Id };
-            var rolemenu76 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton1.Id };
-            var rolemenu77 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton2.Id };
-            var rolemenu78 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton3.Id };
-            var rolemenu79 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton4.Id };
+            var rolemenu76 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton5.Id };
+            var rolemenu77 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton6.Id };
+            var rolemenu78 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton7.Id };
+            var rolemenu79 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton8.Id };
+            var rolemenu80 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton1.Id };
+            var rolemenu81 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton2.Id };
+            var rolemenu82 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton1.Id };
+            var rolemenu83 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton2.Id };
+            var rolemenu84 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton1.Id };
+            var rolemenu85 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton2.Id };
+            var rolemenu86 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton1.Id };
+            var rolemenu87 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton2.Id };
+            var rolemenu88 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton1.Id };
+            var rolemenu89 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton2.Id };
+            var rolemenu90 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton1.Id };
+            var rolemenu91 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton2.Id };
+            var rolemenu92 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton1.Id };
+            var rolemenu93 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton2.Id };
             modelBuilder.Entity<RoleMenu>().HasData(rolemenu1, rolemenu2, rolemenu3, rolemenu4, rolemenu5, rolemenu6, rolemenu7, rolemenu8, rolemenu9,
                 rolemenu10, rolemenu11, rolemenu12, rolemenu13, rolemenu14, rolemenu15, rolemenu16, rolemenu17, rolemenu18, rolemenu19, rolemenu20, rolemenu21,
                 rolemenu22, rolemenu23, rolemenu24, rolemenu25, rolemenu26, rolemenu27, rolemenu28, rolemenu29, rolemenu30, rolemenu31, rolemenu32, rolemenu33,
                 rolemenu34, rolemenu35, rolemenu36, rolemenu37, rolemenu38, rolemenu39, rolemenu40, rolemenu41, rolemenu42, rolemenu43, rolemenu44, rolemenu45,
                 rolemenu46, rolemenu47, rolemenu48, rolemenu49, rolemenu50, rolemenu51, rolemenu52, rolemenu53, rolemenu54, rolemenu55, rolemenu56, rolemenu57,
                 rolemenu58, rolemenu59, rolemenu60, rolemenu61, rolemenu62, rolemenu63, rolemenu64, rolemenu65, rolemenu66, rolemenu67, rolemenu68, rolemenu69,
-                rolemenu70, rolemenu71, rolemenu72, rolemenu73, rolemenu74, rolemenu75, rolemenu76, rolemenu77, rolemenu78, rolemenu79);
+                rolemenu70, rolemenu71, rolemenu72, rolemenu73, rolemenu74, rolemenu75, rolemenu76, rolemenu77, rolemenu78, rolemenu79, rolemenu80, rolemenu81, 
+                rolemenu82, rolemenu83, rolemenu84, rolemenu85, rolemenu86, rolemenu87, rolemenu88, rolemenu89, rolemenu90, rolemenu91, rolemenu92, rolemenu93);
+
+            var dict1 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "组织类型",
+                Type = "string",
+                Value = "cervix,lung,ELSE"
+            };
+            var dict2 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "细胞系种类",
+                Type = "string",
+                Value = "epithelial,ELSE"
+            };
+            var dict3 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "培养方式",
+                Type = "string",
+                Value = "Adherent,Suspension,ELSE"
+            };
+            var dict4 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "疾病",
+                Type = "string",
+                Value = "Carcinoma,Adenocarcinoma,ELSE"
+            };
+            var dict5 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "性别",
+                Type = "string",
+                Value = "Female,Male,ELSE"
+            };
+            var dict6 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "种族",
+                Type = "string",
+                Value = "Black,Caucasian,Asian,ELSE"
+            };
+            var dict7 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "体积",
+                Type = "μL,mL",
+                Value = "Carcinoma,Adenocarcinoma,ELSE"
+            };
+            var dict8 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "浓度",
+                Type = "string",
+                Value = "%,mg/ml"
+            };
+            var dict9 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "供应商",
+                Type = "string",
+                Value = "ThermoFisher,全式金,诺维赞,碧云天,Gibco,Merck,invitrogen"
+            };
+            var dict10 = new DictItem()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                KeyName = "质量",
+                Type = "string",
+                Value = "ng,μg,mg,g,kg"
+            };
+            modelBuilder.Entity<DictItem>().HasData(dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10);
         }
     }
 }

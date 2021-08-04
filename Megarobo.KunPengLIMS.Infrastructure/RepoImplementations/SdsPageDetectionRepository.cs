@@ -70,5 +70,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(c => !c.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<SdsPageDetection> GetSdsPageDetectionByOrder(Guid orderId)
+        {
+            return DbContext.Set<SdsPageDetection>().SingleOrDefaultAsync(q => q.OrderId == orderId);
+        }
     }
 }

@@ -76,5 +76,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(c => !c.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<StockIn> GetStockInByOrder(Guid orderId)
+        {
+            return DbContext.Set<StockIn>().SingleOrDefaultAsync(q => q.OrderId == orderId);
+        }
     }
 }

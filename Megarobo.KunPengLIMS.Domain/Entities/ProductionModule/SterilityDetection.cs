@@ -6,6 +6,9 @@ using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
+    /// <summary>
+    /// 无菌检测
+    /// </summary>
     public class SterilityDetection:Contract
     {
         /// <summary>

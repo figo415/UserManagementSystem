@@ -6,6 +6,9 @@ using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
+    /// <summary>
+    /// qPCR检测
+    /// </summary>
     public class QpcrDetection:Contract
     {
         /// <summary>

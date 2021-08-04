@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface ISdsPageDetectionRepository : IRepositoryBase<SdsPageDetection>, IRepositoryBase2<SdsPageDetection, Guid>
     {
         System.Threading.Tasks.Task<PagedList<SdsPageDetection>> GetSdsPageDetectionsByPage(SdsPageDetectionQueryParameters parameters);
+
+        System.Threading.Tasks.Task<SdsPageDetection> GetSdsPageDetectionByOrder(Guid orderId);
     }
 }

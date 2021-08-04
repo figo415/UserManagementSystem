@@ -43,6 +43,11 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new InvalidOperationException("This order is already shipped");
             }
+            var stockin = await _repoWrapper.StockInRepo.GetStockInByOrder(shipment.OrderId);
+            if(stockin.Status!=StockStatusEnum.StockedIn)
+            {
+                throw new InvalidOperationException("This order must be stocked in");
+            }
             _mapper.Map(dto, shipment, typeof(ShipmentUpdateDto), typeof(Shipment));
             shipment.Status = ShipmentStatusEnum.Shipped;
             shipment.LastModifiedAt = DateTime.Now;

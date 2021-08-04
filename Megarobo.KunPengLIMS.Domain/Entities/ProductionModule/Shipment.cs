@@ -6,6 +6,9 @@ using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
+    /// <summary>
+    /// 发货
+    /// </summary>
     public class Shipment:Contract
     {
         /// <summary>

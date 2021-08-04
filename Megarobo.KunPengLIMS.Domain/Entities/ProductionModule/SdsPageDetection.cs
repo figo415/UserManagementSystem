@@ -6,6 +6,9 @@ using Megarobo.KunPengLIMS.Domain.Enums;
 
 namespace Megarobo.KunPengLIMS.Domain.Entities
 {
+    /// <summary>
+    /// SDS-PAGE检测
+    /// </summary>
     public class SdsPageDetection:Contract
     {
         /// <summary>
@@ -34,5 +37,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public Order Order { get; set; }
 
         public DateTime OrderCreateTime { get; set; }
+
+        [NotMapped]
+        public QpcrDetection QpcrDetection { get; set; }
     }
 }
