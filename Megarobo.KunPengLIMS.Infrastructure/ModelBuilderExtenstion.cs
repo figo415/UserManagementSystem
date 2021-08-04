@@ -677,7 +677,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 Url = "qPCR",
                 OrdinalNumber = 30,
                 IsActive = true,
-                Component = "produce/qPCR/indexproduce/qPCR/index",
+                Component = "produce/qPCR/index",
                 Hidden = false,
                 Icon = "el-icon-s-order",
                 Path = "qPCR",

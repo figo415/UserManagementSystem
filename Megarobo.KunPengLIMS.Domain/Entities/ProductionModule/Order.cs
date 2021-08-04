@@ -109,6 +109,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// 分析报告：pdf
         /// </summary>
         //public object AnalysisReport { get; set; }
+        public Guid AnalysisReportFileId { get; set; }
 
         /// <summary>
         /// 备注

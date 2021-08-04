@@ -10,12 +10,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Models
     /// </summary>
     public class StringApiResult : ApiResult<string>
     {
-        public static StringApiResult Succeed()
+        public static StringApiResult Succeed(string data = null)
         {
             return new StringApiResult()
             {
                 Code = 0,
-                Message = "Success"
+                Message = "Success",
+                Data = data
             };
         }
 

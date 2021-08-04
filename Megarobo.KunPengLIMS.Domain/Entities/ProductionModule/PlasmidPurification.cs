@@ -29,6 +29,11 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public string Enzyme { get; set; }
 
         /// <summary>
+        /// 酶切图片
+        /// </summary>
+        public Guid EnzymeCuttingPictureId { get; set; }
+
+        /// <summary>
         /// 类型：待纯化，已完成
         /// </summary>
         public PlasmidPurificationStatusEnum Status { get; set; }

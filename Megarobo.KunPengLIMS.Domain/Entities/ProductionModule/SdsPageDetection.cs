@@ -27,6 +27,11 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public bool IsPurityQualified { get; set; }
 
         /// <summary>
+        /// 检测图片
+        /// </summary>
+        public Guid DetectionPictureId { get; set; }
+
+        /// <summary>
         /// 状态：待检测，已完成
         /// </summary>
         public DetectionStatusEnum Status { get; set; }

@@ -89,6 +89,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         private readonly ISterilityDetectionRepository _sterilityDetectionRepo;
         private readonly IStockInRepository _stockInRepo;
         private readonly IShipmentRepository _shipmentRepo;
+        private readonly IDocumentRepository _documentRepo;
 
         public IOrderRepository OrderRepo => _orderRepo ?? new OrderRepository(_dbContext);
 
@@ -105,6 +106,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
         public IStockInRepository StockInRepo => _stockInRepo ?? new StockInRepository(_dbContext);
 
         public IShipmentRepository ShipmentRepo => _shipmentRepo ?? new ShipmentRepository(_dbContext);
+
+        public IDocumentRepository DocumentRepo => _documentRepo ?? new DocumentRepository(_dbContext);
 
         #endregion
     }
