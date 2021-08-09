@@ -26,7 +26,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 酶切图片
         /// </summary>
-        public Guid EnzymeCuttingPictureId { get; set; }
+        public string EnzymeCuttingPicture { get; set; }
 
         /// <summary>
         /// 状态：待克隆，已完成

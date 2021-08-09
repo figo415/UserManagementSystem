@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public bool IsBacterialPollute { get; set; }
 
         public bool IsFluorescence { get; set; }
+
+        public List<string> Files { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public float ProteinTiter { get; set; }
 
         public bool IsPurityQualified { get; set; }
+
+        public List<string> Files { get; set; }
     }
 }

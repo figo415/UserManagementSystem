@@ -127,7 +127,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         /// <summary>
         /// 分析报告：pdf
         /// </summary>
-        //public object AnalysisReport { get; set; }
+        public List<string> Files { get; set; }
 
         /// <summary>
         /// 备注

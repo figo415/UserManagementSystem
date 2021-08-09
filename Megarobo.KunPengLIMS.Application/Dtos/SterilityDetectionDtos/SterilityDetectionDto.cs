@@ -18,6 +18,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public bool IsFluorescence { get; set; }
 
+        public List<string> Files { get; set; }
+
         public string Status { get; set; }
     }
 }

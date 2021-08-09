@@ -29,7 +29,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 检测图片
         /// </summary>
-        public Guid DetectionPictureId { get; set; }
+        public string DetectionPicture { get; set; }
 
         /// <summary>
         /// 状态：待检测，已完成

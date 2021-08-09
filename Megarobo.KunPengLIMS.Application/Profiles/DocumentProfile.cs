@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using Megarobo.KunPengLIMS.Domain.Entities;
+using Megarobo.KunPengLIMS.Domain.Externals;
 using Megarobo.KunPengLIMS.Application.Dtos;
 
 namespace Megarobo.KunPengLIMS.Application.Profiles
@@ -11,7 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
     {
         public DocumentProfile()
         {
-            CreateMap<Document, DocumentDto>();
+            CreateMap<S3FileObject, DocumentDto>();
         }
     }
 }

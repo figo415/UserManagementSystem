@@ -78,8 +78,6 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         IShipmentRepository ShipmentRepo { get; }
 
-        IDocumentRepository DocumentRepo { get; }
-
         #endregion
     }
 }

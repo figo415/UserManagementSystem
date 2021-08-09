@@ -11,5 +11,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
         public float Od { get; set; }
 
         public string Enzyme { get; set; }
+
+        public List<string> Files { get; set; }
     }
 }

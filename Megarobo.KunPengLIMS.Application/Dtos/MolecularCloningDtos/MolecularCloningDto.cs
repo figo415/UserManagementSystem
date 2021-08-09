@@ -20,6 +20,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string Enzyme { get; set; }
 
+        public List<string> Files { get; set; }
+
         public string Status { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public bool IsPurityQualified { get; set; }
 
+        public List<string> Files { get; set; }
+
         public string Status { get; set; }
     }
 }

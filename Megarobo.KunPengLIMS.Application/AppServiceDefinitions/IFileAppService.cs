@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
-using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Application.Dtos;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
-    public interface IDocumentAppService
+    public interface IFileAppService
     {
-        Task<DocumentDto> GetDocument(Guid docId);
+        Task<byte[]> GetFile(string filename);
 
-        Task<Guid?> InsertDocument(string filename, byte[] content);
+        Task<DocumentDto> InsertFile(string filename, Stream content);
     }
 }

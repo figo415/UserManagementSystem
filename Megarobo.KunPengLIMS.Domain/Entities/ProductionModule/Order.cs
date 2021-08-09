@@ -108,7 +108,8 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 分析报告：pdf
         /// </summary>
-        //public object AnalysisReport { get; set; }
+        public string AnalysisReport { get; set; }
+
         public Guid AnalysisReportFileId { get; set; }
 
         /// <summary>
