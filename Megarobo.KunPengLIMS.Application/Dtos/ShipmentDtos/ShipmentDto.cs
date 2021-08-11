@@ -14,7 +14,11 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public DateTime ShipmentDate { get; set; }
 
-        public string Address { get; set; }
+        public List<string> Address { get; set; }
+
+        public string Detail { get; set; }
+
+        public string CompleteAddress { get; set; }
 
         public string Status { get; set; }
     }

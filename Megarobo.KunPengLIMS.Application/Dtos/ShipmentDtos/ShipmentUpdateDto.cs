@@ -12,11 +12,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public string ContactNumber { get; set; }
 
-        public string Province { get; set; }
-
-        public string City { get; set; }
-
-        public string District { get; set; }
+        public List<string> Address { get; set; }
 
         public string Detail { get; set; }
     }

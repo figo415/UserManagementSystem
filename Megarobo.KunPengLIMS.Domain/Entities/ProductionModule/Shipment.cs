@@ -27,7 +27,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         public string ContactNumber { get; set; }
 
         /// <summary>
-        /// 邮寄地址
+        /// 邮寄地址:
         /// </summary>
         public Address DeliveryAddress { get; set; }
 

@@ -7,6 +7,8 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Megarobo.KunPengLIMS.Domain.Externals;
 using System.Net.Http;
+using RestSharp;
+using System.Net;
 
 namespace Megarobo.KunPengLIMS.Infrastructure.Utility
 {
@@ -141,6 +143,21 @@ namespace Megarobo.KunPengLIMS.Infrastructure.Utility
             {
                 return null;
             }
+        }
+
+        private TokenResponse GetToken2()
+        {
+            var client = new RestClient(_info.AuthUrl);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("application/x-www-form-urlencoded", $"client_id={_info.ClientId}&grant_type={_info.GrantType}&username={_info.UserName}&password={_info.Password}", ParameterType.RequestBody);
+            var response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return null;
+            }
+            var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
+            return tokenResponse;
         }
     }
 }

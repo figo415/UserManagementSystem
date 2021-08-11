@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Net;
 using System.IO;
 using System.Net.Security;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
 using Megarobo.KunPengLIMS.Infrastructure.Utility;
 using Megarobo.KunPengLIMS.Domain.Externals;
 using System.Security.Claims;
@@ -20,7 +21,14 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
 {
     public class KeycloakAuthorizeFilter : IAuthorizationFilter
     {
-        public void OnAuthorization(AuthorizationFilterContext context)
+        private readonly IKeycloakService _keycloak;
+        
+        public KeycloakAuthorizeFilter(IKeycloakService keycloak)
+        {
+            _keycloak = keycloak;
+        }
+
+        public async void OnAuthorization(AuthorizationFilterContext context)
         {
             if(!HasAllowAnonymous(context))
             {
@@ -28,9 +36,13 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             ?? context.HttpContext.Request.Headers["X-Token"].FirstOrDefault()
             ?? context.HttpContext.Request.Query["Token"].FirstOrDefault()
             ?? context.HttpContext.Request.Cookies["Token"];
-                if (token != null && VerifyToken(context.HttpContext, token))
+                if (token != null)
                 {
-
+                    var isTokenValid = await VerifyToken(context.HttpContext, token);
+                    if(!isTokenValid)
+                    {
+                        context.Result = new UnauthorizedResult();
+                    }
                 }
                 else
                 {
@@ -39,9 +51,9 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             }
         }
 
-        private bool VerifyToken(HttpContext context, string token)
+        private async Task<bool> VerifyToken(HttpContext context, string token)
         {
-            var userinfo = ApiHelper.GetWithAuth<UserInfoResponse>("https://keycloak.dev.aws.megarobo.tech", "/auth/realms/kplims-dev/protocol/openid-connect/userinfo", token);
+            var userinfo = await _keycloak.CheckToken(token);// ApiHelper.GetWithAuth<UserInfoResponse>("https://keycloak.dev.aws.megarobo.tech", "/auth/realms/kplims-dev/protocol/openid-connect/userinfo", token);
             if(userinfo!=null)
             {
                 var claimsIdentity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, userinfo.preferred_username) });

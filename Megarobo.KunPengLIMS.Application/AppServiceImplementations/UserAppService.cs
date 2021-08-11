@@ -10,6 +10,7 @@ using Megarobo.KunPengLIMS.Domain.RepoDefinitions;
 using Megarobo.KunPengLIMS.Domain;
 using Megarobo.KunPengLIMS.Domain.QueryParameters;
 using Megarobo.KunPengLIMS.Application.Exceptions;
+using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
 
 namespace Megarobo.KunPengLIMS.Application.Services
 {
@@ -21,12 +22,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
         private readonly IMenuAppService _menuAppService;
+        private readonly IKeycloakService _keycloak;
 
-        public UserAppService(IRepositoryWrapper wrapper,IMapper mapper, IMenuAppService menuAppService)
+        public UserAppService(IRepositoryWrapper wrapper,IMapper mapper, IMenuAppService menuAppService, IKeycloakService keycloak)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;
             _menuAppService = menuAppService;
+            _keycloak = keycloak;
         }
 
         public async Task<PagedList<UserDto>> GetUsersByPage(UserQueryParameters parameters)
@@ -157,6 +160,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 }
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();
+            if(result)
+            {
+                await _keycloak.CreateUser(user.Id, user.UserName, user.EMail, user.IsActive);
+            }
             return result;
         }
 
@@ -197,6 +204,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 }
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();
+            if(result)
+            {
+                await _keycloak.UpdateUser(user.Id, user.UserName, user.EMail, user.IsActive);
+            }
             return result;
         }
 
@@ -211,6 +222,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
             var result = await _repoWrapper.UserRepo.SaveAsync();
+            if(result)
+            {
+                await _keycloak.EnableUser(user.Id, user.IsActive);
+            }
             return result;
         }
 
@@ -225,6 +240,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
             user.LastModifiedAt = DateTime.Now;
             _repoWrapper.UserRepo.Update(user);
             var result = await _repoWrapper.UserRepo.SaveAsync();
+            if(result)
+            {
+                await _keycloak.ChangePassword(user.Id, user.Password);
+            }
             return result;
         }
 
@@ -242,6 +261,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 _repoWrapper.UserRepo.Update(user);
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();
+            if(result)
+            {
+                foreach(var userid in dto.Guids)
+                {
+                    await _keycloak.DeleteUser(userid);
+                }
+            }
             return result;
         }   
     }
