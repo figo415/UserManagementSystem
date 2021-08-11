@@ -17,6 +17,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         private readonly string _clientId = "admin-cli";
         private readonly string _username = "keycloak";
         private readonly string _password = "keycloak";
+        private readonly string _userRealm = "kplims-dev";
 
         public async Task<bool> CreateUser(Guid id, string username, string email, bool isActive)
         {
@@ -38,8 +39,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                     }
                 }
             };
+            var resource = string.Format("/auth/admin/realms/{0}/users", _userRealm);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/admin/realms/kplims-dev/users", Method.POST);
+            var request = new RestRequest(resource, Method.POST);
             request.AddHeader("Authorization", $"Bearer {tokenresponse.access_token}");
             var jb = JsonConvert.SerializeObject(userrep);
             request.AddJsonBody(jb);

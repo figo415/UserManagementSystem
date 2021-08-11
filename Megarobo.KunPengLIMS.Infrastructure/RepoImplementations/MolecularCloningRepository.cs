@@ -76,5 +76,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(c => !c.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<MolecularCloning> GetMolecularCloningByOrder(Guid orderId)
+        {
+            return DbContext.Set<MolecularCloning>().SingleOrDefaultAsync(q => q.OrderId == orderId);
+        }
     }
 }

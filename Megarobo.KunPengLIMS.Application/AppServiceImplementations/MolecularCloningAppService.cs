@@ -47,6 +47,20 @@ namespace Megarobo.KunPengLIMS.Application.Services
             molecular.Status = MolecularCloningStatusEnum.Finished;
             molecular.LastModifiedAt = DateTime.Now;
             _repoWrapper.MolecularCloningRepo.Update(molecular);
+            var order = await _repoWrapper.OrderRepo.GetByIdAsync(molecular.OrderId);
+            var plasmid = new PlasmidPurification();
+            plasmid.Id = Guid.NewGuid();
+            plasmid.CreatedAt = DateTime.Now;
+            plasmid.IsDeleted = false;
+            plasmid.Status = PlasmidPurificationStatusEnum.WaitForPurifying;
+            plasmid.OrderId = order.Id;
+            plasmid.ContractCode = order.ContractCode;
+            plasmid.ContractType = order.ContractType;
+            plasmid.CarrierCode = order.CarrierCode;
+            plasmid.CarrierStructure = order.CarrierStructure;
+            plasmid.PlasmidSize = order.PlasmidSize;
+            plasmid.OrderCreateTime = order.CreatedAt;
+            _repoWrapper.PlasmidPurificationRepo.Create(plasmid);
             var result = await _repoWrapper.MolecularCloningRepo.SaveAsync();
             return result;
         }

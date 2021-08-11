@@ -131,9 +131,9 @@ namespace Megarobo.KunPengLIMS.Application.Services
             {
                 throw new NotExistedException("Order with Guid=" + orderId + " is not existed");
             }
-            if (!(order.Status == OrderStatusEnum.OrderReceived || order.Status==OrderStatusEnum.WaitForProducing))
+            if (!(order.Status == OrderStatusEnum.OrderReceived))
             {
-                throw new InvalidOperationException("Order only with OrderReceived or WaitForProducing status can do Plasmid Purification");
+                throw new InvalidOperationException("Order only with OrderReceived status can do Plasmid Purification");
             }
             if (order.PlasmidPurification != null)
             {
@@ -174,6 +174,16 @@ namespace Megarobo.KunPengLIMS.Application.Services
             if (!(order.Status == OrderStatusEnum.OrderReceived || order.Status == OrderStatusEnum.WaitForProducing))
             {
                 throw new InvalidOperationException("Order only with OrderReceived or WaitForProducing status can start producing");
+            }
+            var molecular = await _repoWrapper.MolecularCloningRepo.GetMolecularCloningByOrder(order.Id);
+            if(molecular!=null && molecular.Status!=MolecularCloningStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Molecular cloning must be finished for this order");
+            }
+            var plasmid = await _repoWrapper.PlasmidPurificationRepo.GetPlasmidPurificationByOrder(order.Id);
+            if(plasmid!=null && plasmid.Status!=PlasmidPurificationStatusEnum.Finished)
+            {
+                throw new InvalidOperationException("Plasmid purification must be finished for this order");
             }
             order.Status = OrderStatusEnum.InProducing;
             order.StartDate = DateTime.Now;

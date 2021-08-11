@@ -9,5 +9,7 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
     public interface IPlasmidPurificationRepository: IRepositoryBase<PlasmidPurification>, IRepositoryBase2<PlasmidPurification, Guid>
     {
         System.Threading.Tasks.Task<PagedList<PlasmidPurification>> GetPlasmidPurificationsByPage(PlasmidPurificationQueryParameters parameters);
+
+        System.Threading.Tasks.Task<PlasmidPurification> GetPlasmidPurificationByOrder(Guid orderId);
     }
 }

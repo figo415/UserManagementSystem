@@ -84,5 +84,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             predicate = predicate.And(c => !c.IsDeleted);
             return predicate;
         }
+
+        public System.Threading.Tasks.Task<PlasmidPurification> GetPlasmidPurificationByOrder(Guid orderId)
+        {
+            return DbContext.Set<PlasmidPurification>().SingleOrDefaultAsync(q => q.OrderId == orderId);
+        }
     }
 }
