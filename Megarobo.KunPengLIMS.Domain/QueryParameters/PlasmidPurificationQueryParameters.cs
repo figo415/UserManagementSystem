@@ -22,7 +22,7 @@ namespace Megarobo.KunPengLIMS.Domain.QueryParameters
 
         public override string ToString()
         {
-            return string.Format("ContractCode={0}, CarrierCode={1}, ContractType={2}, PlasmidType={4}, Status={5}, StartDate={6}, EndDate={7}", ContractCode, CarrierCode, ContractType, PlasmidType, Status, StartDate, EndDate);
+            return string.Format("ContractCode={0}, CarrierCode={1}, ContractType={2}, PlasmidType={3}, Status={4}, StartDate={5}, EndDate={6}", ContractCode, CarrierCode, ContractType, PlasmidType, Status, StartDate, EndDate);
         }
     }
 }
