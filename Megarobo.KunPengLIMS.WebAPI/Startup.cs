@@ -17,7 +17,8 @@ using Megarobo.KunPengLIMS.Application.Dtos;
 using Megarobo.KunPengLIMS.Domain.Externals;
 using Megarobo.KunPengLIMS.Infrastructure;
 using Microsoft.IdentityModel.Logging;
-using Megarobo.KunPengLIMS.WebAPI.ServiceExtenstions;
+using Megarobo.KunPengLIMS.Application.ServiceExtensions;
+using Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions;
 
 namespace Megarobo.KunPengLIMS.WebAPI
 {
@@ -45,6 +46,8 @@ namespace Megarobo.KunPengLIMS.WebAPI
                     opt.JsonSerializerOptions.IgnoreNullValues = true;
                 }) ;
 
+            services.AddScoped<LogFilterAttribute>();
+
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
             var dbhostname = Environment.GetEnvironmentVariable("DB_HOSTNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
@@ -64,7 +67,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             #endregion
 
-            services.RegisterAppServices();
+            services.AddLims();
 
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
@@ -83,7 +86,10 @@ namespace Megarobo.KunPengLIMS.WebAPI
             }
             #endregion
 
-            services.RegisterRepositories();
+            services.AddLimsRepo();
+            services.AddInventory();
+            services.AddAwss3();
+            services.AddKeycloak();
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

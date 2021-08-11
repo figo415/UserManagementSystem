@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Megarobo.KunPengLIMS.Application.Services;
 
-namespace Megarobo.KunPengLIMS.WebAPI.ServiceExtenstions
+namespace Megarobo.KunPengLIMS.Application.ServiceExtensions
 {
-    public static class AppServiceExtension
+    public static class LimsServiceExtension
     {
-        public static void RegisterAppServices(this IServiceCollection services)
+        public static void AddLims(this IServiceCollection services)
         {
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IDepartmentAppService, DepartmentAppService>();

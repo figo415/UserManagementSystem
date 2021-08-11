@@ -6,7 +6,7 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 {
     public class DocumentDto
     {
-        public string ObjectUrl { get; set; }
+        public string Url { get; set; }
 
         public string ExceptionMessage { get; set; }
     }
