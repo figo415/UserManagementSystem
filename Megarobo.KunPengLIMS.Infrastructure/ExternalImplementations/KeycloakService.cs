@@ -67,8 +67,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public async Task<bool> UpdateUser(Guid userid, string username, string email, bool isActive)
         {
             var tokenresponse = GetToken();
+            var resource = string.Format("/auth/admin/realms/{0}/users/{1}", _userRealm, userid);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/admin/realms/kplims-dev/users/" + userid, Method.PUT);
+            var request = new RestRequest(resource, Method.PUT);
             request.AddHeader("Authorization", $"Bearer {tokenresponse.access_token}");
             var jb = isActive ? string.Format("{\"username\":\"{0}\",\"email\":\"{1}\",\"enabled\": true}",username,email) : string.Format("{\"username\":\"{0}\",\"email\":\"{1}\",\"enabled\": false}", username, email);
             request.AddJsonBody(jb);
@@ -79,8 +80,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public async Task<bool> EnableUser(Guid userid, bool isActive)
         {
             var tokenresponse = GetToken();
+            var resource = string.Format("/auth/admin/realms/{0}/users/{1}", _userRealm, userid);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/admin/realms/kplims-dev/users/"+userid, Method.PUT);
+            var request = new RestRequest(resource, Method.PUT);
             request.AddHeader("Authorization", $"Bearer {tokenresponse.access_token}");
             var jb = isActive ? "{\"enabled\": true}" : "{\"enabled\": false}";
             request.AddJsonBody(jb);
@@ -91,8 +93,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public async Task<bool> ChangePassword(Guid userid, string password)
         {
             var tokenresponse = GetToken();
+            var resource = string.Format("/auth/admin/realms/{0}/users/{1}", _userRealm, userid);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/admin/realms/kplims-dev/users/" + userid, Method.PUT);
+            var request = new RestRequest(resource, Method.PUT);
             request.AddHeader("Authorization", $"Bearer {tokenresponse.access_token}");
             var jb = string.Format("{\"credentials\":[{\"type\":\"password\",\"value\":\"{0}\",\"temporary\":false}]}", password);
             request.AddJsonBody(jb);
@@ -103,8 +106,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public UserInfoResponse CheckToken(string token)
         {
             UserInfoResponse userinfo = null;
+            var resource = string.Format("/auth/realms/{0}/protocol/openid-connect/userinfo", _userRealm);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/realms/kplims-dev/protocol/openid-connect/userinfo", Method.GET);
+            var request = new RestRequest(resource, Method.GET);
             request.AddHeader("Authorization", $"Bearer {token}");
             var response = client.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -117,8 +121,9 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         public async Task<bool> DeleteUser(Guid userid)
         {
             var tokenresponse = GetToken();
+            var resource = string.Format("/auth/admin/realms/{0}/users/{1}", _userRealm, userid);
             var client = new RestClient(_keycloakBaseUrl);
-            var request = new RestRequest("/auth/admin/realms/kplims-dev/users/" + userid, Method.DELETE);
+            var request = new RestRequest(resource, Method.DELETE);
             request.AddHeader("Authorization", $"Bearer {tokenresponse.access_token}");
             var response = await client.ExecuteAsync(request);
             return (response.StatusCode == HttpStatusCode.NoContent);

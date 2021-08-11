@@ -59,6 +59,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             plasmid.CarrierCode = order.CarrierCode;
             plasmid.CarrierStructure = order.CarrierStructure;
             plasmid.PlasmidSize = order.PlasmidSize;
+            plasmid.PlasmidType = order.PlasmidType;
             plasmid.OrderCreateTime = order.CreatedAt;
             _repoWrapper.PlasmidPurificationRepo.Create(plasmid);
             var result = await _repoWrapper.MolecularCloningRepo.SaveAsync();

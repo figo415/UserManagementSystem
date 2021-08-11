@@ -15,7 +15,8 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
             CreateMap<PlasmidPurification, PlasmidPurificationDto>()
                 .ForMember(d => d.ThicknessValue, opt => opt.MapFrom(s => s.Thickness.Value))
                 .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()))
-                .ForMember(d => d.Files, opt => opt.MapFrom<PlasmidFileListResolver>());
+                .ForMember(d => d.Files, opt => opt.MapFrom<PlasmidFileListResolver>())
+                .ForMember(d => d.PlasmidType, opt => opt.MapFrom(s => s.PlasmidType.ToString()));
 
             CreateMap<PlasmidPurificationUpdateDto, PlasmidPurification>()
                 .ForMember(d => d.Thickness, opt => opt.MapFrom(s => new Thickness() { Value = s.ThicknessValue }))

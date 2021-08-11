@@ -49,9 +49,10 @@ namespace Megarobo.KunPengLIMS.Application.Profiles
         {
             if (source.Files != null && source.Files.Any())
             {
-                return string.Join(',', source.Files);
+                var newfiles = string.Join(',', source.Files);
+                return destination.AnalysisReport + "," + newfiles;
             }
-            return string.Empty;
+            return destination.AnalysisReport ;
         }
     }
 

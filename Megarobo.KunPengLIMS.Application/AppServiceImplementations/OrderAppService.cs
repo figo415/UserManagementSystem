@@ -157,6 +157,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             plasmid.ContractType = order.ContractType;
             plasmid.CarrierCode = order.CarrierCode;
             plasmid.CarrierStructure = order.CarrierStructure;
+            plasmid.PlasmidType = order.PlasmidType;
             plasmid.PlasmidSize = order.PlasmidSize;
             plasmid.OrderCreateTime = order.CreatedAt;
             _repoWrapper.PlasmidPurificationRepo.Create(plasmid);

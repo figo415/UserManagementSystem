@@ -16,6 +16,8 @@ namespace Megarobo.KunPengLIMS.Application.Dtos
 
         public int PlasmidSize { get; set; }
 
+        public string PlasmidType { get; set; }
+
         public float ThicknessValue { get; set; }
 
         public float Od { get; set; }
