@@ -8,7 +8,7 @@ namespace Megarobo.KunPengLIMS.Domain.Externals
     {
         public string ETag { get; set; }
 
-        public string ObjectUrl { get; set; }
+        public string Url { get; set; }
 
         public string ExceptionMessage { get; set; }
     }

@@ -45,7 +45,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                     return new S3FileObject()
                     {
                         ETag = response.ETag,
-                        ObjectUrl = serviceUrl + "/" + filename,
+                        Url = serviceUrl + "/" + filename,
                     };
                 }
             }
