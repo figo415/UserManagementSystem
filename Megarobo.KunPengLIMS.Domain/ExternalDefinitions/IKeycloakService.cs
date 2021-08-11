@@ -16,7 +16,7 @@ namespace Megarobo.KunPengLIMS.Domain.ExternalDefinitions
 
         Task<bool> ChangePassword(Guid userid, string password);
 
-        Task<UserInfoResponse> CheckToken(string token);
+        UserInfoResponse CheckToken(string token);
 
         Task<bool> DeleteUser(Guid userid);
     }

@@ -12,8 +12,6 @@ using System.Net;
 using System.IO;
 using System.Net.Security;
 using Megarobo.KunPengLIMS.Domain.ExternalDefinitions;
-using Megarobo.KunPengLIMS.Infrastructure.Utility;
-using Megarobo.KunPengLIMS.Domain.Externals;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
@@ -28,7 +26,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             _keycloak = keycloak;
         }
 
-        public async void OnAuthorization(AuthorizationFilterContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
             if(!HasAllowAnonymous(context))
             {
@@ -38,7 +36,7 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             ?? context.HttpContext.Request.Cookies["Token"];
                 if (token != null)
                 {
-                    var isTokenValid = await VerifyToken(context.HttpContext, token);
+                    var isTokenValid = VerifyToken(context.HttpContext, token);
                     if(!isTokenValid)
                     {
                         context.Result = new UnauthorizedResult();
@@ -51,9 +49,9 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             }
         }
 
-        private async Task<bool> VerifyToken(HttpContext context, string token)
+        private bool VerifyToken(HttpContext context, string token)
         {
-            var userinfo = await _keycloak.CheckToken(token);// ApiHelper.GetWithAuth<UserInfoResponse>("https://keycloak.dev.aws.megarobo.tech", "/auth/realms/kplims-dev/protocol/openid-connect/userinfo", token);
+            var userinfo = _keycloak.CheckToken(token);
             if(userinfo!=null)
             {
                 var claimsIdentity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, userinfo.preferred_username) });

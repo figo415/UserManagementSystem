@@ -98,13 +98,13 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             return (response.StatusCode == HttpStatusCode.NoContent);
         }
 
-        public async Task<UserInfoResponse> CheckToken(string token)
+        public UserInfoResponse CheckToken(string token)
         {
             UserInfoResponse userinfo = null;
             var client = new RestClient(_keycloakBaseUrl);
             var request = new RestRequest("/auth/realms/kplims-dev/protocol/openid-connect/userinfo", Method.GET);
             request.AddHeader("Authorization", $"Bearer {token}");
-            var response = await client.ExecuteAsync(request);
+            var response = client.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 userinfo = JsonConvert.DeserializeObject<UserInfoResponse>(response.Content);
