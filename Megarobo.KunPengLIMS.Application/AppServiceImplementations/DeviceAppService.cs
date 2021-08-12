@@ -19,9 +19,9 @@ namespace Megarobo.KunPengLIMS.Application.Services
     {
         private readonly IRepositoryWrapper _repoWrapper;
         private readonly IMapper _mapper;
-        private readonly ILocationService _locationService;
+        private readonly IInventoryService _locationService;
 
-        public DeviceAppService(IRepositoryWrapper wrapper, IMapper mapper, ILocationService locationService)
+        public DeviceAppService(IRepositoryWrapper wrapper, IMapper mapper, IInventoryService locationService)
         {
             _repoWrapper = wrapper;
             _mapper = mapper;

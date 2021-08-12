@@ -10,13 +10,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions
 {
     public static class InventoryServiceExtension
     {
-        public static void AddInventory(this IServiceCollection services)
+        public static void AddInventory(this IServiceCollection services,string connectionString)
         {
-            services.AddScoped<ApiHelper>();
-
-            services.AddScoped<IInventoryService, InventoryService>();
-
-            services.AddScoped<ILocationService, LocationService>();
+            var inventoryInstance = new InventoryService(connectionString);
+            services.AddSingleton<IInventoryService>(inventoryInstance);
         }
     }
 }

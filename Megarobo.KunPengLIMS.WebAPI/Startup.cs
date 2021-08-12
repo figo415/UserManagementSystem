@@ -50,17 +50,18 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
-            var dbhostname = Environment.GetEnvironmentVariable("DB_HOSTNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var dbport = Environment.GetEnvironmentVariable("DB_PORT", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var dbusername = Environment.GetEnvironmentVariable("DB_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var dbpassword = Environment.GetEnvironmentVariable("DB_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var dbname = Environment.GetEnvironmentVariable("DB_NAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var connectionString = "Host={0};Port={1};User ID={2};Password={3};Database={4};Pooling=true;";
-            if (!string.IsNullOrEmpty(dbhostname) && !string.IsNullOrEmpty(dbport) && !string.IsNullOrEmpty(dbusername) && !string.IsNullOrEmpty(dbpassword) && !string.IsNullOrEmpty(dbname))
-            {
-                connectionString = string.Format(connectionString, dbhostname, dbport, dbusername, dbpassword, dbname);
-            }
-            else
+            //var dbhostname = Environment.GetEnvironmentVariable("DB_HOSTNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var dbport = Environment.GetEnvironmentVariable("DB_PORT", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var dbusername = Environment.GetEnvironmentVariable("DB_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var dbpassword = Environment.GetEnvironmentVariable("DB_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var dbname = Environment.GetEnvironmentVariable("DB_NAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var connectionString = "Host={0};Port={1};User ID={2};Password={3};Database={4};Pooling=true;";
+            //if (!string.IsNullOrEmpty(dbhostname) && !string.IsNullOrEmpty(dbport) && !string.IsNullOrEmpty(dbusername) && !string.IsNullOrEmpty(dbpassword) && !string.IsNullOrEmpty(dbname))
+            //{
+            //    connectionString = string.Format(connectionString, dbhostname, dbport, dbusername, dbpassword, dbname);
+            //}
+            var connectionString = Environment.GetEnvironmentVariable("Postgres", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(connectionString))
             {
                 connectionString = Configuration.GetConnectionString("PostgreLocal");
             }
@@ -87,9 +88,24 @@ namespace Megarobo.KunPengLIMS.WebAPI
             #endregion
 
             services.AddLimsRepo();
-            services.AddInventory();
-            services.AddAwss3("AWSAccessKeyId=AKIAR2BBIFEVM7TJF4WP;AWSSecretAccessKey=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;BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;");
-            services.AddKeycloak("KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;");
+            var inventoryConnectionString= Environment.GetEnvironmentVariable("InventorySystem", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(inventoryConnectionString))
+            {
+                inventoryConnectionString = Configuration.GetConnectionString("InventorySystem");
+            }
+            services.AddInventory(inventoryConnectionString);
+            var awss3ConnectionString= Environment.GetEnvironmentVariable("AwsS3", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(awss3ConnectionString))
+            {
+                awss3ConnectionString = Configuration.GetConnectionString("AwsS3");
+            }
+            services.AddAwss3(awss3ConnectionString);
+            var keycloakConnectionString= Environment.GetEnvironmentVariable("Keycloak", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            if(string.IsNullOrEmpty(keycloakConnectionString))
+            {
+                keycloakConnectionString = Configuration.GetConnectionString("Keycloak");
+            }
+            services.AddKeycloak(keycloakConnectionString);
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

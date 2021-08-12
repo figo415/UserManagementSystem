@@ -11,10 +11,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
 {
     public class PositionAppService:IPositionAppService
     {
-        private readonly ILocationService _service;
+        private readonly IInventoryService _service;
         private readonly IMapper _mapper;
 
-        public PositionAppService(ILocationService service, IMapper mapper)
+        public PositionAppService(IInventoryService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
