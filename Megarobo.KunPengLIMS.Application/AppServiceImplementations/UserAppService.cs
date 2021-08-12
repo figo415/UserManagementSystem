@@ -162,7 +162,13 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.UserRepo.SaveAsync();
             if(result)
             {
-                await _keycloak.CreateUser(user.Id, user.UserName, user.EMail, user.IsActive);
+                var keycloakid = await _keycloak.CreateUser(user.Id, user.UserName, user.EMail, user.IsActive);
+                if(keycloakid!=null)
+                {
+                    user.KeycloakId = keycloakid;
+                    _repoWrapper.UserRepo.Update(user);
+                    await _repoWrapper.UserRepo.SaveAsync();
+                }
             }
             return result;
         }
@@ -206,7 +212,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.UserRepo.SaveAsync();
             if(result)
             {
-                await _keycloak.UpdateUser(user.Id, user.UserName, user.EMail, user.IsActive);
+                await _keycloak.UpdateUser(user.KeycloakId.Value, user.UserName, user.EMail, user.IsActive);
             }
             return result;
         }
@@ -224,7 +230,7 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.UserRepo.SaveAsync();
             if(result)
             {
-                await _keycloak.EnableUser(user.Id, user.IsActive);
+                await _keycloak.EnableUser(user.KeycloakId.Value, user.IsActive);
             }
             return result;
         }
@@ -242,13 +248,14 @@ namespace Megarobo.KunPengLIMS.Application.Services
             var result = await _repoWrapper.UserRepo.SaveAsync();
             if(result)
             {
-                await _keycloak.ChangePassword(user.Id, user.Password);
+                await _keycloak.ChangePassword(user.KeycloakId.Value, user.Password);
             }
             return result;
         }
 
         public async Task<bool> DeleteUsers(DeleteMultiDto dto)
         {
+            var keycloakids = new List<Guid>();
             foreach(var userId in dto.Guids)
             {
                 var user = await _repoWrapper.UserRepo.GetByIdAsync(userId);
@@ -259,11 +266,12 @@ namespace Megarobo.KunPengLIMS.Application.Services
                 user.IsDeleted = true;
                 user.LastModifiedAt = DateTime.Now;
                 _repoWrapper.UserRepo.Update(user);
+                keycloakids.Add(user.KeycloakId.Value);
             }
             var result = await _repoWrapper.UserRepo.SaveAsync();
             if(result)
             {
-                foreach(var userid in dto.Guids)
+                foreach(var userid in keycloakids)
                 {
                     await _keycloak.DeleteUser(userid);
                 }

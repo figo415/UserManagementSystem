@@ -14,7 +14,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 入库日期
         /// </summary>
-        public DateTime StockInDate { get; set; }
+        public DateTime? StockInDate { get; set; }
 
         /// <summary>
         /// 位置

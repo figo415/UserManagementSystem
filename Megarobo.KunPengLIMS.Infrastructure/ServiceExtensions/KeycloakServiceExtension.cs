@@ -9,9 +9,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions
 {
     public static class KeycloakServiceExtension
     {
-        public static void AddKeycloak(this IServiceCollection services)
+        public static void AddKeycloak(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<IKeycloakService, KeycloakService>();
+            var keycloakInstance = new KeycloakService(connectionString);
+            services.AddSingleton<IKeycloakService>(keycloakInstance);
         }
     }
 }

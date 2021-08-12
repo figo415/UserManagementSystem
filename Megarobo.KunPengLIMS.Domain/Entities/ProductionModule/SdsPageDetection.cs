@@ -14,7 +14,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 检测日期
         /// </summary>
-        public DateTime DetectionDate { get; set; }
+        public DateTime? DetectionDate { get; set; }
 
         /// <summary>
         /// 蛋白滴度（vgs/ml）

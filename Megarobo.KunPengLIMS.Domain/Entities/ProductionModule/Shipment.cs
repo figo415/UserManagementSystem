@@ -14,7 +14,7 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
         /// <summary>
         /// 发货日期
         /// </summary>
-        public DateTime ShipmentDate { get; set; }
+        public DateTime? ShipmentDate { get; set; }
 
         /// <summary>
         /// 收货人

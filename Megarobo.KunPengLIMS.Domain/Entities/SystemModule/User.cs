@@ -29,6 +29,11 @@ namespace Megarobo.KunPengLIMS.Domain.Entities
 
         public bool IsActive { get; set; }
 
+        /// <summary>
+        /// User ID in KeyCloak
+        /// </summary>
+        public Guid? KeycloakId { get; set; }
+
         public virtual ICollection<UserDepartmentRole> DepartmentRoles { get; set; }
 
         public virtual ICollection<UserSkill> Skills { get; set; }

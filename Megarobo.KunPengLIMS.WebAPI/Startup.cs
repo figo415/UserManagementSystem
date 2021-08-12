@@ -89,7 +89,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddLimsRepo();
             services.AddInventory();
             services.AddAwss3();
-            services.AddKeycloak();
+            services.AddKeycloak("KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;");
 
             #region Swagger
             // Register the Swagger generator, defining one or more Swagger documents

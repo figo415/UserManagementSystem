@@ -8,7 +8,7 @@ namespace Megarobo.KunPengLIMS.Domain.ExternalDefinitions
 {
     public interface IKeycloakService
     {
-        Task<bool> CreateUser(Guid id, string username, string email, bool isActive);
+        Task<Guid?> CreateUser(Guid id, string username, string email, bool isActive);
 
         Task<bool> UpdateUser(Guid userid, string username, string email, bool isActive);
 

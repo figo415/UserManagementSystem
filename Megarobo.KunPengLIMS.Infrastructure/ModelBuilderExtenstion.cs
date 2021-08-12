@@ -625,6 +625,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             var orderButton6 = new Button() { Id = Guid.NewGuid(), Name = "进入生产", Code = "StartProduce", MenuId = orderMenu.Id };
             var orderButton7 = new Button() { Id = Guid.NewGuid(), Name = "QC&入库", Code = "Warehousing", MenuId = orderMenu.Id };
             var orderButton8 = new Button() { Id = Guid.NewGuid(), Name = "完成", Code = "FinishOrder", MenuId = orderMenu.Id };
+            var orderButton9 = new Button() { Id = Guid.NewGuid(), Name = "取消订单", Code = "CancelOrder", MenuId = orderMenu.Id };
             var moleculeMenu = new Menu()
             {
                 Id = Guid.NewGuid(),
@@ -683,8 +684,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 Path = "qPCR",
                 Title = "qPCR检测"
             };
-            var qpcrButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询qPCR检测", Code = "QueryQpcr", MenuId = moleculeMenu.Id };
-            var qpcrButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成qPCR检测", Code = "FinishQpcr", MenuId = moleculeMenu.Id };
+            var qpcrButton1 = new Button() { Id = Guid.NewGuid(), Name = "查询qPCR检测", Code = "QueryQpcr", MenuId = qpcrMenu.Id };
+            var qpcrButton2 = new Button() { Id = Guid.NewGuid(), Name = "完成qPCR检测", Code = "FinishQpcr", MenuId = qpcrMenu.Id };
             var sdspageMenu = new Menu()
             {
                 Id = Guid.NewGuid(),
@@ -793,7 +794,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 projectButton1, projectButton2, projectButton3, projectButton4,
                 takeButton1, takeButton2, takeButton3, takeButton4,
                 scheduleButton1,
-                orderButton1, orderButton2, orderButton3, orderButton4, orderButton5, orderButton6, orderButton7, orderButton8,
+                orderButton1, orderButton2, orderButton3, orderButton4, orderButton5, orderButton6, orderButton7, orderButton8, orderButton9, 
                 moleculeButton1, moleculeButton2,
                 plasmidButton1,plasmidButton2,
                 qpcrButton1,qpcrButton2,
@@ -880,20 +881,21 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             var rolemenu77 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton6.Id };
             var rolemenu78 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton7.Id };
             var rolemenu79 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton8.Id };
-            var rolemenu80 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton1.Id };
-            var rolemenu81 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton2.Id };
-            var rolemenu82 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton1.Id };
-            var rolemenu83 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton2.Id };
-            var rolemenu84 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton1.Id };
-            var rolemenu85 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton2.Id };
-            var rolemenu86 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton1.Id };
-            var rolemenu87 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton2.Id };
-            var rolemenu88 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton1.Id };
-            var rolemenu89 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton2.Id };
-            var rolemenu90 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton1.Id };
-            var rolemenu91 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton2.Id };
-            var rolemenu92 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton1.Id };
-            var rolemenu93 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton2.Id };
+            var rolemenu80 = new RoleMenu() { RoleId = role.Id, MenuId = orderMenu.Id, ButtonId = orderButton9.Id };
+            var rolemenu81 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton1.Id };
+            var rolemenu82 = new RoleMenu() { RoleId = role.Id, MenuId = moleculeMenu.Id, ButtonId = moleculeButton2.Id };
+            var rolemenu83 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton1.Id };
+            var rolemenu84 = new RoleMenu() { RoleId = role.Id, MenuId = plasmidMenu.Id, ButtonId = plasmidButton2.Id };
+            var rolemenu85 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton1.Id };
+            var rolemenu86 = new RoleMenu() { RoleId = role.Id, MenuId = qpcrMenu.Id, ButtonId = qpcrButton2.Id };
+            var rolemenu87 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton1.Id };
+            var rolemenu88 = new RoleMenu() { RoleId = role.Id, MenuId = sdspageMenu.Id, ButtonId = sdspageButton2.Id };
+            var rolemenu89 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton1.Id };
+            var rolemenu90 = new RoleMenu() { RoleId = role.Id, MenuId = sterilityMenu.Id, ButtonId = sterilityButton2.Id };
+            var rolemenu91 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton1.Id };
+            var rolemenu92 = new RoleMenu() { RoleId = role.Id, MenuId = stockMenu.Id, ButtonId = stockButton2.Id };
+            var rolemenu93 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton1.Id };
+            var rolemenu94 = new RoleMenu() { RoleId = role.Id, MenuId = shipmentMenu.Id, ButtonId = shipmentButton2.Id };
             modelBuilder.Entity<RoleMenu>().HasData(rolemenu1, rolemenu2, rolemenu3, rolemenu4, rolemenu5, rolemenu6, rolemenu7, rolemenu8, rolemenu9,
                 rolemenu10, rolemenu11, rolemenu12, rolemenu13, rolemenu14, rolemenu15, rolemenu16, rolemenu17, rolemenu18, rolemenu19, rolemenu20, rolemenu21,
                 rolemenu22, rolemenu23, rolemenu24, rolemenu25, rolemenu26, rolemenu27, rolemenu28, rolemenu29, rolemenu30, rolemenu31, rolemenu32, rolemenu33,
@@ -901,7 +903,8 @@ namespace Megarobo.KunPengLIMS.Infrastructure
                 rolemenu46, rolemenu47, rolemenu48, rolemenu49, rolemenu50, rolemenu51, rolemenu52, rolemenu53, rolemenu54, rolemenu55, rolemenu56, rolemenu57,
                 rolemenu58, rolemenu59, rolemenu60, rolemenu61, rolemenu62, rolemenu63, rolemenu64, rolemenu65, rolemenu66, rolemenu67, rolemenu68, rolemenu69,
                 rolemenu70, rolemenu71, rolemenu72, rolemenu73, rolemenu74, rolemenu75, rolemenu76, rolemenu77, rolemenu78, rolemenu79, rolemenu80, rolemenu81, 
-                rolemenu82, rolemenu83, rolemenu84, rolemenu85, rolemenu86, rolemenu87, rolemenu88, rolemenu89, rolemenu90, rolemenu91, rolemenu92, rolemenu93);
+                rolemenu82, rolemenu83, rolemenu84, rolemenu85, rolemenu86, rolemenu87, rolemenu88, rolemenu89, rolemenu90, rolemenu91, rolemenu92, rolemenu93,
+                rolemenu94);
 
             var dict1 = new DictItem()
             {
