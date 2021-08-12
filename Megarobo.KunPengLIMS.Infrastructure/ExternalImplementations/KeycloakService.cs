@@ -21,18 +21,29 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
 
         public KeycloakService(string connectionString)
         {
-            var pairs = connectionString.Split(';', StringSplitOptions.RemoveEmptyEntries);
-            var dic = new Dictionary<string, string>();
-            foreach(var pair in pairs)
+            if(string.IsNullOrEmpty(connectionString))
             {
-                var kv = pair.Split("=", StringSplitOptions.RemoveEmptyEntries);
-                dic.Add(kv[0], kv[1]);
+                throw new ArgumentNullException("ConnectionString for KeyCloak");
             }
-            _keycloakUrl = dic["KeycloakUrl"];
-            _masterClientId = dic["MasterClientId"];
-            _masterUsername = dic["MasterUsername"];
-            _masterPassword = dic["MasterPassword"];
-            _kplimsRealm = dic["KplimsRealm"];
+            try
+            {
+                var pairs = connectionString.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                var dic = new Dictionary<string, string>();
+                foreach (var pair in pairs)
+                {
+                    var kv = pair.Split("=", StringSplitOptions.RemoveEmptyEntries);
+                    dic.Add(kv[0], kv[1]);
+                }
+                _keycloakUrl = dic["KeycloakUrl"];
+                _masterClientId = dic["MasterClientId"];
+                _masterUsername = dic["MasterUsername"];
+                _masterPassword = dic["MasterPassword"];
+                _kplimsRealm = dic["KplimsRealm"];
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException("The correct Connection String for KeyCloak is like: KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;");
+            }
         }
 
         public async Task<Guid?> CreateUser(Guid id, string username, string email, bool isActive)

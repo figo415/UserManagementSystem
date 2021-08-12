@@ -20,7 +20,6 @@ namespace Megarobo.KunPengLIMS.WebAPI.Controllers
     [Route("limsapi/users")]
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
-    [AllowAnonymous]
     public class UserController : ControllerBase
     {
         private readonly IUserAppService _service;

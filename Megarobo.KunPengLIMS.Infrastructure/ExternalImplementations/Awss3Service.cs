@@ -17,11 +17,50 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
     /// </summary>
     public class Awss3Service:IAwss3Service
     {
-        private readonly string awsAccessKey = "AKIAR2BBIFEVM7TJF4WP";
-        private readonly string awsSecretKey = "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";
-        private readonly string bucketName = "ls-lims-service-bucket-dev";
-        private readonly string serviceUrl = "https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn";
-        private readonly Amazon.RegionEndpoint region = Amazon.RegionEndpoint.CNNorthWest1;
+        private string _awsAccessKey;
+        private string _awsSecretKey;
+        private string _bucketName;
+        private string _serviceUrl;
+        private Amazon.RegionEndpoint _region;
+
+        public Awss3Service(string connectionString)
+        {
+            if(string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException("Connection string for AWS S3");
+            }
+            try
+            {
+                var pairs = connectionString.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                var dic = new Dictionary<string, string>();
+                foreach (var pair in pairs)
+                {
+                    var kv = pair.Split("=", StringSplitOptions.RemoveEmptyEntries);
+                    dic.Add(kv[0], kv[1]);
+                }
+                _awsAccessKey = dic["AWSAccessKeyId"];
+                _awsSecretKey = dic["AWSSecretAccessKey"];
+                _bucketName = dic["BucketName"];
+                _serviceUrl = dic["ServiceURL"];
+                var reg = dic["RegionEndpoint"];
+                if(reg=="cnnorth1")
+                {
+                    _region = Amazon.RegionEndpoint.CNNorth1;
+                }
+                else if(reg=="cnnorthwest1")
+                {
+                    _region = Amazon.RegionEndpoint.CNNorthWest1;
+                }
+                else
+                {
+                    _region = Amazon.RegionEndpoint.CNNorthWest1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("The correct Connection String for AWS S3 is like: AWSAccessKeyId=AKIAR2BBIFEVM7TJF4WP;AWSSecretAccessKey=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;BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;");
+            }
+        }
 
         public async Task<S3FileObject> S3Upload(string filename, Stream content)
         {
@@ -29,14 +68,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
             {
                 var config = new AmazonS3Config()
                 {
-                    ServiceURL = serviceUrl,
-                    RegionEndpoint = region
+                    ServiceURL = _serviceUrl,
+                    RegionEndpoint = _region
                 };
-                using (var client = new AmazonS3Client(awsAccessKey, awsSecretKey, config))
+                using (var client = new AmazonS3Client(_awsAccessKey, _awsSecretKey, config))
                 {
                     var request = new PutObjectRequest()
                     {
-                        BucketName = bucketName,
+                        BucketName = _bucketName,
                         CannedACL = S3CannedACL.PublicRead,
                         Key = filename,
                         InputStream = content
@@ -45,7 +84,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                     return new S3FileObject()
                     {
                         ETag = response.ETag,
-                        Url = serviceUrl + "/" + filename,
+                        Url = _serviceUrl + "/" + filename,
                     };
                 }
             }
@@ -59,16 +98,16 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         {
             var config= new AmazonS3Config()
             {
-                ServiceURL = serviceUrl,
-                RegionEndpoint = region
+                ServiceURL = _serviceUrl,
+                RegionEndpoint = _region
             };
-            using (var client = new AmazonS3Client(awsAccessKey, awsSecretKey, config))
+            using (var client = new AmazonS3Client(_awsAccessKey, _awsSecretKey, config))
             {
                 try
                 {
                     var request = new GetObjectRequest()
                     {
-                        BucketName = bucketName,
+                        BucketName = _bucketName,
                         Key = keyname
                     };
                     var response = await client.GetObjectAsync(request);

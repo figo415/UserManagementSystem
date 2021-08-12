@@ -9,9 +9,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions
 {
     public static class Awss3ServiceExtension
     {
-        public static void AddAwss3(this IServiceCollection services)
+        public static void AddAwss3(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<IAwss3Service, Awss3Service>();
+            var s3instance = new Awss3Service(connectionString);
+            services.AddSingleton<IAwss3Service>(s3instance);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             services.AddLimsRepo();
             services.AddInventory();
-            services.AddAwss3();
+            services.AddAwss3("AWSAccessKeyId=AKIAR2BBIFEVM7TJF4WP;AWSSecretAccessKey=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;BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;");
             services.AddKeycloak("KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;");
 
             #region Swagger
