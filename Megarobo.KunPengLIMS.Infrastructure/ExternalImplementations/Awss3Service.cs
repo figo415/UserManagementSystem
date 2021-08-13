@@ -39,8 +39,18 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                     var kv = pair.Split("=", StringSplitOptions.RemoveEmptyEntries);
                     dic.Add(kv[0], kv[1]);
                 }
-                _awsAccessKey = dic["AWSAccessKeyId"];
-                _awsSecretKey = dic["AWSSecretAccessKey"];
+                if (dic["UseKey"]=="true")
+                {
+                    _useKey = true;
+                    _awsAccessKey = dic["AWSAccessKeyId"];
+                    _awsSecretKey = dic["AWSSecretAccessKey"];
+                }
+                else
+                {
+                    _useKey = false;
+                    _awsAccessKey = string.Empty;
+                    _awsSecretKey = string.Empty;
+                }
                 _bucketName = dic["BucketName"];
                 _serviceUrl = dic["ServiceURL"];
                 var reg = dic["RegionEndpoint"];
@@ -56,18 +66,10 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                 {
                     _region = Amazon.RegionEndpoint.CNNorthWest1;
                 }
-                if(dic.ContainsKey("UseKey"))
-                {
-                    _useKey = true;
-                }
-                else
-                {
-                    _useKey = false;
-                }
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("The correct Connection String for AWS S3 is like: AWSAccessKeyId=AKIAR2BBIFEVM7TJF4WP;AWSSecretAccessKey=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;BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;");
+                throw new ArgumentException("The correct Connection String for AWS S3 is like: AWSAccessKeyId=AKIAR2BBIFEVM7TJF4WP;AWSSecretAccessKey=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;BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;UseKey=true;");
             }
         }
 

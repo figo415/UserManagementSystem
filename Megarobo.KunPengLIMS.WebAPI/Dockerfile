@@ -17,14 +17,9 @@ RUN dotnet publish "Megarobo.KunPengLIMS.WebAPI.csproj" -c Release -o /app/publi
 
 FROM base AS final
 WORKDIR /app
-ENV DB_HOSTNAME="localhost"
-ENV DB_PORT="5432"
-ENV DB_USERNAME="postgres"
-ENV DB_PASSWORD="megarobo"
-ENV DB_NAME="limsdb"
-ENV INVENTORY_BASEURL="https://api.lims.test.aws.megarobo.tech"
-ENV INVENTORY_AUTHURL="https://keycloak.dev.aws.megarobo.tech/auth/realms/lims-test/protocol/openid-connect/token"
-ENV INVENTORY_USERNAME="admin@admin.com"
-ENV INVENTORY_PASSWORD="123456"
+ENV Postgres="Host=host.docker.internal;Port=5432;User ID=postgres;Password=megarobo;Database=limsdb;Pooling=true;"
+ENV InventorySystem="InventoryServerUrl=https://api.lims.test.aws.megarobo.tech"
+ENV AwsS3="BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;UseKey=false;"
+ENV Keycloak="KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;"
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Megarobo.KunPengLIMS.WebAPI.dll"]
