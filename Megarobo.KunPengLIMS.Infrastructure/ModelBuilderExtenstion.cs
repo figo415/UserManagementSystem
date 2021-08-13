@@ -13,13 +13,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure
             var user = new User()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt=DateTime.Now,
-                IsDeleted=false,
-                UserName= "admin@admin.com",
-                EMail= "234298234@qq.com",
-                MobileNumber= "13523429876",
-                IsActive=true,
-                WorkTime= "8:00-9:00"
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                UserName = "admin@admin.com",
+                EMail = "234298234@qq.com",
+                MobileNumber = "13523429876",
+                IsActive = true,
+                WorkTime = "8:00-9:00",
+                KeycloakId = new Guid("378b263a-6920-4d9c-b15f-bcd09e2875f8")
             };
             modelBuilder.Entity<User>().HasData(user);
 

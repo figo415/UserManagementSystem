@@ -22,6 +22,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
         private string _bucketName;
         private string _serviceUrl;
         private Amazon.RegionEndpoint _region;
+        private bool _useKey;
 
         public Awss3Service(string connectionString)
         {
@@ -55,6 +56,14 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                 {
                     _region = Amazon.RegionEndpoint.CNNorthWest1;
                 }
+                if(dic.ContainsKey("UseKey"))
+                {
+                    _useKey = true;
+                }
+                else
+                {
+                    _useKey = false;
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +80,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                     ServiceURL = _serviceUrl,
                     RegionEndpoint = _region
                 };
-                using (var client = new AmazonS3Client(_awsAccessKey, _awsSecretKey, config))
+                using (var client = _useKey? new AmazonS3Client(_awsAccessKey, _awsSecretKey, config): new AmazonS3Client(config))
                 {
                     var request = new PutObjectRequest()
                     {
@@ -101,7 +110,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ExternalImplementations
                 ServiceURL = _serviceUrl,
                 RegionEndpoint = _region
             };
-            using (var client = new AmazonS3Client(_awsAccessKey, _awsSecretKey, config))
+            using (var client = _useKey? new AmazonS3Client(_awsAccessKey, _awsSecretKey, config): new AmazonS3Client(config))
             {
                 try
                 {

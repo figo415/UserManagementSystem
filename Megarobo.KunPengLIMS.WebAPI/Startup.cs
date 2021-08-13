@@ -50,16 +50,6 @@ namespace Megarobo.KunPengLIMS.WebAPI
 
             #region Database
             //services.AddDbContext<LimsDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Mysql")));
-            //var dbhostname = Environment.GetEnvironmentVariable("DB_HOSTNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            //var dbport = Environment.GetEnvironmentVariable("DB_PORT", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            //var dbusername = Environment.GetEnvironmentVariable("DB_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            //var dbpassword = Environment.GetEnvironmentVariable("DB_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            //var dbname = Environment.GetEnvironmentVariable("DB_NAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            //var connectionString = "Host={0};Port={1};User ID={2};Password={3};Database={4};Pooling=true;";
-            //if (!string.IsNullOrEmpty(dbhostname) && !string.IsNullOrEmpty(dbport) && !string.IsNullOrEmpty(dbusername) && !string.IsNullOrEmpty(dbpassword) && !string.IsNullOrEmpty(dbname))
-            //{
-            //    connectionString = string.Format(connectionString, dbhostname, dbport, dbusername, dbpassword, dbname);
-            //}
             var connectionString = Environment.GetEnvironmentVariable("Postgres", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
             if(string.IsNullOrEmpty(connectionString))
             {
@@ -73,18 +63,18 @@ namespace Megarobo.KunPengLIMS.WebAPI
             services.AddAutoMapper(typeof(DeleteMultiDto));
 
             #region InventoryAPI
-            var inventoryBaseUrl = Environment.GetEnvironmentVariable("INVENTORY_BASEURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var inventoryAuthUrl = Environment.GetEnvironmentVariable("INVENTORY_AUTHURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var inventoryUsername = Environment.GetEnvironmentVariable("INVENTORY_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            var inventoryPassword = Environment.GetEnvironmentVariable("INVENTORY_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
-            if(string.IsNullOrEmpty(inventoryBaseUrl) && string.IsNullOrEmpty(inventoryAuthUrl) && string.IsNullOrEmpty(inventoryUsername) && string.IsNullOrEmpty(inventoryPassword))
-            {
-                services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
-            }
-            else
-            {
-                services.Configure<InventoryApiInfo>(i => { i.InventoryBaseUrl = inventoryBaseUrl; i.AuthUrl = inventoryAuthUrl; i.UserName = inventoryUsername; i.Password = inventoryPassword; i.ClientId = "web-ui"; i.GrantType = "password"; });
-            }
+            //var inventoryBaseUrl = Environment.GetEnvironmentVariable("INVENTORY_BASEURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var inventoryAuthUrl = Environment.GetEnvironmentVariable("INVENTORY_AUTHURL", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var inventoryUsername = Environment.GetEnvironmentVariable("INVENTORY_USERNAME", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //var inventoryPassword = Environment.GetEnvironmentVariable("INVENTORY_PASSWORD", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
+            //if(string.IsNullOrEmpty(inventoryBaseUrl) && string.IsNullOrEmpty(inventoryAuthUrl) && string.IsNullOrEmpty(inventoryUsername) && string.IsNullOrEmpty(inventoryPassword))
+            //{
+            //    services.Configure<InventoryApiInfo>(Configuration.GetSection("InventoryApiInfo"));
+            //}
+            //else
+            //{
+            //    services.Configure<InventoryApiInfo>(i => { i.InventoryBaseUrl = inventoryBaseUrl; i.AuthUrl = inventoryAuthUrl; i.UserName = inventoryUsername; i.Password = inventoryPassword; i.ClientId = "web-ui"; i.GrantType = "password"; });
+            //}
             #endregion
 
             services.AddLimsRepo();
