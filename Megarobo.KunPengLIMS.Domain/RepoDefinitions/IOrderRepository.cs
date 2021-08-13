@@ -16,6 +16,8 @@ namespace Megarobo.KunPengLIMS.Domain.RepoDefinitions
 
         System.Threading.Tasks.Task<Order> GetOrderWithPlasmid(Guid orderId);
 
+        System.Threading.Tasks.Task<Order> GetOrderWithMoleculeAndPlasmid(Guid orderId);
+
         System.Threading.Tasks.Task<Order> GetOrderWithQpcr(Guid orderId);
 
         System.Threading.Tasks.Task<Order> GetOrderWithShipment(Guid orderId);

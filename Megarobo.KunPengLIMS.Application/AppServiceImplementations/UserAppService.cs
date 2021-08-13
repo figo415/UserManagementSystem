@@ -77,10 +77,10 @@ namespace Megarobo.KunPengLIMS.Application.Services
 
         public async Task<UserWithRightsDto> GetUserByToken(string userName)
         {
-            var users = await _repoWrapper.UserRepo.GetUsersByName(userName);
-            if(users.Any())
+            var tmpuser = await _repoWrapper.UserRepo.GetUserByName(userName);
+            if(tmpuser!=null)
             {
-                var user = await _repoWrapper.UserRepo.GetUserWithDepartmentRole(users.First().Id);
+                var user = await _repoWrapper.UserRepo.GetUserWithDepartmentRole(tmpuser.Id);
                 if(user!=null)
                 {
                     var result = _mapper.Map<UserWithRightsDto>(user);

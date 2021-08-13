@@ -77,22 +77,22 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
 
         public System.Threading.Tasks.Task<User> GetUserWithDepartmentRole(Guid userId)
         {
-            return System.Threading.Tasks.Task.FromResult(GetUserWithDepartmentRoleInternal(userId));
-        }
-
-        private User GetUserWithDepartmentRoleInternal(Guid userId)
-        {
-            var user = DbContext.Set<User>().Include(u => u.DepartmentRoles).ThenInclude(udr => udr.Department).Where(u=>u.Id==userId).SingleOrDefault();
-            foreach(var dr in user.DepartmentRoles)
+            var user = DbContext.Set<User>().Include(u => u.DepartmentRoles).ThenInclude(udr => udr.Department).Where(u => u.Id == userId).SingleOrDefault();
+            foreach (var dr in user.DepartmentRoles)
             {
                 dr.Role = DbContext.Set<Role>().SingleOrDefault(s => s.Id == dr.RoleId);
             }
-            return user;
+            return System.Threading.Tasks.Task.FromResult(user);
         }
 
         public System.Threading.Tasks.Task<IEnumerable<User>> GetUsersByName(string userName)
         {
             return GetByConditionAsync(u => u.UserName == userName);
+        }
+
+        public System.Threading.Tasks.Task<User> GetUserByName(string userName)
+        {
+            return DbContext.Set<User>().SingleOrDefaultAsync(u => !u.IsDeleted && u.UserName == userName);
         }
     }
 }

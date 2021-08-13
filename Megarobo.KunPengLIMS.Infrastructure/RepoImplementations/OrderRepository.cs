@@ -92,6 +92,11 @@ namespace Megarobo.KunPengLIMS.Infrastructure.RepoImplementations
             return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.PlasmidPurification).Where(o => o.Id == orderId).SingleOrDefault());
         }
 
+        public System.Threading.Tasks.Task<Order> GetOrderWithMoleculeAndPlasmid(Guid orderId)
+        {
+            return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.MolecularCloning).Include(o => o.PlasmidPurification).Where(o => o.Id == orderId).SingleOrDefault());
+        }
+
         public Task<Order> GetOrderWithQpcr(Guid orderId)
         {
             return System.Threading.Tasks.Task.FromResult(DbContext.Set<Order>().Include(o => o.QpcrDetection).Where(o => o.Id == orderId).SingleOrDefault());
