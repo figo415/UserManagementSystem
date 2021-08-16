@@ -36,9 +36,19 @@ namespace Megarobo.KunPengLIMS.WebAPI.Filters
             }
             else
             {
-                error.Code = 2;
-                error.Message = DateTime.Now + ": Server error";
-                error.Data = context.Exception.Message;
+                if(context.HttpContext.Request.Headers.ContainsKey("Verbose"))
+                {
+                    var request = context.HttpContext.Request;
+                    error.Code = 2;
+                    error.Message = string.Format("{0} {1}://{2}{3}{4}{5} at {6} run into error.", request.Method, request.Scheme, request.Host.Value, request.Path, request.QueryString.HasValue ? "?" : string.Empty, request.QueryString.HasValue ? request.QueryString.Value : string.Empty, DateTime.Now);
+                    error.Data = context.Exception.ToString();
+                }
+                else
+                {
+                    error.Code = 2;
+                    error.Message = DateTime.Now + ": Server error";
+                    error.Data = context.Exception.Message;
+                }
             }
             context.Result = new ObjectResult(error) { StatusCode = StatusCodes.Status500InternalServerError };
 
