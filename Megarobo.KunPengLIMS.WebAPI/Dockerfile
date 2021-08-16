@@ -17,7 +17,7 @@ RUN dotnet publish "Megarobo.KunPengLIMS.WebAPI.csproj" -c Release -o /app/publi
 
 FROM base AS final
 WORKDIR /app
-ENV Postgres="Host=host.docker.internal;Port=5432;User ID=postgres;Password=megarobo;Database=limsdb;Pooling=true;"
+ENV Postgres="Host=mega-postgres.cluster-cwfyhcnvgjwi.rds.cn-northwest-1.amazonaws.com.cn;Port=5432;User ID=postgres;Password=megapostgres;Database=kunpengapidev;Pooling=true;"
 ENV InventorySystem="InventoryServerUrl=https://api.lims.test.aws.megarobo.tech"
 ENV AwsS3="BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;UseKey=false;"
 ENV Keycloak="KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;"
