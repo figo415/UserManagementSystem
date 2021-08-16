@@ -54,6 +54,10 @@ namespace Megarobo.KunPengLIMS.WebAPI
             if(string.IsNullOrEmpty(connectionString))
             {
                 connectionString = Configuration.GetConnectionString("PostgreLocal");
+                if (string.IsNullOrEmpty(connectionString))
+                {
+                    connectionString = "Host=host.docker.internal;Port=5432;User ID=postgres;Password=megarobo;Database=limsdb;Pooling=true;";
+                }
             }
             services.AddDbContext<LimsDbContext>(options => options.UseNpgsql(connectionString));
             #endregion
@@ -82,18 +86,30 @@ namespace Megarobo.KunPengLIMS.WebAPI
             if(string.IsNullOrEmpty(inventoryConnectionString))
             {
                 inventoryConnectionString = Configuration.GetConnectionString("InventorySystem");
+                if (string.IsNullOrEmpty(inventoryConnectionString))
+                {
+                    inventoryConnectionString = "InventoryServerUrl=https://api.lims.test.aws.megarobo.tech";
+                }
             }
             services.AddInventory(inventoryConnectionString);
             var awss3ConnectionString= Environment.GetEnvironmentVariable("AwsS3", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
             if(string.IsNullOrEmpty(awss3ConnectionString))
             {
                 awss3ConnectionString = Configuration.GetConnectionString("AwsS3");
+                if (string.IsNullOrEmpty(awss3ConnectionString))
+                {
+                    awss3ConnectionString = "BucketName=ls-lims-service-bucket-dev;ServiceURL=https://ls-lims-service-bucket-dev.s3.cn-northwest-1.amazonaws.com.cn;RegionEndpoint=cnnorthwest1;UseKey=false;";
+                }
             }
             services.AddAwss3(awss3ConnectionString);
             var keycloakConnectionString= Environment.GetEnvironmentVariable("Keycloak", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.Process);
             if(string.IsNullOrEmpty(keycloakConnectionString))
             {
                 keycloakConnectionString = Configuration.GetConnectionString("Keycloak");
+                if (string.IsNullOrEmpty(keycloakConnectionString))
+                {
+                    keycloakConnectionString = "KeycloakUrl=https://keycloak.dev.aws.megarobo.tech;MasterClientId=admin-cli;MasterUsername=keycloak;MasterPassword=keycloak;KplimsRealm=kplims-dev;";
+                }
             }
             services.AddKeycloak(keycloakConnectionString);
 
