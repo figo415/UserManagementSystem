@@ -13,6 +13,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions
         public static void AddInventory(this IServiceCollection services,string connectionString)
         {
             var inventoryInstance = new InventoryService(connectionString);
+            Console.WriteLine("Inventory system connection string: " + connectionString);
             services.AddSingleton<IInventoryService>(inventoryInstance);
         }
     }

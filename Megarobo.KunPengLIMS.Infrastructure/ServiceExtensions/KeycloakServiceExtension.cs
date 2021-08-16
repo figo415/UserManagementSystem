@@ -12,6 +12,7 @@ namespace Megarobo.KunPengLIMS.Infrastructure.ServiceExtensions
         public static void AddKeycloak(this IServiceCollection services, string connectionString)
         {
             var keycloakInstance = new KeycloakService(connectionString);
+            Console.WriteLine("Keycloak connection string: " + connectionString);
             services.AddSingleton<IKeycloakService>(keycloakInstance);
         }
     }
