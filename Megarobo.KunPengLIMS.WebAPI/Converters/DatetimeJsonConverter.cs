@@ -23,7 +23,14 @@ namespace Megarobo.KunPengLIMS.WebAPI.Converters
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToString("yyyy-MM-dd HH:mm:ss"));
+            if(value==DateTime.Parse("01/01/0001 00:00:00"))
+            {
+                writer.WriteStringValue("");
+            }
+            else
+            {
+                writer.WriteStringValue(value.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
         }
     }
 }
